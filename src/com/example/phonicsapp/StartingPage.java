@@ -21,7 +21,7 @@ import org.andengine.util.debug.Debug;
 import android.content.Context;
 import android.view.Display;
 
-public class MainActivity extends SimpleBaseGameActivity
+public class StartingPage extends SimpleBaseGameActivity
 {
 
 	static int CAMERA_WIDTH;
@@ -61,23 +61,23 @@ public class MainActivity extends SimpleBaseGameActivity
 		// TODO Auto-generated method stub
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
 
-		this.mBitmapTextureAtlas = new BuildableBitmapTextureAtlas(
-				this.getTextureManager(), 1600, 1200);
+		mBitmapTextureAtlas = new BuildableBitmapTextureAtlas(
+				getTextureManager(), 1600, 1200);
 
-		MainActivity.mbackGroundTextureRegion = BitmapTextureAtlasTextureRegionFactory
+		mbackGroundTextureRegion = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(this.mBitmapTextureAtlas, this, "bg3.png");
-		MainActivity.mKolomTextureRegion = BitmapTextureAtlasTextureRegionFactory
+		mKolomTextureRegion = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(this.mBitmapTextureAtlas, this, "kolom.png");
-		MainActivity.mBoardTextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "kolom.png");
-		MainActivity.mParrotTextureRegion = BitmapTextureAtlasTextureRegionFactory
+		mBoardTextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "board.png");
+		mParrotTextureRegion = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(this.mBitmapTextureAtlas, this, "kolom.png");
 		
 		try 
 		{
-			this.mBitmapTextureAtlas.build(new BlackPawnTextureAtlasBuilder<IBitmapTextureAtlasSource,
+			mBitmapTextureAtlas.build(new BlackPawnTextureAtlasBuilder<IBitmapTextureAtlasSource,
 					BitmapTextureAtlas>(0, 0, 0));
-			this.mBitmapTextureAtlas.load();
+			mBitmapTextureAtlas.load();
 		} 
 		
 		catch (TextureAtlasBuilderException e)
@@ -101,7 +101,7 @@ public class MainActivity extends SimpleBaseGameActivity
 		backGround.setWidth(CAMERA_WIDTH);
 		mScene.attachChild(backGround);
 		
-		parrot = new Sprite(CAMERA_WIDTH/3-300, CAMERA_HEIGHT-300, mParrotTextureRegion, getVertexBufferObjectManager())
+		parrot = new Sprite(CAMERA_WIDTH/3-200, CAMERA_HEIGHT-250, mParrotTextureRegion, getVertexBufferObjectManager())
 		{
 			@Override
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY)
@@ -126,7 +126,7 @@ public class MainActivity extends SimpleBaseGameActivity
 		mScene.registerTouchArea(parrot);
 		mScene.attachChild(parrot);
 		
-		kolom = new Sprite(CAMERA_WIDTH/2-100, CAMERA_HEIGHT-300, mKolomTextureRegion, getVertexBufferObjectManager())
+		kolom = new Sprite(CAMERA_WIDTH/2-100, CAMERA_HEIGHT-250, mKolomTextureRegion, getVertexBufferObjectManager())
 		{
 			@Override
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY)
@@ -151,7 +151,7 @@ public class MainActivity extends SimpleBaseGameActivity
 		mScene.registerTouchArea(kolom);
 		mScene.attachChild(kolom);
 
-		board = new Sprite(CAMERA_WIDTH/2+100, CAMERA_HEIGHT-300, mKolomTextureRegion, getVertexBufferObjectManager())
+		board = new Sprite(CAMERA_WIDTH/2+100, CAMERA_HEIGHT-250, mBoardTextureRegion, getVertexBufferObjectManager())
 		{
 			@Override
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY)
@@ -160,7 +160,7 @@ public class MainActivity extends SimpleBaseGameActivity
 				{
 				case TouchEvent.ACTION_DOWN:
 					
-					this.setScale((float) 1.5);
+					this.setScale((float) 1.2);
 				break;
 				case TouchEvent.ACTION_UP:
 					
@@ -172,7 +172,7 @@ public class MainActivity extends SimpleBaseGameActivity
 			}
 		};
 		board.setHeight(CAMERA_HEIGHT/3);
-		board.setWidth(CAMERA_WIDTH/3);
+		board.setWidth(CAMERA_WIDTH/3-20);
 		mScene.registerTouchArea(board);
 		mScene.attachChild(board);
 		
