@@ -15,6 +15,7 @@ import org.andengine.opengl.texture.atlas.bitmap.source.IBitmapTextureAtlasSourc
 import org.andengine.opengl.texture.atlas.buildable.builder.BlackPawnTextureAtlasBuilder;
 import org.andengine.opengl.texture.atlas.buildable.builder.ITextureAtlasBuilder.TextureAtlasBuilderException;
 import org.andengine.opengl.texture.region.ITextureRegion;
+import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.ui.activity.SimpleBaseGameActivity;
 import org.andengine.util.color.Color;
 import org.andengine.util.debug.Debug;
@@ -31,15 +32,19 @@ public class StartingPage extends SimpleBaseGameActivity
 	public static Scene mScene;
 	static Context context;
 	
-	private BuildableBitmapTextureAtlas mBitmapTextureAtlas;
-	public static ITextureRegion mKolomTextureRegion;
-	public static ITextureRegion mBoardTextureRegion;
-	public static ITextureRegion mParrotTextureRegion;
+	public static StartingPage instace;
 	
-	public static ITextureRegion mbackGroundTextureRegion;
+	private BuildableBitmapTextureAtlas mBitmapTextureAtlas, mBitmapTextureAtlas1;
+	public static ITextureRegion mKolomTextureRegion, mBoardTextureRegion, mParrotTextureRegion;
+	public static ITextureRegion mMoTextureRegion;
 	
-	public static Sprite backGround, parrot, board, kolom;
-
+	public static ITextureRegion mbackGroundTextureRegion, mbackGround2TextureRegion;
+	
+	public static Sprite backGround, backGround2;
+	public static Sprite parrot, board, kolom;
+	public static Sprite mo;
+	
+	public static VertexBufferObjectManager vertexBufferObjectManager;
 	
 	@Override
 	public EngineOptions onCreateEngineOptions()
@@ -63,21 +68,41 @@ public class StartingPage extends SimpleBaseGameActivity
 
 		mBitmapTextureAtlas = new BuildableBitmapTextureAtlas(
 				getTextureManager(), 1600, 1200);
+		
+		mBitmapTextureAtlas1 = new BuildableBitmapTextureAtlas(
+				getTextureManager(), 1600, 1200);
 
 		mbackGroundTextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "bg3.png");
+				.createFromAsset(this.mBitmapTextureAtlas, this, "bg-1.png");
+		mbackGround2TextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas1, this, "bg-2.png");
+		
 		mKolomTextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "kolom.png");
+				.createFromAsset(this.mBitmapTextureAtlas, this, "kolom-2.png");
 		mBoardTextureRegion = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(this.mBitmapTextureAtlas, this, "board.png");
 		mParrotTextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "kolom.png");
+				.createFromAsset(this.mBitmapTextureAtlas, this, "parrot-3.png");
+		
+		mMoTextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas1, this, "mo.png");
 		
 		try 
 		{
 			mBitmapTextureAtlas.build(new BlackPawnTextureAtlasBuilder<IBitmapTextureAtlasSource,
 					BitmapTextureAtlas>(0, 0, 0));
 			mBitmapTextureAtlas.load();
+		} 
+		
+		catch (TextureAtlasBuilderException e)
+		{
+			Debug.e(e);
+		}
+		try 
+		{
+			mBitmapTextureAtlas1.build(new BlackPawnTextureAtlasBuilder<IBitmapTextureAtlasSource,
+					BitmapTextureAtlas>(0, 0, 0));
+			mBitmapTextureAtlas1.load();
 		} 
 		
 		catch (TextureAtlasBuilderException e)
@@ -101,7 +126,7 @@ public class StartingPage extends SimpleBaseGameActivity
 		backGround.setWidth(CAMERA_WIDTH);
 		mScene.attachChild(backGround);
 		
-		parrot = new Sprite(CAMERA_WIDTH/3-200, CAMERA_HEIGHT-250, mParrotTextureRegion, getVertexBufferObjectManager())
+		parrot = new Sprite(CAMERA_WIDTH/3-200, CAMERA_HEIGHT-300, mParrotTextureRegion, getVertexBufferObjectManager())
 		{
 			@Override
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY)
@@ -110,48 +135,31 @@ public class StartingPage extends SimpleBaseGameActivity
 				{
 					case TouchEvent.ACTION_DOWN:
 					
-						this.setScale((float) 1.5);
+						this.setScale((float) 1.2);
+						
+						mScene = new MenuPage();
+						setCurrentScene(mScene);
+						
 					break;
+					
 					case TouchEvent.ACTION_UP:
 						
 						this.setScale((float) 1.0);
+						
 					break;
 				}
 
 				return true;
 			}
 		};
-		parrot.setHeight(CAMERA_HEIGHT/3);
-		parrot.setWidth(CAMERA_WIDTH/3);
+		Debug.d("CAMERA_HEIGHT:"+CAMERA_HEIGHT);
+		Debug.d("CAMERA_WIDTH:"+CAMERA_WIDTH);
+		//parrot.setHeight((float) (CAMERA_HEIGHT / 3.065));
+		//parrot.setWidth((float) (CAMERA_WIDTH / 3.6));
 		mScene.registerTouchArea(parrot);
 		mScene.attachChild(parrot);
 		
 		kolom = new Sprite(CAMERA_WIDTH/2-100, CAMERA_HEIGHT-250, mKolomTextureRegion, getVertexBufferObjectManager())
-		{
-			@Override
-			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY)
-			{
-				switch (pSceneTouchEvent.getAction()) 
-				{
-				case TouchEvent.ACTION_DOWN:
-					
-					this.setScale((float) 1.5);
-				break;
-				case TouchEvent.ACTION_UP:
-					
-					this.setScale((float) 1.0);
-				break;
-				}
-
-				return true;
-			}
-		};
-		kolom.setHeight(CAMERA_HEIGHT/3);
-		kolom.setWidth(CAMERA_WIDTH/3);
-		mScene.registerTouchArea(kolom);
-		mScene.attachChild(kolom);
-
-		board = new Sprite(CAMERA_WIDTH/2+100, CAMERA_HEIGHT-250, mBoardTextureRegion, getVertexBufferObjectManager())
 		{
 			@Override
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY)
@@ -171,13 +179,50 @@ public class StartingPage extends SimpleBaseGameActivity
 				return true;
 			}
 		};
+		//kolom.setHeight(CAMERA_HEIGHT/3);
+		//kolom.setWidth(CAMERA_WIDTH/3);
+		mScene.registerTouchArea(kolom);
+		mScene.attachChild(kolom);
+
+		board = new Sprite(CAMERA_WIDTH/2+130, CAMERA_HEIGHT-250, mBoardTextureRegion, getVertexBufferObjectManager())
+		{
+			@Override
+			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY)
+			{
+				switch (pSceneTouchEvent.getAction()) 
+				{
+				case TouchEvent.ACTION_DOWN:
+					
+					this.setScale((float) 1.1);
+				break;
+				case TouchEvent.ACTION_UP:
+					
+					this.setScale((float) 1.0);
+				break;
+				}
+
+				return true;
+			}
+		};
 		board.setHeight(CAMERA_HEIGHT/3);
-		board.setWidth(CAMERA_WIDTH/3-20);
+		board.setWidth(CAMERA_WIDTH/3-60);
 		mScene.registerTouchArea(board);
 		mScene.attachChild(board);
+		
+		vertexBufferObjectManager = getVertexBufferObjectManager();
 		
 		return mScene;
 	}
 
+	public static StartingPage getSharedInstances()
+	{
+		return instace;
+	}
+	
+	public void setCurrentScene(Scene scene)
+	{
+		mScene = scene;
+		getEngine().setScene(mScene);
+	}
 
 }
