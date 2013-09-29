@@ -7,20 +7,20 @@ import org.andengine.input.touch.TouchEvent;
 
 public class MenuPage extends Scene
 {
-	StartingPage instance;
+	GameMainPage GameMainPageInstance;
 
 	public MenuPage()
 	{
 		setBackground(new Background(0.09804f, 0.6274f, 0));
-		
-		StartingPage.backGround2 = new Sprite(0, 0, StartingPage.mbackGround2TextureRegion, StartingPage.vertexBufferObjectManager);
-		StartingPage.backGround2.setHeight(StartingPage.CAMERA_HEIGHT);
-		StartingPage.backGround2.setWidth(StartingPage.CAMERA_WIDTH);
-		attachChild(StartingPage.backGround2);
+		GameMainPage.backGround2 = new Sprite(0, 0, GameMainPage.mbackGround2TextureRegion, GameMainPage.vertexBufferObjectManager);
+		GameMainPage.backGround2.setHeight(GameMainPage.CAMERA_HEIGHT);
+		GameMainPage.backGround2.setWidth(GameMainPage.CAMERA_WIDTH);
+		attachChild(GameMainPage.backGround2);
+		GameMainPageInstance = GameMainPage.getSharedInstances();
 		//instance = StartingPage.getSharedInstances();
 		
 		
-		StartingPage.mo = new Sprite(30, 10, StartingPage.mMoTextureRegion, StartingPage.vertexBufferObjectManager)
+		GameMainPage.mo = new Sprite(30, 10, GameMainPage.mMoTextureRegion, GameMainPage.vertexBufferObjectManager)
 		{
 			@Override
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY)
@@ -30,6 +30,9 @@ public class MenuPage extends Scene
 				case TouchEvent.ACTION_DOWN:
 					
 					this.setScale((float) 1.2);
+					
+					GameMainPageInstance.startActivity();
+					
 				break;
 				case TouchEvent.ACTION_UP:
 					
@@ -40,10 +43,10 @@ public class MenuPage extends Scene
 				return true;
 			}
 		};
-		StartingPage.mo.setHeight((float)(StartingPage.CAMERA_HEIGHT/4.5));
-		StartingPage.mo.setWidth((float) (StartingPage.CAMERA_WIDTH/8.3));
-		registerTouchArea(StartingPage.mo);
-		attachChild(StartingPage.mo);
+		GameMainPage.mo.setHeight((float)(GameMainPage.CAMERA_HEIGHT/4.5));
+		GameMainPage.mo.setWidth((float) (GameMainPage.CAMERA_WIDTH/8.3));
+		registerTouchArea(GameMainPage.mo);
+		attachChild(GameMainPage.mo);
 		
 	}
 	

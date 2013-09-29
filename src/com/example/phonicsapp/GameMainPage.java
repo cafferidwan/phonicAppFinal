@@ -1,6 +1,8 @@
 package com.example.phonicsapp;
 
 import org.andengine.engine.camera.Camera;
+import org.andengine.engine.handler.timer.ITimerCallback;
+import org.andengine.engine.handler.timer.TimerHandler;
 import org.andengine.engine.options.EngineOptions;
 import org.andengine.engine.options.ScreenOrientation;
 import org.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
@@ -19,10 +21,16 @@ import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.ui.activity.SimpleBaseGameActivity;
 import org.andengine.util.color.Color;
 import org.andengine.util.debug.Debug;
+
+import com.example.phonicsapp.animatedBook.BaseActivity;
+
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.view.Display;
 
-public class StartingPage extends SimpleBaseGameActivity
+
+public class GameMainPage extends SimpleBaseGameActivity
 {
 
 	static int CAMERA_WIDTH;
@@ -32,7 +40,7 @@ public class StartingPage extends SimpleBaseGameActivity
 	public static Scene mScene;
 	static Context context;
 	
-	public static StartingPage instace;
+	public static GameMainPage GameMainPageInstace;
 	
 	private BuildableBitmapTextureAtlas mBitmapTextureAtlas, mBitmapTextureAtlas1;
 	public static ITextureRegion mKolomTextureRegion, mBoardTextureRegion, mParrotTextureRegion;
@@ -46,10 +54,16 @@ public class StartingPage extends SimpleBaseGameActivity
 	
 	public static VertexBufferObjectManager vertexBufferObjectManager;
 	
+	public static GameMainPage getSharedInstances()
+	{
+		return GameMainPageInstace;
+	}
+	
 	@Override
 	public EngineOptions onCreateEngineOptions()
 	{
 		// TODO Auto-generated method stub
+		GameMainPageInstace = this;
 		Display display = getWindowManager().getDefaultDisplay();
 		CAMERA_HEIGHT = display.getHeight();
 		CAMERA_WIDTH = display.getWidth();
@@ -82,7 +96,7 @@ public class StartingPage extends SimpleBaseGameActivity
 		mBoardTextureRegion = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(this.mBitmapTextureAtlas, this, "board.png");
 		mParrotTextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "parrot-3.png");
+				.createFromAsset(this.mBitmapTextureAtlas, this, "parrot-4.png");
 		
 		mMoTextureRegion = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(this.mBitmapTextureAtlas1, this, "mo.png");
@@ -121,6 +135,8 @@ public class StartingPage extends SimpleBaseGameActivity
 		mScene.setBackground(new Background(Color.WHITE));
 		mScene.setTouchAreaBindingOnActionDownEnabled(true);
 		
+		GameMainPage.context = getApplicationContext();
+		
 		backGround = new Sprite(0, 0, mbackGroundTextureRegion, getVertexBufferObjectManager());
 		backGround.setHeight(CAMERA_HEIGHT);
 		backGround.setWidth(CAMERA_WIDTH);
@@ -139,6 +155,7 @@ public class StartingPage extends SimpleBaseGameActivity
 						
 						mScene = new MenuPage();
 						setCurrentScene(mScene);
+						
 						
 					break;
 					
@@ -169,10 +186,12 @@ public class StartingPage extends SimpleBaseGameActivity
 				case TouchEvent.ACTION_DOWN:
 					
 					this.setScale((float) 1.2);
+					
 				break;
 				case TouchEvent.ACTION_UP:
 					
 					this.setScale((float) 1.0);
+					
 				break;
 				}
 
@@ -214,10 +233,13 @@ public class StartingPage extends SimpleBaseGameActivity
 		return mScene;
 	}
 
-	public static StartingPage getSharedInstances()
+	void startActivity()
 	{
-		return instace;
+		finish();
+		startActivity(new Intent(this, BaseActivity.class));
 	}
+	
+	
 	
 	public void setCurrentScene(Scene scene)
 	{
