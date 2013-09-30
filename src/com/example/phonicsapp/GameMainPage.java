@@ -22,7 +22,7 @@ import org.andengine.ui.activity.SimpleBaseGameActivity;
 import org.andengine.util.color.Color;
 import org.andengine.util.debug.Debug;
 
-import com.example.phonicsapp.animatedBook.BaseActivity;
+import com.example.phonicsapp.animatedBook.AnimatedBookActivity;
 
 import android.app.Activity;
 import android.content.Context;
@@ -236,10 +236,8 @@ public class GameMainPage extends SimpleBaseGameActivity
 	void startActivity()
 	{
 		finish();
-		startActivity(new Intent(this, BaseActivity.class));
+		startActivity(new Intent(this, AnimatedBookActivity.class));
 	}
-	
-	
 	
 	public void setCurrentScene(Scene scene)
 	{

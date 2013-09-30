@@ -71,10 +71,10 @@ public class Parrot extends AnimatedSprite
 		parrotFlying.animate(new long[] { 200, 200, 200, 200, 200, 200, 200,
 				200 }, 0, 7, true);
 		parrotFlying.setFlippedHorizontal(true);
-		parrotFlying.setHeight(BaseActivity.CAMERA_HIGHT / 2);
-		parrotFlying.setWidth(BaseActivity.CAMERA_WIDTH / 4);
-		mLetter.setHeight(BaseActivity.CAMERA_HIGHT / 6);
-		mLetter.setWidth(BaseActivity.CAMERA_WIDTH / 8);
+		parrotFlying.setHeight(AnimatedBookActivity.CAMERA_HIGHT / 2);
+		parrotFlying.setWidth(AnimatedBookActivity.CAMERA_WIDTH / 4);
+		mLetter.setHeight(AnimatedBookActivity.CAMERA_HIGHT / 6);
+		mLetter.setWidth(AnimatedBookActivity.CAMERA_WIDTH / 8);
 		loadMparrot();
 
 	}
@@ -82,15 +82,15 @@ public class Parrot extends AnimatedSprite
 	void loadMparrot()
 	{
 		MoveModifier mMod = new MoveModifier(4.0f,
-				BaseActivity.CAMERA_WIDTH + 100,
-				BaseActivity.CAMERA_WIDTH - 250,
-				BaseActivity.CAMERA_HIGHT / 10.55f,
-				BaseActivity.CAMERA_HIGHT / 10.55f);
+				AnimatedBookActivity.CAMERA_WIDTH + 100,
+				AnimatedBookActivity.CAMERA_WIDTH - 250,
+				AnimatedBookActivity.CAMERA_HIGHT / 10.55f,
+				AnimatedBookActivity.CAMERA_HIGHT / 10.55f);
 		MoveModifier mModLetter = new MoveModifier(4.0f,
-				BaseActivity.CAMERA_WIDTH + 100,
-				BaseActivity.CAMERA_WIDTH - 220,
-				BaseActivity.CAMERA_HIGHT / 2.1f,
-				BaseActivity.CAMERA_HIGHT / 2.1f);
+				AnimatedBookActivity.CAMERA_WIDTH + 100,
+				AnimatedBookActivity.CAMERA_WIDTH - 220,
+				AnimatedBookActivity.CAMERA_HIGHT / 2.1f,
+				AnimatedBookActivity.CAMERA_HIGHT / 2.1f);
 		DelayModifier dMod = new DelayModifier(1,
 				new IEntityModifierListener()
 		{
@@ -138,7 +138,7 @@ public class Parrot extends AnimatedSprite
 					}
 					case TouchEvent.ACTION_UP:
 					{
-						BaseActivity.mMainScene.detachChildren();
+						AnimatedBookActivity.mMainScene.detachChildren();
 						break;
 					}
 					default: 

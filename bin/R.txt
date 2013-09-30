@@ -16,7 +16,7 @@ int raw ma 0x7f040006
 int raw mama 0x7f040007
 int raw megh 0x7f040008
 int raw mo 0x7f040009
-int raw mohish 0x7f04000a
+int raw mohis 0x7f04000a
 int raw moi 0x7f04000b
 int raw mula 0x7f04000c
 int raw parrot_introducing_mo 0x7f04000d

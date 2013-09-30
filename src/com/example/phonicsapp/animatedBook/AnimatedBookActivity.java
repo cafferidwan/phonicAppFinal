@@ -21,13 +21,15 @@ import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.ui.activity.SimpleBaseGameActivity;
 
 import com.example.phonicsapp.R;
-import com.example.phonicsapp.R.raw;
+import com.example.phonicsapp.boxGame.BoxGameActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.Display;
 
-public class BaseActivity extends SimpleBaseGameActivity {
+public class AnimatedBookActivity extends SimpleBaseGameActivity 
+{
 	public static int CAMERA_HIGHT;
 	public static int CAMERA_WIDTH;
 	public static Context context;
@@ -238,7 +240,7 @@ public class BaseActivity extends SimpleBaseGameActivity {
 		mMainScene = new Scene();
 		
 		vertexBufferObjectManager = getVertexBufferObjectManager();
-		BaseActivity.context = getApplicationContext();
+		AnimatedBookActivity.context = getApplicationContext();
 		
 		mMainScene.setTouchAreaBindingOnActionMoveEnabled(true);
 		
@@ -250,7 +252,7 @@ public class BaseActivity extends SimpleBaseGameActivity {
 		nextStage(2);
 		return mMainScene;
 	}
-	  public static void nextStage(int stage)
+	  public  void nextStage(int stage)
 	  {
 		//'a' letter
 		if(stage == 1)
@@ -312,21 +314,21 @@ public class BaseActivity extends SimpleBaseGameActivity {
 	
 	static void loadImage1(ITextureRegion r1, int voice)
 	{
-		TiledImage t1 = new TiledImage(ImagePosX, ImagePosY, ImageWidth , ImageHight, r1, vertexBufferObjectManager,voice,BaseActivity.context);
+		TiledImage t1 = new TiledImage(ImagePosX, ImagePosY, ImageWidth , ImageHight, r1, vertexBufferObjectManager,voice,AnimatedBookActivity.context);
 		mMainScene.registerTouchArea(t1.Letter);
 		mMainScene.attachChild(t1.Letter);
 	}
 	
 	static void loadImage2(ITextureRegion r1, int voice)
 	{
-		TiledImage t2 = new TiledImage(ImagePosX+(CAMERA_WIDTH*0.22f), ImagePosY, ImageWidth , ImageHight, r1, vertexBufferObjectManager,voice,BaseActivity.context);
+		TiledImage t2 = new TiledImage(ImagePosX+(CAMERA_WIDTH*0.22f), ImagePosY, ImageWidth , ImageHight, r1, vertexBufferObjectManager,voice,AnimatedBookActivity.context);
 		mMainScene.registerTouchArea(t2.Letter);
 		mMainScene.attachChild(t2.Letter);
 	}
 	
 	static void loadImage3(ITextureRegion r1,int voice)
 	{
-		TiledImage t3 = new TiledImage(ImagePosX+(CAMERA_WIDTH*0.44f), ImagePosY, ImageWidth , ImageHight, r1, vertexBufferObjectManager,voice,BaseActivity.context);
+		TiledImage t3 = new TiledImage(ImagePosX+(CAMERA_WIDTH*0.44f), ImagePosY, ImageWidth , ImageHight, r1, vertexBufferObjectManager,voice,AnimatedBookActivity.context);
 		mMainScene.registerTouchArea(t3.Letter);
 		mMainScene.attachChild(t3.Letter);
 		
@@ -334,7 +336,7 @@ public class BaseActivity extends SimpleBaseGameActivity {
 	
 	static void loadImage4(ITextureRegion r1,int voice)
 	{
-		TiledImage t4 = new TiledImage(ImagePosX, ImagePosY+(CAMERA_HIGHT*0.44f), ImageWidth , ImageHight,r1 , vertexBufferObjectManager,voice,BaseActivity.context);
+		TiledImage t4 = new TiledImage(ImagePosX, ImagePosY+(CAMERA_HIGHT*0.44f), ImageWidth , ImageHight,r1 , vertexBufferObjectManager,voice,AnimatedBookActivity.context);
 		mMainScene.registerTouchArea(t4.Letter);
 		mMainScene.attachChild(t4.Letter);
 		
@@ -342,7 +344,7 @@ public class BaseActivity extends SimpleBaseGameActivity {
 	
 	static void loadImage5(ITextureRegion r1, int voice)
 	{
-		TiledImage t5 = new TiledImage(ImagePosX+(CAMERA_WIDTH*0.22f), ImagePosY+(CAMERA_HIGHT*0.44f), ImageWidth , ImageHight, r1, vertexBufferObjectManager,voice,BaseActivity.context);
+		TiledImage t5 = new TiledImage(ImagePosX+(CAMERA_WIDTH*0.22f), ImagePosY+(CAMERA_HIGHT*0.44f), ImageWidth , ImageHight, r1, vertexBufferObjectManager,voice,AnimatedBookActivity.context);
 		mMainScene.registerTouchArea(t5.Letter);
 		mMainScene.attachChild(t5.Letter);
 		
@@ -350,15 +352,15 @@ public class BaseActivity extends SimpleBaseGameActivity {
 	
 	static void loadImage6(ITextureRegion r1 , int voice)
 	{
-		TiledImage t6 = new TiledImage(ImagePosX+(CAMERA_WIDTH*0.44f), ImagePosY+(CAMERA_HIGHT*0.44f), ImageWidth , ImageHight, r1, vertexBufferObjectManager,voice,BaseActivity.context);
+		TiledImage t6 = new TiledImage(ImagePosX+(CAMERA_WIDTH*0.44f), ImagePosY+(CAMERA_HIGHT*0.44f), ImageWidth , ImageHight, r1, vertexBufferObjectManager,voice,AnimatedBookActivity.context);
 		mMainScene.registerTouchArea(t6.Letter);
 		mMainScene.attachChild(t6.Letter);
 		
 	}
 	
-	static void loadParrotAndNext(TiledTextureRegion p , ITextureRegion n,ITextureRegion l)
+	 void loadParrotAndNext(TiledTextureRegion p , ITextureRegion n,ITextureRegion l)
 	{
-		Parrot p1 = new Parrot(CAMERA_WIDTH + 200,CAMERA_WIDTH - 250, CAMERA_HIGHT / 2 ,CAMERA_HIGHT / 2, p, vertexBufferObjectManager, R.raw.mama, BaseActivity.context,l);
+		Parrot p1 = new Parrot(CAMERA_WIDTH + 200,CAMERA_WIDTH - 250, CAMERA_HIGHT / 2 ,CAMERA_HIGHT / 2, p, vertexBufferObjectManager, R.raw.mama, AnimatedBookActivity.context,l);
 		mMainScene.registerTouchArea(p1.parrotFlying);
 		mMainScene.attachChild(p1.parrotFlying);
 		createNextArrow(CAMERA_WIDTH-100f, CAMERA_HIGHT-100f, 200f, 200f, n, 1);
@@ -366,7 +368,7 @@ public class BaseActivity extends SimpleBaseGameActivity {
 		mMainScene.attachChild(NextSprite);
 		mMainScene.attachChild(p1.mLetter);
 	}
-	static void createNextArrow(float pX, float pY, float pWidth, float pHeight,ITextureRegion pTextureRegion, int voice)
+	void createNextArrow(float pX, float pY, float pWidth, float pHeight,ITextureRegion pTextureRegion, int voice)
 	{
 		NextSprite = new Sprite(pX, pY, pTextureRegion, vertexBufferObjectManager)
 		{
@@ -389,11 +391,14 @@ public class BaseActivity extends SimpleBaseGameActivity {
 						if(ArrowTouchEnable)
 						{
 							ArrowTouchEnable = false;
-							BaseActivity.mMainScene.detachChildren();
+							startActivity();
+							/*
+							AnimatedBookActivity.mMainScene.detachChildren();
 							mMainScene.attachChild(BgSprite);
 							TiledImage.ObjNo = 0;
 							NextCount++;
 							nextStage(NextCount);
+							*/
 						}
 						break;
 					}
@@ -407,5 +412,9 @@ public class BaseActivity extends SimpleBaseGameActivity {
 		};
 	}
 	
-	
+	void startActivity()
+	{
+		finish();
+		startActivity(new Intent(this, BoxGameActivity.class));
+	}
 }

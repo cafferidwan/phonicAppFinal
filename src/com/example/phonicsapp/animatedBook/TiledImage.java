@@ -13,8 +13,6 @@ import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.util.modifier.IModifier;
 
 import com.example.phonicsapp.R;
-import com.example.phonicsapp.R.raw;
-
 import android.content.Context;
 import android.media.MediaPlayer;
 
@@ -71,7 +69,7 @@ public class TiledImage extends Sprite
 			}
 		};
 		en = new Entity(0,0);
-		s = new Sprite(0,0, BaseActivity.SpriteBgTextureReason, vertexBufferObjectManager);
+		s = new Sprite(0,0, AnimatedBookActivity.SpriteBgTextureReason, vertexBufferObjectManager);
 		Letter.setWidth(pHeight);
 		Letter.setHeight(pHeight);		
 		s.setWidth(pHeight);
@@ -82,8 +80,8 @@ public class TiledImage extends Sprite
 		
 		s.setVisible(false);
 		Letter.setVisible(false);	
-		AnimateImage();
 		
+		AnimateImage();
 	}
 	
 	void AnimateImage() 
@@ -112,7 +110,7 @@ public class TiledImage extends Sprite
 						if(audioPlayCount==6)
 						{
 							audioPlay = true;
-							BaseActivity.ArrowTouchEnable = true;
+							AnimatedBookActivity.ArrowTouchEnable = true;
 						}
 					}
 				});
@@ -131,7 +129,7 @@ public class TiledImage extends Sprite
 			if(!mediaPlayer.isPlaying())
 			{
 				mediaPlayer.reset();
-				mediaPlayer = MediaPlayer.create(BaseActivity.context, val);
+				mediaPlayer = MediaPlayer.create(AnimatedBookActivity.context, val);
 					
 				try 
 				{
