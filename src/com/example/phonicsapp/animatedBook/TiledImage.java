@@ -22,7 +22,7 @@ public class TiledImage extends Sprite
 	Sprite Letter,s;
 	IEntity en ;
 	static boolean audioPlay= false;
-	static int ObjNo=0, audio, audioPlayCount=0;
+	static int ObjNo=1, audio, audioPlayCount=0;
 	static float APPEARING_TIME=3f;
 	static MediaPlayer mediaPlayer;
 	static Context con;
@@ -86,9 +86,8 @@ public class TiledImage extends Sprite
 	
 	void AnimateImage() 
 	{
-		DelayModifier dMod = new DelayModifier(ObjNo * 5,new IEntityModifierListener()
+		DelayModifier dMod = new DelayModifier(ObjNo * 6,new IEntityModifierListener()
 		{
-
 					@Override
 					public void onModifierStarted(IModifier<IEntity> arg0,
 							IEntity arg1)
@@ -97,7 +96,7 @@ public class TiledImage extends Sprite
 					}
 
 					@Override
-					public void onModifierFinished(IModifier<IEntity> arg0,
+					public void onModifierFinished(IModifier<IEntity> arg0, 
 								IEntity arg1)
 					{
 						Letter.setVisible(true);
@@ -111,6 +110,7 @@ public class TiledImage extends Sprite
 						{
 							audioPlay = true;
 							AnimatedBookActivity.ArrowTouchEnable = true;
+							//ObjNo=0;
 						}
 					}
 				});

@@ -254,7 +254,7 @@ public class AnimatedBookActivity extends SimpleBaseGameActivity
 	}
 	  public  void nextStage(int stage)
 	  {
-		//'a' letter
+		  TiledImage.ObjNo = 1;
 		if(stage == 1)
 		{
 			loadImage1(MangoTextureReason,R.raw.mama);
