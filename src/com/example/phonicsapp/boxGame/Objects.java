@@ -90,6 +90,16 @@ public class Objects extends Sprite
 						Functions.playAudio(R.raw.mohis);
 					}
 				}
+				else if(pSceneTouchEvent.getX()- this.getWidth()/2 == BoxGameActivity.mama.getX() && 
+						pSceneTouchEvent.getY()- this.getHeight()/2 == BoxGameActivity.mama.getY())
+				{
+					i++;
+					if(i==1)
+					{
+						Functions.audioPlay = true;
+						Functions.playAudio(R.raw.mama);
+					}
+				}
 				
 				
 				break;
@@ -99,6 +109,7 @@ public class Objects extends Sprite
 				i=0;
 				
 				touchFlag = false;
+				BoxGameActivity.bCounter=0;
 				
 				break;
 			}

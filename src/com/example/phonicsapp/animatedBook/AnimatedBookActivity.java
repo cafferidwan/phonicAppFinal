@@ -30,12 +30,12 @@ import android.view.Display;
 
 public class AnimatedBookActivity extends SimpleBaseGameActivity 
 {
-	public static int CAMERA_HIGHT;
+	public static int CAMERA_HEIGHT;
 	public static int CAMERA_WIDTH;
 	public static Context context;
 	public static Camera mCamera;
 	static float ImageWidth;
-	static float ImageHight;
+	static float ImageHeight;
 	
 	
 	static int NextCount=1;
@@ -122,25 +122,25 @@ public class AnimatedBookActivity extends SimpleBaseGameActivity
 	{
 		// TODO Auto-generated method stub
 		Display display = getWindowManager().getDefaultDisplay();
-		CAMERA_HIGHT = display.getHeight();
+		CAMERA_HEIGHT = display.getHeight();
 		CAMERA_WIDTH = display.getWidth();
 		
-		ImageHight = CAMERA_HIGHT/2.5f;
+		ImageHeight = CAMERA_HEIGHT/2.5f;
 		ImageWidth = CAMERA_WIDTH/4.5f;
 		
 		ImagePosX = CAMERA_WIDTH/100;
-		ImagePosY = CAMERA_HIGHT/20;
+		ImagePosY = CAMERA_HEIGHT/20;
 		
-		mCamera = new Camera(0, 0, CAMERA_WIDTH, CAMERA_HIGHT);		
+		mCamera = new Camera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);		
 		
-		return new EngineOptions(true, ScreenOrientation.LANDSCAPE_FIXED, new RatioResolutionPolicy(CAMERA_WIDTH, CAMERA_HIGHT), mCamera);
+		return new EngineOptions(true, ScreenOrientation.LANDSCAPE_FIXED, new RatioResolutionPolicy(CAMERA_WIDTH, CAMERA_HEIGHT), mCamera);
 	}
 	@Override
 	protected void onCreateResources() 
 	{
 		// TODO Auto-generated method stub
 		
-		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx1/");
+		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("AnimatedBookGfx/");
 		BgBuildableBitmapTextureAtlas = new BuildableBitmapTextureAtlas(getTextureManager(), 1800, 1432,TextureOptions.DEFAULT);
 		BgTextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(BgBuildableBitmapTextureAtlas, this, "jungle16.png");
 		
@@ -245,7 +245,7 @@ public class AnimatedBookActivity extends SimpleBaseGameActivity
 		mMainScene.setTouchAreaBindingOnActionMoveEnabled(true);
 		
 		BgSprite = new Sprite(0, 0, BgTextureReason,vertexBufferObjectManager);
-		BgSprite.setHeight(CAMERA_HIGHT);
+		BgSprite.setHeight(CAMERA_HEIGHT);
 		BgSprite.setWidth(CAMERA_WIDTH);
 		mMainScene.attachChild(BgSprite);
 						
@@ -314,21 +314,21 @@ public class AnimatedBookActivity extends SimpleBaseGameActivity
 	
 	static void loadImage1(ITextureRegion r1, int voice)
 	{
-		TiledImage t1 = new TiledImage(ImagePosX, ImagePosY, ImageWidth , ImageHight, r1, vertexBufferObjectManager,voice,AnimatedBookActivity.context);
+		TiledImage t1 = new TiledImage(ImagePosX, ImagePosY, ImageWidth , ImageHeight, r1, vertexBufferObjectManager,voice,AnimatedBookActivity.context);
 		mMainScene.registerTouchArea(t1.Letter);
 		mMainScene.attachChild(t1.Letter);
 	}
 	
 	static void loadImage2(ITextureRegion r1, int voice)
 	{
-		TiledImage t2 = new TiledImage(ImagePosX+(CAMERA_WIDTH*0.22f), ImagePosY, ImageWidth , ImageHight, r1, vertexBufferObjectManager,voice,AnimatedBookActivity.context);
+		TiledImage t2 = new TiledImage(ImagePosX+(CAMERA_WIDTH*0.22f), ImagePosY, ImageWidth , ImageHeight, r1, vertexBufferObjectManager,voice,AnimatedBookActivity.context);
 		mMainScene.registerTouchArea(t2.Letter);
 		mMainScene.attachChild(t2.Letter);
 	}
 	
 	static void loadImage3(ITextureRegion r1,int voice)
 	{
-		TiledImage t3 = new TiledImage(ImagePosX+(CAMERA_WIDTH*0.44f), ImagePosY, ImageWidth , ImageHight, r1, vertexBufferObjectManager,voice,AnimatedBookActivity.context);
+		TiledImage t3 = new TiledImage(ImagePosX+(CAMERA_WIDTH*0.44f), ImagePosY, ImageWidth , ImageHeight, r1, vertexBufferObjectManager,voice,AnimatedBookActivity.context);
 		mMainScene.registerTouchArea(t3.Letter);
 		mMainScene.attachChild(t3.Letter);
 		
@@ -336,7 +336,7 @@ public class AnimatedBookActivity extends SimpleBaseGameActivity
 	
 	static void loadImage4(ITextureRegion r1,int voice)
 	{
-		TiledImage t4 = new TiledImage(ImagePosX, ImagePosY+(CAMERA_HIGHT*0.44f), ImageWidth , ImageHight,r1 , vertexBufferObjectManager,voice,AnimatedBookActivity.context);
+		TiledImage t4 = new TiledImage(ImagePosX, ImagePosY+(CAMERA_HEIGHT*0.44f), ImageWidth , ImageHeight,r1 , vertexBufferObjectManager,voice,AnimatedBookActivity.context);
 		mMainScene.registerTouchArea(t4.Letter);
 		mMainScene.attachChild(t4.Letter);
 		
@@ -344,7 +344,7 @@ public class AnimatedBookActivity extends SimpleBaseGameActivity
 	
 	static void loadImage5(ITextureRegion r1, int voice)
 	{
-		TiledImage t5 = new TiledImage(ImagePosX+(CAMERA_WIDTH*0.22f), ImagePosY+(CAMERA_HIGHT*0.44f), ImageWidth , ImageHight, r1, vertexBufferObjectManager,voice,AnimatedBookActivity.context);
+		TiledImage t5 = new TiledImage(ImagePosX+(CAMERA_WIDTH*0.22f), ImagePosY+(CAMERA_HEIGHT*0.44f), ImageWidth , ImageHeight, r1, vertexBufferObjectManager,voice,AnimatedBookActivity.context);
 		mMainScene.registerTouchArea(t5.Letter);
 		mMainScene.attachChild(t5.Letter);
 		
@@ -352,7 +352,7 @@ public class AnimatedBookActivity extends SimpleBaseGameActivity
 	
 	static void loadImage6(ITextureRegion r1 , int voice)
 	{
-		TiledImage t6 = new TiledImage(ImagePosX+(CAMERA_WIDTH*0.44f), ImagePosY+(CAMERA_HIGHT*0.44f), ImageWidth , ImageHight, r1, vertexBufferObjectManager,voice,AnimatedBookActivity.context);
+		TiledImage t6 = new TiledImage(ImagePosX+(CAMERA_WIDTH*0.44f), ImagePosY+(CAMERA_HEIGHT*0.44f), ImageWidth , ImageHeight, r1, vertexBufferObjectManager,voice,AnimatedBookActivity.context);
 		mMainScene.registerTouchArea(t6.Letter);
 		mMainScene.attachChild(t6.Letter);
 		
@@ -360,10 +360,10 @@ public class AnimatedBookActivity extends SimpleBaseGameActivity
 	
 	 void loadParrotAndNext(TiledTextureRegion p , ITextureRegion n,ITextureRegion l)
 	{
-		Parrot p1 = new Parrot(CAMERA_WIDTH + 200,CAMERA_WIDTH - 250, CAMERA_HIGHT / 2 ,CAMERA_HIGHT / 2, p, vertexBufferObjectManager, R.raw.mama, AnimatedBookActivity.context,l);
+		Parrot p1 = new Parrot(CAMERA_WIDTH + 200,CAMERA_WIDTH - 250, CAMERA_HEIGHT / 2 ,CAMERA_HEIGHT / 2, p, vertexBufferObjectManager, R.raw.mama, AnimatedBookActivity.context,l);
 		mMainScene.registerTouchArea(p1.parrotFlying);
 		mMainScene.attachChild(p1.parrotFlying);
-		createNextArrow(CAMERA_WIDTH-100f, CAMERA_HIGHT-100f, 200f, 200f, n, 1);
+		createNextArrow(CAMERA_WIDTH-100f, CAMERA_HEIGHT-100f, 200f, 200f, n, 1);
 		mMainScene.registerTouchArea(NextSprite);
 		mMainScene.attachChild(NextSprite);
 		mMainScene.attachChild(p1.mLetter);

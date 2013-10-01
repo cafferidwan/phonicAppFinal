@@ -28,6 +28,7 @@ import com.example.phonicsapp.GameMainPage;
 import com.example.phonicsapp.R;
 import com.example.phonicsapp.R.raw;
 import com.example.phonicsapp.animatedBook.AnimatedBookActivity;
+import com.example.phonicsapp.monkeyGame.MonkeyGameActivity;
 
 import android.content.Context;
 import android.content.Intent;
@@ -54,25 +55,30 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 	public static ITextureRegion mMeghTextureRegion;
 	public static ITextureRegion mMoiTextureRegion;
 	public static ITextureRegion mMoTextureRegion;
+	public static ITextureRegion mMamaTextureRegion;
 	
 	public static ITextureRegion mBox1TextureRegion;
 	public static ITextureRegion mBox2TextureRegion;
 	
 	private BuildableBitmapTextureAtlas mAnimatedBitmapTextureAtlas;
-	private BuildableBitmapTextureAtlas mAnimatedBitmapTextureAtlas1;
 	public static TiledTextureRegion mParrotTextureRegion;
 	public static TiledTextureRegion mBoxTextureRegion;
 	
-	public static Sprite backGround, mula, kola, ma, mohis, keramBoard, megh, moi;
+	public static Sprite backGround, mula, kola, ma, mohis, keramBoard, megh, moi, mama;
 	static Sprite mo;
 	static AnimatedSprite  parrot;
 	public TimerHandler timer1, timer2;
 	
 	static float mulaX , mulaY, kolaX, kolaY, maX, maY, mohisX, 
-		  mohisY, keramBoardX, keramBoardY, meghX, meghY, moiX, moiY;
+		  mohisY, keramBoardX, keramBoardY, meghX, meghY, moiX, moiY, mamaX, mamaY;
 	static Sprite openedBox, closedBox;
+	
+	static float ImageHight;
+	static float ImageWidth;
 
 	static BoxGameActivity boxGameActivityInstance;
+	static int bCounter=0;
+	static int aCounter=0;
 	
 	public static BoxGameActivity getSharedInstances()
 	{
@@ -88,8 +94,14 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 		CAMERA_HEIGHT = display.getHeight();
 		CAMERA_WIDTH = display.getWidth();
 		
+		ImageHight = CAMERA_HEIGHT/4.5f;
+		ImageWidth = CAMERA_WIDTH/6.5f;
+		
 		mulaX = CAMERA_WIDTH/2 - CAMERA_WIDTH/4;
 		mulaY =	CAMERA_HEIGHT/2 - CAMERA_HEIGHT/4;
+		
+		mamaX = CAMERA_WIDTH/2 - CAMERA_WIDTH/4;
+		mamaY =	CAMERA_HEIGHT - CAMERA_HEIGHT/4;
 		
 		kolaX = 50;
 		kolaY = CAMERA_HEIGHT-CAMERA_HEIGHT/4;
@@ -97,13 +109,13 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 		maX = 50;
 		maY = CAMERA_HEIGHT/2 - CAMERA_HEIGHT/4;
 		
-		mohisX = CAMERA_WIDTH - 100;
-		mohisY = CAMERA_HEIGHT/2 - CAMERA_HEIGHT/4;
+		mohisX = CAMERA_WIDTH - 150;
+		mohisY = CAMERA_HEIGHT/2;
 		
-		keramBoardX = 500;
+		keramBoardX = CAMERA_WIDTH - CAMERA_WIDTH/4 -50;
 		keramBoardY = CAMERA_HEIGHT-130;
 		
-		meghX = CAMERA_WIDTH - 100;
+		meghX = CAMERA_WIDTH - 150;
 		meghY = CAMERA_HEIGHT-CAMERA_HEIGHT/4;
 		
 		moiX = CAMERA_WIDTH/2;
@@ -119,7 +131,7 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 	protected void onCreateResources() 
 	{
 		// TODO Auto-generated method stub
-		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx2/");
+		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("BoxGameGfx/");
 
 		this.mBitmapTextureAtlas = new BuildableBitmapTextureAtlas(
 				this.getTextureManager(), 1600, 1200);
@@ -141,6 +153,8 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 				.createFromAsset(this.mBitmapTextureAtlas, this, "megh-2.png");
 		BoxGameActivity.mMoiTextureRegion = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(this.mBitmapTextureAtlas, this, "moi-2.png");
+		BoxGameActivity.mMamaTextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "mama-2.png");
 		BoxGameActivity.mMoTextureRegion = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(this.mBitmapTextureAtlas, this, "mo.png");
 		
@@ -149,10 +163,9 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 		BoxGameActivity.mBox2TextureRegion = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(this.mBitmapTextureAtlas, this, "box-16.png");
 		
-		mAnimatedBitmapTextureAtlas = new BuildableBitmapTextureAtlas(this.getTextureManager(), 900, 228, TextureOptions.NEAREST);
-		mAnimatedBitmapTextureAtlas1 = new BuildableBitmapTextureAtlas(this.getTextureManager(), 600, 153, TextureOptions.NEAREST);
+		mAnimatedBitmapTextureAtlas = new BuildableBitmapTextureAtlas(this.getTextureManager(), 1000, 554, TextureOptions.NEAREST);
 		BoxGameActivity.mParrotTextureRegion = BitmapTextureAtlasTextureRegionFactory.
-				createTiledFromAsset(this.mAnimatedBitmapTextureAtlas, this, "parrot1.png", 8, 2);
+				createTiledFromAsset(this.mAnimatedBitmapTextureAtlas, this, "p5.png", 5, 2);
 		try 
 		{
 			this.mBitmapTextureAtlas.build(new BlackPawnTextureAtlasBuilder<IBitmapTextureAtlasSource,
@@ -175,14 +188,6 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 			Debug.e(e);
 		}
 		
-		try {
-			this.mAnimatedBitmapTextureAtlas1.build(new BlackPawnTextureAtlasBuilder<IBitmapTextureAtlasSource, BitmapTextureAtlas>(0, 0, 0));
-			this.mAnimatedBitmapTextureAtlas1.load();
-		} 
-		catch (TextureAtlasBuilderException e) 
-		{
-			Debug.e(e);
-		}
 		
 		//timer1 for checking if the any object collides with the box
 		timer1 = new TimerHandler(1.0f/120, true, new ITimerCallback()
@@ -191,18 +196,14 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 			public void onTimePassed(TimerHandler pTimerHandler)
 			{
 				// TODO Auto-generated method stub
-				
-				Debug.d("ma:"+ma.getX());
-				Debug.d("moi:"+moi.getX());
-				Debug.d("mohis:"+mohis.getX());
-				Debug.d("megh:"+megh.getX());
-				Debug.d("mula:"+mula.getX());
-				
-//				if(mo.getY()==null)
-//				{
-//					
-//					
-//				}
+				Debug.d("a:"+aCounter);
+				//if all the items are in the box
+				if(aCounter==6)
+				{
+					bCounter = 0;
+					aCounter = -1;
+					startActivity();
+				}
 				
 				if(Functions.collisoinCheck(closedBox, kola)==1 ||
 						Functions.collisoinCheck(closedBox, kola)==2)
@@ -250,7 +251,7 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 				{
 					BoxGameActivity.openedBox.setVisible(true);
 					BoxGameActivity.closedBox.setVisible(false);
-				
+		
 					if(Objects.touchFlag == false)
 					{
 						Functions.fadeOut(megh);
@@ -296,6 +297,19 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 					}
 				}
 				
+				//Mama
+				else if(Functions.collisoinCheck(closedBox, mama)==1 ||
+						Functions.collisoinCheck(closedBox, mama)==2)
+				{
+					BoxGameActivity.openedBox.setVisible(true);
+					BoxGameActivity.closedBox.setVisible(false);
+				
+					if(Objects.touchFlag == false)
+					{
+						Functions.fadeOut(mama);
+					}
+				}
+				
 				else
 				{
 					BoxGameActivity.openedBox.setVisible(false);
@@ -321,44 +335,65 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 		
 		//opened box-y:160
 		openedBox = new Sprite(CAMERA_WIDTH/2-100, CAMERA_HEIGHT/2, mBox1TextureRegion, getVertexBufferObjectManager());
+		//openedBox.setWidth(ImageWidth*1.5f);
+		//openedBox.setHeight(ImageHight*1.5f);
 		mScene.attachChild(openedBox);
 		openedBox.setVisible(false);
 		
 		//closed box
 		closedBox = new Sprite(CAMERA_WIDTH/2-100, CAMERA_HEIGHT/2, mBox2TextureRegion, getVertexBufferObjectManager());
+		//closedBox.setWidth(ImageWidth*1.5f);
+		//closedBox.setHeight(ImageHight*1.5f);
 		mScene.attachChild(closedBox);
 		closedBox.setVisible(true);
 		
 		parrot = new Parrot(BoxGameActivity.CAMERA_WIDTH+500, BoxGameActivity.CAMERA_HEIGHT/2-50, mParrotTextureRegion, this.getVertexBufferObjectManager());
-		parrot.animate(new long[]{200, 200, 200, 200, 200, 200, 200, 200}, 0, 7, true);
+		parrot.animate(new long[]{150, 150, 150, 150, 150, 150, 150, 150, 150, 150}, 0, 9, true);
 		parrot.setFlippedHorizontal(true);
-		parrot.setWidth(CAMERA_WIDTH/6 + 80);
-		parrot.setHeight(CAMERA_HEIGHT/4 + 60);
+		parrot.setWidth(ImageWidth*1.5f);
+		parrot.setHeight(ImageHight*1.5f);
 		mScene.registerTouchArea(parrot);
 		mScene.attachChild(parrot);
 		
+		mama = new Objects(mamaX, mamaY, mMamaTextureRegion, getVertexBufferObjectManager());
+		mama.setWidth(ImageWidth);
+		mama.setHeight(ImageHight);
+		mScene.registerTouchArea(mama);
+		mScene.attachChild(mama);
 		
 		kola = new Objects(kolaX, kolaY, mKolaTextureRegion, getVertexBufferObjectManager());
+		kola.setWidth(ImageWidth);
+		kola.setHeight(ImageHight);
 		mScene.registerTouchArea(kola);
 		mScene.attachChild(kola);
 		
 		mula = new Objects(mulaX, mulaY, mMulaTextureRegion, getVertexBufferObjectManager());
+		mula.setWidth(ImageWidth);
+		mula.setHeight(ImageHight);
 		mScene.registerTouchArea(mula);
 		mScene.attachChild(mula);
 		
 		ma = new Objects(maX, maY, mMaTextureRegion, getVertexBufferObjectManager());
+		ma.setWidth(ImageWidth);
+		ma.setHeight(ImageHight);
 		mScene.registerTouchArea(ma);
 		mScene.attachChild(ma);
 		
 		mohis = new Objects(mohisX, mohisY, mMohisTextureRegion, getVertexBufferObjectManager());
+		mohis.setWidth(ImageWidth);
+		mohis.setHeight(ImageHight);
 		mScene.registerTouchArea(mohis);
 		mScene.attachChild(mohis);
 		
 		keramBoard = new Objects(keramBoardX, keramBoardY, mKeramBoardTextureRegion, getVertexBufferObjectManager());
+		keramBoard.setWidth(ImageWidth);
+		keramBoard.setHeight(ImageHight);
 		mScene.registerTouchArea(keramBoard);
 		mScene.attachChild(keramBoard);
 		
 		megh = new Objects(meghX, meghY, mMeghTextureRegion, getVertexBufferObjectManager());
+		megh.setWidth(ImageWidth);
+		megh.setHeight(ImageHight);
 		mScene.registerTouchArea(megh);
 		mScene.attachChild(megh);
 		
@@ -398,10 +433,10 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 	}
 	
 	
-	void startActivity()
+	public void startActivity()
 	{
 		finish();
-		startActivity(new Intent(this, AnimatedBookActivity.class));
+		startActivity(new Intent(this, MonkeyGameActivity.class));
 	}
 	
 	public void setCurrentScene(Scene scene)

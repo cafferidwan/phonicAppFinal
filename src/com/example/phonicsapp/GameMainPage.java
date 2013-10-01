@@ -78,7 +78,7 @@ public class GameMainPage extends SimpleBaseGameActivity
 	protected void onCreateResources() 
 	{
 		// TODO Auto-generated method stub
-		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gfx/");
+		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gameMenuGfx/");
 
 		mBitmapTextureAtlas = new BuildableBitmapTextureAtlas(
 				getTextureManager(), 1600, 1200);
@@ -142,7 +142,7 @@ public class GameMainPage extends SimpleBaseGameActivity
 		backGround.setWidth(CAMERA_WIDTH);
 		mScene.attachChild(backGround);
 		
-		parrot = new Sprite(CAMERA_WIDTH/3-200, CAMERA_HEIGHT-300, mParrotTextureRegion, getVertexBufferObjectManager())
+		parrot = new Sprite(CAMERA_WIDTH/3-200, CAMERA_HEIGHT/2, mParrotTextureRegion, getVertexBufferObjectManager())
 		{
 			@Override
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY)
@@ -176,7 +176,7 @@ public class GameMainPage extends SimpleBaseGameActivity
 		mScene.registerTouchArea(parrot);
 		mScene.attachChild(parrot);
 		
-		kolom = new Sprite(CAMERA_WIDTH/2-100, CAMERA_HEIGHT-250, mKolomTextureRegion, getVertexBufferObjectManager())
+		kolom = new Sprite(CAMERA_WIDTH/2-100, CAMERA_HEIGHT/2, mKolomTextureRegion, getVertexBufferObjectManager())
 		{
 			@Override
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY)
@@ -203,7 +203,7 @@ public class GameMainPage extends SimpleBaseGameActivity
 		mScene.registerTouchArea(kolom);
 		mScene.attachChild(kolom);
 
-		board = new Sprite(CAMERA_WIDTH/2+130, CAMERA_HEIGHT-250, mBoardTextureRegion, getVertexBufferObjectManager())
+		board = new Sprite(CAMERA_WIDTH/2+130, CAMERA_HEIGHT/2, mBoardTextureRegion, getVertexBufferObjectManager())
 		{
 			@Override
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY)

@@ -9,10 +9,14 @@ import org.andengine.entity.modifier.SequenceEntityModifier;
 import org.andengine.entity.modifier.PathModifier.IPathModifierListener;
 import org.andengine.entity.modifier.PathModifier.Path;
 import org.andengine.entity.sprite.Sprite;
+import org.andengine.ui.activity.BaseGameActivity;
 import org.andengine.util.debug.Debug;
 import org.andengine.util.modifier.ease.EaseBounceOut;
 import org.andengine.util.modifier.ease.EaseCircularInOut;
 import org.andengine.util.modifier.ease.EaseQuadOut;
+
+import com.example.phonicsapp.GameMainPage;
+
 import android.content.Context;
 import android.media.MediaPlayer;
 
@@ -112,12 +116,17 @@ public class Functions
 	}
 	
 	//FadeOut Function
-	public static void fadeOut(final Sprite a)
+	public static void fadeOut(final Sprite sprite)
 	{
-		final Path boxPath = new Path(2).to(a.getX(), a.getY()).
+		BoxGameActivity.bCounter++;
+		if(BoxGameActivity.bCounter==1)
+		{
+			BoxGameActivity.aCounter++;
+		}
+		final Path boxPath = new Path(2).to(sprite.getX(), sprite.getY()).
 				to(BoxGameActivity.closedBox.getX(), BoxGameActivity.closedBox.getY()+30);
 		
-		a.registerEntityModifier(new PathModifier((float)0.4, boxPath,  new IPathModifierListener() 
+		sprite.registerEntityModifier(new PathModifier((float)0.4, boxPath,  new IPathModifierListener() 
 		{
 			@Override
 			public void onPathStarted(final PathModifier pPathModifier, final IEntity pEntity) 
@@ -153,7 +162,8 @@ public class Functions
 		        {
 		                super.onModifierStarted(pItem);
 		                // Your action after starting modifier
-		                BoxGameActivity.mScene.unregisterTouchArea(a);
+		                //BoxGameActivity.counter();
+		                BoxGameActivity.mScene.unregisterTouchArea(sprite);
 		        }
 		       
 		        @Override
@@ -161,11 +171,11 @@ public class Functions
 		        {
 		                super.onModifierFinished(pItem);
 		                // Your action after finishing modifier
-		                a.setY(BoxGameActivity.CAMERA_WIDTH-BoxGameActivity.CAMERA_WIDTH/4);
+		                sprite.setY(BoxGameActivity.CAMERA_HEIGHT - BoxGameActivity.CAMERA_HEIGHT/4);
 		        }
 		};
 		 
-		a.registerEntityModifier(yourModifier);
+		sprite.registerEntityModifier(yourModifier);
 	}
 	
 	//Audio play Function
