@@ -46,8 +46,8 @@ public class AnimatedBookActivity extends SimpleBaseGameActivity
 	
 	//Background 
 	public static BuildableBitmapTextureAtlas BgBuildableBitmapTextureAtlas;
-	public static ITextureRegion BgTextureReason;
-	public static ITextureRegion SpriteBgTextureReason;
+	public static ITextureRegion BgTextureRegion;
+	public static ITextureRegion SpriteBgTextureRegion;
 	public static Scene mMainScene;
 	public static Sprite BgSprite;
 	public static Sprite NextSprite;
@@ -57,63 +57,63 @@ public class AnimatedBookActivity extends SimpleBaseGameActivity
 	public static BuildableBitmapTextureAtlas LetterBuildableBitmapTextureAtlas;
 	
 	//Letter images 1 Aaa
-	public static ITextureRegion MangoTextureReason;
-	public static ITextureRegion AppleTextureReason;
-	public static ITextureRegion GingerTextureReason;
-	public static ITextureRegion PineappleTextureReason;
-	public static ITextureRegion PotatoTextureReason;
-	public static ITextureRegion SkyTextureReason;
+	public static ITextureRegion MangoTextureRegion;
+	public static ITextureRegion AppleTextureRegion;
+	public static ITextureRegion GingerTextureRegion;
+	public static ITextureRegion PineappleTextureRegion;
+	public static ITextureRegion PotatoTextureRegion;
+	public static ITextureRegion SkyTextureRegion;
 	
 	//Letter images 2 Moo
 	public static BuildableBitmapTextureAtlas Letter2BuildableBitmapTextureAtlas;
-	public static ITextureRegion MaTextureReason;
-	public static ITextureRegion MamaTextureReason;
-	public static ITextureRegion MoiTextureReason;
-	public static ITextureRegion MeghTextureReason;
-	public static ITextureRegion MulaTextureReason;
-	public static ITextureRegion MohisTextureReason;
+	public static ITextureRegion MaTextureRegion;
+	public static ITextureRegion MamaTextureRegion;
+	public static ITextureRegion MoiTextureRegion;
+	public static ITextureRegion MeghTextureRegion;
+	public static ITextureRegion MulaTextureRegion;
+	public static ITextureRegion MohisTextureRegion;
 	
 	//Letter images 3 Taa
 	public static BuildableBitmapTextureAtlas Letter3BuildableBitmapTextureAtlas;
-	public static ITextureRegion SelfTextureReason;
-	public static ITextureRegion TalTextureReason;
-	public static ITextureRegion TalaTextureReason;
-	public static ITextureRegion TaraTextureReason;
-	public static ITextureRegion TuliTextureReason;
-	public static ITextureRegion TamaTextureReason;
+	public static ITextureRegion SelfTextureRegion;
+	public static ITextureRegion TalTextureRegion;
+	public static ITextureRegion TalaTextureRegion;
+	public static ITextureRegion TaraTextureRegion;
+	public static ITextureRegion TuliTextureRegion;
+	public static ITextureRegion TamaTextureRegion;
 	
 	//Letter images 4 Laa
 	public static BuildableBitmapTextureAtlas Letter4BuildableBitmapTextureAtlas;
-	public static ITextureRegion LalTextureReason;
-	public static ITextureRegion LangolTextureReason;
-	public static ITextureRegion LataTextureReason;
-	public static ITextureRegion LatimTextureReason;
-	public static ITextureRegion LauuTextureReason;
-	public static ITextureRegion LebuTextureReason;
+	public static ITextureRegion LalTextureRegion;
+	public static ITextureRegion LangolTextureRegion;
+	public static ITextureRegion LataTextureRegion;
+	public static ITextureRegion LatimTextureRegion;
+	public static ITextureRegion LauuTextureRegion;
+	public static ITextureRegion LebuTextureRegion;
 	
 	//Letter images 5 Ko
 	public static BuildableBitmapTextureAtlas Letter5BuildableBitmapTextureAtlas;
-	public static ITextureRegion KakTextureReason;
-	public static ITextureRegion KaramTextureReason;
-	public static ITextureRegion KolaTextureReason;
-	public static ITextureRegion KolTextureReason;
-	public static ITextureRegion KolomTextureReason;
-	public static ITextureRegion KomlaTextureReason;
+	public static ITextureRegion KakTextureRegion;
+	public static ITextureRegion KaramTextureRegion;
+	public static ITextureRegion KolaTextureRegion;
+	public static ITextureRegion KolTextureRegion;
+	public static ITextureRegion KolomTextureRegion;
+	public static ITextureRegion KomlaTextureRegion;
 	
 	//Next Arrow
-	public static ITextureRegion NextTextureReason;
+	public static ITextureRegion NextTextureRegion;
 	
 	//Parrot image Flying
 	public BitmapTextureAtlas ParrotBitmapTextureAtlus;
-	public static TiledTextureRegion ParrotTextureReason;
+	public static TiledTextureRegion ParrotTextureRegion;
 
 	//Letter 
 	public static BuildableBitmapTextureAtlas LetterAllBuildableBitmapTextureAtlas;
-	public static ITextureRegion LetterKoTextureReason;
-	public static ITextureRegion LetterMoTextureReason;
-	public static ITextureRegion LetterLaTextureReason;
-	public static ITextureRegion LetterToTextureReason;
-	public static ITextureRegion LetterAaaTextureReason;
+	public static ITextureRegion LetterKoTextureRegion;
+	public static ITextureRegion LetterMoTextureRegion;
+	public static ITextureRegion LetterLaTextureRegion;
+	public static ITextureRegion LetterToTextureRegion;
+	public static ITextureRegion LetterAaaTextureRegion;
 	
 	public static VertexBufferObjectManager vertexBufferObjectManager;
 	
@@ -142,67 +142,67 @@ public class AnimatedBookActivity extends SimpleBaseGameActivity
 		
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("AnimatedBookGfx/");
 		BgBuildableBitmapTextureAtlas = new BuildableBitmapTextureAtlas(getTextureManager(), 1800, 1432,TextureOptions.DEFAULT);
-		BgTextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(BgBuildableBitmapTextureAtlas, this, "jungle16.png");
+		BgTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(BgBuildableBitmapTextureAtlas, this, "jungle16.png");
 		
 		//Letter Image
 		LetterBuildableBitmapTextureAtlas = new BuildableBitmapTextureAtlas(getTextureManager(), 1400, 900,TextureOptions.DEFAULT);
 		
-		SpriteBgTextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(LetterBuildableBitmapTextureAtlas, this, "spritebg.png");
+		SpriteBgTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(LetterBuildableBitmapTextureAtlas, this, "spritebg.png");
 		
-		MangoTextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(LetterBuildableBitmapTextureAtlas, this, "grp1/mango2.png");
-		AppleTextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(LetterBuildableBitmapTextureAtlas, this, "grp1/apple.png");
-		GingerTextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(LetterBuildableBitmapTextureAtlas, this, "grp1/ginger.png");
-		PineappleTextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(LetterBuildableBitmapTextureAtlas, this, "grp1/pineapple.png");
-		PotatoTextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(LetterBuildableBitmapTextureAtlas, this, "grp1/potato.png");
-		SkyTextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(LetterBuildableBitmapTextureAtlas, this, "grp1/sky.png");
-		NextTextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(LetterBuildableBitmapTextureAtlas, this, "arrow_right.png");
+		MangoTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(LetterBuildableBitmapTextureAtlas, this, "grp1/mango2.png");
+		AppleTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(LetterBuildableBitmapTextureAtlas, this, "grp1/apple.png");
+		GingerTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(LetterBuildableBitmapTextureAtlas, this, "grp1/ginger.png");
+		PineappleTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(LetterBuildableBitmapTextureAtlas, this, "grp1/pineapple.png");
+		PotatoTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(LetterBuildableBitmapTextureAtlas, this, "grp1/potato.png");
+		SkyTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(LetterBuildableBitmapTextureAtlas, this, "grp1/sky.png");
+		NextTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(LetterBuildableBitmapTextureAtlas, this, "arrow_right.png");
 		
 		//Letter Group 2 Moo
 		Letter2BuildableBitmapTextureAtlas = new BuildableBitmapTextureAtlas(getTextureManager(), 1200, 800,TextureOptions.DEFAULT);
-		MaTextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter2BuildableBitmapTextureAtlas, this, "grp2/ma.png");
-		MamaTextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter2BuildableBitmapTextureAtlas, this, "grp2/mama.png");
-		MulaTextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter2BuildableBitmapTextureAtlas, this, "grp2/mula.png");
-		MeghTextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter2BuildableBitmapTextureAtlas, this, "grp2/megh.png");
-		MoiTextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter2BuildableBitmapTextureAtlas, this, "grp2/moi.png");
-		MohisTextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter2BuildableBitmapTextureAtlas, this, "grp2/mohis.png");
+		MaTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter2BuildableBitmapTextureAtlas, this, "grp2/ma.png");
+		MamaTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter2BuildableBitmapTextureAtlas, this, "grp2/mama.png");
+		MulaTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter2BuildableBitmapTextureAtlas, this, "grp2/mula.png");
+		MeghTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter2BuildableBitmapTextureAtlas, this, "grp2/megh.png");
+		MoiTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter2BuildableBitmapTextureAtlas, this, "grp2/moi.png");
+		MohisTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter2BuildableBitmapTextureAtlas, this, "grp2/mohis.png");
 		
 		//Letter Group 3 Taa 
 		Letter3BuildableBitmapTextureAtlas = new BuildableBitmapTextureAtlas(getTextureManager(), 1300, 800,TextureOptions.DEFAULT);
-		SelfTextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter3BuildableBitmapTextureAtlas, this, "grp3/shelfe.png");
-		TalTextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter3BuildableBitmapTextureAtlas, this, "grp3/tal.png");
-		TalaTextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter3BuildableBitmapTextureAtlas, this, "grp3/tala.png");
-		TaraTextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter3BuildableBitmapTextureAtlas, this, "grp3/tara.png");
-		TuliTextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter3BuildableBitmapTextureAtlas, this, "grp3/tulee.png");
-		TamaTextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter3BuildableBitmapTextureAtlas, this, "grp3/tama.png");
+		SelfTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter3BuildableBitmapTextureAtlas, this, "grp3/shelfe.png");
+		TalTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter3BuildableBitmapTextureAtlas, this, "grp3/tal.png");
+		TalaTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter3BuildableBitmapTextureAtlas, this, "grp3/tala.png");
+		TaraTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter3BuildableBitmapTextureAtlas, this, "grp3/tara.png");
+		TuliTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter3BuildableBitmapTextureAtlas, this, "grp3/tulee.png");
+		TamaTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter3BuildableBitmapTextureAtlas, this, "grp3/tama.png");
 				
 		//Letter Group 4 Laa
 		Letter4BuildableBitmapTextureAtlas = new BuildableBitmapTextureAtlas(getTextureManager(), 1200, 800,TextureOptions.DEFAULT);
-		LalTextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter4BuildableBitmapTextureAtlas, this, "grp4/lal.png");
-		LangolTextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter4BuildableBitmapTextureAtlas, this, "grp4/langol.png");
-		LataTextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter4BuildableBitmapTextureAtlas, this, "grp4/lata.png");
-		LatimTextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter4BuildableBitmapTextureAtlas, this, "grp4/latim.png");
-		LauuTextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter4BuildableBitmapTextureAtlas, this, "grp4/lauu.png");
-		LebuTextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter4BuildableBitmapTextureAtlas, this, "grp4/lebu.png");
+		LalTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter4BuildableBitmapTextureAtlas, this, "grp4/lal.png");
+		LangolTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter4BuildableBitmapTextureAtlas, this, "grp4/langol.png");
+		LataTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter4BuildableBitmapTextureAtlas, this, "grp4/lata.png");
+		LatimTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter4BuildableBitmapTextureAtlas, this, "grp4/latim.png");
+		LauuTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter4BuildableBitmapTextureAtlas, this, "grp4/lauu.png");
+		LebuTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter4BuildableBitmapTextureAtlas, this, "grp4/lebu.png");
 								
 		//Letter Group 5 Ko
 		Letter5BuildableBitmapTextureAtlas = new BuildableBitmapTextureAtlas(getTextureManager(), 1200, 800,TextureOptions.DEFAULT);
-		KakTextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter5BuildableBitmapTextureAtlas, this, "grp5/kak.png");
-		KaramTextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter5BuildableBitmapTextureAtlas, this, "grp5/karam.png");
-		KolTextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter5BuildableBitmapTextureAtlas, this, "grp5/kol.png");
-		KolaTextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter5BuildableBitmapTextureAtlas, this, "grp5/kola.png");
-		KolomTextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter5BuildableBitmapTextureAtlas, this, "grp5/kolom.png");
-		KomlaTextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter5BuildableBitmapTextureAtlas, this, "grp5/komla.png");
+		KakTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter5BuildableBitmapTextureAtlas, this, "grp5/kak.png");
+		KaramTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter5BuildableBitmapTextureAtlas, this, "grp5/karam.png");
+		KolTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter5BuildableBitmapTextureAtlas, this, "grp5/kol.png");
+		KolaTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter5BuildableBitmapTextureAtlas, this, "grp5/kola.png");
+		KolomTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter5BuildableBitmapTextureAtlas, this, "grp5/kolom.png");
+		KomlaTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter5BuildableBitmapTextureAtlas, this, "grp5/komla.png");
 					
 		// Letter All 
 		LetterAllBuildableBitmapTextureAtlas = new BuildableBitmapTextureAtlas(getTextureManager(), 1200, 1200,TextureOptions.DEFAULT);
-		LetterKoTextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(LetterAllBuildableBitmapTextureAtlas, this, "grp5/letter_ko.png");
-		LetterMoTextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(LetterAllBuildableBitmapTextureAtlas, this, "grp2/letter_mo.png");
-		LetterLaTextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(LetterAllBuildableBitmapTextureAtlas, this, "grp4/letter_lo.png");
-		LetterToTextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(LetterAllBuildableBitmapTextureAtlas, this, "grp3/letter_to.png");
-		LetterAaaTextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(LetterAllBuildableBitmapTextureAtlas, this, "grp1/letter_aa.png");
+		LetterKoTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(LetterAllBuildableBitmapTextureAtlas, this, "grp5/letter_ko.png");
+		LetterMoTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(LetterAllBuildableBitmapTextureAtlas, this, "grp2/letter_mo.png");
+		LetterLaTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(LetterAllBuildableBitmapTextureAtlas, this, "grp4/letter_lo.png");
+		LetterToTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(LetterAllBuildableBitmapTextureAtlas, this, "grp3/letter_to.png");
+		LetterAaaTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(LetterAllBuildableBitmapTextureAtlas, this, "grp1/letter_aa.png");
 		
 		ParrotBitmapTextureAtlus = new BitmapTextureAtlas(getTextureManager(), 900, 228,TextureOptions.DEFAULT);
-		ParrotTextureReason = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(ParrotBitmapTextureAtlus, this, "sprite_parrot4.png",0,0,8,2);
+		ParrotTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(ParrotBitmapTextureAtlus, this, "sprite_parrot4.png",0,0,8,2);
 		
 		
 		try
@@ -244,7 +244,7 @@ public class AnimatedBookActivity extends SimpleBaseGameActivity
 		
 		mMainScene.setTouchAreaBindingOnActionMoveEnabled(true);
 		
-		BgSprite = new Sprite(0, 0, BgTextureReason,vertexBufferObjectManager);
+		BgSprite = new Sprite(0, 0, BgTextureRegion,vertexBufferObjectManager);
 		BgSprite.setHeight(CAMERA_HEIGHT);
 		BgSprite.setWidth(CAMERA_WIDTH);
 		mMainScene.attachChild(BgSprite);
@@ -257,58 +257,58 @@ public class AnimatedBookActivity extends SimpleBaseGameActivity
 		  TiledImage.ObjNo = 1;
 		if(stage == 1)
 		{
-			loadImage1(MangoTextureReason,R.raw.mama);
-			loadImage2(AppleTextureReason,R.raw.mama);
-			loadImage3(GingerTextureReason,R.raw.mama);
-			loadImage4(PineappleTextureReason,R.raw.mama);
-			loadImage5(PotatoTextureReason,R.raw.mama);
-			loadImage6(SkyTextureReason,R.raw.mama);
-			loadParrotAndNext(ParrotTextureReason,NextTextureReason,LetterAaaTextureReason);
+			loadImage1(MangoTextureRegion,R.raw.mama);
+			loadImage2(AppleTextureRegion,R.raw.mama);
+			loadImage3(GingerTextureRegion,R.raw.mama);
+			loadImage4(PineappleTextureRegion,R.raw.mama);
+			loadImage5(PotatoTextureRegion,R.raw.mama);
+			loadImage6(SkyTextureRegion,R.raw.mama);
+			loadParrotAndNext(ParrotTextureRegion,NextTextureRegion,LetterAaaTextureRegion);
 		}
 		//'mo' letter
 		else if(stage == 2)
 		{
-			loadImage1(MamaTextureReason,R.raw.mama);
-			loadImage2(MaTextureReason,R.raw.mama);
-			loadImage3(MohisTextureReason,R.raw.mama);
-			loadImage4(MulaTextureReason,R.raw.mama);
-			loadImage5(MoiTextureReason,R.raw.mama);
-			loadImage6(MeghTextureReason,R.raw.mama);
-			loadParrotAndNext(ParrotTextureReason,NextTextureReason,LetterMoTextureReason);
+			loadImage1(MamaTextureRegion,R.raw.mama);
+			loadImage2(MaTextureRegion,R.raw.ma);
+			loadImage3(MohisTextureRegion,R.raw.mohis);
+			loadImage4(MulaTextureRegion,R.raw.mula);
+			loadImage5(MoiTextureRegion,R.raw.moi);
+			loadImage6(MeghTextureRegion,R.raw.megh);
+			loadParrotAndNext(ParrotTextureRegion,NextTextureRegion,LetterMoTextureRegion);
 		}
 		else if(stage == 3)
 		{
 			Letter2BuildableBitmapTextureAtlas.clearTextureAtlasSources();
-			loadImage1(SelfTextureReason,R.raw.mama);
-			loadImage2(TalTextureReason,R.raw.mama);
-			loadImage3(TalaTextureReason,R.raw.mama);
-			loadImage4(TaraTextureReason,R.raw.mama);
-			loadImage5(TuliTextureReason,R.raw.mama);
-			loadImage6(TamaTextureReason,R.raw.mama);
-			loadParrotAndNext(ParrotTextureReason,NextTextureReason,LetterToTextureReason);
+			loadImage1(SelfTextureRegion,R.raw.mama);
+			loadImage2(TalTextureRegion,R.raw.mama);
+			loadImage3(TalaTextureRegion,R.raw.mama);
+			loadImage4(TaraTextureRegion,R.raw.mama);
+			loadImage5(TuliTextureRegion,R.raw.mama);
+			loadImage6(TamaTextureRegion,R.raw.mama);
+			loadParrotAndNext(ParrotTextureRegion,NextTextureRegion,LetterToTextureRegion);
 		}
 		else if(stage == 4)
 		{
 			Letter3BuildableBitmapTextureAtlas.clearTextureAtlasSources();
 			Log.d("TitledImage", " In 4 ");
-			loadImage1(LalTextureReason,R.raw.mama);
-			loadImage2(LangolTextureReason,R.raw.mama);
-			loadImage3(LataTextureReason,R.raw.mama);
-			loadImage4(LatimTextureReason,R.raw.mama);
-			loadImage5(LauuTextureReason,R.raw.mama);
-			loadImage6(LebuTextureReason,R.raw.mama);
-			loadParrotAndNext(ParrotTextureReason,NextTextureReason,LetterLaTextureReason);
+			loadImage1(LalTextureRegion,R.raw.mama);
+			loadImage2(LangolTextureRegion,R.raw.mama);
+			loadImage3(LataTextureRegion,R.raw.mama);
+			loadImage4(LatimTextureRegion,R.raw.mama);
+			loadImage5(LauuTextureRegion,R.raw.mama);
+			loadImage6(LebuTextureRegion,R.raw.mama);
+			loadParrotAndNext(ParrotTextureRegion,NextTextureRegion,LetterLaTextureRegion);
 		}
 		else if(stage == 5)
 		{
 			Letter3BuildableBitmapTextureAtlas.clearTextureAtlasSources();
-			loadImage1(KakTextureReason,R.raw.mama);
-			loadImage2(KaramTextureReason,R.raw.mama);
-			loadImage3(KolTextureReason,R.raw.mama);
-			loadImage4(KolaTextureReason,R.raw.mama);
-			loadImage5(KolomTextureReason,R.raw.mama);
-			loadImage6(KomlaTextureReason,R.raw.mama);
-			loadParrotAndNext(ParrotTextureReason,NextTextureReason,LetterKoTextureReason);
+			loadImage1(KakTextureRegion,R.raw.mama);
+			loadImage2(KaramTextureRegion,R.raw.mama);
+			loadImage3(KolTextureRegion,R.raw.mama);
+			loadImage4(KolaTextureRegion,R.raw.mama);
+			loadImage5(KolomTextureRegion,R.raw.mama);
+			loadImage6(KomlaTextureRegion,R.raw.mama);
+			loadParrotAndNext(ParrotTextureRegion,NextTextureRegion,LetterKoTextureRegion);
 		}
 	}
 	

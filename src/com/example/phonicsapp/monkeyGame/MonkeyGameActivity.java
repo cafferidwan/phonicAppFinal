@@ -15,68 +15,88 @@ import org.andengine.entity.scene.ITouchArea;
 import org.andengine.entity.scene.Scene;
 import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.Sprite;
-import org.andengine.entity.util.FPSLogger;
 import org.andengine.input.touch.TouchEvent;
 import org.andengine.opengl.texture.TextureOptions;
 import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
 import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlasTextureRegionFactory;
 import org.andengine.opengl.texture.region.ITextureRegion;
 import org.andengine.opengl.texture.region.TextureRegion;
+import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.ui.activity.SimpleBaseGameActivity;
 import org.andengine.util.color.Color;
 import org.andengine.util.debug.Debug;
 import org.andengine.util.modifier.ease.EaseSineInOut;
 
+import com.example.phonicsapp.R;
+
+import android.content.Intent;
+import android.media.MediaPlayer;
 import android.util.Log;
+import android.view.Display;
+import android.view.Window;
+import android.view.WindowManager;
 
 
-public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAreaTouchListener {
+public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAreaTouchListener
+{
 	// ===========================================================
 	// Constants
 	// ===========================================================
+	static MonkeyGameActivity activity;
 	
-	private static final int CAMERA_WIDTH = 320;
-	private static final int CAMERA_HEIGHT = 480;
+	static int CAMERA_WIDTH;
+	static int CAMERA_HEIGHT;
+	static float distance;
 	public String DEBUG_TAG = MonkeyGameActivity.class.getSimpleName();
 	// ===========================================================
 	// Fields
 	// ===========================================================
 	
-	private BitmapTextureAtlas texImage;
-	private TextureRegion regImage;
+	public static BitmapTextureAtlas mBitmapAtlas;
+	public static TextureRegion mTexture;
 	
-	public Sprite sprImage, croc, pen, ball, banana, jacKFruit, keramBoard, monkey1, monkey2, monkey3;
-	private Camera mCamera;
+	public static Sprite backGround, moi, mama, tala, langol, banana, megh, mohis, monkey1, banana2, monkey2;
+	public static Camera mCamera;
 
-	private BitmapTextureAtlas mBitmapTextureAtlasCroc;
-	private BitmapTextureAtlas mBitmapTextureAtlasPen;
-	private BitmapTextureAtlas mBitmapTextureAtlasBall;
-	private BitmapTextureAtlas mBitmapTextureAtlasBanana;
-	private BitmapTextureAtlas mBitmapTextureAtlasJackFruit;
-	private BitmapTextureAtlas mBitmapTextureAtlasKeramBoard;
+	public static BitmapTextureAtlas mBitmapTextureAtlasMoi;
+	public static BitmapTextureAtlas mBitmapTextureAtlasMama;
+	public static BitmapTextureAtlas mBitmapTextureAtlasTala;
+	public static BitmapTextureAtlas mBitmapTextureAtlasLangol;
+	public static BitmapTextureAtlas mBitmapTextureAtlasBanana;
+	public static BitmapTextureAtlas mBitmapTextureAtlasMegh;
+	public static BitmapTextureAtlas mBitmapTextureAtlasMohis;
 	
-	private BitmapTextureAtlas mBitmapTextureAtlasM1;
-	private BitmapTextureAtlas mBitmapTextureAtlasM2;
-	private BitmapTextureAtlas mBitmapTextureAtlasM3;
+	public static BitmapTextureAtlas mBitmapTextureAtlasM1, mBitmapTextureAtlasM2;
 	
+	public static Scene mScene;
+	public static ITextureRegion mFaceTextureRegionMoi;
+	public static ITextureRegion mFaceTextureRegionMama;
+	public static ITextureRegion mFaceTextureRegionTala;
+	public static ITextureRegion mFaceTextureRegionLangol;
+	public static ITextureRegion mFaceTextureRegionBanana;
+	public static ITextureRegion mFaceTextureRegionMegh;
+	public static ITextureRegion mFaceTextureRegionMohis;
 	
+	public static ITextureRegion mFaceTextureRegionM1, mFaceTextureRegionM2;
 	
-	private Scene mMainScene;
-	private ITextureRegion mFaceTextureRegionCroc;
-	private ITextureRegion mFaceTextureRegionPen;
-	private ITextureRegion mFaceTextureRegionBall;
-	private ITextureRegion mFaceTextureRegionBanana;
-	private ITextureRegion mFaceTextureRegionJackFruit;
-	private ITextureRegion mFaceTextureRegionKeramBoard;
+	static float mFaceCount = -60;
+
+	public static int aCount = 0;
+	//public static Sound ballSound, crocSound, keramSound, penSound, jackFruitSound, bananaSound;
+	public static int randomItem;
 	
-	private ITextureRegion mFaceTextureRegionM1, mFaceTextureRegionM2, mFaceTextureRegionM3;
+	public static Sprite[] position = new Sprite[7];
+	public static float bananaX, bananaY;
 	
-	private int mFaceCount = -50, aCount = 0;
-	//private Sound ballSound, crocSound, keramSound, penSound, jackFruitSound, bananaSound;
-	private int randomItem;
+	static float ImageHeight;
+	static float ImageWidth;
 	
-	private Sprite[] position = new Sprite[7];
-	private float bananaX, bananaY;
+	static float ImageHeightObjects;
+	static float ImageWidthObjects;
+	
+	public static VertexBufferObjectManager vbo;
+	static Boolean audioPlay = false;
+	static MediaPlayer mediaPlayer = new MediaPlayer();
 	
 	// ===========================================================
 	// Constructors
@@ -94,13 +114,23 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 	@Override
 	public EngineOptions onCreateEngineOptions() 
 	{
-		this.mCamera = new Camera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
-
-		EngineOptions en = new EngineOptions(true,
-				ScreenOrientation.PORTRAIT_FIXED, new RatioResolutionPolicy(CAMERA_WIDTH, CAMERA_HEIGHT), mCamera);
-
-		en.getAudioOptions().setNeedsSound(true);
-		return en;
+		activity = this;
+		Display display = getWindowManager().getDefaultDisplay();
+		CAMERA_HEIGHT = display.getHeight();
+		CAMERA_WIDTH = display.getWidth();
+		
+		requestWindowFeature(Window.FEATURE_NO_TITLE);
+	    getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		
+		ImageHeight = CAMERA_HEIGHT/1.1f;
+		ImageWidth = CAMERA_WIDTH/6.0f;
+		
+		ImageHeightObjects = CAMERA_HEIGHT/6.0f;
+		ImageWidthObjects = CAMERA_WIDTH/8.5f;
+		
+		mCamera = new Camera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
+		
+		return new EngineOptions(true, ScreenOrientation.LANDSCAPE_SENSOR,new RatioResolutionPolicy(CAMERA_WIDTH, CAMERA_HEIGHT), mCamera);
 	}
 
 	@Override
@@ -108,114 +138,115 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 	{
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("monkeyGameGfx/");
 		
-		texImage = new BitmapTextureAtlas(this.getTextureManager(), 512, 512,TextureOptions.BILINEAR_PREMULTIPLYALPHA);
-		regImage = BitmapTextureAtlasTextureRegionFactory.createFromAsset(texImage, this.getAssets(), "background.png", 0, 0);
+		mBitmapAtlas = new BitmapTextureAtlas(getTextureManager(), 1600, 864,TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+		mTexture = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapAtlas, getAssets(), "bg-1.png", 0, 0);
 
-		this.mBitmapTextureAtlasCroc = new BitmapTextureAtlas(this.getTextureManager(), 256, 128, TextureOptions.BILINEAR);
-		this.mBitmapTextureAtlasPen = new BitmapTextureAtlas(this.getTextureManager(), 256, 128);
-		this.mBitmapTextureAtlasBall = new BitmapTextureAtlas(this.getTextureManager(), 256, 128);
-		this.mBitmapTextureAtlasBanana = new BitmapTextureAtlas(this.getTextureManager(), 40, 52);
-		this.mBitmapTextureAtlasJackFruit = new BitmapTextureAtlas(this.getTextureManager(), 256, 128);
-		this.mBitmapTextureAtlasKeramBoard = new BitmapTextureAtlas(this.getTextureManager(), 256, 128);
+		mBitmapTextureAtlasMoi = new BitmapTextureAtlas(getTextureManager(), 120, 120, TextureOptions.BILINEAR);
+		mBitmapTextureAtlasMama = new BitmapTextureAtlas(getTextureManager(), 120, 120);
+		mBitmapTextureAtlasTala = new BitmapTextureAtlas(getTextureManager(), 120, 120);
+		mBitmapTextureAtlasLangol = new BitmapTextureAtlas(getTextureManager(), 120, 120);
+		mBitmapTextureAtlasBanana = new BitmapTextureAtlas(getTextureManager(), 200, 200);
+		mBitmapTextureAtlasMegh = new BitmapTextureAtlas(getTextureManager(), 120, 120);
+		mBitmapTextureAtlasMohis = new BitmapTextureAtlas(getTextureManager(), 120, 120);
 		
-		this.mBitmapTextureAtlasM1 = new BitmapTextureAtlas(this.getTextureManager(), 340, 80, TextureOptions.BILINEAR_PREMULTIPLYALPHA );
-		this.mBitmapTextureAtlasM2 = new BitmapTextureAtlas(this.getTextureManager(), 40, 52, TextureOptions.BILINEAR_PREMULTIPLYALPHA);
-		this.mBitmapTextureAtlasM3 = new BitmapTextureAtlas(this.getTextureManager(), 340, 80, TextureOptions.BILINEAR_PREMULTIPLYALPHA );
+		mBitmapTextureAtlasM1 = new BitmapTextureAtlas(getTextureManager(), 208, 682, TextureOptions.BILINEAR_PREMULTIPLYALPHA );
+		mBitmapTextureAtlasM2 = new BitmapTextureAtlas(getTextureManager(), 208, 682, TextureOptions.BILINEAR_PREMULTIPLYALPHA );
 		
-		this.mFaceTextureRegionCroc = BitmapTextureAtlasTextureRegionFactory.createFromAsset(this.mBitmapTextureAtlasCroc, this, "croc.png", 0, 50);
-		this.mFaceTextureRegionPen = BitmapTextureAtlasTextureRegionFactory.createFromAsset(this.mBitmapTextureAtlasPen, this, "pen.png",0,50);
-		this.mFaceTextureRegionBall = BitmapTextureAtlasTextureRegionFactory.createFromAsset(this.mBitmapTextureAtlasBall, this, "foot.png",20,60);
-		this.mFaceTextureRegionBanana = BitmapTextureAtlasTextureRegionFactory.createFromAsset(this.mBitmapTextureAtlasBanana, this, "ban.png",0,0);
-		this.mFaceTextureRegionJackFruit = BitmapTextureAtlasTextureRegionFactory.createFromAsset(this.mBitmapTextureAtlasJackFruit, this, "jacks.png",20,60);
-		this.mFaceTextureRegionKeramBoard = BitmapTextureAtlasTextureRegionFactory.createFromAsset(this.mBitmapTextureAtlasKeramBoard, this, "karam.png",0,50);
-		
-		
-		this.mFaceTextureRegionM1 = BitmapTextureAtlasTextureRegionFactory.createFromAsset(this.mBitmapTextureAtlasM1, this, "monkey.png",0,0);
-		this.mFaceTextureRegionM2 = BitmapTextureAtlasTextureRegionFactory.createFromAsset(this.mBitmapTextureAtlasM2, this, "ban.png",0,0);
-		this.mFaceTextureRegionM3 = BitmapTextureAtlasTextureRegionFactory.createFromAsset(this.mBitmapTextureAtlasM3, this, "monkey.png",0,0);
+		mFaceTextureRegionMoi = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasMoi, this, "moi-2.png", 0, 0);
+		mFaceTextureRegionMama = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasMama, this, "mama-2.png",0,0);
+		mFaceTextureRegionTala = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasTala, this, "tala.png",0,0);
+		mFaceTextureRegionLangol = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasLangol, this, "langol.png",0,0);
+		mFaceTextureRegionBanana = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasBanana, this, "banana.png",0,0);
+		mFaceTextureRegionMegh = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasMegh, this, "megh-2.png",0,0);
+		mFaceTextureRegionMohis = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasMohis, this, "mohis-2.png",0,0);
 		
 		
-		texImage.load();
+		mFaceTextureRegionM1 = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasM1, this, "m1.png",0,0);
+		mFaceTextureRegionM2 = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasM2, this, "m2.png",0,0);
 		
-		this.mBitmapTextureAtlasCroc.load();
-		this.mBitmapTextureAtlasPen.load();
-		this.mBitmapTextureAtlasBall.load();
-		this.mBitmapTextureAtlasBanana.load();
-		this.mBitmapTextureAtlasJackFruit.load();
-		this.mBitmapTextureAtlasKeramBoard.load();
 		
-		this.mBitmapTextureAtlasM1.load();
-		this.mBitmapTextureAtlasM2.load();
-		this.mBitmapTextureAtlasM3.load();
+		mBitmapAtlas.load();
+		
+		mBitmapTextureAtlasMoi.load();
+		mBitmapTextureAtlasMama.load();
+		mBitmapTextureAtlasTala.load();
+		mBitmapTextureAtlasLangol.load();
+		mBitmapTextureAtlasBanana.load();
+		mBitmapTextureAtlasMegh.load();
+		mBitmapTextureAtlasMohis.load();
+		
+		mBitmapTextureAtlasM1.load();
+		mBitmapTextureAtlasM2.load();
 		
 	}
 	
 	@Override
 	public Scene onCreateScene() 
 	{
-		this.mEngine.registerUpdateHandler(new FPSLogger());
-
 		/* Just a simple */
-		this.mMainScene = new Scene();
-		mMainScene.setBackground(new Background(Color.WHITE));
-
+		mScene = new Scene();
+		mScene.setBackground(new Background(Color.WHITE));
+		vbo = getVertexBufferObjectManager();
 		
-		sprImage = new Sprite(0, 0, regImage,this.getVertexBufferObjectManager());
-		mMainScene.attachChild(sprImage);
 		
-		mMainScene.registerUpdateHandler(new TimerHandler(5, true,new ITimerCallback()
+		backGround = new Sprite(0, 0, mTexture,getVertexBufferObjectManager());
+		backGround.setWidth(CAMERA_WIDTH);
+		backGround.setHeight(CAMERA_HEIGHT);
+		mScene.attachChild(backGround);
+		
+		mScene.registerUpdateHandler(new TimerHandler(5, true,new ITimerCallback()
 		{
 			@Override
 			public void onTimePassed(TimerHandler pTimerHandler)
 			{
 				// TODO Auto-generated method stub
 				
-				randomItem = (int)(Math.random()*8);
+				randomItem = (int)(Math.random()*6);
 				Log.d(DEBUG_TAG, "randomItem "+randomItem);
 				switch(randomItem)
 				{
 					case 0:
-							croc();
+							GameObjects.moi();
 					break;
 					
 					case 1:
-							pen();
+							GameObjects.mama();
 					break;
 					
 					case 2:
-							ball();
+							GameObjects.tala();
 					break;
 					
 					case 3:
-							ball();
+							GameObjects.langol();
 					break;
 					
 					case 4:
-							keramBoard();
+							GameObjects.mohis();
 					break;
 						
 					case 5:
-							jackFruit();
+							GameObjects.megh();
 					break;
 					
 					case 6:
-							ball();
+							//GameObjects.ball();
 					break;
 				
 					case 7:
-							ball();
+							//GameObjects.ball();
 					break;
 					
 					default:
-						    ball();
+						   // ball();
 					break;
 				}
 			}
 		}));
 		
 		
-		this.mMainScene.setOnAreaTouchListener(this);
-		return this.mMainScene;
+		mScene.setOnAreaTouchListener(this);
+		return mScene;
 	}
 
 	@Override
@@ -225,24 +256,43 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 		
 		if (pSceneTouchEvent.isActionDown()) 
 		{
-			this.removeFace((Sprite) pTouchArea);
+			removeFace((Sprite) pTouchArea);
 			return true;
 		}
 		return false;
 	}
 
-	private void removeFace(Sprite pTouchArea)
+	public static void removeFace(Sprite pTouchArea)
 	{
 		// TODO Auto-generated method stub
 		
-		if((Sprite)pTouchArea==ball)
+		if((Sprite)pTouchArea==tala)
 		{
-			//MainActivity.this.ballSound.play();
-			this.mMainScene.unregisterTouchArea(pTouchArea);
-			this.mMainScene.detachChild(pTouchArea);
+			audioPlay = true;
+			playAudio(R.raw.tala);
+			mScene.unregisterTouchArea(pTouchArea);
+			mScene.detachChild(pTouchArea);
 			if(position[aCount]==null)
 			{
-				//Toast.makeText(getBaseContext(), "There is no Banana",Toast.LENGTH_SHORT ).show();
+
+			}
+			else
+			{
+				bananaX=position[aCount].getX();
+				bananaY=position[aCount].getY();
+				
+				monkey1();
+			}
+		}
+		else if((Sprite)pTouchArea==langol)
+		{
+			audioPlay = true;
+			playAudio(R.raw.langol);
+			mScene.unregisterTouchArea(pTouchArea);
+			mScene.detachChild(pTouchArea);
+			if(position[aCount]==null)
+			{
+
 			}
 			else
 			{
@@ -253,73 +303,77 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 			}
 		}
 
-		else if((Sprite)pTouchArea==pen)
+		else if((Sprite)pTouchArea==mama)
 		{
-			//MainActivity.this.penSound.play();
+			audioPlay = true;
+			playAudio(R.raw.mama);
 			addFace(CAMERA_WIDTH / 2, CAMERA_HEIGHT / 2);
-			this.mMainScene.unregisterTouchArea(pTouchArea);
-			this.mMainScene.detachChild(pTouchArea);
+			mScene.unregisterTouchArea(pTouchArea);
+			mScene.detachChild(pTouchArea);
 		}
-		else if((Sprite)pTouchArea==jacKFruit)
+		else if((Sprite)pTouchArea==megh)
 		{
-			//MainActivity.this.jackFruitSound.play();
+			audioPlay = true;
+			playAudio(R.raw.megh);
 			addFace(CAMERA_WIDTH / 2, CAMERA_HEIGHT / 2);
-			this.mMainScene.unregisterTouchArea(pTouchArea);
-			this.mMainScene.detachChild(pTouchArea);
+			mScene.unregisterTouchArea(pTouchArea);
+			mScene.detachChild(pTouchArea);
 		}
-		else if((Sprite)pTouchArea==croc)
+		else if((Sprite)pTouchArea==moi)
 		{
-			//MainActivity.this.crocSound.play();
+			audioPlay = true;
+			playAudio(R.raw.moi);
 			addFace(CAMERA_WIDTH / 2, CAMERA_HEIGHT / 2);
-			this.mMainScene.unregisterTouchArea(pTouchArea);
-			this.mMainScene.detachChild(pTouchArea);
+			mScene.unregisterTouchArea(pTouchArea);
+			mScene.detachChild(pTouchArea);
 		}
-		else if((Sprite)pTouchArea==keramBoard)
+		else if((Sprite)pTouchArea==mohis)
 		{
-			//MainActivity.this.keramSound.play();
+			audioPlay = true;
+			playAudio(R.raw.mohis);
 			addFace(CAMERA_WIDTH / 2, CAMERA_HEIGHT / 2);
-			this.mMainScene.unregisterTouchArea(pTouchArea);
-			this.mMainScene.detachChild(pTouchArea);
+			mScene.unregisterTouchArea(pTouchArea);
+			mScene.detachChild(pTouchArea);
 		}
-		else if((Sprite)pTouchArea==position[aCount])
-		{
-			//MainActivity.this.bananaSound.play();
-		}
+//		else if((Sprite)pTouchArea==position[aCount])
+//		{
+//			//audioPlay = true;
+//			//playAudio(R.raw.tala);
+//		}
 		
 		System.gc();
 	}
 
-	private void addFace(final float pX, final float pY) 
+	private static void addFace(final float pX, final float pY) 
 	{
-		this.mFaceCount = mFaceCount+95;
-		this.aCount = aCount+1;
+		distance = (float) (CAMERA_WIDTH/5.3 )-5;
+		mFaceCount = mFaceCount+distance;
+		aCount = aCount+1;
 		
 		if(aCount==5)
 		{
 
-			mMainScene.clearUpdateHandlers();
-			mMainScene.clearEntityModifiers();
-			mMainScene.clearTouchAreas();
-			mMainScene.clearChildScene();
+			mScene.clearUpdateHandlers();
+			mScene.clearEntityModifiers();
+			mScene.clearTouchAreas();
+			mScene.clearChildScene();
 			
-			mMainScene.registerUpdateHandler(new TimerHandler(2, new ITimerCallback() {
+			mScene.registerUpdateHandler(new TimerHandler(2, new ITimerCallback() 
+			{
 				
 				@Override
 				public void onTimePassed(TimerHandler pTimerHandler)
 				{
 					// TODO Auto-generated method stub
-					MonkeyGameActivity.this.finish();
-					//startActivity(new Intent(getBaseContext(),menu.class));
+					startActivity();
 				}
 			}));
-			
-			//MainActivity.this.finish();
 		}
-//		else
-//		{
-			position[aCount] = new Sprite(0, 50 , this.mFaceTextureRegionBanana,this.getVertexBufferObjectManager());
-			final Path bananaPath = new Path(2).to(300, 150).to(40, this.mFaceCount );
-			/* Add the proper animation when a waypoint of the path is passed. */
+			position[aCount] = new Sprite(0, 50 , mFaceTextureRegionBanana,MonkeyGameActivity.vbo);
+			position[aCount].setWidth(ImageWidthObjects);
+			position[aCount].setHeight(ImageHeightObjects);
+			final Path bananaPath = new Path(2).to(CAMERA_WIDTH/2, -50).to(mFaceCount, CAMERA_HEIGHT - CAMERA_HEIGHT/3 + 30 );
+			
 				position[aCount].registerEntityModifier(new PathModifier(1, bananaPath, null, new IPathModifierListener() {
 				@Override
 				public void onPathStarted(final PathModifier pPathModifier, final IEntity pEntity) {
@@ -337,153 +391,30 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 				}
 
 				@Override
-				public void onPathFinished(final PathModifier pPathModifier, final IEntity pEntity) {
+				public void onPathFinished(final PathModifier pPathModifier, final IEntity pEntity)
+				{
 					Debug.d("onPathFinished");
-				
-
+					
 					bananaX=position[aCount].getX();
 					bananaY=position[aCount].getY();
 				}
 			}, EaseSineInOut.getInstance()));
 		
-			this.mMainScene.attachChild(position[aCount]);
-			this.mMainScene.registerTouchArea(position[aCount]);
+			mScene.attachChild(position[aCount]);
+			mScene.registerTouchArea(position[aCount]);
 		}
-//	}
-	public void croc()
-	{
-		croc = new Sprite(0, 0, this.mFaceTextureRegionCroc, this.getVertexBufferObjectManager()); 
-		
-		final Path crocPath = new Path(2).to(100, CAMERA_HEIGHT).to(100, -250 );
-		croc.registerEntityModifier(new PathModifier(5, crocPath, null, new IPathModifierListener() {
-			@Override
-			public void onPathStarted(final PathModifier pPathModifier, final IEntity pEntity) {
-				Debug.d("onPathStarted");
-			}
 
-			@Override
-			public void onPathWaypointStarted(final PathModifier pPathModifier, final IEntity pEntity, final int pWaypointIndex) {
-				Debug.d("onPathWaypointStarted:  " + pWaypointIndex);
-				
-			}
-
-			@Override
-			public void onPathWaypointFinished(final PathModifier pPathModifier, final IEntity pEntity, final int pWaypointIndex) {
-				Debug.d("onPathWaypointFinished: " + pWaypointIndex);
-			}
-
-			@Override
-			public void onPathFinished(final PathModifier pPathModifier, final IEntity pEntity) {
-				Debug.d("onPathFinished");
-				
-				///mMainScene.detachChild(MainActivity.this.croc);
-				//croc=null;
-			}
-		}, EaseSineInOut.getInstance()));
-		this.mMainScene.attachChild(croc);
-		this.mMainScene.registerTouchArea(croc);
-	}
 	
-	public void jackFruit()
-	{
-		jacKFruit = new Sprite(0, 50, this.mFaceTextureRegionJackFruit, this.getVertexBufferObjectManager());
-		final Path jackFruitPath = new Path(2).to(100, 0).to(100, CAMERA_HEIGHT );
-		jacKFruit.registerEntityModifier(new PathModifier(5, jackFruitPath, null, new IPathModifierListener() {
-			@Override
-			public void onPathStarted(final PathModifier pPathModifier, final IEntity pEntity) {
-				Debug.d("onPathStarted");
-			}
-
-			@Override
-			public void onPathWaypointStarted(final PathModifier pPathModifier, final IEntity pEntity, final int pWaypointIndex) {
-				Debug.d("onPathWaypointStarted:  " + pWaypointIndex);
-				
-			}
-
-			@Override
-			public void onPathWaypointFinished(final PathModifier pPathModifier, final IEntity pEntity, final int pWaypointIndex) {
-				Debug.d("onPathWaypointFinished: " + pWaypointIndex);
-			}
-
-			@Override
-			public void onPathFinished(final PathModifier pPathModifier, final IEntity pEntity) {
-				Debug.d("onPathFinished");
-			}
-		}, EaseSineInOut.getInstance()));
-		this.mMainScene.attachChild(jacKFruit);
-		this.mMainScene.registerTouchArea(jacKFruit);
-		
-	}
 	
-	public void pen()
+	public static void monkey1()
 	{
-		pen = new Sprite(0, 50, this.mFaceTextureRegionPen, this.getVertexBufferObjectManager());
-		
-		final Path penPath = new Path(2).to(200, 0).to(200, CAMERA_HEIGHT );
-		pen.registerEntityModifier(new PathModifier(5, penPath, null, new IPathModifierListener() {
-			@Override
-			public void onPathStarted(final PathModifier pPathModifier, final IEntity pEntity) {
-				Debug.d("onPathStarted");
-			}
-
-			@Override
-			public void onPathWaypointStarted(final PathModifier pPathModifier, final IEntity pEntity, final int pWaypointIndex) {
-				Debug.d("onPathWaypointStarted:  " + pWaypointIndex);
-				
-			}
-
-			@Override
-			public void onPathWaypointFinished(final PathModifier pPathModifier, final IEntity pEntity, final int pWaypointIndex) {
-				Debug.d("onPathWaypointFinished: " + pWaypointIndex);
-			}
-
-			@Override
-			public void onPathFinished(final PathModifier pPathModifier, final IEntity pEntity) {
-				Debug.d("onPathFinished");
-			}
-		}, EaseSineInOut.getInstance()));
-		this.mMainScene.attachChild(pen);
-		this.mMainScene.registerTouchArea(pen);
-	}
-	
-	public void keramBoard()
-	{
-		
-		keramBoard = new Sprite(0, 50, this.mFaceTextureRegionKeramBoard, this.getVertexBufferObjectManager());
-		final Path keramPath = new Path(2).to(100, 0).to(100, CAMERA_HEIGHT );
-		keramBoard.registerEntityModifier(new PathModifier(5, keramPath, null, new IPathModifierListener() {
-			@Override
-			public void onPathStarted(final PathModifier pPathModifier, final IEntity pEntity) {
-				Debug.d("onPathStarted");
-			}
-
-			@Override
-			public void onPathWaypointStarted(final PathModifier pPathModifier, final IEntity pEntity, final int pWaypointIndex) {
-				Debug.d("onPathWaypointStarted:  " + pWaypointIndex);
-				
-			}
-
-			@Override
-			public void onPathWaypointFinished(final PathModifier pPathModifier, final IEntity pEntity, final int pWaypointIndex) {
-				Debug.d("onPathWaypointFinished: " + pWaypointIndex);
-			}
-
-			@Override
-			public void onPathFinished(final PathModifier pPathModifier, final IEntity pEntity) {
-				Debug.d("onPathFinished");
-			}
-		}, EaseSineInOut.getInstance()));
-		this.mMainScene.attachChild(keramBoard);
-		this.mMainScene.registerTouchArea(keramBoard);
-	}
-	
-	public void monkey1()
-	{
-		monkey1 = new Sprite(0, 50, this.mFaceTextureRegionM1, this.getVertexBufferObjectManager());
-		this.mMainScene.attachChild(monkey1);
+		monkey1 = new Sprite(0, 50, mFaceTextureRegionM1, MonkeyGameActivity.vbo);
+		monkey1.setWidth(ImageWidth);
+		monkey1.setHeight(ImageHeight);
+		mScene.attachChild(monkey1);
 		monkey1.setVisible(true);
 		
-		final Path monkey1Path = new Path(2).to(300, 150).to(bananaX+40,bananaY+10);
+		final Path monkey1Path = new Path(2).to(CAMERA_WIDTH/2,-400).to(bananaX,(float) (bananaY-CAMERA_HEIGHT/1.4)); 
 		monkey1.registerEntityModifier(new PathModifier(2, monkey1Path, null, new IPathModifierListener() 
 		{
 			@Override
@@ -510,109 +441,85 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 			{
 				Debug.d("onPathFinished");
 				monkey1.setVisible(false);
-				mFaceCount=mFaceCount-95;
+				mFaceCount=mFaceCount-distance;
 				
 				monkey2();
 			}
 		}, EaseSineInOut.getInstance()));
 	}
 	
-	public void monkey2()
+	public static void monkey2()
 	{
-		monkey3 = new Sprite(bananaX+30, bananaY+5, this.mFaceTextureRegionM3, this.getVertexBufferObjectManager());
-		this.mMainScene.attachChild(monkey3);
+		monkey2 = new Sprite(bananaX, (float) (bananaY-CAMERA_HEIGHT/1.4), mFaceTextureRegionM2, MonkeyGameActivity.vbo);
+		monkey2.setWidth(ImageWidth);
+		monkey2.setHeight(ImageHeight);
+		mScene.attachChild(monkey2);
 		
-		final Path monkey3Path = new Path(2).to(bananaX+30, bananaY+5).to(400,150);
-		monkey3.registerEntityModifier(new PathModifier(2, monkey3Path, null, new IPathModifierListener() {
+		final Path monkey2Path = new Path(2).to(bananaX,(float) (bananaY-CAMERA_HEIGHT/1.4)).to(CAMERA_WIDTH/2,-500);
+		monkey2.registerEntityModifier(new PathModifier((float)1.5, monkey2Path, null, new IPathModifierListener()
+		{
 			@Override
-			public void onPathStarted(final PathModifier pPathModifier, final IEntity pEntity) {
+			public void onPathStarted(final PathModifier pPathModifier, final IEntity pEntity) 
+			{
 				Debug.d("onPathStarted");
 			}
-
 			@Override
-			public void onPathWaypointStarted(final PathModifier pPathModifier, final IEntity pEntity, final int pWaypointIndex) {
+			public void onPathWaypointStarted(final PathModifier pPathModifier, final IEntity pEntity, final int pWaypointIndex) 
+			{
 				Debug.d("onPathWaypointStarted:  " + pWaypointIndex);
 				
 			}
-
 			@Override
-			public void onPathWaypointFinished(final PathModifier pPathModifier, final IEntity pEntity, final int pWaypointIndex) {
+			public void onPathWaypointFinished(final PathModifier pPathModifier, final IEntity pEntity, final int pWaypointIndex) 
+			{
 				Debug.d("onPathWaypointFinished: " + pWaypointIndex);
 			}
 
 			@Override
-			public void onPathFinished(final PathModifier pPathModifier, final IEntity pEntity) {
+			public void onPathFinished(final PathModifier pPathModifier, final IEntity pEntity) 
+			{
 				Debug.d("onPathFinished");
-				
+				monkey2.setVisible(false);
 			}
 		}, EaseSineInOut.getInstance()));
 		
-		monkey2 = new Sprite(bananaX, bananaY, this.mFaceTextureRegionM2, this.getVertexBufferObjectManager());
-		this.mMainScene.attachChild(monkey2);
-		
-		
-		final Path monkey2Path = new Path(2).to(bananaX, bananaY).to(375,150);
-		monkey2.registerEntityModifier(new PathModifier(2, monkey2Path, null, new IPathModifierListener() {
-			@Override
-			public void onPathStarted(final PathModifier pPathModifier, final IEntity pEntity) {
-				Debug.d("onPathStarted");
-				
-				mMainScene.detachChild(position[aCount]);
-				position[aCount]=null;
-				aCount = aCount - 1;
-			}
-
-			@Override
-			public void onPathWaypointStarted(final PathModifier pPathModifier, final IEntity pEntity, final int pWaypointIndex) {
-				Debug.d("onPathWaypointStarted:  " + pWaypointIndex);
-				
-			}
-
-			@Override
-			public void onPathWaypointFinished(final PathModifier pPathModifier, final IEntity pEntity, final int pWaypointIndex) {
-				Debug.d("onPathWaypointFinished: " + pWaypointIndex);
-			}
-
-			@Override
-			public void onPathFinished(final PathModifier pPathModifier, final IEntity pEntity) {
-				Debug.d("onPathFinished");
-			}
-		}, EaseSineInOut.getInstance()));
+		mScene.detachChild(position[aCount]);
+		position[aCount]=null;
+		aCount = aCount - 1;
 	}
 	
-	public void ball()
+	public static void startActivity()
 	{
-		ball = new Sprite(0, 50, this.mFaceTextureRegionBall, this.getVertexBufferObjectManager());
-		
-		final Path ballPath = new Path(2).to(100, 0).to(100, CAMERA_HEIGHT );
-		ball.registerEntityModifier(new PathModifier(4, ballPath, null, new IPathModifierListener() {
-			@Override
-			public void onPathStarted(final PathModifier pPathModifier, final IEntity pEntity) {
-				Debug.d("onPathStarted");
-			}
-
-			@Override
-			public void onPathWaypointStarted(final PathModifier pPathModifier, final IEntity pEntity, final int pWaypointIndex) {
-				Debug.d("onPathWaypointStarted:  " + pWaypointIndex);
-				
-			}
-
-			@Override
-			public void onPathWaypointFinished(final PathModifier pPathModifier, final IEntity pEntity, final int pWaypointIndex) {
-				Debug.d("onPathWaypointFinished: " + pWaypointIndex);
-			}
-
-			@Override
-			public void onPathFinished(final PathModifier pPathModifier, final IEntity pEntity) {
-				Debug.d("onPathFinished");
-			}
-		}, EaseSineInOut.getInstance()));
-		this.mMainScene.attachChild(ball);
-		this.mMainScene.registerTouchArea(ball);
+		activity.finish();
+		activity.startActivity(new Intent(activity, MonkeyGameActivity.class));
+		aCount = 0;
+		mFaceCount = -60;
 	}
-
 	
-	
+	//Audio play Function
+	public static void playAudio(int val)
+	{
+		if(audioPlay)
+		{
+			if(!mediaPlayer.isPlaying())
+			{
+				mediaPlayer.reset();
+				mediaPlayer = MediaPlayer.create(activity, val);
+					
+				try 
+				{
+					mediaPlayer.start();
+					mediaPlayer.setLooping(false);
+				} 
+				catch (IllegalStateException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+			audioPlay = true;
+		}
+	}
 	// ===========================================================
 	// Methods
 	// ===========================================================

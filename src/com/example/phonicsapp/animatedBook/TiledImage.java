@@ -69,7 +69,7 @@ public class TiledImage extends Sprite
 			}
 		};
 		en = new Entity(0,0);
-		s = new Sprite(0,0, AnimatedBookActivity.SpriteBgTextureReason, vertexBufferObjectManager);
+		s = new Sprite(0,0, AnimatedBookActivity.SpriteBgTextureRegion, vertexBufferObjectManager);
 		Letter.setWidth(pHeight);
 		Letter.setHeight(pHeight);		
 		s.setWidth(pHeight);

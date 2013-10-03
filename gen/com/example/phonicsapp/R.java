@@ -35,10 +35,10 @@ public final class R {
         public static final int main=0x7f080000;
     }
     public static final class raw {
-        public static final int m_ma=0x7f040000;
-        public static final int m_mama=0x7f040001;
-        public static final int m_megh=0x7f040002;
-        public static final int m_mohish=0x7f040003;
+        public static final int langol=0x7f040000;
+        public static final int m_ma=0x7f040001;
+        public static final int m_mama=0x7f040002;
+        public static final int m_megh=0x7f040003;
         public static final int m_moi=0x7f040004;
         public static final int m_mula=0x7f040005;
         public static final int ma=0x7f040006;
@@ -49,6 +49,7 @@ public final class R {
         public static final int moi=0x7f04000b;
         public static final int mula=0x7f04000c;
         public static final int parrot_introducing_mo=0x7f04000d;
+        public static final int tala=0x7f04000e;
     }
     public static final class string {
         public static final int action_settings=0x7f060001;
