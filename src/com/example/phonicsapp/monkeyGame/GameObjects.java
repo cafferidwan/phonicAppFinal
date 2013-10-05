@@ -161,6 +161,7 @@ public class GameObjects
 				new Runnable() {
 					public void run() {
 						//Debug.d("onPathFinished");
+						MonkeyGameActivity.moi.setVisible(false);
 						MonkeyGameActivity.mScene
 								.detachChild(MonkeyGameActivity.moi);
 					}
@@ -222,6 +223,7 @@ public class GameObjects
 			public void onPathFinished(final PathModifier pPathModifier, final IEntity pEntity)
 			{
 				//Debug.d("onPathFinished");
+				MonkeyGameActivity.megh.setVisible(false);
 				new Runnable() {
 					public void run() {
 						MonkeyGameActivity.mScene.detachChild(MonkeyGameActivity.megh);
@@ -283,16 +285,17 @@ public class GameObjects
 			@Override
 			public void onPathFinished(final PathModifier pPathModifier, final IEntity pEntity) 
 			{
-				
+				MonkeyGameActivity.mama.setVisible(false);
+				new Runnable() {
+					public void run() {
+						//Debug.d("onPathFinished");
+						MonkeyGameActivity.mScene
+								.detachChild(MonkeyGameActivity.mama);
+					}
+				};
 			}
 		}, EaseSineInOut.getInstance()));
-		new Runnable() {
-			public void run() {
-				//Debug.d("onPathFinished");
-				MonkeyGameActivity.mScene
-						.detachChild(MonkeyGameActivity.mama);
-			}
-		};
+		
 	}
 	
 	public static void mohis(int number)
@@ -348,6 +351,7 @@ public class GameObjects
 			{
 				//Debug.d("onPathFinished");
 				//MonkeyGameActivity.mScene.detachChild(MonkeyGameActivity.mohis);
+				MonkeyGameActivity.mohis.setVisible(false);
 				new Runnable() {
 					public void run() {
 						MonkeyGameActivity.mScene.detachChild(MonkeyGameActivity.mohis);
@@ -410,6 +414,7 @@ public class GameObjects
 			{
 				//Debug.d("onPathFinished");
 				//MonkeyGameActivity.mScene.detachChild(MonkeyGameActivity.tala);
+				MonkeyGameActivity.tala.setVisible(false);
 				new Runnable() {
 					public void run() {
 						MonkeyGameActivity.mScene.detachChild(MonkeyGameActivity.tala);
@@ -472,6 +477,7 @@ public class GameObjects
 			{
 				//Debug.d("onPathFinished");
 				//MonkeyGameActivity.mScene.detachChild(MonkeyGameActivity.langol);
+				MonkeyGameActivity.langol.setVisible(false);
 				new Runnable() {
 					public void run() {
 						MonkeyGameActivity.mScene

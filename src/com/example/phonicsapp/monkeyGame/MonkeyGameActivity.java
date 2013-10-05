@@ -433,7 +433,7 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 			
 			position[aCount].setWidth(ImageWidthObjects);
 			position[aCount].setHeight(ImageHeightObjects);
-			final Path bananaPath = new Path(2).to(CAMERA_WIDTH/2, -50).to(mFaceCount, CAMERA_HEIGHT - CAMERA_HEIGHT/3 + 30 );
+			final Path bananaPath = new Path(2).to(CAMERA_WIDTH/2, -100).to(mFaceCount, CAMERA_HEIGHT - CAMERA_HEIGHT/3 + 30 );
 			
 				position[aCount].registerEntityModifier(new PathModifier((float) 1, bananaPath, null, new IPathModifierListener() {
 				@Override
@@ -512,7 +512,7 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 		monkey2.setHeight(ImageHeight);
 		mScene.attachChild(monkey2);
 		
-		final Path monkey2Path = new Path(2).to(position[aCount].getX(),(float) (position[aCount].getY()-CAMERA_HEIGHT/1.4)).to(CAMERA_WIDTH/2,-500);
+		final Path monkey2Path = new Path(2).to(position[aCount].getX(),(float) (position[aCount].getY()-CAMERA_HEIGHT/1.4)).to(CAMERA_WIDTH/2,-600);
 		monkey2.registerEntityModifier(new PathModifier((float)1.1, monkey2Path, null, new IPathModifierListener()
 		{
 			@Override
