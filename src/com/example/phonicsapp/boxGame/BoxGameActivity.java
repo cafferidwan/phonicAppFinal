@@ -422,16 +422,33 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 		mo.setHeight(60);
 		mo.setWidth(60);
 		mScene.attachChild(mo);
+		
 		Parrot.parrotPath();
+		
 		
 		mScene.registerUpdateHandler(timer1);
 		
 		//getting the context
 		BoxGameActivity.context = getApplicationContext();
 		
+		mScene.registerUpdateHandler(new TimerHandler((float) 0.5, new ITimerCallback()
+		{
+			@Override
+			public void onTimePassed(TimerHandler pTimerHandler)
+			{
+				playIntroSound();
+			}
+		}));
+		
 		return mScene;
 	}
 	
+	public void playIntroSound()
+	{
+		Functions.audioPlay = true;
+		Functions.playAudio(R.raw.parrot_intro);
+		
+	}
 	
 	public void startActivity()
 	{

@@ -22,10 +22,11 @@ public class TiledImage extends Sprite
 	Sprite Letter,s;
 	IEntity en ;
 	static boolean audioPlay= false;
-	static int ObjNo=1, audio, audioPlayCount=0;
+	static int ObjNo=1, audioPlayCount=0;
 	static float APPEARING_TIME=3f;
 	static MediaPlayer mediaPlayer;
 	static Context con;
+	int audio;
 	
 	public TiledImage(float pX, float pY, float pWidth, float pHeight,ITextureRegion pTextureRegion,VertexBufferObjectManager vertexBufferObjectManager, int voice, Context cont) 
 	{
@@ -103,7 +104,7 @@ public class TiledImage extends Sprite
 						s.setVisible(true);
 						
 						audioPlay = true;
-						playAudio(R.raw.m_moi);
+						playAudio(audio);
 						
 						audioPlayCount++;
 						if(audioPlayCount==6)

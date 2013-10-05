@@ -19,8 +19,10 @@ int raw mo 0x7f040009
 int raw mohis 0x7f04000a
 int raw moi 0x7f04000b
 int raw mula 0x7f04000c
-int raw parrot_introducing_mo 0x7f04000d
-int raw tala 0x7f04000e
+int raw parrot_correct 0x7f04000d
+int raw parrot_intro 0x7f04000e
+int raw parrot_introducing_mo 0x7f04000f
+int raw tala 0x7f040010
 int string action_settings 0x7f060001
 int string app_name 0x7f060000
 int string hello_world 0x7f060002

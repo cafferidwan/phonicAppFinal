@@ -16,6 +16,7 @@ import org.andengine.util.modifier.ease.EaseCircularInOut;
 import org.andengine.util.modifier.ease.EaseQuadOut;
 
 import com.example.phonicsapp.GameMainPage;
+import com.example.phonicsapp.R;
 
 import android.content.Context;
 import android.media.MediaPlayer;
@@ -67,8 +68,6 @@ public class Functions
         float midPointY = 0 ;
         
         
-        //int j =(int)( Math.random()*2);
-        
         if(k == 0)
         {
         	startX = a.getX();
@@ -79,6 +78,9 @@ public class Functions
         	
         	endX = BoxGameActivity.kolaX;
         	endY = BoxGameActivity.kolaY;
+        	
+        	Functions.audioPlay = true;
+			Functions.playAudio(R.raw.parrot_correct);
         	
         	jumpModifier = new SequenceEntityModifier(
                     new MoveYModifier(jumpDuration, startY, midPointY,EaseQuadOut.getInstance()),
@@ -101,6 +103,9 @@ public class Functions
         	endX = BoxGameActivity.keramBoardX;
         	endY = BoxGameActivity.keramBoardY;
         	
+        	Functions.audioPlay = true;
+			Functions.playAudio(R.raw.parrot_correct);
+			
         	jumpModifier = new SequenceEntityModifier(
                     new MoveYModifier(jumpDuration, startY, midPointY, EaseCircularInOut.getInstance()),
                     new MoveYModifier(jumpDuration, midPointY, endY, EaseBounceOut.getInstance()));

@@ -25,6 +25,7 @@ public class Parrot extends AnimatedSprite
 	{
 		super(pX, pY, pTiledTextureRegion, vertexBufferObjectManager);
 		// TODO Auto-generated constructor stub
+
 	}
 	
 	@Override
@@ -53,21 +54,21 @@ public class Parrot extends AnimatedSprite
 
 	static void parrotPath() 
 	{
-		MoveModifier mMod = new MoveModifier(4.0f, BoxGameActivity.CAMERA_WIDTH + 200, BoxGameActivity.CAMERA_WIDTH - 250, 
+		
+		MoveModifier mMod = new MoveModifier(4.0f, BoxGameActivity.CAMERA_WIDTH , BoxGameActivity.CAMERA_WIDTH - 250, 
 				BoxGameActivity.CAMERA_HEIGHT / 2 -30, BoxGameActivity.CAMERA_HEIGHT / 2 - 140);
 		
 		MoveModifier mModLetter = new MoveModifier(4.0f, BoxGameActivity.CAMERA_WIDTH + 200,BoxGameActivity.CAMERA_WIDTH - 210,
 				BoxGameActivity.CAMERA_HEIGHT / 2 + 100, BoxGameActivity.CAMERA_HEIGHT / 2 - 10);
 		
-		DelayModifier dMod = new DelayModifier((float) 0.2,new IEntityModifierListener()
+		DelayModifier dMod = new DelayModifier((float) 0.1,new IEntityModifierListener()
 		{
 
 					@Override
 					public void onModifierStarted(IModifier<IEntity> arg0,
 							IEntity arg1) 
 					{
-						Functions.audioPlay = true;
-						Functions.playAudio(R.raw.parrot_introducing_mo);
+					
 					}
 
 					@Override
