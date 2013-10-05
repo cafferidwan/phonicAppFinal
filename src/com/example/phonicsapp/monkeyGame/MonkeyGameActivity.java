@@ -82,13 +82,15 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 	public static int randomItem, randomItem1;
 	
 	public static Sprite[] position = new Sprite[7];
-	public static float bananaX, bananaY;
 	
 	static float ImageHeight;
 	static float ImageWidth;
 	
 	static float ImageHeightObjects;
 	static float ImageWidthObjects;
+	
+	static int value = 0;
+	static int bananaValue = 0;
 	
 	public static VertexBufferObjectManager vbo;
 	static Boolean audioPlay = false;
@@ -121,8 +123,8 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 		ImageHeight = CAMERA_HEIGHT/1.1f;
 		ImageWidth = CAMERA_WIDTH/6.0f;
 		
-		ImageHeightObjects = CAMERA_HEIGHT/6.0f;
-		ImageWidthObjects = CAMERA_WIDTH/8.5f;
+		ImageHeightObjects = CAMERA_HEIGHT/5.0f;
+		ImageWidthObjects = CAMERA_WIDTH/7.5f;
 		
 		mCamera = new Camera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
 		
@@ -184,44 +186,65 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 		mScene.setBackground(new Background(Color.WHITE));
 		vbo = getVertexBufferObjectManager();
 		
-		
 		backGround = new Sprite(0, 0, mTexture,getVertexBufferObjectManager());
 		backGround.setWidth(CAMERA_WIDTH);
 		backGround.setHeight(CAMERA_HEIGHT);
 		mScene.attachChild(backGround);
 		
-		mScene.registerUpdateHandler(new TimerHandler(5, true,new ITimerCallback()
+		mScene.registerUpdateHandler(new TimerHandler(1, true, new ITimerCallback() 
+		{
+			@Override
+			public void onTimePassed(TimerHandler pTimerHandler) 
+			{
+				// TODO Auto-generated method stub
+				
+				if(value == 1)
+				{
+					monkey1();
+				}
+			}
+		}));
+		
+		mScene.registerUpdateHandler(new TimerHandler(5, true, new ITimerCallback()
 		{
 			@Override
 			public void onTimePassed(TimerHandler pTimerHandler)
 			{
 				// TODO Auto-generated method stub
 				
-
-
-				randomItem = (int)(Math.random()*6);
-				randomItem1 = (int)(Math.random()*6);
-				if(randomItem == randomItem1)
+				if(bananaValue == 1)
 				{
-					randomItem1 = randomItem1+1;
+					addFace(CAMERA_WIDTH / 2, CAMERA_HEIGHT / 2);
 				}
 				
+				randomItem = (int)(Math.random()*6);
+				randomItem1 = (int)(Math.random()*6);
+				if(randomItem == randomItem1 )
+				{
+					randomItem1 = randomItem1+2;
+				}
+				
+				if(randomItem == 0 &&  randomItem1==1 || randomItem == 1 &&  randomItem1==0)
+				{
+					Debug.d("This is here");
+					randomItem1 = randomItem1+2;
+				}
 				switch(randomItem)
 				{
 					case 0:
-							GameObjects.moi(1);
-					break;
-					
-					case 1:
-							GameObjects.mama(1);
-					break;
-					
-					case 2:
 							GameObjects.tala(1);
 					break;
 					
-					case 3:
+					case 1:
 							GameObjects.langol(1);
+					break;
+					
+					case 2:
+							GameObjects.moi(1);
+					break;
+					
+					case 3:
+							GameObjects.mama(1);
 					break;
 					
 					case 4:
@@ -233,43 +256,42 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 					break;
 
 					default:
-
+							GameObjects.megh(1);
 					break;
 				}
 				
 				switch(randomItem1)
 				{
 					case 0:
-							GameObjects.moi(2);
+						GameObjects.tala(2);
 					break;
-					
+			
 					case 1:
-							GameObjects.mama(2);
+						GameObjects.langol(2);
 					break;
-					
+			
 					case 2:
-							GameObjects.tala(2);
+						GameObjects.moi(2);
 					break;
-					
+			
 					case 3:
-							GameObjects.langol(2);
+						GameObjects.mama(2);
 					break;
-					
+			
 					case 4:
-							GameObjects.mohis(2);
+						GameObjects.mohis(2);
 					break;
-						
+				
 					case 5:
-							GameObjects.megh(2);
+						GameObjects.megh(2);
 					break;
 					
 					default:
-
+							GameObjects.moi(2);
 					break;
 				}
 			}
 		}));
-		
 		
 		mScene.setOnAreaTouchListener(this);
 		return mScene;
@@ -298,16 +320,24 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 			playAudio(R.raw.tala);
 			mScene.unregisterTouchArea(pTouchArea);
 			mScene.detachChild(pTouchArea);
+
 			if(position[aCount]==null)
 			{
 
 			}
 			else
 			{
-				bananaX=position[aCount].getX();
-				bananaY=position[aCount].getY();
-				
-				monkey1();
+				value = 1;
+//				mScene.detachChild(mama);
+//				mScene.detachChild(mohis);
+//				mScene.detachChild(megh);
+//				mScene.detachChild(moi);
+//				mScene.detachChild(langol);
+//				mScene.unregisterTouchArea(mama);
+//				mScene.unregisterTouchArea(mohis);
+//				mScene.unregisterTouchArea(megh);
+//				mScene.unregisterTouchArea(moi);
+//				mScene.unregisterTouchArea(langol);
 			}
 		}
 		else if((Sprite)pTouchArea==langol)
@@ -321,11 +351,18 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 
 			}
 			else
-			{
-				bananaX=position[aCount].getX();
-				bananaY=position[aCount].getY();
-				
-				monkey1();
+			{	
+				value = 1;
+//				mScene.detachChild(mama);
+//				mScene.detachChild(mohis);
+//				mScene.detachChild(megh);
+//				mScene.detachChild(moi);
+//				mScene.detachChild(tala);
+//				mScene.unregisterTouchArea(mama);
+//				mScene.unregisterTouchArea(mohis);
+//				mScene.unregisterTouchArea(megh);
+//				mScene.unregisterTouchArea(moi);
+//				mScene.unregisterTouchArea(tala);
 			}
 		}
 
@@ -333,7 +370,7 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 		{
 			audioPlay = true;
 			playAudio(R.raw.mama);
-			addFace(CAMERA_WIDTH / 2, CAMERA_HEIGHT / 2);
+			bananaValue = 1;
 			mScene.unregisterTouchArea(pTouchArea);
 			mScene.detachChild(pTouchArea);
 		}
@@ -341,7 +378,7 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 		{
 			audioPlay = true;
 			playAudio(R.raw.megh);
-			addFace(CAMERA_WIDTH / 2, CAMERA_HEIGHT / 2);
+			bananaValue = 1;
 			mScene.unregisterTouchArea(pTouchArea);
 			mScene.detachChild(pTouchArea);
 		}
@@ -349,7 +386,7 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 		{
 			audioPlay = true;
 			playAudio(R.raw.moi);
-			addFace(CAMERA_WIDTH / 2, CAMERA_HEIGHT / 2);
+			bananaValue = 1;
 			mScene.unregisterTouchArea(pTouchArea);
 			mScene.detachChild(pTouchArea);
 		} 
@@ -357,7 +394,7 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 		{
 			audioPlay = true;
 			playAudio(R.raw.mohis);
-			addFace(CAMERA_WIDTH / 2, CAMERA_HEIGHT / 2);
+			bananaValue = 1;
 			mScene.unregisterTouchArea(pTouchArea);
 			mScene.detachChild(pTouchArea);
 		}
@@ -369,6 +406,7 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 		distance = (float) (CAMERA_WIDTH/5.3 )-5;
 		mFaceCount = mFaceCount+distance;
 		aCount = aCount+1;
+		bananaValue = 0;
 		
 		if(aCount==5)
 		{
@@ -390,41 +428,38 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 			}));
 		}
 			position[aCount] = new Sprite(0, 50 , mFaceTextureRegionBanana,MonkeyGameActivity.vbo);
+			mScene.attachChild(position[aCount]);
+			mScene.registerTouchArea(position[aCount]);
+			
 			position[aCount].setWidth(ImageWidthObjects);
 			position[aCount].setHeight(ImageHeightObjects);
 			final Path bananaPath = new Path(2).to(CAMERA_WIDTH/2, -50).to(mFaceCount, CAMERA_HEIGHT - CAMERA_HEIGHT/3 + 30 );
 			
-				position[aCount].registerEntityModifier(new PathModifier(1, bananaPath, null, new IPathModifierListener() {
+				position[aCount].registerEntityModifier(new PathModifier((float) 1, bananaPath, null, new IPathModifierListener() {
 				@Override
 				public void onPathStarted(final PathModifier pPathModifier, final IEntity pEntity) {
-					Debug.d("onPathStarted");
+					//Debug.d("onPathStarted");
 				}
 
 				@Override
 				public void onPathWaypointStarted(final PathModifier pPathModifier, final IEntity pEntity, final int pWaypointIndex) {
-					Debug.d("onPathWaypointStarted:  " + pWaypointIndex);
+					//Debug.d("onPathWaypointStarted:  " + pWaypointIndex);
 				}
 
 				@Override
 				public void onPathWaypointFinished(final PathModifier pPathModifier, final IEntity pEntity, final int pWaypointIndex) {
-					Debug.d("onPathWaypointFinished: " + pWaypointIndex);
+					//Debug.d("onPathWaypointFinished: " + pWaypointIndex);
 				}
 
 				@Override
 				public void onPathFinished(final PathModifier pPathModifier, final IEntity pEntity)
 				{
-					Debug.d("onPathFinished");
+					//Debug.d("onPathFinished");
 					
-					bananaX=position[aCount].getX();
-					bananaY=position[aCount].getY();
 				}
 			}, EaseSineInOut.getInstance()));
-		
-			mScene.attachChild(position[aCount]);
-			mScene.registerTouchArea(position[aCount]);
 		}
 
-	
 	
 	public static void monkey1()
 	{
@@ -434,32 +469,34 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 		mScene.attachChild(monkey1);
 		monkey1.setVisible(true);
 		
-		final Path monkey1Path = new Path(2).to(CAMERA_WIDTH/2,-400).to(bananaX,(float) (bananaY-CAMERA_HEIGHT/1.4)); 
-		monkey1.registerEntityModifier(new PathModifier(2, monkey1Path, null, new IPathModifierListener() 
+		value = 0;
+		
+		final Path monkey1Path = new Path(2).to(CAMERA_WIDTH/2,-400).to(position[aCount].getX(),(float) (position[aCount].getY()-CAMERA_HEIGHT/1.4)); 
+		monkey1.registerEntityModifier(new PathModifier((float) 1.1, monkey1Path, null, new IPathModifierListener() 
 		{
 			@Override
 			public void onPathStarted(final PathModifier pPathModifier, final IEntity pEntity) 
 			{
-				Debug.d("onPathStarted");
+				//Debug.d("onPathStarted");
 			}
 
 			@Override
 			public void onPathWaypointStarted(final PathModifier pPathModifier, final IEntity pEntity, final int pWaypointIndex)
 			{
-				Debug.d("onPathWaypointStarted:  " + pWaypointIndex);
+				//Debug.d("onPathWaypointStarted:  " + pWaypointIndex);
 				
 			}
 
 			@Override
 			public void onPathWaypointFinished(final PathModifier pPathModifier, final IEntity pEntity, final int pWaypointIndex)
 			{
-				Debug.d("onPathWaypointFinished: " + pWaypointIndex);
+				//Debug.d("onPathWaypointFinished: " + pWaypointIndex);
 			}
 
 			@Override
 			public void onPathFinished(final PathModifier pPathModifier, final IEntity pEntity)
 			{
-				Debug.d("onPathFinished");
+				//Debug.d("onPathFinished");
 				monkey1.setVisible(false);
 				mFaceCount=mFaceCount-distance;
 				
@@ -470,35 +507,35 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 	
 	public static void monkey2()
 	{
-		monkey2 = new Sprite(bananaX, (float) (bananaY-CAMERA_HEIGHT/1.4), mFaceTextureRegionM2, MonkeyGameActivity.vbo);
+		monkey2 = new Sprite(position[aCount].getX(), (float) (position[aCount].getY()-CAMERA_HEIGHT/1.4), mFaceTextureRegionM2, MonkeyGameActivity.vbo);
 		monkey2.setWidth(ImageWidth);
 		monkey2.setHeight(ImageHeight);
 		mScene.attachChild(monkey2);
 		
-		final Path monkey2Path = new Path(2).to(bananaX,(float) (bananaY-CAMERA_HEIGHT/1.4)).to(CAMERA_WIDTH/2,-500);
-		monkey2.registerEntityModifier(new PathModifier((float)1.5, monkey2Path, null, new IPathModifierListener()
+		final Path monkey2Path = new Path(2).to(position[aCount].getX(),(float) (position[aCount].getY()-CAMERA_HEIGHT/1.4)).to(CAMERA_WIDTH/2,-500);
+		monkey2.registerEntityModifier(new PathModifier((float)1.1, monkey2Path, null, new IPathModifierListener()
 		{
 			@Override
 			public void onPathStarted(final PathModifier pPathModifier, final IEntity pEntity) 
 			{
-				Debug.d("onPathStarted");
+				//Debug.d("onPathStarted");
 			}
 			@Override
 			public void onPathWaypointStarted(final PathModifier pPathModifier, final IEntity pEntity, final int pWaypointIndex) 
 			{
-				Debug.d("onPathWaypointStarted:  " + pWaypointIndex);
+				//Debug.d("onPathWaypointStarted:  " + pWaypointIndex);
 				
 			}
 			@Override
 			public void onPathWaypointFinished(final PathModifier pPathModifier, final IEntity pEntity, final int pWaypointIndex) 
 			{
-				Debug.d("onPathWaypointFinished: " + pWaypointIndex);
+				//Debug.d("onPathWaypointFinished: " + pWaypointIndex);
 			}
 
 			@Override
 			public void onPathFinished(final PathModifier pPathModifier, final IEntity pEntity) 
 			{
-				Debug.d("onPathFinished");
+				//Debug.d("onPathFinished");
 				monkey2.setVisible(false);
 			}
 		}, EaseSineInOut.getInstance()));
