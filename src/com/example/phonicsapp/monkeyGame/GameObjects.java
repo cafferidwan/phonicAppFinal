@@ -158,15 +158,16 @@ public class GameObjects
 			public void onPathFinished(final PathModifier pPathModifier, final IEntity pEntity) 
 			{
 				//Debug.d("onPathFinished");
+				new Runnable() {
+					public void run() {
+						//Debug.d("onPathFinished");
+						MonkeyGameActivity.mScene
+								.detachChild(MonkeyGameActivity.moi);
+					}
+				};
 			}
 		}, EaseSineInOut.getInstance()));
-		new Runnable() {
-			public void run() {
-				//Debug.d("onPathFinished");
-				MonkeyGameActivity.mScene
-						.detachChild(MonkeyGameActivity.moi);
-			}
-		};
+		
 	}
 	
 	public static void megh(int number)
@@ -221,13 +222,14 @@ public class GameObjects
 			public void onPathFinished(final PathModifier pPathModifier, final IEntity pEntity)
 			{
 				//Debug.d("onPathFinished");
+				new Runnable() {
+					public void run() {
+						MonkeyGameActivity.mScene.detachChild(MonkeyGameActivity.megh);
+					}
+				};
 			}
 		}, EaseSineInOut.getInstance()));
-		new Runnable() {
-			public void run() {
-				MonkeyGameActivity.mScene.detachChild(MonkeyGameActivity.megh);
-			}
-		};
+		
 	}
 	
 	public static void mama(int number)
@@ -346,13 +348,14 @@ public class GameObjects
 			{
 				//Debug.d("onPathFinished");
 				//MonkeyGameActivity.mScene.detachChild(MonkeyGameActivity.mohis);
+				new Runnable() {
+					public void run() {
+						MonkeyGameActivity.mScene.detachChild(MonkeyGameActivity.mohis);
+					}
+				};
 			}
 		}, EaseSineInOut.getInstance()));
-		new Runnable() {
-			public void run() {
-				MonkeyGameActivity.mScene.detachChild(MonkeyGameActivity.mohis);
-			}
-		};
+		
 	}
 	
 	public static void tala(int number)
@@ -407,13 +410,14 @@ public class GameObjects
 			{
 				//Debug.d("onPathFinished");
 				//MonkeyGameActivity.mScene.detachChild(MonkeyGameActivity.tala);
+				new Runnable() {
+					public void run() {
+						MonkeyGameActivity.mScene.detachChild(MonkeyGameActivity.tala);
+					}
+				};
 			}
 		}, EaseSineInOut.getInstance()));
-		new Runnable() {
-			public void run() {
-				MonkeyGameActivity.mScene.detachChild(MonkeyGameActivity.tala);
-			}
-		};
+		
 	}
 	
 	public static void langol(int number)
@@ -468,13 +472,14 @@ public class GameObjects
 			{
 				//Debug.d("onPathFinished");
 				//MonkeyGameActivity.mScene.detachChild(MonkeyGameActivity.langol);
+				new Runnable() {
+					public void run() {
+						MonkeyGameActivity.mScene
+								.detachChild(MonkeyGameActivity.langol);
+					}
+				};
 			}
 		}, EaseSineInOut.getInstance()));
-		new Runnable() {
-			public void run() {
-				MonkeyGameActivity.mScene
-						.detachChild(MonkeyGameActivity.langol);
-			}
-		};
+		
 	}
 }
