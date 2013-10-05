@@ -26,15 +26,13 @@ import org.andengine.ui.activity.SimpleBaseGameActivity;
 import org.andengine.util.color.Color;
 import org.andengine.util.debug.Debug;
 import org.andengine.util.modifier.ease.EaseSineInOut;
-
-import com.example.phonicsapp.R;
-
 import android.content.Intent;
 import android.media.MediaPlayer;
-import android.util.Log;
 import android.view.Display;
 import android.view.Window;
 import android.view.WindowManager;
+
+import com.example.phonicsapp.R;
 
 
 public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAreaTouchListener
@@ -47,7 +45,6 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 	static int CAMERA_WIDTH;
 	static int CAMERA_HEIGHT;
 	static float distance;
-	public String DEBUG_TAG = MonkeyGameActivity.class.getSimpleName();
 	// ===========================================================
 	// Fields
 	// ===========================================================
@@ -82,8 +79,7 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 	static float mFaceCount = -60;
 
 	public static int aCount = 0;
-	//public static Sound ballSound, crocSound, keramSound, penSound, jackFruitSound, bananaSound;
-	public static int randomItem;
+	public static int randomItem, randomItem1;
 	
 	public static Sprite[] position = new Sprite[7];
 	public static float bananaX, bananaY;
@@ -201,44 +197,74 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 			{
 				// TODO Auto-generated method stub
 				
+
+
 				randomItem = (int)(Math.random()*6);
-				Log.d(DEBUG_TAG, "randomItem "+randomItem);
+				randomItem1 = (int)(Math.random()*6);
+				if(randomItem == randomItem1)
+				{
+					randomItem1 = randomItem1+1;
+				}
+				
 				switch(randomItem)
 				{
 					case 0:
-							GameObjects.moi();
+							GameObjects.moi(1);
 					break;
 					
 					case 1:
-							GameObjects.mama();
+							GameObjects.mama(1);
 					break;
 					
 					case 2:
-							GameObjects.tala();
+							GameObjects.tala(1);
 					break;
 					
 					case 3:
-							GameObjects.langol();
+							GameObjects.langol(1);
 					break;
 					
 					case 4:
-							GameObjects.mohis();
+							GameObjects.mohis(1);
 					break;
 						
 					case 5:
-							GameObjects.megh();
+							GameObjects.megh(1);
+					break;
+
+					default:
+
+					break;
+				}
+				
+				switch(randomItem1)
+				{
+					case 0:
+							GameObjects.moi(2);
 					break;
 					
-					case 6:
-							//GameObjects.ball();
+					case 1:
+							GameObjects.mama(2);
 					break;
-				
-					case 7:
-							//GameObjects.ball();
+					
+					case 2:
+							GameObjects.tala(2);
+					break;
+					
+					case 3:
+							GameObjects.langol(2);
+					break;
+					
+					case 4:
+							GameObjects.mohis(2);
+					break;
+						
+					case 5:
+							GameObjects.megh(2);
 					break;
 					
 					default:
-						   // ball();
+
 					break;
 				}
 			}
@@ -335,13 +361,7 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 			mScene.unregisterTouchArea(pTouchArea);
 			mScene.detachChild(pTouchArea);
 		}
-//		else if((Sprite)pTouchArea==position[aCount])
-//		{
-//			//audioPlay = true;
-//			//playAudio(R.raw.tala);
-//		}
-		
-		System.gc();
+
 	}
 
 	private static void addFace(final float pX, final float pY) 
