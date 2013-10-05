@@ -326,7 +326,7 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 			addFace(CAMERA_WIDTH / 2, CAMERA_HEIGHT / 2);
 			mScene.unregisterTouchArea(pTouchArea);
 			mScene.detachChild(pTouchArea);
-		}
+		} 
 		else if((Sprite)pTouchArea==mohis)
 		{
 			audioPlay = true;
