@@ -23,13 +23,9 @@ import org.andengine.opengl.texture.region.TiledTextureRegion;
 import org.andengine.ui.activity.SimpleBaseGameActivity;
 import org.andengine.util.color.Color;
 import org.andengine.util.debug.Debug;
-
-import com.example.phonicsapp.GameMainPage;
 import com.example.phonicsapp.R;
-import com.example.phonicsapp.R.raw;
-import com.example.phonicsapp.animatedBook.AnimatedBookActivity;
 import com.example.phonicsapp.monkeyGame.MonkeyGameActivity;
-
+import StatusBarController.StatusBar;
 import android.content.Context;
 import android.content.Intent;
 import android.view.Display;
@@ -196,12 +192,10 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 			public void onTimePassed(TimerHandler pTimerHandler)
 			{
 				// TODO Auto-generated method stub
-				Debug.d("a:"+aCounter);
+				
 				//if all the items are in the box
-				if(aCounter==6)
+				if(!(mohis.getX()>=0) && !(ma.getX()>=0) && !(mama.getX()>=0) && !(megh.getX()>=0) && !(mula.getX()>=0) && !(moi.getX()>=0))
 				{
-					bCounter = 0;
-					aCounter = -1;
 					startActivity();
 				}
 				
@@ -328,6 +322,8 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 		mScene.setBackground(new Background(Color.WHITE));
 		mScene.setTouchAreaBindingOnActionDownEnabled(true);
 		
+		StatusBar.hideStatusBar();
+		
 		backGround = new Sprite(0, 0, mbackGroundTextureRegion, getVertexBufferObjectManager());
 		backGround.setHeight(CAMERA_HEIGHT);
 		backGround.setWidth(CAMERA_WIDTH);
@@ -452,6 +448,7 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 	
 	public void startActivity()
 	{
+		mScene.unregisterUpdateHandler(timer1);
 		finish();
 		startActivity(new Intent(this, MonkeyGameActivity.class));
 	}

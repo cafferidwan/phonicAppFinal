@@ -26,12 +26,9 @@ import org.andengine.ui.activity.SimpleBaseGameActivity;
 import org.andengine.util.color.Color;
 import org.andengine.util.debug.Debug;
 import org.andengine.util.modifier.ease.EaseSineInOut;
-import android.content.Intent;
+import StatusBarController.StatusBar;
 import android.media.MediaPlayer;
 import android.view.Display;
-import android.view.Window;
-import android.view.WindowManager;
-
 import com.example.phonicsapp.R;
 
 
@@ -117,9 +114,6 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 		CAMERA_HEIGHT = display.getHeight();
 		CAMERA_WIDTH = display.getWidth();
 		
-		requestWindowFeature(Window.FEATURE_NO_TITLE);
-	    getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		
 		ImageHeight = CAMERA_HEIGHT/1.1f;
 		ImageWidth = CAMERA_WIDTH/6.0f;
 		
@@ -186,6 +180,10 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 		mScene.setBackground(new Background(Color.WHITE));
 		vbo = getVertexBufferObjectManager();
 		
+		//debug mode
+		//RootTools.debugMode = true; 
+		StatusBar.showStatusBar();
+				
 		backGround = new Sprite(0, 0, mTexture,getVertexBufferObjectManager());
 		backGround.setWidth(CAMERA_WIDTH);
 		backGround.setHeight(CAMERA_HEIGHT);
@@ -328,16 +326,6 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 			else
 			{
 				value = 1;
-//				mScene.detachChild(mama);
-//				mScene.detachChild(mohis);
-//				mScene.detachChild(megh);
-//				mScene.detachChild(moi);
-//				mScene.detachChild(langol);
-//				mScene.unregisterTouchArea(mama);
-//				mScene.unregisterTouchArea(mohis);
-//				mScene.unregisterTouchArea(megh);
-//				mScene.unregisterTouchArea(moi);
-//				mScene.unregisterTouchArea(langol);
 			}
 		}
 		else if((Sprite)pTouchArea==langol)
@@ -353,16 +341,6 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 			else
 			{	
 				value = 1;
-//				mScene.detachChild(mama);
-//				mScene.detachChild(mohis);
-//				mScene.detachChild(megh);
-//				mScene.detachChild(moi);
-//				mScene.detachChild(tala);
-//				mScene.unregisterTouchArea(mama);
-//				mScene.unregisterTouchArea(mohis);
-//				mScene.unregisterTouchArea(megh);
-//				mScene.unregisterTouchArea(moi);
-//				mScene.unregisterTouchArea(tala);
 			}
 		}
 
@@ -401,7 +379,7 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 
 	}
 
-	private static void addFace(final float pX, final float pY) 
+	public void addFace(final float pX, final float pY) 
 	{
 		distance = (float) (CAMERA_WIDTH/5.3 )-5;
 		mFaceCount = mFaceCount+distance;
@@ -423,11 +401,13 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 				public void onTimePassed(TimerHandler pTimerHandler)
 				{
 					// TODO Auto-generated method stub
+					aCount = 0;
+					mFaceCount = -60;
 					startActivity();
 				}
 			}));
 		}
-			position[aCount] = new Sprite(0, 50 , mFaceTextureRegionBanana,MonkeyGameActivity.vbo);
+			position[aCount] = new Sprite(0, 50 , mFaceTextureRegionBanana,MonkeyGameActivity.vbo); 
 			mScene.attachChild(position[aCount]);
 			mScene.registerTouchArea(position[aCount]);
 			
@@ -545,12 +525,10 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 		aCount = aCount - 1;
 	}
 	
-	public static void startActivity()
+	public void startActivity()
 	{
 		activity.finish();
-		activity.startActivity(new Intent(activity, MonkeyGameActivity.class));
-		aCount = 0;
-		mFaceCount = -60;
+		//activity.startActivity(new Intent(activity, MonkeyGameActivity.class));
 	}
 	
 	//Audio play Function

@@ -1,8 +1,8 @@
 package com.example.phonicsapp;
 
+import java.util.ArrayList;
+
 import org.andengine.engine.camera.Camera;
-import org.andengine.engine.handler.timer.ITimerCallback;
-import org.andengine.engine.handler.timer.TimerHandler;
 import org.andengine.engine.options.EngineOptions;
 import org.andengine.engine.options.ScreenOrientation;
 import org.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
@@ -17,14 +17,13 @@ import org.andengine.opengl.texture.atlas.bitmap.source.IBitmapTextureAtlasSourc
 import org.andengine.opengl.texture.atlas.buildable.builder.BlackPawnTextureAtlasBuilder;
 import org.andengine.opengl.texture.atlas.buildable.builder.ITextureAtlasBuilder.TextureAtlasBuilderException;
 import org.andengine.opengl.texture.region.ITextureRegion;
+import org.andengine.opengl.texture.region.TextureRegion;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.ui.activity.SimpleBaseGameActivity;
 import org.andengine.util.color.Color;
 import org.andengine.util.debug.Debug;
 
 import com.example.phonicsapp.animatedBook.AnimatedBookActivity;
-
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.Display;
@@ -71,7 +70,6 @@ public class GameMainPage extends SimpleBaseGameActivity
 		mCamera = new Camera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
 		
 		return new EngineOptions(true, ScreenOrientation.LANDSCAPE_SENSOR,new RatioResolutionPolicy(CAMERA_WIDTH, CAMERA_HEIGHT), mCamera);
-	
 	}
 
 	@Override
@@ -81,7 +79,7 @@ public class GameMainPage extends SimpleBaseGameActivity
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gameMenuGfx/");
 
 		mBitmapTextureAtlas = new BuildableBitmapTextureAtlas(
-				getTextureManager(), 1600, 1200);
+				getTextureManager(), 2600, 2200);
 		
 		mBitmapTextureAtlas1 = new BuildableBitmapTextureAtlas(
 				getTextureManager(), 1600, 1200);
@@ -131,9 +129,11 @@ public class GameMainPage extends SimpleBaseGameActivity
 	protected Scene onCreateScene()
 	{
 		// TODO Auto-generated method stub
+		
 		mScene = new Scene();
 		mScene.setBackground(new Background(Color.WHITE));
 		mScene.setTouchAreaBindingOnActionDownEnabled(true);
+		
 		
 		GameMainPage.context = getApplicationContext();
 		
@@ -169,10 +169,8 @@ public class GameMainPage extends SimpleBaseGameActivity
 				return true;
 			}
 		};
-		Debug.d("CAMERA_HEIGHT:"+CAMERA_HEIGHT);
-		Debug.d("CAMERA_WIDTH:"+CAMERA_WIDTH);
-		//parrot.setHeight((float) (CAMERA_HEIGHT / 3.065));
-		//parrot.setWidth((float) (CAMERA_WIDTH / 3.6));
+		//Debug.d("CAMERA_HEIGHT:"+CAMERA_HEIGHT);
+		//Debug.d("CAMERA_WIDTH:"+CAMERA_WIDTH);
 		mScene.registerTouchArea(parrot);
 		mScene.attachChild(parrot);
 		

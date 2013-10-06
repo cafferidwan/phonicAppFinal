@@ -7,6 +7,8 @@
     <uses-sdk
         android:minSdkVersion="8"
         android:targetSdkVersion="17" />
+    
+    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS" />
 
     <application
         android:allowBackup="true"
@@ -14,7 +16,7 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="com.example.phonicsapp.monkeyGame.MonkeyGameActivity"
+            android:name="com.example.phonicsapp.GameMainPage"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,7 +38,7 @@
         </activity>
         
         <activity 
-            android:name="com.example.phonicsapp.GameMainPage"
+            android:name="com.example.phonicsapp.monkeyGame.MonkeyGameActivity"
             android:label="@string/app_name" >
         </activity>
         
