@@ -1,16 +1,25 @@
 package com.example.phonicsapp.wordbuilder;
+
+import java.util.ArrayList;
+import java.util.Timer;
+
 import org.andengine.engine.camera.Camera;
-import org.andengine.engine.handler.timer.ITimerCallback;
-import org.andengine.engine.handler.timer.TimerHandler;
 import org.andengine.engine.options.EngineOptions;
 import org.andengine.engine.options.ScreenOrientation;
 import org.andengine.engine.options.resolutionpolicy.RatioResolutionPolicy;
+import org.andengine.entity.Entity;
+import org.andengine.entity.IEntity;
+import org.andengine.entity.modifier.DelayModifier;
+import org.andengine.entity.modifier.MoveXModifier;
+import org.andengine.entity.modifier.SequenceEntityModifier;
+import org.andengine.entity.primitive.Rectangle;
+import org.andengine.entity.scene.ITouchArea;
 import org.andengine.entity.scene.Scene;
 import org.andengine.entity.scene.background.Background;
+import org.andengine.entity.sprite.AnimatedSprite;
 import org.andengine.entity.sprite.Sprite;
-import org.andengine.entity.util.FPSLogger;
-import org.andengine.input.touch.detector.ClickDetector;
-import org.andengine.input.touch.detector.SurfaceScrollDetector;
+import org.andengine.input.touch.TouchEvent;
+import org.andengine.opengl.texture.TextureOptions;
 import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
 import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlasTextureRegionFactory;
 import org.andengine.opengl.texture.atlas.bitmap.BuildableBitmapTextureAtlas;
@@ -18,823 +27,369 @@ import org.andengine.opengl.texture.atlas.bitmap.source.IBitmapTextureAtlasSourc
 import org.andengine.opengl.texture.atlas.buildable.builder.BlackPawnTextureAtlasBuilder;
 import org.andengine.opengl.texture.atlas.buildable.builder.ITextureAtlasBuilder.TextureAtlasBuilderException;
 import org.andengine.opengl.texture.region.ITextureRegion;
+import org.andengine.opengl.texture.region.TiledTextureRegion;
+import org.andengine.opengl.vbo.VertexBufferObjectManager;
+import org.andengine.ui.activity.BaseActivity;
 import org.andengine.ui.activity.SimpleBaseGameActivity;
 import org.andengine.util.color.Color;
 import org.andengine.util.debug.Debug;
 
+import com.example.phonicsapp.GameMainPage;
 import com.example.phonicsapp.R;
 
+import android.app.Application;
+import android.content.Context;
+import android.content.Intent;
+import android.media.MediaPlayer;
+import android.util.Log;
 import android.view.Display;
 
-
-public class MainActivity extends SimpleBaseGameActivity 
-{
-	// ===========================================================
-	// Constants
-	// ===========================================================
+public class MainActivity extends SimpleBaseGameActivity {
 
 	public static int CAMERA_WIDTH;
 	public static int CAMERA_HEIGHT;
-	public String DEBUG_TAG = MainActivity.class.getSimpleName();
-	// ===========================================================
-	// Fields
-	// ===========================================================
-
-	private Camera mCamera;
-	public static Scene mScene;
+	public static Scene mCurrentScene;
+	public static Scene mCurrentScene1;
+	public static BaseActivity instance;
+	public Camera mCamera;
+	public static boolean isMove =true;	
+	public static int ma_amm_secuenceCount;
 	
-    // Scrolling
-    public static SurfaceScrollDetector mScrollDetector;
-    public static ClickDetector mClickDetector;
-
-	// Bitmap Texture For Bangla 'A' Letter
-
-	private BuildableBitmapTextureAtlas mBitmapTextureAtlas;
-	private ITextureRegion mBackGroundTextureRegion;
-	private ITextureRegion mAkarTextureRegion;
-	private ITextureRegion mMOTextureRegion;
-	private ITextureRegion mMaTextureRegion;
-	private ITextureRegion mShoreaTextureRegion;
-	private ITextureRegion mScissorTextureRegion;
+	//public static Entity en1 = new Entity();
 	
-	public static float centerX, centerY;
-
-	public static Sprite maImage, backGround;
-	public static Letter1 akar;
-	public static Letter2 mo;
-	public static Letter3 shorea;
-	public static Scissor Scissor;
 	
-	static MainActivity activity;
-	// ===========================================================
-	// Constructors
-	// ===========================================================
-
-	// ===========================================================
-	// Getter & Setter
-	// ===========================================================
-
-	// ===========================================================
-	// Methods for/from SuperClass/Interfaces
-	// ===========================================================
-
-	public static boolean mergeEnable1 = false;
-	public static boolean mergeEnable2 = false;
-	public static boolean mergeEnable3 = false;
-	public static boolean mergeEnable4 = false;
-	public static boolean mergeEnable5 = false;
-	public static boolean mergeEnable6 = false;
-	public static boolean mergeEnable7 = false;
-	public static boolean mergeEnable8 = false;
-	public static boolean mergeEnable9 = false;
-	public static boolean mergeEnable10 = false;
-	public static boolean mergeEnable11 = false;
-	public static boolean mergeEnable12 = false;
+	public Sprite BgSprite;
+	public static Sprite sprite1,sprite2,buttonHome;
+	public static ArrayList<sprite2> SpriteList;
+	public static VertexBufferObjectManager vobm;	
+	public static ArrayList<sprite3> SpriteContainer;
+	public static ArrayList<sprite3> SpriteContainer1;
 	
-	public static int count1, count2, count3, count4, count5, count6, count7, count8;
+	public static sprite2 sp1,sp2,sp3,spg;
+	public static sprite3 sp3a,sp3b,sp3c,sp3d;
+	public static CharactorObject c1,cAmm;
+	public static Parrot anm1;
+	public static EngineOptions engOps;
+	
+	public static boolean isMaa=true,isAmm=false;
+	
+	public static BuildableBitmapTextureAtlas BgBuildableBitmapTextureAtlas;
+	public BitmapTextureAtlas ParrotBitmapTextureAtlus;
+	public static ITextureRegion BgTextureReason;
+	public static ITextureRegion Letter1TextureReason;
+	public static ITextureRegion Letter2TextureReason;
+	public static ITextureRegion Letter3TextureReason;
+	public static ITextureRegion MaTextureReason;
+	public static ITextureRegion KachiTextureReason;
+	public static ITextureRegion ParrotUpTextureReason;
+	public static ITextureRegion ParrotDownTextureReason;
+	public static TiledTextureRegion ParrotTextureReason;
+	private static MediaPlayer mediaPlayer;
+	public static ITextureRegion AmmTextureReason;
+	public static ITextureRegion ButtonHomeTextureReason;
+	
+	public static int[] tracksContainer = new int[3];
+	public static int audioIndexCounter=0;
 	
 	@Override
-	public EngineOptions onCreateEngineOptions()
-	{
+	public EngineOptions onCreateEngineOptions() {
 		// TODO Auto-generated method stub
-		activity = this;
 		Display display = getWindowManager().getDefaultDisplay();
-		CAMERA_WIDTH = display.getWidth();
 		CAMERA_HEIGHT = display.getHeight();
-
-		this.mCamera = new Camera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
-
-		EngineOptions en = new EngineOptions(true, ScreenOrientation.LANDSCAPE_SENSOR,
-						   new RatioResolutionPolicy(CAMERA_WIDTH, CAMERA_HEIGHT), mCamera);
-		// Setting MuliTouch
-		en.getTouchOptions().setNeedsMultiTouch(true);
-
-		return en;
+		CAMERA_WIDTH = display.getWidth();
+		instance = this;
+		ma_amm_secuenceCount = 0;
+		MainActivity.isMaa = true;
+		MainActivity.isAmm = false;
+		tracksContainer[0]=R.raw.aakar;
+		tracksContainer[1]=R.raw.shoroa;
+		tracksContainer[2]=R.raw.mo;
+		
+		//vobm = getVertexBufferObjectManager();
+		SpriteList = new ArrayList<sprite2>();
+		SpriteContainer = new ArrayList<sprite3>();
+		SpriteContainer1 = new ArrayList<sprite3>();
+	    mCamera = new Camera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
+	    engOps = new EngineOptions(true, ScreenOrientation.LANDSCAPE_SENSOR, new RatioResolutionPolicy(CAMERA_WIDTH, CAMERA_HEIGHT), mCamera);
+		engOps.getTouchOptions().setNeedsMultiTouch(true);
+	    return engOps; 
 	}
 
 	@Override
-	protected void onCreateResources() 
-	{
+	protected void onCreateResources() {
 		// TODO Auto-generated method stub
-		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("WordBuilding/");
+		
+		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("WordBuildingGfx/");
+		BgBuildableBitmapTextureAtlas = new BuildableBitmapTextureAtlas(this.getTextureManager(), 2900, 2532,TextureOptions.DEFAULT);
+		MainActivity.BgTextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(BgBuildableBitmapTextureAtlas, this, "jungle16.png");
+		MainActivity.Letter1TextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(BgBuildableBitmapTextureAtlas, this, "akar.png");
+		MainActivity.Letter2TextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(BgBuildableBitmapTextureAtlas, this, "shoroa.png");
+		MainActivity.Letter3TextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(BgBuildableBitmapTextureAtlas, this, "mo.png");
+		MainActivity.MaTextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(BgBuildableBitmapTextureAtlas, this, "ma.png");
+		MainActivity.AmmTextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(BgBuildableBitmapTextureAtlas, this, "amm.png");
+		MainActivity.KachiTextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(BgBuildableBitmapTextureAtlas, this, "kachi.png");
+		MainActivity.ParrotUpTextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(BgBuildableBitmapTextureAtlas, this, "parrot_up.png");
+		//this.ParrotDownTextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(BgBuildableBitmapTextureAtlas, this, "parrot_down.png");
+		MainActivity.ButtonHomeTextureReason = BitmapTextureAtlasTextureRegionFactory.createFromAsset(BgBuildableBitmapTextureAtlas, this, "button_home.png");
+		
+		ParrotBitmapTextureAtlus = new BitmapTextureAtlas(this.getTextureManager(), 1200, 400,TextureOptions.DEFAULT);
+		MainActivity.ParrotTextureReason = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(ParrotBitmapTextureAtlus, this, "sprite_parrot4.png",0,0,3,1);
+		try {
+			BgBuildableBitmapTextureAtlas.build(new BlackPawnTextureAtlasBuilder<IBitmapTextureAtlasSource, BitmapTextureAtlas>(0, 0, 0));
+			BgBuildableBitmapTextureAtlas.load();
+			ParrotBitmapTextureAtlus.load();
 
-		this.mBitmapTextureAtlas = new BuildableBitmapTextureAtlas(this.getTextureManager(), 2512, 2512);
-
-		this.mBackGroundTextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "jungle.png");
-		this.mAkarTextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "1.png");
-		this.mMOTextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "mo.png");
-		this.mMaTextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "ma.png");
-		this.mShoreaTextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "a.png");
-		this.mScissorTextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "scissor.png");
-
-		try
-		{
-			this.mBitmapTextureAtlas
-					.build(new BlackPawnTextureAtlasBuilder<IBitmapTextureAtlasSource, BitmapTextureAtlas>(
-							0, 0, 0));
-			this.mBitmapTextureAtlas.load();
-		} 
-		catch (TextureAtlasBuilderException e) 
-		{
-			Debug.e(e);
+		} catch (TextureAtlasBuilderException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-
 	}
 
 	@Override
-	protected Scene onCreateScene() 
-	{
+	protected Scene onCreateScene() {
 		// TODO Auto-generated method stub
-		this.mEngine.registerUpdateHandler(new FPSLogger());
-		mScene = new Scene();
-		mScene.setBackground(new Background(Color.WHITE));
-		mScene.setTouchAreaBindingOnActionDownEnabled(true);
+		mCurrentScene = new Scene();
+		mCurrentScene.setTouchAreaBindingOnActionMoveEnabled(true);
+	    mCurrentScene.setBackground(new Background(0.09804f, 0.7274f, 0.8f));
+	    
+		BgSprite = new Sprite(0, 0, BgTextureReason, getVertexBufferObjectManager());
+	    BgSprite.setHeight(CAMERA_HEIGHT);
+		BgSprite.setWidth(CAMERA_WIDTH);
+		mCurrentScene.attachChild(BgSprite);
+		mCurrentScene.setUserData("MainScene");
 		
-		backGround = new Sprite(0, 0, mBackGroundTextureRegion, getVertexBufferObjectManager());
-		mScene.attachChild(backGround);
-		backGround.setWidth(CAMERA_WIDTH);
-		backGround.setHeight(CAMERA_HEIGHT);
+		loadHomeButton();
 		
-		centerX = (CAMERA_WIDTH - this.mAkarTextureRegion.getWidth()) / 2;
-		centerY = (CAMERA_HEIGHT - this.mAkarTextureRegion.getHeight()) / 2;
+		//myRectangle1 = new GroupSprite(110f, 110f, 50f, 30f, this.getVertexBufferObjectManager());
+		//myRectangle1.myRectangle.attachChild(en1);
+		//en1.setUserData("Entity1");
+//		mCurrentScene.attachChild(myRectangle1.myRectangle);
+//		mCurrentScene.registerTouchArea(myRectangle1.myRectangle);
+		
+		sp3a = new sprite3(CAMERA_WIDTH - 350, CAMERA_HEIGHT - 150, 100f, 100f, Letter1TextureReason, getVertexBufferObjectManager(),1,R.raw.aakar,getApplicationContext());
+		sp3b = new sprite3(CAMERA_WIDTH - 500, CAMERA_HEIGHT - 150, 100f, 100f, Letter2TextureReason, getVertexBufferObjectManager(),1,R.raw.shoroa,getApplicationContext());
+		sp3c = new sprite3(CAMERA_WIDTH - 650, CAMERA_HEIGHT - 150, 100f, 100f, Letter3TextureReason, getVertexBufferObjectManager(),1,R.raw.mo,getApplicationContext());
+		sp3d = new sprite3(CAMERA_WIDTH - 120, CAMERA_HEIGHT - 120, 120f, 120f, KachiTextureReason, getVertexBufferObjectManager(),1,0,getApplicationContext());
+		c1 = new CharactorObject(CAMERA_WIDTH/2 - 150, CAMERA_HEIGHT/2 - 200, 170f, 200f, MaTextureReason, getVertexBufferObjectManager(),R.raw.ma);
+		cAmm = new CharactorObject(CAMERA_WIDTH/2 - 150, CAMERA_HEIGHT/2 - 200, 170f, 170f, AmmTextureReason, getVertexBufferObjectManager(),R.raw.aam1);
+		//buttonHome= new CharactorObject(10,10, 50f, 50f, ButtonHomeTextureReason, getVertexBufferObjectManager(),0);
+		Parrot parrot = new Parrot(CAMERA_WIDTH -200, CAMERA_HEIGHT/4-100, 200, 200, ParrotTextureReason, this.getVertexBufferObjectManager());
+		anm1 = parrot;
+		anm1.normalState();
+		
+		sp3a.s3 = sp3a;
+		sp3b.s3 = sp3b;
+		sp3c.s3 = sp3c;
+		sp3d.s3 = sp3d;
+		
+		sp3a.sprite1.setUserData("akar");
+		sp3b.sprite1.setUserData("shoroa");
+		sp3c.sprite1.setUserData("mo");
+		
+		sp3a.sprite1.setZIndex(100);
+		sp3b.sprite1.setZIndex(2000);
+		sp3c.sprite1.setZIndex(30000);
+		
+		SpriteContainer1.add(sp3a);
+		SpriteContainer1.add(sp3b);
+		SpriteContainer1.add(sp3c);
+		
+		sp3d.sprite1.setZIndex(9998);
+		mCurrentScene.attachChild(sp3d.sprite1);
+		mCurrentScene.attachChild(c1.sprite1);
+		mCurrentScene.attachChild(sp3a.sprite1);
+		mCurrentScene.attachChild(sp3b.sprite1);	
+		mCurrentScene.attachChild(sp3c.sprite1);	
+		
+		mCurrentScene.attachChild(anm1.anm1);
 		
 		
-		//Setting the maImage invisible
-		maImage = new Sprite(CAMERA_WIDTH/2-150 , 0, this.mMaTextureRegion, this.getVertexBufferObjectManager());
-		mScene.attachChild(maImage);
-		maImage.setWidth(CAMERA_WIDTH/4);
-		maImage.setHeight(CAMERA_HEIGHT/2);
-		maImage.setVisible(true);
+		sp3d.sizzer = true;		
 		
-		mScene.registerUpdateHandler(new TimerHandler((float) 0.09, true,
-				new ITimerCallback()
+		mCurrentScene.sortChildren();
+		return mCurrentScene;
+	}
+	
+	public static int getIndexOfSprite(Sprite s){
+		
+		if (MainActivity.SpriteList.contains(s)){
+			return MainActivity.SpriteList.indexOf(s);
+		}
+		return 0; 
+	}
+	
+	public static sprite3 getColliedobj(sprite3 sp){
+		Sprite spr = new Sprite(sp.sprite1.getX() , sp.sprite1.getY(), MainActivity.Letter1TextureReason, MainActivity.vobm);
+		Sprite spr2 = new Sprite(sp.sprite1.getX() , sp.sprite1.getY(), MainActivity.Letter1TextureReason, MainActivity.vobm);
+		//MainActivity.mCurrentScene.attachChild(spr);
+		spr.setVisible(false);
+		spr.setHeight(sp.sprite1.getHeight());
+		spr.setWidth(sp.sprite1.getWidth() + 20);
+		
+		spr2.setVisible(false);
+		spr2.setHeight(sp.sprite1.getHeight());
+		spr2.setWidth(sp.sprite1.getWidth() + 20 );
+	    for(int i = 0;  i< SpriteContainer1.size();i++)
+	    {
+	    	spr2.setPosition(SpriteContainer1.get(i).sprite1.getX(), SpriteContainer1.get(i).sprite1.getY());
+	    	//Log.d("chk colution ", "Size " + SpriteList.size() +"array list : " + SpriteList.get(i).sprite1.getUserData());	
+	    	try {
+				
+	       if(spr2.collidesWith(spr) && !(SpriteContainer1.get(i).sprite1).equals(sp.sprite1) && (!(SpriteContainer.contains(SpriteContainer1.get(i))) || sp.single)){
+	    	
+	    	  // Log.d("chk colution ", "input sprite: " + sp.getUserData() +" array list sprite : " + SpriteList.get(i).sprite1.getUserData());
+	    	   float y1,y2,x1,x2,w1,w2,h1,h2; 
+	    	   y2 = SpriteContainer1.get(i).sprite1.getY();
+	    	   x2 = SpriteContainer1.get(i).sprite1.getX();
+	    	   w2 = SpriteContainer1.get(i).sprite1.getWidth();
+	    	   h2 = SpriteContainer1.get(i).sprite1.getHeight();
+	    	   y1 = sp.sprite1.getY();
+	    	   x1 = sp.sprite1.getX();
+	    	   w1 = sp.sprite1.getWidth();
+	    	   h1 = sp.sprite1.getHeight();
+	    	   
+	    	   if((x2+w2 >= x1-10 && (x2+w2 <= x1+10)) || (x1+w1 >= x2 - 10 && x1+w1 <= x2 + 10)){
+	    		  // if(){
+	    			   return SpriteContainer1.get(i); 
+	    		  // }
+	    	   }
+	    	   
+	    	  /* if(((x1+w1)>x2 || x1<(w2+x2)) && ((y1+h1)>y2 || y2>(h1+y1))){
+		    	   if(Math.abs(y1-y2) < 10 && Math.abs(y1-y2) >= -1) {
+		    		   Log.d("chk colution ", "Y1-Y2 : " + Math.abs(y1-y2));
+		    		   return SpriteContainer1.get(i);
+		    	   }		    	  
+	    	   }*/
+    		   //return SpriteContainer1.get(i);
+	        }
+	    	} catch (Exception e) {
+				// TODO: handle exception
+	    		Log.d("chk colution ", "e : " + e.getMessage());
+			}
+	      /* else if(SpriteContainer1.get(i).sprite1.collidesWith(sp) && !(SpriteContainer1.get(i).sprite1).equals(sp))
+	       	{
+	    	  // Log.d("chk colution ", "input sprite: " + sp.getUserData() +" array list sprite : " + SpriteList.get(i).sprite1.getUserData());
+	    	   return SpriteContainer1.get(i);
+	        }*/
+	     }
+	   // sp.setWidth(sp.getWidth()+20);
+		return null;
+	}
+	public static sprite2 getColliedSprite(Sprite sp){
+	    for(int i = 0;  i< SpriteList.size();i++)
+	    {
+	    	//Log.d("chk colution ", "Size " + SpriteList.size() +"array list : " + SpriteList.get(i).sprite1.getUserData());	    	
+	       if(SpriteList.get(i).sprite1.collidesWith(sp) && !(SpriteList.get(i).sprite1).equals(sp))
+	       	{
+	    	  // Log.d("chk colution ", "input sprite: " + sp.getUserData() +" array list sprite : " + SpriteList.get(i).sprite1.getUserData());
+    		   return SpriteList.get(i);
+	        }
+	       else if(SpriteList.get(i).sprite1.collidesWith(sp) && !(SpriteList.get(i).sprite1).equals(sp))
+	       	{
+	    	  // Log.d("chk colution ", "input sprite: " + sp.getUserData() +" array list sprite : " + SpriteList.get(i).sprite1.getUserData());
+	    	   return SpriteList.get(i);
+	        }
+	     }
+
+		return null;
+	}
+	public static void sortSpriteContainer(){
+		sprite3 s3;
+		for(int i=0;i<SpriteContainer.size();i++){
+			for(int j=0;j<SpriteContainer.size()-1;j++){
+				if(SpriteContainer.get(j).sprite1.getX()>SpriteContainer.get(j+1).sprite1.getX()){
+					s3 = SpriteContainer.get(j);
+					SpriteContainer.set(j, SpriteContainer.get(j+1));
+					SpriteContainer.set(j+1,s3);				
+				}
+			}
+		}
+		rePosition();
+	}
+	public static void rePosition(){
+		for(int i=1;i<SpriteContainer.size();i++){
+			SpriteContainer.get(i).sprite1.setPosition(SpriteContainer.get(i-1).sprite1.getX()+SpriteContainer.get(i-1).sprite1.getWidth(),SpriteContainer.get(i-1).sprite1.getY());
+		}
+	}
+	
+	public static void makeGroup(sprite2 s1){
+		mCurrentScene.detachChild(s1.sprite1);
+		spg.sprite1.attachChild(s1.sprite1);
+		s1.frizz = true;
+		//if(spg.sprite1.getChildCount() !=0 ){
+			s1.sprite1.setPosition(spg.sprite1.getChildCount()*100, spg.sprite1.getChildCount()*100);
+			spg.setWidth(spg.sprite1.getChildCount()*100);
+		//}
+		s1.sprite1.setPosition(0f, 0f);
+		
+	}
+	public static void reposition(){
+		for(int i=0; i < spg.sprite1.getChildCount(); i++ ){
+			spg.getChildByIndex(i).setPosition(2*100, 0);
+			spg.setWidth(spg.sprite1.getChildCount()*100);
+		}
+		
+	}
+	public static boolean allowJoin (Sprite mo, Sprite akar){
+		if (mo.getX() - akar.getX() > 105 && mo.getX() - akar.getX() < 180 && mo.getY() - akar.getY() < 25 && mo.getY() - akar.getY() > -25)
 		{
-					@Override
-					public void onTimePassed(TimerHandler pTimerHandler) 
-					{
-						// TODO Auto-generated method stub
-						
-//						if()
-//						{
-//							
-//						}
-						
-						//checking the scissor
-						if(Scissor.getX()!= CAMERA_WIDTH- CAMERA_WIDTH/5 && Scissor.getY()!= CAMERA_HEIGHT-CAMERA_HEIGHT/4 && Scissor.scissorGate==1)
-						{
-							Scissor.scissorGate = 0;
-							Paths.scissorPath();
-						}
-						
-						if(mergeEnable1== true)
-						{
-							Debug.d("mergeEnable1 is up");
-						}
-						 if(mergeEnable2== true)
-						{
-							Debug.d("mergeEnable2 is up");
-						}
-						 if(mergeEnable3== true)
-						{
-							Debug.d("mergeEnable3 is up");
-						}
-						 if(mergeEnable4== true)
-						{
-							Debug.d("mergeEnable4 is up");
-						}
-						 if(mergeEnable5== true)
-						{
-							Debug.d("mergeEnable5 is up");
-						}
-						 if(mergeEnable6== true)
-						{
-							Debug.d("mergeEnable6 is up");
-						}
-						 if(mergeEnable7== true)
-						{
-							Debug.d("mergeEnable7 is up");
-						}
-						 if(mergeEnable7== true)
-						{
-							Debug.d("mergeEnable7 is up");
-						}
-						if(mergeEnable8== true)
-						{
-							Debug.d("mergeEnable8 is up");
-						}
-						if(mergeEnable9== true)
-						{
-							Debug.d("mergeEnable9 is up");
-						}
-						if(mergeEnable10== true)
-						{
-							Debug.d("mergeEnable10 is up");
-						}
-						if(mergeEnable11== true)
-						{
-							Debug.d("mergeEnable11 is up");
-						}
-						if(mergeEnable12== true)
-						{
-							Debug.d("mergeEnable12 is up");
-						}
-						
-						
-						////////////////////////////////////////////////
-						// Calculating if 'mo' is in the range of 'akar'
-						if (mo.getX() - akar.getX() > 90
-								&& mo.getX() - akar.getX() < 110
-								&& mo.getY() - akar.getY() < 25
-								&& mo.getY() - akar.getY() > -25)
-						{
-							if (mo.getX() == akar.getX() + 100)
-							{
-								if(Scissor.collidesWith(akar) && Scissor.collidesWith(mo))
-								{
-									count1++;
-									if(count1 == 1)
-									{
-										mergeEnable1 = false;
-										mergeEnable2 = false;
-										Paths.splitPath();
-									}
-								}
-							
-							}
-							//If letters are in the range but not merged, then enable merging
-							else
-							{
-								//play sound on join
-								soundFunction.audioPlay = true;
-								soundFunction.playAudioLoop2(R.raw.akar ,R.raw.mo);
-								
-								mergeEnable1 = true;
-								mergeEnable2 = false;
-								mergeEnable3 = false;
-								mergeEnable4 = false;
-								mergeEnable5 = false;
-								mergeEnable6 = false;
-								mergeEnable7 = false;
-								mergeEnable8 = false;
-								mergeEnable9 = false;
-								mergeEnable10 = false;
-								mergeEnable11 = false;
-								mergeEnable12 = false;
-							}
-
-						}
-						// Calculating if 'akar' is in the range of 'mo'----making 'ma' word
-						else if (akar.getX() - mo.getX() > 90
-								&& akar.getX() - mo.getX() < 110
-								&& akar.getY() - mo.getY() < 25
-								&& akar.getY() - mo.getY() > -25) 
-						{
-							if (mo.getX() + 100 == akar.getX()) 
-							{
-								//Setting the maImage visible when the letters are merged
-								//maImage.setVisible(true);
-								
-								if(Scissor.collidesWith(akar) && Scissor.collidesWith(mo))
-								{
-									count2++;
-									if(count2 == 1)
-									{
-										mergeEnable1 = false;
-										mergeEnable2 = false;
-										Paths.splitPath();
-									}
-								}
-							}
-							//If letters are in the range but not merged, then enable merging
-							else
-							{
-								//play sound on join
-								soundFunction.audioPlay = true;
-								soundFunction.playAudio(R.raw.ma);
-								
-								mergeEnable1 = false;
-								mergeEnable2 = true;
-								mergeEnable3 = false;
-								mergeEnable4 = false;
-								mergeEnable5 = false;
-								mergeEnable6 = false;
-								mergeEnable7 = false;
-								mergeEnable8 = false;
-								mergeEnable9 = false;
-								mergeEnable10 = false;
-								mergeEnable11 = false;
-								mergeEnable12 = false;
-							}
-						}
-						else
-						{
-							//Setting the maImage invisible when the letters are not merged
-							//maImage.setVisible(false);
-						}
-						//////////////////////////////////////////////////
-						// Calculating if 'mo' is in the range of 'shorea'
-						 if (mo.getX() - shorea.getX() > 90
-								&& mo.getX() - shorea.getX() < 110
-								&& mo.getY() - shorea.getY() < 25
-								&& mo.getY() - shorea.getY() > -25)
-						{
-							if (mo.getX() == shorea.getX() + 100)
-							{
-								if(Scissor.collidesWith(shorea) && Scissor.collidesWith(mo))
-								{
-									count3++;
-									if(count3 == 1)
-									{
-										mergeEnable3 = false;
-										mergeEnable4 = false;
-										Paths.splitPath();
-									}
-								}
-								
-							}
-							//If letters are in the range but not merged, then enable merging
-							else
-							{
-								//play sound on join
-								soundFunction.audioPlay = true;
-								soundFunction.playAudio(R.raw.aam);
-
-								mergeEnable1 = false;
-								mergeEnable2 = false;
-								mergeEnable3 = true;
-								mergeEnable4 = false;
-								mergeEnable5 = false;
-								mergeEnable6 = false;
-								mergeEnable7 = false;
-								mergeEnable8 = false;
-								mergeEnable9 = false;
-								mergeEnable10 = false;
-								mergeEnable11 = false;
-								mergeEnable12 = false;
-							}
-
-						}
-						// Calculating if 'shorea' is in the range of 'mo'----making 'ma' word
-						else if (shorea.getX() - mo.getX() > 90
-								&& shorea.getX() - mo.getX() < 110
-								&& shorea.getY() - mo.getY() < 25
-								&& shorea.getY() - mo.getY() > -25) 
-						{
-							if (mo.getX() + 100 == shorea.getX()) 
-							{
-								//Setting the maImage visible when the letters are merged
-								//maImage.setVisible(true);
-								
-								if(Scissor.collidesWith(shorea) && Scissor.collidesWith(mo))
-								{
-									count4++;
-									if(count4 == 1)
-									{
-										mergeEnable3 = false;
-										mergeEnable4 = false;
-										Paths.splitPath();
-									}
-								}
-							}
-							//If letters are in the range but not merged, then enable merging
-							else
-							{
-								//play sound on join
-								soundFunction.audioPlay = true;
-								soundFunction.playAudioLoop2(R.raw.mo, R.raw.shorea);
-								
-								mergeEnable1 = false;
-								mergeEnable2 = false;
-								mergeEnable3 = false;
-								mergeEnable4 = true;
-								mergeEnable5 = false;
-								mergeEnable6 = false;
-								mergeEnable7 = false;
-								mergeEnable8 = false;
-								mergeEnable9 = false;
-								mergeEnable10 = false;
-								mergeEnable11 = false;
-								mergeEnable12 = false;
-							}
-						}
-						
-						 //////////////////////////////////////////////////
-						 // Calculating if 'akar' is in the range of 'shorea'
-						 if (akar.getX() - shorea.getX() > 90
-								 && akar.getX() - shorea.getX() < 110
-								 && akar.getY() - shorea.getY() < 25
-								 && akar.getY() - shorea.getY() > -25)
-						 {
-							 if (akar.getX() == shorea.getX() + 100)
-							 {
-								 if(Scissor.collidesWith(shorea) && Scissor.collidesWith(akar))
-								 {
-									 count5++;
-									 if(count5 == 1)
-									 {
-										 mergeEnable5 = false;
-										 mergeEnable6 = false;
-										 Paths.splitPath();
-									 }
-								 }
-			
-							 }
-							 //If letters are in the range but not merged, then enable merging
-							 else
-							 {
-								 //play sound on join
-								 soundFunction.audioPlay = true;
-								 soundFunction.playAudioLoop2(R.raw.shorea, R.raw.akar);
-								 
-								 mergeEnable1 = false;
-								 mergeEnable2 = false;
-								 mergeEnable3 = false;
-								 mergeEnable4 = false;
-							     mergeEnable5 = true;
-								 mergeEnable6 = false;
-								 mergeEnable7 = false;
-								 mergeEnable8 = false;
-								 mergeEnable9 = false;
-								 mergeEnable10 = false;
-								 mergeEnable11 = false;
-								 mergeEnable12 = false;
-								 
-							 }
-
-						 }
-						// Calculating if 'shorea' is in the range of 'akar'----making 'ma' word
-						else if (shorea.getX() - akar.getX() > 90
-								&& shorea.getX() - akar.getX() < 110
-								&& shorea.getY() - akar.getY() < 25
-								&& shorea.getY() - akar.getY() > -25) 
-						{
-							if (akar.getX() + 100 == shorea.getX()) 
-							{
-								//Setting the maImage visible when the letters are merged
-								//maImage.setVisible(true);
-
-								if(Scissor.collidesWith(shorea) && Scissor.collidesWith(akar))
-								{
-									count6++;
-									if(count6 == 1)
-									{
-										mergeEnable5 = false;
-										mergeEnable6 = false;
-										Paths.splitPath();
-									}
-								}
-							}
-							//If letters are in the range but not merged, then enable merging
-							else
-							{
-								//play sound on join
-								soundFunction.audioPlay = true;
-								soundFunction.playAudioLoop2(R.raw.akar, R.raw.shorea);
-								
-								mergeEnable1 = false;
-								mergeEnable2 = false;
-								mergeEnable3 = false;
-								mergeEnable4 = false;
-							    mergeEnable5 = false;
-								mergeEnable6 = true;
-								mergeEnable7 = false;
-								mergeEnable8 = false;
-								mergeEnable9 = false;
-								mergeEnable10 = false;
-								mergeEnable11 = false;
-								mergeEnable12 = false;
-							}
-						}
-						 
-						//////////////////////////////////////////////////
-						//1.'shorea'-'akar'-'mo'
-						if(mo.getX() - akar.getX() > 90
-								&& mo.getX() - akar.getX() < 110
-								&& mo.getY() - akar.getY() < 25
-								&& mo.getY() - akar.getY() > -25 
-								&&
-								akar.getX() - shorea.getX() > 90
-								&& akar.getX() - shorea.getX() < 110
-								&& akar.getY() - shorea.getY() < 25
-								&& akar.getY() - shorea.getY() > -25)
-						{ 
-							if(mo.getX() == akar.getX() + 100 && akar.getX() == shorea.getX() + 100)
-							{
-								 if(Scissor.collidesWith(akar) && Scissor.collidesWith(mo))
-								 {
-									 mergeEnable7 = false;
-									 mergeEnable5 = false;
-								 }
-								 else if(Scissor.collidesWith(shorea) && Scissor.collidesWith(akar))
-								 {
-									 mergeEnable7 = false;
-									 mergeEnable1 = false;
-								 }
-							}
-							else
-							{
-								//play sound on join
-								soundFunction.audioPlay = true;
-								soundFunction.playAudioLoop3(R.raw.shorea, R.raw.akar, R.raw.mo);
-								
-								mergeEnable1 = false;
-								mergeEnable2 = false;
-								mergeEnable3 = false;
-								mergeEnable4 = false;
-								mergeEnable5 = false;
-								mergeEnable6 = false;
-								mergeEnable7 = true;
-								mergeEnable8 = false;
-								mergeEnable9 = false;
-								mergeEnable10 = false;
-								mergeEnable11 = false;
-								mergeEnable12 = false;
-								
-							}
-						}
-
-						//2.'akar'-'shorea'-'mo'
-						if(mo.getX() - shorea.getX() > 90
-								&& mo.getX() - shorea.getX() < 110
-								&& mo.getY() - shorea.getY() < 25
-								&& mo.getY() - shorea.getY() > -25
-								&&
-								shorea.getX() - akar.getX() > 90
-								&& shorea.getX() - akar.getX() < 110
-								&& shorea.getY() - akar.getY() < 25
-								&& shorea.getY() - akar.getY() > -25)
-						{ 
-							if(mo.getX() == shorea.getX() + 100 && akar.getX() + 100 == shorea.getX())
-							{
-								 if(Scissor.collidesWith(shorea) && Scissor.collidesWith(mo))
-								 {
-									 mergeEnable8 = false;
-									 mergeEnable3 = false;
-								 }
-								 else if(Scissor.collidesWith(shorea) && Scissor.collidesWith(akar))
-								 {
-									 mergeEnable8 = false;
-									 mergeEnable6 = false; 
-								 } 
-							}
-							else
-							{
-								//play sound on join
-								soundFunction.audioPlay = true;
-								soundFunction.playAudioLoop3(R.raw.akar, R.raw.shorea, R.raw.mo);
-								
-								mergeEnable1 = false;
-								mergeEnable2 = false;
-								mergeEnable3 = false;
-								mergeEnable4 = false;
-								mergeEnable5 = false;
-								mergeEnable6 = false;
-								mergeEnable7 = false;
-								mergeEnable8 = true;
-								mergeEnable9 = false;
-								mergeEnable10 = false;
-								mergeEnable11 = false;
-								mergeEnable12 = false;
-							}
-						}
-						
-						//3.'akar'-'mo'-'shorea'
-						if(akar.getX() - mo.getX() > 90
-								&& akar.getX() - mo.getX() < 110
-								&& akar.getY() - mo.getY() < 25
-								&& akar.getY() - mo.getY() > -25
-								&&
-								mo.getX() - shorea.getX() > 90
-								&& mo.getX() - shorea.getX() < 110
-								&& mo.getY() - shorea.getY() < 25
-								&& mo.getY() - shorea.getY() > -25)
-						{ 
-							if(mo.getX() + 100 == akar.getX() && mo.getX() == shorea.getX() + 100)
-							{
-								 if(Scissor.collidesWith(akar) && Scissor.collidesWith(mo))
-								 {
-									 mergeEnable9 = false;
-									 mergeEnable2 = false;
-								 }
-								 else if(Scissor.collidesWith(shorea) && Scissor.collidesWith(mo))
-								 {
-									 mergeEnable9 = false;
-									 mergeEnable3 = false;
-								 } 
-							}
-							else
-							{
-								//play sound on join
-								soundFunction.audioPlay = true;
-								soundFunction.playAudioLoop3(R.raw.akar, R.raw.shorea, R.raw.mo);
-								
-								mergeEnable1 = false;
-								mergeEnable2 = false;
-								mergeEnable3 = false;
-								mergeEnable4 = false;
-								mergeEnable5 = false;
-								mergeEnable6 = false;
-								mergeEnable7 = false;
-								mergeEnable8 = false;
-								mergeEnable9 = true;
-								mergeEnable10 = false;
-								mergeEnable11 = false;
-								mergeEnable12 = false;
-							}
-						}
-						
-						//4.'mo'-'akar'-'shorea'
-						if(akar.getX() - mo.getX() > 90
-								&& akar.getX() - mo.getX() < 110
-								&& akar.getY() - mo.getY() < 25
-								&& akar.getY() - mo.getY() > -25
-								&&
-								shorea.getX() - akar.getX() > 90
-								&& shorea.getX() - akar.getX() < 110
-								&& shorea.getY() - akar.getY() < 25
-								&& shorea.getY() - akar.getY() > -25)
-						{ 
-							if(mo.getX() + 100 == akar.getX() && akar.getX() + 100 == shorea.getX())
-							{
-								 if(Scissor.collidesWith(akar) && Scissor.collidesWith(mo))
-								 {
-									 mergeEnable10 = false;
-									 mergeEnable2 = false;
-								 }
-								 else if(Scissor.collidesWith(shorea) && Scissor.collidesWith(akar))
-								 {
-									 mergeEnable10 = false;
-									 mergeEnable6 = false;
-								 } 
-							}
-							else
-							{
-								//play sound on join
-								soundFunction.audioPlay = true;
-								soundFunction.playAudioLoop3(R.raw.mo, R.raw.akar, R.raw.shorea);
-							
-								mergeEnable1 = false;
-								mergeEnable2 = false;
-								mergeEnable3 = false;
-								mergeEnable4 = false;
-								mergeEnable5 = false;
-								mergeEnable6 = false;
-								mergeEnable7 = false;
-								mergeEnable8 = false;
-								mergeEnable9 = false;
-								mergeEnable10 = true;
-								mergeEnable11 = false;
-								mergeEnable12 = false;
-							}
-						}
-						
-						//5.'mo'-'shorea'-'akar'
-						if(shorea.getX() - mo.getX() > 90
-								&& shorea.getX() - mo.getX() < 110
-								&& shorea.getY() - mo.getY() < 25
-								&& shorea.getY() - mo.getY() > -25
-								&&
-								akar.getX() - shorea.getX() > 90
-								 && akar.getX() - shorea.getX() < 110
-								 && akar.getY() - shorea.getY() < 25
-								 && akar.getY() - shorea.getY() > -25)
-						{ 
-							if(mo.getX() + 100 == shorea.getX() && akar.getX() == shorea.getX() + 100)
-							{
-								 if(Scissor.collidesWith(mo) && Scissor.collidesWith(shorea))
-								 {
-									 mergeEnable11 = false;
-									 mergeEnable4 = false;
-								 }
-								 else if(Scissor.collidesWith(shorea) && Scissor.collidesWith(akar))
-								 {
-									 mergeEnable11 = false;
-									 mergeEnable5 = false;
-								 } 
-							}
-							else
-							{
-								//play sound on join
-								soundFunction.audioPlay = true;
-								soundFunction.playAudioLoop3(R.raw.mo, R.raw.shorea, R.raw.akar);
-								
-								mergeEnable1 = false;
-								mergeEnable2 = false;
-								mergeEnable3 = false;
-								mergeEnable4 = false;
-								mergeEnable5 = false;
-								mergeEnable6 = false;
-								mergeEnable7 = false;
-								mergeEnable8 = false;
-								mergeEnable9 = false;
-								mergeEnable10 = false;
-								mergeEnable11 = true;
-								mergeEnable12 = false;
-							}
-						}
-						
-						//6.'akar'-'mo'-'shorea'
-						if(mo.getX() - akar.getX() > 90
-								&& mo.getX() - akar.getX() < 110
-								&& mo.getY() - akar.getY() < 25
-								&& mo.getY() - akar.getY() > -25
-								&&
-								shorea.getX() - mo.getX() > 90
-								&& shorea.getX() - mo.getX() < 110
-								&& shorea.getY() - mo.getY() < 25
-								&& shorea.getY() - mo.getY() > -25)
-						{
-							if(mo.getX() == akar.getX() + 100 && mo.getX() + 100 == shorea.getX())
-							{
-								 if(Scissor.collidesWith(mo) && Scissor.collidesWith(shorea))
-								 {
-									 mergeEnable12 = false;
-									 mergeEnable4 = false;
-								 }
-								 else if(Scissor.collidesWith(akar) && Scissor.collidesWith(mo))
-								 {
-									 mergeEnable12 = false;
-									 mergeEnable1 = false;
-								 } 
-							}
-							else
-							{
-								//play sound on join
-								soundFunction.audioPlay = true;
-								soundFunction.playAudioLoop3(R.raw.akar, R.raw.mo, R.raw.shorea);
-								
-								mergeEnable1 = false;
-								mergeEnable2 = false;
-								mergeEnable3 = false;
-								mergeEnable4 = false;
-								mergeEnable5 = false;
-								mergeEnable6 = false;
-								mergeEnable7 = false;
-								mergeEnable8 = false;
-								mergeEnable9 = false;
-								mergeEnable10 = false;
-								mergeEnable11 = false;
-								mergeEnable12 = true;
-							}
-						}
+			return true;
+		}
+		else if (akar.getX() - mo.getX() > 105 && akar.getX() - mo.getX() < 180 && akar.getY() - mo.getY() < 25 && akar.getY() - mo.getY() > -25) 
+		{
+			return true;
+		}
+		return false;
+		
+	}
+	public void loadHomeButton(){
+		buttonHome = new Sprite(10, 10, ButtonHomeTextureReason,vobm){
+			@Override
+			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent,
+					final float pTouchAreaLocalX, final float pTouchAreaLocalY) {
+				// Log.d("TitledImage", "Before ");
+				switch (pSceneTouchEvent.getAction()) {
+				case TouchEvent.ACTION_DOWN: {
+					
+						finish();
+						startActivity(new Intent(getBaseContext(), GameMainPage.class));
+					
+						break;
 					}
-				}));
-
-		// Bangla Letter 'Akar'
-		akar = new Letter1(centerX, centerY, this.mAkarTextureRegion, getVertexBufferObjectManager());
-		mScene.registerTouchArea(akar);
-		mScene.attachChild(akar);
+					case TouchEvent.ACTION_MOVE: {
+						
+						break;
+					}
+					case TouchEvent.ACTION_UP: {
+						MainActivity.mCurrentScene.detachChild(buttonHome);
+						break;
+					}
+					default: {
 		
-		// Bangla Letter 'MO'
-		mo = new Letter2(centerX + 200, centerY, this.mMOTextureRegion, getVertexBufferObjectManager());
-		mScene.registerTouchArea(mo);
-		mScene.attachChild(mo);
-		
-		// Bangla Letter 'shorea'
-		shorea = new Letter3(centerX, centerY+200, this.mShoreaTextureRegion, getVertexBufferObjectManager());
-		mScene.registerTouchArea(shorea);
-		mScene.attachChild(shorea);
-
-		// Scissor
-		Scissor = new Scissor(MainActivity.CAMERA_WIDTH - MainActivity.CAMERA_WIDTH/5, MainActivity.CAMERA_HEIGHT - MainActivity.CAMERA_HEIGHT/4,
-		mScissorTextureRegion, getVertexBufferObjectManager());
-		mScene.registerTouchArea(Scissor);
-		mScene.attachChild(Scissor);
-		Scissor.setWidth((float) (80));
-		Scissor.setHeight(87);
-		
-		return mScene;
+					}
+				}
+				return true;
+			}
+		};
+		buttonHome.setWidth(70f);
+		buttonHome.setHeight(70f);
+		mCurrentScene.registerTouchArea(buttonHome);
+		mCurrentScene.attachChild(buttonHome);
 	}
 	
 	
-	@Override
-	protected void onDestroy()
-	{
-		super.onDestroy();
-		
-		if(soundFunction.mediaPlayer!= null)
-		{
-			soundFunction.mediaPlayer.release();
-			soundFunction.mediaPlayer = null;
-		}
-		
-		if(soundFunction.mediaPlayer1!= null)
-		{
-			soundFunction.mediaPlayer1.release();
-			soundFunction.mediaPlayer1 = null;
-		}
-		
-		if(soundFunction.mediaPlayer2!= null)
-		{
-			soundFunction.mediaPlayer2.release();
-			soundFunction.mediaPlayer2 = null;
-		}
+	public static void updatePos(Spriteobject s, int x, int y) {
+	    s.updatePosition(x, y);
 	}
-		
+	public static BaseActivity getSharedInstance() {
+	    return instance;
+	}
+	 
+	// to change the current main scene
+	public void setCurrentScene(Scene scene) {
+	    mCurrentScene = scene;
+	    getEngine().setScene(mCurrentScene);
+	}
+	 
+
 }

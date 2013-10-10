@@ -25,6 +25,7 @@ import com.example.phonicsapp.boxGame.BoxGameActivity;
 import com.example.phonicsapp.monkeyGame.MonkeyGameActivity;
 import com.example.phonicsapp.wordbuilder.MainActivity;
 
+import StatusBarController.StatusBar;
 import android.content.Context;
 import android.content.Intent;
 import android.view.Display;
@@ -67,6 +68,7 @@ public class GameMainPage extends SimpleBaseGameActivity
 		Display display = getWindowManager().getDefaultDisplay();
 		CAMERA_HEIGHT = display.getHeight();
 		CAMERA_WIDTH = display.getWidth();
+		StatusBar.showStatusBar();
 		
 		mCamera = new Camera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
 		

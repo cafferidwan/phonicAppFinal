@@ -27,8 +27,11 @@ import org.andengine.util.color.Color;
 import org.andengine.util.debug.Debug;
 import org.andengine.util.modifier.ease.EaseSineInOut;
 import StatusBarController.StatusBar;
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.view.Display;
+
+import com.example.phonicsapp.GameMainPage;
 import com.example.phonicsapp.R;
 
 
@@ -73,7 +76,7 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 	
 	public static ITextureRegion mFaceTextureRegionM1, mFaceTextureRegionM2;
 	
-	static float mFaceCount = -120;
+	static float mFaceCount = -60;
 
 	public static int aCount = 0;
 	public static int randomItem, randomItem1;
@@ -130,15 +133,15 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 	{
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("monkeyGameGfx/");
 		
-		mBitmapAtlas = new BitmapTextureAtlas(getTextureManager(), 1800, 964,TextureOptions.BILINEAR_PREMULTIPLYALPHA);
-		mTexture = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapAtlas, getAssets(), "bg_1.png", 0, 0);
+		mBitmapAtlas = new BitmapTextureAtlas(getTextureManager(), 1600, 864,TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+		mTexture = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapAtlas, getAssets(), "bg-1.png", 0, 0);
 
 		mBitmapTextureAtlasMoi = new BitmapTextureAtlas(getTextureManager(), 120, 120, TextureOptions.BILINEAR);
 		mBitmapTextureAtlasMama = new BitmapTextureAtlas(getTextureManager(), 120, 120);
 		mBitmapTextureAtlasTala = new BitmapTextureAtlas(getTextureManager(), 120, 120);
 		mBitmapTextureAtlasLangol = new BitmapTextureAtlas(getTextureManager(), 120, 120);
 		mBitmapTextureAtlasBanana = new BitmapTextureAtlas(getTextureManager(), 200, 200);
-		mBitmapTextureAtlasMegh = new BitmapTextureAtlas(getTextureManager(), 220, 220);
+		mBitmapTextureAtlasMegh = new BitmapTextureAtlas(getTextureManager(), 120, 120);
 		mBitmapTextureAtlasMohis = new BitmapTextureAtlas(getTextureManager(), 120, 120);
 		
 		mBitmapTextureAtlasM1 = new BitmapTextureAtlas(getTextureManager(), 208, 682, TextureOptions.BILINEAR_PREMULTIPLYALPHA );
@@ -148,8 +151,8 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 		mFaceTextureRegionMama = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasMama, this, "mama-2.png",0,0);
 		mFaceTextureRegionTala = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasTala, this, "tala.png",0,0);
 		mFaceTextureRegionLangol = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasLangol, this, "langol.png",0,0);
-		mFaceTextureRegionBanana = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasBanana, this, "banana.png",0,0);
-		mFaceTextureRegionMegh = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasMegh, this, "megh.png",0,0);
+		mFaceTextureRegionBanana = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasBanana, this, "banana-1.png",0,0);
+		mFaceTextureRegionMegh = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasMegh, this, "megh-2.png",0,0);
 		mFaceTextureRegionMohis = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasMohis, this, "mohis-2.png",0,0);
 		
 		
@@ -381,7 +384,7 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 
 	public void addFace(final float pX, final float pY) 
 	{
-		distance = (float) (CAMERA_WIDTH/5.1 )-3;
+		distance = (float) (CAMERA_WIDTH/5.3 )-5;
 		mFaceCount = mFaceCount+distance;
 		aCount = aCount+1;
 		bananaValue = 0;
@@ -411,8 +414,8 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 			mScene.attachChild(position[aCount]);
 			mScene.registerTouchArea(position[aCount]);
 			
-			position[aCount].setWidth(ImageWidthObjects);
-			position[aCount].setHeight(ImageHeightObjects);
+			position[aCount].setWidth(80);
+			position[aCount].setHeight(80);
 			final Path bananaPath = new Path(2).to(CAMERA_WIDTH/2, -100).to(mFaceCount, CAMERA_HEIGHT - CAMERA_HEIGHT/3 + 30 );
 			
 				position[aCount].registerEntityModifier(new PathModifier((float) 1, bananaPath, null, new IPathModifierListener() {
@@ -528,7 +531,10 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 	public void startActivity()
 	{
 		activity.finish();
-		//activity.startActivity(new Intent(activity, MonkeyGameActivity.class));
+		mFaceCount = -60;
+		aCount = 0;
+		
+		activity.startActivity(new Intent(activity, GameMainPage.class));
 	}
 	
 	//Audio play Function
