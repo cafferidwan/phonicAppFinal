@@ -145,7 +145,7 @@ public class GameMainPage extends SimpleBaseGameActivity
 		backGround.setWidth(CAMERA_WIDTH);
 		mScene.attachChild(backGround);
 		
-		parrot = new Sprite(CAMERA_WIDTH/5-200, CAMERA_HEIGHT/2-150, mParrotTextureRegion, getVertexBufferObjectManager())
+		parrot = new Sprite(0, CAMERA_HEIGHT/2-150, mParrotTextureRegion, getVertexBufferObjectManager())
 		{
 			@Override
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY)

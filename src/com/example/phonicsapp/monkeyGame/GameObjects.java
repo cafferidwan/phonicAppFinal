@@ -193,8 +193,8 @@ public class GameObjects
 		MonkeyGameActivity.megh = new Sprite(0, 50, MonkeyGameActivity.mFaceTextureRegionMegh, MonkeyGameActivity.vbo);
 		MonkeyGameActivity.mScene.attachChild(MonkeyGameActivity.megh);
 		MonkeyGameActivity.mScene.registerTouchArea(MonkeyGameActivity.megh);
-		MonkeyGameActivity.megh.setWidth(MonkeyGameActivity.ImageWidthObjects);
-		MonkeyGameActivity.megh.setHeight(MonkeyGameActivity.ImageHeightObjects);
+		MonkeyGameActivity.megh.setWidth(140);
+		MonkeyGameActivity.megh.setHeight(77);
 		
 		final Path meghPath = new Path(2).to(ax, ay ).to(bx, by);
 		

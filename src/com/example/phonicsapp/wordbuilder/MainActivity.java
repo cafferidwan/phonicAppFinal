@@ -169,7 +169,7 @@ public class MainActivity extends SimpleBaseGameActivity {
 		sp3a = new sprite3(CAMERA_WIDTH - 350, CAMERA_HEIGHT - 150, 100f, 100f, Letter1TextureReason, getVertexBufferObjectManager(),1,R.raw.aakar,getApplicationContext());
 		sp3b = new sprite3(CAMERA_WIDTH - 500, CAMERA_HEIGHT - 150, 100f, 100f, Letter2TextureReason, getVertexBufferObjectManager(),1,R.raw.shoroa,getApplicationContext());
 		sp3c = new sprite3(CAMERA_WIDTH - 650, CAMERA_HEIGHT - 150, 100f, 100f, Letter3TextureReason, getVertexBufferObjectManager(),1,R.raw.mo,getApplicationContext());
-		sp3d = new sprite3(CAMERA_WIDTH - 120, CAMERA_HEIGHT - 120, 120f, 120f, KachiTextureReason, getVertexBufferObjectManager(),1,0,getApplicationContext());
+		sp3d = new sprite3(CAMERA_WIDTH - 150, CAMERA_HEIGHT - 150, 200f, 100f, KachiTextureReason, getVertexBufferObjectManager(),1,0,getApplicationContext());
 		c1 = new CharactorObject(CAMERA_WIDTH/2 - 150, CAMERA_HEIGHT/2 - 200, 170f, 200f, MaTextureReason, getVertexBufferObjectManager(),R.raw.ma);
 		cAmm = new CharactorObject(CAMERA_WIDTH/2 - 150, CAMERA_HEIGHT/2 - 200, 170f, 170f, AmmTextureReason, getVertexBufferObjectManager(),R.raw.aam1);
 		//buttonHome= new CharactorObject(10,10, 50f, 50f, ButtonHomeTextureReason, getVertexBufferObjectManager(),0);

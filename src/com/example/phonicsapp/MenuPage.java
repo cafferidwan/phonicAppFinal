@@ -20,7 +20,7 @@ public class MenuPage extends Scene
 		//instance = StartingPage.getSharedInstances();
 		
 		
-		GameMainPage.mo = new Sprite(30, 10, GameMainPage.mMoTextureRegion, GameMainPage.vertexBufferObjectManager)
+		GameMainPage.mo = new Sprite(GameMainPage.CAMERA_WIDTH/18, GameMainPage.CAMERA_HEIGHT/18, GameMainPage.mMoTextureRegion, GameMainPage.vertexBufferObjectManager)
 		{
 			@Override
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY)
@@ -43,8 +43,8 @@ public class MenuPage extends Scene
 				return true;
 			}
 		};
-		GameMainPage.mo.setHeight(100);
-		GameMainPage.mo.setWidth(100);
+		GameMainPage.mo.setHeight(GameMainPage.CAMERA_HEIGHT/5);
+		GameMainPage.mo.setWidth(GameMainPage.CAMERA_WIDTH/9);
 		registerTouchArea(GameMainPage.mo);
 		attachChild(GameMainPage.mo);
 		
