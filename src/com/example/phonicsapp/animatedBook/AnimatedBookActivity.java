@@ -155,7 +155,7 @@ public class AnimatedBookActivity extends SimpleBaseGameActivity
 		PineappleTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(LetterBuildableBitmapTextureAtlas, this, "grp1/pineapple.png");
 		PotatoTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(LetterBuildableBitmapTextureAtlas, this, "grp1/potato.png");
 		SkyTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(LetterBuildableBitmapTextureAtlas, this, "grp1/sky.png");
-		NextTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(LetterBuildableBitmapTextureAtlas, this, "arrow_right.png");
+		NextTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(LetterBuildableBitmapTextureAtlas, this, "a.png");
 		
 		//Letter Group 2 Moo
 		Letter2BuildableBitmapTextureAtlas = new BuildableBitmapTextureAtlas(getTextureManager(), 1200, 800,TextureOptions.DEFAULT);
@@ -164,7 +164,7 @@ public class AnimatedBookActivity extends SimpleBaseGameActivity
 		MulaTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter2BuildableBitmapTextureAtlas, this, "grp2/mula.png");
 		MeghTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter2BuildableBitmapTextureAtlas, this, "grp2/megh.png");
 		MoiTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter2BuildableBitmapTextureAtlas, this, "grp2/moi.png");
-		MohisTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter2BuildableBitmapTextureAtlas, this, "grp2/mohis.png");
+		MohisTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(Letter2BuildableBitmapTextureAtlas, this, "grp2/mohish.png");
 		
 		//Letter Group 3 Taa 
 		Letter3BuildableBitmapTextureAtlas = new BuildableBitmapTextureAtlas(getTextureManager(), 1300, 800,TextureOptions.DEFAULT);
@@ -201,8 +201,8 @@ public class AnimatedBookActivity extends SimpleBaseGameActivity
 		LetterToTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(LetterAllBuildableBitmapTextureAtlas, this, "grp3/letter_to.png");
 		LetterAaaTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(LetterAllBuildableBitmapTextureAtlas, this, "grp1/letter_aa.png");
 		
-		ParrotBitmapTextureAtlus = new BitmapTextureAtlas(getTextureManager(), 900, 228,TextureOptions.DEFAULT);
-		ParrotTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(ParrotBitmapTextureAtlus, this, "sprite_parrot4.png",0,0,8,2);
+		ParrotBitmapTextureAtlus = new BitmapTextureAtlas(getTextureManager(), 3000, 1015,TextureOptions.DEFAULT);
+		ParrotTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(ParrotBitmapTextureAtlus, this, "sprite_parrot4.png",0,0,6,2);
 		
 		
 		try
@@ -367,6 +367,7 @@ public class AnimatedBookActivity extends SimpleBaseGameActivity
 		mMainScene.registerTouchArea(NextSprite);
 		mMainScene.attachChild(NextSprite);
 		mMainScene.attachChild(p1.mLetter);
+		mMainScene.sortChildren();
 	}
 	void createNextArrow(float pX, float pY, float pWidth, float pHeight,ITextureRegion pTextureRegion, int voice)
 	{

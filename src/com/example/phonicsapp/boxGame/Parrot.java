@@ -36,7 +36,7 @@ public class Parrot extends AnimatedSprite
 			case TouchEvent.ACTION_DOWN:
 			
 				Functions.audioPlay = true;
-				Functions.playAudio(R.raw.mo);
+				Functions.playAudio(R.raw.parrot_intro);
 				
 			break;
 			
@@ -55,11 +55,11 @@ public class Parrot extends AnimatedSprite
 	static void parrotPath() 
 	{
 		
-		MoveModifier mMod = new MoveModifier(4.0f, BoxGameActivity.CAMERA_WIDTH , BoxGameActivity.CAMERA_WIDTH - 250, 
-				BoxGameActivity.CAMERA_HEIGHT / 2 -30, BoxGameActivity.CAMERA_HEIGHT / 2 - 140);
+		MoveModifier mMod = new MoveModifier(4, BoxGameActivity.CAMERA_WIDTH , BoxGameActivity.CAMERA_WIDTH - 200, 
+				BoxGameActivity.CAMERA_HEIGHT / 2 -200, BoxGameActivity.CAMERA_HEIGHT / 2 - 200);
 		
-		MoveModifier mModLetter = new MoveModifier(4.0f, BoxGameActivity.CAMERA_WIDTH + 200,BoxGameActivity.CAMERA_WIDTH - 210,
-				BoxGameActivity.CAMERA_HEIGHT / 2 + 100, BoxGameActivity.CAMERA_HEIGHT / 2 - 10);
+		MoveModifier mModLetter = new MoveModifier(4, BoxGameActivity.CAMERA_WIDTH  ,BoxGameActivity.CAMERA_WIDTH - 180,
+				BoxGameActivity.CAMERA_HEIGHT / 2 -80, BoxGameActivity.CAMERA_HEIGHT / 2 - 80);
 		
 		DelayModifier dMod = new DelayModifier((float) 0.1,new IEntityModifierListener()
 		{

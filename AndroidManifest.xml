@@ -30,6 +30,11 @@
             android:label="@string/app_name" >
             
         </activity>
+         <activity 
+            android:name="com.example.phonicsapp.wordbuilder.MainActivity"
+            android:label="@string/app_name" >
+            
+        </activity>
         
         <activity 
             android:name="com.example.phonicsapp.boxGame.BoxGameActivity"

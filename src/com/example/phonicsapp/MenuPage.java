@@ -43,12 +43,13 @@ public class MenuPage extends Scene
 				return true;
 			}
 		};
-		GameMainPage.mo.setHeight((float)(GameMainPage.CAMERA_HEIGHT/4.5));
-		GameMainPage.mo.setWidth((float) (GameMainPage.CAMERA_WIDTH/8.3));
+		GameMainPage.mo.setHeight(100);
+		GameMainPage.mo.setWidth(100);
 		registerTouchArea(GameMainPage.mo);
 		attachChild(GameMainPage.mo);
 		
 	}
+	
 	
 	
 }

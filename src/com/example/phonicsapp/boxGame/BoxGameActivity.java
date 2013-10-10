@@ -90,31 +90,31 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 		CAMERA_HEIGHT = display.getHeight();
 		CAMERA_WIDTH = display.getWidth();
 		
-		ImageHight = CAMERA_HEIGHT/4.5f;
-		ImageWidth = CAMERA_WIDTH/6.5f;
+		ImageHight = 120;
+		ImageWidth = 120;
 		
 		mulaX = CAMERA_WIDTH/2 - CAMERA_WIDTH/4;
 		mulaY =	CAMERA_HEIGHT/2 - CAMERA_HEIGHT/4;
 		
-		mamaX = CAMERA_WIDTH/2 - CAMERA_WIDTH/4;
-		mamaY =	CAMERA_HEIGHT - CAMERA_HEIGHT/4;
+		mamaX = CAMERA_WIDTH/2 - CAMERA_WIDTH/3;
+		mamaY =	CAMERA_HEIGHT-130;
 		
-		kolaX = 50;
-		kolaY = CAMERA_HEIGHT-CAMERA_HEIGHT/4;
+		kolaX = 35;
+		kolaY = CAMERA_HEIGHT-130;
 		
 		maX = 50;
 		maY = CAMERA_HEIGHT/2 - CAMERA_HEIGHT/4;
 		
 		mohisX = CAMERA_WIDTH - 150;
-		mohisY = CAMERA_HEIGHT/2;
+		mohisY = CAMERA_HEIGHT-130;
 		
-		keramBoardX = CAMERA_WIDTH - CAMERA_WIDTH/4 -50;
+		keramBoardX = CAMERA_WIDTH - CAMERA_WIDTH/4 -95;
 		keramBoardY = CAMERA_HEIGHT-130;
 		
-		meghX = CAMERA_WIDTH - 150;
-		meghY = CAMERA_HEIGHT-CAMERA_HEIGHT/4;
+		meghX =  CAMERA_WIDTH/2 + 40;
+		meghY = CAMERA_HEIGHT/4;
 		
-		moiX = CAMERA_WIDTH/2;
+		moiX = CAMERA_WIDTH/2-90;
 		moiY = CAMERA_HEIGHT/2 - CAMERA_HEIGHT/4;
 		
 		mCamera = new Camera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
@@ -130,7 +130,7 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("BoxGameGfx/");
 
 		this.mBitmapTextureAtlas = new BuildableBitmapTextureAtlas(
-				this.getTextureManager(), 1600, 1200);
+				this.getTextureManager(), 1800, 1400);
 
 		BoxGameActivity.mbackGroundTextureRegion = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(this.mBitmapTextureAtlas, this, "JungleBG.png");
@@ -140,13 +140,13 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 				.createFromAsset(this.mBitmapTextureAtlas, this, "kola-1.png");
 		
 		BoxGameActivity.mMaTextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "ma-2.png");
+				.createFromAsset(this.mBitmapTextureAtlas, this, "ma.png");
 		BoxGameActivity.mMohisTextureRegion = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(this.mBitmapTextureAtlas, this, "mohis-2.png");
 		BoxGameActivity.mKeramBoardTextureRegion = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(this.mBitmapTextureAtlas, this, "keramBoard1.png");
 		BoxGameActivity.mMeghTextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "megh-2.png");
+				.createFromAsset(this.mBitmapTextureAtlas, this, "megh.png");
 		BoxGameActivity.mMoiTextureRegion = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(this.mBitmapTextureAtlas, this, "moi-2.png");
 		BoxGameActivity.mMamaTextureRegion = BitmapTextureAtlasTextureRegionFactory
@@ -159,9 +159,9 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 		BoxGameActivity.mBox2TextureRegion = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(this.mBitmapTextureAtlas, this, "box-16.png");
 		
-		mAnimatedBitmapTextureAtlas = new BuildableBitmapTextureAtlas(this.getTextureManager(), 1000, 554, TextureOptions.NEAREST);
+		mAnimatedBitmapTextureAtlas = new BuildableBitmapTextureAtlas(this.getTextureManager(), 3000, 1015, TextureOptions.NEAREST);
 		BoxGameActivity.mParrotTextureRegion = BitmapTextureAtlasTextureRegionFactory.
-				createTiledFromAsset(this.mAnimatedBitmapTextureAtlas, this, "p5.png", 5, 2);
+				createTiledFromAsset(this.mAnimatedBitmapTextureAtlas, this, "parrot.png", 6, 2);
 		try 
 		{
 			this.mBitmapTextureAtlas.build(new BlackPawnTextureAtlasBuilder<IBitmapTextureAtlasSource,
@@ -343,53 +343,45 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 		mScene.attachChild(closedBox);
 		closedBox.setVisible(true);
 		
-		parrot = new Parrot(BoxGameActivity.CAMERA_WIDTH+500, BoxGameActivity.CAMERA_HEIGHT/2-50, mParrotTextureRegion, this.getVertexBufferObjectManager());
-		parrot.animate(new long[]{150, 150, 150, 150, 150, 150, 150, 150, 150, 150}, 0, 9, true);
-		parrot.setFlippedHorizontal(true);
-		parrot.setWidth(ImageWidth*1.5f);
-		parrot.setHeight(ImageHight*1.5f);
-		mScene.registerTouchArea(parrot);
-		mScene.attachChild(parrot);
-		
 		mama = new Objects(mamaX, mamaY, mMamaTextureRegion, getVertexBufferObjectManager());
-		mama.setWidth(ImageWidth);
-		mama.setHeight(ImageHight);
+//		mama.setWidth(ImageWidth);
+//		mama.setHeight(ImageHight);
 		mScene.registerTouchArea(mama);
 		mScene.attachChild(mama);
 		
 		kola = new Objects(kolaX, kolaY, mKolaTextureRegion, getVertexBufferObjectManager());
-		kola.setWidth(ImageWidth);
-		kola.setHeight(ImageHight);
+//		kola.setWidth(ImageWidth);
+//		kola.setHeight(ImageHight);
 		mScene.registerTouchArea(kola);
 		mScene.attachChild(kola);
 		
 		mula = new Objects(mulaX, mulaY, mMulaTextureRegion, getVertexBufferObjectManager());
-		mula.setWidth(ImageWidth);
-		mula.setHeight(ImageHight);
+//		mula.setWidth(ImageWidth);
+//		mula.setHeight(ImageHight);
 		mScene.registerTouchArea(mula);
 		mScene.attachChild(mula);
 		
 		ma = new Objects(maX, maY, mMaTextureRegion, getVertexBufferObjectManager());
-		ma.setWidth(ImageWidth);
-		ma.setHeight(ImageHight);
+//		ma.setWidth(ImageWidth);
+//		ma.setHeight(ImageHight);
 		mScene.registerTouchArea(ma);
 		mScene.attachChild(ma);
 		
 		mohis = new Objects(mohisX, mohisY, mMohisTextureRegion, getVertexBufferObjectManager());
-		mohis.setWidth(ImageWidth);
-		mohis.setHeight(ImageHight);
+//		mohis.setWidth(ImageWidth);
+//		mohis.setHeight(ImageHight);
 		mScene.registerTouchArea(mohis);
 		mScene.attachChild(mohis);
 		
 		keramBoard = new Objects(keramBoardX, keramBoardY, mKeramBoardTextureRegion, getVertexBufferObjectManager());
-		keramBoard.setWidth(ImageWidth);
-		keramBoard.setHeight(ImageHight);
+//		keramBoard.setWidth(ImageWidth);
+//		keramBoard.setHeight(ImageHight);
 		mScene.registerTouchArea(keramBoard);
 		mScene.attachChild(keramBoard);
 		
 		megh = new Objects(meghX, meghY, mMeghTextureRegion, getVertexBufferObjectManager());
-		megh.setWidth(ImageWidth);
-		megh.setHeight(ImageHight);
+//		megh.setWidth(ImageWidth);
+//		megh.setHeight(ImageHight);
 		mScene.registerTouchArea(megh);
 		mScene.attachChild(megh);
 		
@@ -415,9 +407,17 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 				return true;
 			}
 		};
-		mo.setHeight(60);
-		mo.setWidth(60);
+		mo.setHeight(80);
+		mo.setWidth(80);
 		mScene.attachChild(mo);
+		
+		parrot = new Parrot(BoxGameActivity.CAMERA_WIDTH+500, BoxGameActivity.CAMERA_HEIGHT/2-50, mParrotTextureRegion, this.getVertexBufferObjectManager());
+		parrot.animate(new long[]{100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100}, 0, 11, true);
+		parrot.setFlippedHorizontal(true);
+		parrot.setWidth(ImageWidth*1.5f);
+		parrot.setHeight(ImageHight*1.5f);
+		mScene.registerTouchArea(parrot);
+		mScene.attachChild(parrot);
 		
 		Parrot.parrotPath();
 		

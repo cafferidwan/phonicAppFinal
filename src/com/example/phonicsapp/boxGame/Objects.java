@@ -100,6 +100,26 @@ public class Objects extends Sprite
 						Functions.playAudio(R.raw.mama);
 					}
 				}
+				else if(pSceneTouchEvent.getX()- this.getWidth()/2 == BoxGameActivity.keramBoard.getX() && 
+						pSceneTouchEvent.getY()- this.getHeight()/2 == BoxGameActivity.keramBoard.getY())
+				{
+					i++;
+					if(i==1)
+					{
+						Functions.audioPlay = true;
+						Functions.playAudio(R.raw.keram);
+					}
+				}
+				else if(pSceneTouchEvent.getX()- this.getWidth()/2 == BoxGameActivity.kola.getX() && 
+						pSceneTouchEvent.getY()- this.getHeight()/2 == BoxGameActivity.kola.getY())
+				{
+					i++;
+					if(i==1)
+					{
+						Functions.audioPlay = true;
+						Functions.playAudio(R.raw.kola);
+					}
+				}
 				
 				
 				break;

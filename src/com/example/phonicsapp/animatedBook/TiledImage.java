@@ -1,5 +1,8 @@
 package com.example.phonicsapp.animatedBook;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import org.andengine.entity.Entity;
 import org.andengine.entity.IEntity;
 import org.andengine.entity.modifier.DelayModifier;
@@ -15,15 +18,16 @@ import org.andengine.util.modifier.IModifier;
 import com.example.phonicsapp.R;
 import android.content.Context;
 import android.media.MediaPlayer;
+import android.os.Handler;
+import android.util.Log;
 
 public class TiledImage extends Sprite
-{
-	
+{	
 	Sprite Letter,s;
 	IEntity en ;
 	static boolean audioPlay= false;
-	static int ObjNo=1, audioPlayCount=0;
-	static float APPEARING_TIME=3f;
+	static int ObjNo=0, audioPlayCount=0,anotherCounter = 0;
+	static float APPEARING_TIME=3f, anotherDelay;
 	static MediaPlayer mediaPlayer;
 	static Context con;
 	int audio;
@@ -87,12 +91,42 @@ public class TiledImage extends Sprite
 	
 	void AnimateImage() 
 	{
-		DelayModifier dMod = new DelayModifier(ObjNo * 6,new IEntityModifierListener()
+		Log.d("TiledImage", "ObjNo: "+ObjNo);
+		if(ObjNo == 2){
+			anotherDelay = 10.0f;
+			//anotherCounter=1; 
+		}
+		else if(ObjNo == 3){ 
+			anotherDelay = 12.1f; 
+			//anotherCounter=1; 
+		}
+		else if(ObjNo == 4){ 
+			anotherDelay = 14.1f; 
+			//anotherCounter=1; 
+		}
+		else if(ObjNo == 5){ 
+			anotherDelay = 16.1f; 
+			//anotherCounter=1; 
+		}
+		else if(ObjNo == 6){ 
+			anotherDelay = 18.1f; 
+			//anotherCounter=1; 
+		}
+		else if(ObjNo == 7){ 
+			anotherDelay = 20.1f; 
+			//anotherCounter=1; 
+		}
+		else{
+			anotherDelay = 22.3f;
+		}
+		Log.d("TiledImage", "ObjNo: "+ObjNo + " anotherDelay: "+ anotherDelay +" total: "+ ObjNo*anotherDelay);
+		
+		DelayModifier dMod = new DelayModifier(anotherDelay,new IEntityModifierListener()
 		{
 					@Override
 					public void onModifierStarted(IModifier<IEntity> arg0,
 							IEntity arg1)
-					{
+					{ 
 						
 					}
 

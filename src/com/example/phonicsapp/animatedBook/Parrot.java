@@ -57,7 +57,10 @@ public class Parrot extends AnimatedSprite
 				case TouchEvent.ACTION_UP: 
 				{
 					TiledImage.audioPlay = true;
-					TiledImage.playAudio(R.raw.mo);
+					if(AnimatedBookActivity.ArrowTouchEnable){
+						TiledImage.playAudio(R.raw.mo);
+					}
+					
 					break;
 				}
 				default:
@@ -68,30 +71,35 @@ public class Parrot extends AnimatedSprite
 				return false;
 			}
 		};
-		parrotFlying.animate(new long[] { 200, 200, 200, 200, 200, 200, 200,
-				200 }, 0, 7, true);
+		parrotFlying.animate(new long[] {  100, 100, 100, 100,100, 100, 100, 100, 100, 100, 100,
+				100 }, 0, 11, true);
 		parrotFlying.setFlippedHorizontal(true);
 		parrotFlying.setHeight(AnimatedBookActivity.CAMERA_HEIGHT / 2);
 		parrotFlying.setWidth(AnimatedBookActivity.CAMERA_WIDTH / 4);
-		mLetter.setHeight(AnimatedBookActivity.CAMERA_HEIGHT / 6);
-		mLetter.setWidth(AnimatedBookActivity.CAMERA_WIDTH / 8);
+		mLetter.setHeight(80);
+		mLetter.setWidth(80);
+		mLetter.setZIndex(3);
+		parrotFlying.setZIndex(5);
+		AnimatedBookActivity.mMainScene.sortChildren();
+		
 		loadMparrot();
 
 	}
 
 	void loadMparrot()
 	{
-		MoveModifier mMod = new MoveModifier(4.0f,
-				AnimatedBookActivity.CAMERA_WIDTH + 100,
-				AnimatedBookActivity.CAMERA_WIDTH - 250,
+		
+		MoveModifier mMod = new MoveModifier(4.0f,AnimatedBookActivity.CAMERA_WIDTH -10, AnimatedBookActivity.CAMERA_WIDTH - 250,
 				AnimatedBookActivity.CAMERA_HEIGHT / 10.55f,
 				AnimatedBookActivity.CAMERA_HEIGHT / 10.55f);
+		
 		MoveModifier mModLetter = new MoveModifier(4.0f,
-				AnimatedBookActivity.CAMERA_WIDTH + 100,
+				AnimatedBookActivity.CAMERA_WIDTH -10,
 				AnimatedBookActivity.CAMERA_WIDTH - 220,
-				AnimatedBookActivity.CAMERA_HEIGHT / 2.1f,
-				AnimatedBookActivity.CAMERA_HEIGHT / 2.1f);
-		DelayModifier dMod = new DelayModifier(1,
+				AnimatedBookActivity.CAMERA_HEIGHT / 2.4f,
+				AnimatedBookActivity.CAMERA_HEIGHT / 2.4f);
+		 
+		DelayModifier dMod = new DelayModifier(2.51f,
 				new IEntityModifierListener()
 		{
 
@@ -99,7 +107,25 @@ public class Parrot extends AnimatedSprite
 					public void onModifierStarted(IModifier<IEntity> arg0,
 							IEntity arg1)
 					{
+											
+					}
 
+					@Override
+					public void onModifierFinished(IModifier<IEntity> arg0,
+							IEntity arg1) 
+					{
+						
+					}
+				});
+		DelayModifier dMod1 = new DelayModifier(2.5f,
+				new IEntityModifierListener()
+		{
+
+					@Override
+					public void onModifierStarted(IModifier<IEntity> arg0,
+							IEntity arg1)
+					{
+								
 					}
 
 					@Override
@@ -110,11 +136,12 @@ public class Parrot extends AnimatedSprite
 						TiledImage.playAudio(R.raw.parrot_introducing_mo);
 					}
 				});
-		SequenceEntityModifier macch_sm = new SequenceEntityModifier(mMod, dMod);
-		SequenceEntityModifier mLetter_sm = new SequenceEntityModifier(mModLetter, dMod);
+		SequenceEntityModifier macch_sm = new SequenceEntityModifier(dMod1,mMod);
+		SequenceEntityModifier mLetter_sm = new SequenceEntityModifier(dMod,mModLetter);
 		
 		parrotFlying.registerEntityModifier(macch_sm);
 		mLetter.registerEntityModifier(mLetter_sm);
+			
 	}
 
 	void createNextArrow(float pX, float pY, float pWidth, float pHeight,
