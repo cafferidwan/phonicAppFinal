@@ -27,6 +27,9 @@ import org.andengine.util.color.Color;
 import org.andengine.util.debug.Debug;
 import org.andengine.util.modifier.ease.EaseSineInOut;
 import StatusBarController.StatusBar;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.DialogInterface.OnClickListener;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.view.Display;
@@ -176,6 +179,25 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 	}
 	
 	@Override
+	public void onBackPressed()
+	{
+	    new AlertDialog.Builder(this)
+	        .setTitle("Really Exit?")
+	        .setMessage("Are you sure you want to exit?")
+	        .setNegativeButton(android.R.string.no, null)
+	        .setPositiveButton(android.R.string.yes, new OnClickListener()
+	        {
+
+	            public void onClick(DialogInterface arg0, int arg1) 
+	            {
+	            	aCount = 0;
+					mFaceCount = -100; 
+	                MonkeyGameActivity.super.onBackPressed();
+	            }
+	        }).create().show();
+	}
+	
+	@Override
 	public Scene onCreateScene() 
 	{
 		/* Just a simple */
@@ -205,6 +227,18 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 				}
 			}
 		}));
+		 
+		mScene.registerUpdateHandler(new TimerHandler(3, true, new ITimerCallback() {
+			
+			@Override
+			public void onTimePassed(TimerHandler pTimerHandler) {
+				// TODO Auto-generated method stub
+				if(bananaValue == 1)
+				{
+					addFace(CAMERA_WIDTH / 2, CAMERA_HEIGHT / 2);
+				}
+			}
+		}));
 		
 		mScene.registerUpdateHandler(new TimerHandler(5, true, new ITimerCallback()
 		{
@@ -212,11 +246,6 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 			public void onTimePassed(TimerHandler pTimerHandler)
 			{
 				// TODO Auto-generated method stub
-				
-				if(bananaValue == 1)
-				{
-					addFace(CAMERA_WIDTH / 2, CAMERA_HEIGHT / 2);
-				}
 				
 				randomItem = (int)(Math.random()*6);
 				randomItem1 = (int)(Math.random()*6);
@@ -321,6 +350,11 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 			playAudio(R.raw.tala);
 			mScene.unregisterTouchArea(pTouchArea);
 			mScene.detachChild(pTouchArea);
+			GameObjects.fadeOut(megh);
+			GameObjects.fadeOut(moi);
+			GameObjects.fadeOut(mohis);
+			GameObjects.fadeOut(mama);
+			GameObjects.fadeOut(langol);
 
 			if(position[aCount]==null)
 			{
@@ -337,6 +371,12 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 			playAudio(R.raw.langol);
 			mScene.unregisterTouchArea(pTouchArea);
 			mScene.detachChild(pTouchArea);
+			GameObjects.fadeOut(megh);
+			GameObjects.fadeOut(moi);
+			GameObjects.fadeOut(mohis);
+			GameObjects.fadeOut(tala);
+			GameObjects.fadeOut(mama);
+			
 			if(position[aCount]==null)
 			{
 
@@ -354,6 +394,11 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 			bananaValue = 1;
 			mScene.unregisterTouchArea(pTouchArea);
 			mScene.detachChild(pTouchArea);
+			GameObjects.fadeOut(megh);
+			GameObjects.fadeOut(moi);
+			GameObjects.fadeOut(mohis);
+			GameObjects.fadeOut(tala);
+			GameObjects.fadeOut(langol);
 		}
 		else if((Sprite)pTouchArea==megh)
 		{
@@ -362,6 +407,11 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 			bananaValue = 1;
 			mScene.unregisterTouchArea(pTouchArea);
 			mScene.detachChild(pTouchArea);
+			GameObjects.fadeOut(mama);
+			GameObjects.fadeOut(moi);
+			GameObjects.fadeOut(mohis);
+			GameObjects.fadeOut(tala);
+			GameObjects.fadeOut(langol);
 		}
 		else if((Sprite)pTouchArea==moi)
 		{
@@ -370,6 +420,11 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 			bananaValue = 1;
 			mScene.unregisterTouchArea(pTouchArea);
 			mScene.detachChild(pTouchArea);
+			GameObjects.fadeOut(megh);
+			GameObjects.fadeOut(mama);
+			GameObjects.fadeOut(mohis);
+			GameObjects.fadeOut(tala);
+			GameObjects.fadeOut(langol);
 		} 
 		else if((Sprite)pTouchArea==mohis)
 		{
@@ -378,6 +433,11 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 			bananaValue = 1;
 			mScene.unregisterTouchArea(pTouchArea);
 			mScene.detachChild(pTouchArea);
+			GameObjects.fadeOut(megh);
+			GameObjects.fadeOut(moi);
+			GameObjects.fadeOut(mama);
+			GameObjects.fadeOut(tala);
+			GameObjects.fadeOut(langol);
 		}
 
 	}
@@ -396,7 +456,7 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 			mScene.clearEntityModifiers();
 			mScene.clearTouchAreas();
 			mScene.clearChildScene();
-			
+			//Finishing the game
 			mScene.registerUpdateHandler(new TimerHandler(2, new ITimerCallback() 
 			{
 				
@@ -418,19 +478,23 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 			position[aCount].setHeight(ImageHeightObjects-22);
 			final Path bananaPath = new Path(2).to(CAMERA_WIDTH/2, -100).to(mFaceCount, CAMERA_HEIGHT - CAMERA_HEIGHT/3 + 30 );
 			
-				position[aCount].registerEntityModifier(new PathModifier((float) 1, bananaPath, null, new IPathModifierListener() {
+			position[aCount].registerEntityModifier(new PathModifier((float) 1, bananaPath, null, new IPathModifierListener() 
+			{
 				@Override
-				public void onPathStarted(final PathModifier pPathModifier, final IEntity pEntity) {
+				public void onPathStarted(final PathModifier pPathModifier, final IEntity pEntity) 
+				{
 					//Debug.d("onPathStarted");
 				}
 
 				@Override
-				public void onPathWaypointStarted(final PathModifier pPathModifier, final IEntity pEntity, final int pWaypointIndex) {
+				public void onPathWaypointStarted(final PathModifier pPathModifier, final IEntity pEntity, final int pWaypointIndex)
+				{
 					//Debug.d("onPathWaypointStarted:  " + pWaypointIndex);
 				}
 
 				@Override
-				public void onPathWaypointFinished(final PathModifier pPathModifier, final IEntity pEntity, final int pWaypointIndex) {
+				public void onPathWaypointFinished(final PathModifier pPathModifier, final IEntity pEntity, final int pWaypointIndex) 
+				{
 					//Debug.d("onPathWaypointFinished: " + pWaypointIndex);
 				}
 
@@ -443,7 +507,6 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 			}, EaseSineInOut.getInstance()));
 		}
 
-	
 	public static void monkey1()
 	{
 		monkey1 = new Sprite(0, 50, mFaceTextureRegionM1, MonkeyGameActivity.vbo);

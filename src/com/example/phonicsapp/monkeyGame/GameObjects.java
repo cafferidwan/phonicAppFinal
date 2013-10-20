@@ -1,6 +1,7 @@
 package com.example.phonicsapp.monkeyGame;
 
 import org.andengine.entity.IEntity;
+import org.andengine.entity.modifier.AlphaModifier;
 import org.andengine.entity.modifier.PathModifier;
 import org.andengine.entity.modifier.PathModifier.IPathModifierListener;
 import org.andengine.entity.modifier.PathModifier.Path;
@@ -8,104 +9,40 @@ import org.andengine.entity.sprite.Sprite;
 import org.andengine.util.debug.Debug;
 import org.andengine.util.modifier.ease.EaseSineInOut;
 
+import com.example.phonicsapp.boxGame.BoxGameActivity;
+
 public class GameObjects 
 {
 	static float ax, ay, bx, by;
 	
-//	public static void checker()
-//	{
-//		if(MonkeyGameActivity.moi!=null)
-//		{
-//			if(MonkeyGameActivity.moi.getX()<0 && MonkeyGameActivity.moi.getX()<MonkeyGameActivity.CAMERA_WIDTH)
-//			{
-//			Debug.d("moi is there");
-//			new Runnable() {
-//				public void run() {
-//					MonkeyGameActivity.mScene
-//							.unregisterTouchArea(MonkeyGameActivity.moi);
-//					MonkeyGameActivity.mScene
-//							.detachChild(MonkeyGameActivity.moi);
-//				}
-//			};
-//			}
-//		}
-//		 if(MonkeyGameActivity.mama!=null)
-//		{
-//		    if(MonkeyGameActivity.mama.getX()<0 && MonkeyGameActivity.mama.getX()<MonkeyGameActivity.CAMERA_WIDTH)
-//			{
-//			Debug.d("moi is there");
-//			new Runnable() {
-//				public void run() {
-//					MonkeyGameActivity.mScene
-//							.unregisterTouchArea(MonkeyGameActivity.mama);
-//					MonkeyGameActivity.mScene
-//							.detachChild(MonkeyGameActivity.mama);
-//				}
-//			};
-//			}
-//		}
-//		 if(MonkeyGameActivity.mohis!=null)
-//		{
-//			if(MonkeyGameActivity.mohis.getX()<0 && MonkeyGameActivity.mohis.getX()<MonkeyGameActivity.CAMERA_WIDTH)
-//			{
-//			Debug.d("moi is there");
-//			new Runnable() {
-//				public void run() {
-//					MonkeyGameActivity.mScene
-//							.unregisterTouchArea(MonkeyGameActivity.mohis);
-//					MonkeyGameActivity.mScene
-//							.detachChild(MonkeyGameActivity.mohis);
-//				}
-//			};
-//			}
-//		}
-//		 if(MonkeyGameActivity.megh!=null)
-//		{
-//			if(MonkeyGameActivity.megh.getX()<0 && MonkeyGameActivity.megh.getX()<MonkeyGameActivity.CAMERA_WIDTH)
-//			{
-//			Debug.d("moi is there");
-//			new Runnable() {
-//				public void run() {
-//					MonkeyGameActivity.mScene
-//							.unregisterTouchArea(MonkeyGameActivity.megh);
-//					MonkeyGameActivity.mScene
-//							.detachChild(MonkeyGameActivity.megh);
-//				}
-//			};
-//			}
-//		}
-//		 if(MonkeyGameActivity.tala!=null)
-//		{
-//			if(MonkeyGameActivity.moi.getX()<0 && MonkeyGameActivity.moi.getX()<MonkeyGameActivity.CAMERA_WIDTH)
-//			{
-//			Debug.d("moi is there");
-//			new Runnable() {
-//				public void run() {
-//					MonkeyGameActivity.mScene
-//							.unregisterTouchArea(MonkeyGameActivity.tala);
-//					MonkeyGameActivity.mScene
-//							.detachChild(MonkeyGameActivity.tala);
-//				}
-//			};
-//			}
-//		}
-//		 if(MonkeyGameActivity.langol!=null)
-//		{
-//			if(MonkeyGameActivity.moi.getX()<0 && MonkeyGameActivity.moi.getX()<MonkeyGameActivity.CAMERA_WIDTH)
-//			{
-//			Debug.d("moi is there");
-//			new Runnable() {
-//				public void run() {
-//					MonkeyGameActivity.mScene
-//							.unregisterTouchArea(MonkeyGameActivity.langol);
-//					MonkeyGameActivity.mScene
-//							.detachChild(MonkeyGameActivity.langol);
-//				}
-//			};
-//			}
-//		}
-//	}
 
+	public static void fadeOut(final Sprite sprite)
+	{
+		if(sprite!= null)
+		{
+		AlphaModifier yourModifier = new AlphaModifier(1f, 0.5f, 0f)
+		{
+		        @Override
+		        protected void onModifierStarted(IEntity pItem)
+		        {
+		                super.onModifierStarted(pItem);
+		                // Your action after starting modifier
+		                MonkeyGameActivity.mScene.unregisterTouchArea(sprite);
+		        }
+		       
+		        @Override
+		        protected void onModifierFinished(IEntity pItem)
+		        {
+		                super.onModifierFinished(pItem);
+		                // Your action after finishing modifier
+		                //MonkeyGameActivity.mScene.detachChild(sprite);
+		        }
+		};
+		 
+		sprite.registerEntityModifier(yourModifier);
+		}
+	}
+	
 	public static void moi(int number)
 	{
 		if(number == 1)

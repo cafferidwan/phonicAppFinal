@@ -142,11 +142,16 @@ public class sprite3 extends Sprite implements OnCompletionListener {
 				}
 				case TouchEvent.ACTION_UP: {
 					//if(s3.sizzer == true){
-						MoveModifier mf = new MoveModifier(0.5f, MainActivity.sp3d.sprite1.getX(), MainActivity.CAMERA_WIDTH-150f, MainActivity.sp3d.sprite1.getY(), MainActivity.CAMERA_HEIGHT -150);
+						MoveModifier mf = new MoveModifier(0.2f, MainActivity.sp3d.sprite1.getX(), MainActivity.CAMERA_WIDTH-150f, MainActivity.sp3d.sprite1.getY(), MainActivity.CAMERA_HEIGHT -150);
 						MainActivity.sp3d.sprite1.registerEntityModifier(mf);
 						//sprite1.setPosition((MainActivity.CAMERA_WIDTH)-150,(MainActivity.CAMERA_HEIGHT) -150);
 					//}
-					sprite1.setZIndex(300);
+						if(s3.sizzer == true){
+							sprite1.setZIndex(300);
+						} else {
+							sprite1.setZIndex(3);
+						}
+					
 					MainActivity.mCurrentScene.sortChildren();
 
 					break;
