@@ -76,8 +76,8 @@ public class Functions
         	midPointX = 120;
         	midPointY = 50;
         	
-        	endX = BoxGameActivity.kolaX;
-        	endY = BoxGameActivity.kolaY;
+        	endX = BoxGameActivity.wrongObj1X;
+        	endY = BoxGameActivity.wrongObj1Y;
         	
         	Functions.audioPlay = true;
 			Functions.playAudio(R.raw.parrot_correct);
@@ -100,8 +100,8 @@ public class Functions
         	midPointX = BoxGameActivity.CAMERA_WIDTH/2+100;
         	midPointY = 50;
         	
-        	endX = BoxGameActivity.keramBoardX;
-        	endY = BoxGameActivity.keramBoardY;
+        	endX = BoxGameActivity.wrongObj2X;
+        	endY = BoxGameActivity.wrongObj2Y;
         	
         	Functions.audioPlay = true;
 			Functions.playAudio(R.raw.parrot_correct);

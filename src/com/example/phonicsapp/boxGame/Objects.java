@@ -39,89 +39,86 @@ public class Objects extends Sprite
 				this.setPosition(pSceneTouchEvent.getX() - this.getWidth() / 2, 
 						pSceneTouchEvent.getY() - this.getHeight() / 2);
 				
-				if(pSceneTouchEvent.getX()- this.getWidth()/2 == BoxGameActivity.moi.getX() && 
-						pSceneTouchEvent.getY()- this.getHeight()/2 == BoxGameActivity.moi.getY())
+				if(pSceneTouchEvent.getX()- this.getWidth()/2 == BoxGameActivity.obj1.getX() && 
+						pSceneTouchEvent.getY()- this.getHeight()/2 == BoxGameActivity.obj1.getY())
 				{
 					i++;
 					if(i==1)
 					{
 						Functions.audioPlay = true;
-						Functions.playAudio(R.raw.moi);
+						Functions.playAudio(BoxGameActivity.obj1Sound);
 					}
 				}
-				
-				else if(pSceneTouchEvent.getX()- this.getWidth()/2 == BoxGameActivity.ma.getX() && 
-						pSceneTouchEvent.getY()- this.getHeight()/2 == BoxGameActivity.ma.getY())
+				else if(pSceneTouchEvent.getX()- this.getWidth()/2 == BoxGameActivity.obj2.getX() && 
+						pSceneTouchEvent.getY()- this.getHeight()/2 == BoxGameActivity.obj2.getY())
 				{
 					i++;
 					if(i==1)
 					{
 						Functions.audioPlay = true;
-						Functions.playAudio(R.raw.ma);
+						Functions.playAudio(BoxGameActivity.obj2Sound);
 					}
 				}
-				else if(pSceneTouchEvent.getX()- this.getWidth()/2 == BoxGameActivity.mula.getX() && 
-						pSceneTouchEvent.getY()- this.getHeight()/2 == BoxGameActivity.mula.getY())
+				else if(pSceneTouchEvent.getX()- this.getWidth()/2 == BoxGameActivity.obj3.getX() && 
+						pSceneTouchEvent.getY()- this.getHeight()/2 == BoxGameActivity.obj3.getY())
 				{
 					i++;
 					if(i==1)
 					{
 						Functions.audioPlay = true;
-						Functions.playAudio(R.raw.mula);
+						Functions.playAudio(BoxGameActivity.obj3Sound);
 					}
 				}
-				else if(pSceneTouchEvent.getX()- this.getWidth()/2 == BoxGameActivity.megh.getX() && 
-						pSceneTouchEvent.getY()- this.getHeight()/2 == BoxGameActivity.megh.getY())
+				else if(pSceneTouchEvent.getX()- this.getWidth()/2 == BoxGameActivity.obj4.getX() && 
+						pSceneTouchEvent.getY()- this.getHeight()/2 == BoxGameActivity.obj4.getY())
 				{
 					i++;
 					if(i==1)
 					{
 						Functions.audioPlay = true;
-						Functions.playAudio(R.raw.megh);
+						Functions.playAudio(BoxGameActivity.obj4Sound);
 					}
 				}
-				else if(pSceneTouchEvent.getX()- this.getWidth()/2 == BoxGameActivity.mohis.getX() && 
-						pSceneTouchEvent.getY()- this.getHeight()/2 == BoxGameActivity.mohis.getY())
+				else if(pSceneTouchEvent.getX()- this.getWidth()/2 == BoxGameActivity.obj5.getX() && 
+						pSceneTouchEvent.getY()- this.getHeight()/2 == BoxGameActivity.obj5.getY())
 				{
 					i++;
 					if(i==1)
 					{
 						Functions.audioPlay = true;
-						Functions.playAudio(R.raw.mohis);
+						Functions.playAudio(BoxGameActivity.obj5Sound);
 					}
 				}
-				else if(pSceneTouchEvent.getX()- this.getWidth()/2 == BoxGameActivity.mama.getX() && 
-						pSceneTouchEvent.getY()- this.getHeight()/2 == BoxGameActivity.mama.getY())
+				else if(pSceneTouchEvent.getX()- this.getWidth()/2 == BoxGameActivity.obj6.getX() && 
+						pSceneTouchEvent.getY()- this.getHeight()/2 == BoxGameActivity.obj6.getY())
 				{
 					i++;
 					if(i==1)
 					{
 						Functions.audioPlay = true;
-						Functions.playAudio(R.raw.mama);
+						Functions.playAudio(BoxGameActivity.obj6Sound);
 					}
 				}
-				else if(pSceneTouchEvent.getX()- this.getWidth()/2 == BoxGameActivity.keramBoard.getX() && 
-						pSceneTouchEvent.getY()- this.getHeight()/2 == BoxGameActivity.keramBoard.getY())
+				else if(pSceneTouchEvent.getX()- this.getWidth()/2 == BoxGameActivity.wrongObj1.getX() && 
+						pSceneTouchEvent.getY()- this.getHeight()/2 == BoxGameActivity.wrongObj1.getY())
 				{
 					i++;
 					if(i==1)
 					{
 						Functions.audioPlay = true;
-						Functions.playAudio(R.raw.keram);
+						Functions.playAudio(BoxGameActivity.wrongObj1Sound);
 					}
 				}
-				else if(pSceneTouchEvent.getX()- this.getWidth()/2 == BoxGameActivity.kola.getX() && 
-						pSceneTouchEvent.getY()- this.getHeight()/2 == BoxGameActivity.kola.getY())
+				else if(pSceneTouchEvent.getX()- this.getWidth()/2 == BoxGameActivity.wrongObj2.getX() && 
+						pSceneTouchEvent.getY()- this.getHeight()/2 == BoxGameActivity.wrongObj2.getY())
 				{
 					i++;
 					if(i==1)
 					{
 						Functions.audioPlay = true;
-						Functions.playAudio(R.raw.kola);
+						Functions.playAudio(BoxGameActivity.wrongObj2Sound);
 					}
 				}
-				
-				
 				break;
 			}
 			case TouchEvent.ACTION_UP:

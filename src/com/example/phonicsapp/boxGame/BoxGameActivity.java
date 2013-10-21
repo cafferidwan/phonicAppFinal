@@ -10,7 +10,6 @@ import org.andengine.entity.scene.Scene;
 import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.AnimatedSprite;
 import org.andengine.entity.sprite.Sprite;
-import org.andengine.input.touch.TouchEvent;
 import org.andengine.opengl.texture.TextureOptions;
 import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
 import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlasTextureRegionFactory;
@@ -41,33 +40,47 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 	static Context context;
 	
 	private BuildableBitmapTextureAtlas mBitmapTextureAtlas;
-	public static ITextureRegion mMulaTextureRegion;
-	public static ITextureRegion mKolaTextureRegion;
-	public static ITextureRegion mMaTextureRegion;
-	
-	public static ITextureRegion mMohisTextureRegion;
 	public static ITextureRegion mbackGroundTextureRegion;
-	public static ITextureRegion mKeramBoardTextureRegion;
-	public static ITextureRegion mMeghTextureRegion;
-	public static ITextureRegion mMoiTextureRegion;
-	public static ITextureRegion mMoTextureRegion;
-	public static ITextureRegion mMamaTextureRegion;
 	
 	public static ITextureRegion mBox1TextureRegion;
 	public static ITextureRegion mBox2TextureRegion;
 	
 	private BuildableBitmapTextureAtlas mAnimatedBitmapTextureAtlas;
 	public static TiledTextureRegion mParrotTextureRegion;
-	public static TiledTextureRegion mBoxTextureRegion;
 	
-	public static Sprite backGround, mula, kola, ma, mohis, keramBoard, megh, moi, mama;
-	static Sprite mo;
+	//Letter-Mo
+	public static ITextureRegion mMulaTextureRegion;
+	public static ITextureRegion mMaTextureRegion;
+	public static ITextureRegion mMohisTextureRegion;
+	public static ITextureRegion mMeghTextureRegion;
+	public static ITextureRegion mMoiTextureRegion;
+	public static ITextureRegion mMamaTextureRegion;
+	public static ITextureRegion mMoTextureRegion;
+	public static ITextureRegion mKolaTextureRegion;
+	public static ITextureRegion mKeramBoardTextureRegion;
+	
+	//Letter-A
+	public static ITextureRegion mM1TextureRegion;
+	public static ITextureRegion mM2TextureRegion;
+	public static ITextureRegion mM3TextureRegion;
+	public static ITextureRegion mM4TextureRegion;
+	public static ITextureRegion mM5TextureRegion;
+	public static ITextureRegion mM6TextureRegion;
+	public static ITextureRegion mMATextureRegion;
+	public static ITextureRegion mW1TextureRegion;
+	public static ITextureRegion mW2TextureRegion;
+	
+	public static Sprite backGround, openedBox, closedBox;
+	static Sprite obj1, obj2, obj3, obj4, obj5, obj6,wrongObj1, wrongObj2;
+	static int obj1Sound, obj2Sound, obj3Sound, obj4Sound, obj5Sound, obj6Sound, wrongObj1Sound, wrongObj2Sound, letterSound;
+	
+	static Letter letter ;
+	//Obj1-mula, Obj2-ma, Obj3-mohis, Obj4-megh, Obj5-moi, Obj6-mama, wrongObj1-kola, wrongObj2-keramBoard;
 	static AnimatedSprite  parrot;
 	public TimerHandler timer1, timer2;
 	
-	static float mulaX , mulaY, kolaX, kolaY, maX, maY, mohisX, 
-		  mohisY, keramBoardX, keramBoardY, meghX, meghY, moiX, moiY, mamaX, mamaY;
-	static Sprite openedBox, closedBox;
+	static float obj1X , obj1Y, obj2X, obj2Y, obj3X, obj3Y, obj4X, obj4Y, obj5X, obj5Y, 
+				 obj6X, obj6Y, wrongObj1X, wrongObj1Y, wrongObj2X, wrongObj2Y;
 	
 	static float ImageHight;
 	static float ImageWidth;
@@ -93,29 +106,29 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 		ImageHight = 120;
 		ImageWidth = 120;
 		
-		mulaX = CAMERA_WIDTH/2 - CAMERA_WIDTH/4;
-		mulaY =	CAMERA_HEIGHT/2 - CAMERA_HEIGHT/4;
+		obj1X = CAMERA_WIDTH/2 - CAMERA_WIDTH/4;
+		obj1Y =	CAMERA_HEIGHT/2 - CAMERA_HEIGHT/4;
 		
-		mamaX = CAMERA_WIDTH/2 - CAMERA_WIDTH/3;
-		mamaY =	CAMERA_HEIGHT-130;
+		obj6X = CAMERA_WIDTH/2 - CAMERA_WIDTH/3;
+		obj6Y =	CAMERA_HEIGHT-130;
 		
-		kolaX = 35;
-		kolaY = CAMERA_HEIGHT-130;
+		wrongObj1X = 35;
+		wrongObj1Y = CAMERA_HEIGHT-130;
 		
-		maX = 50;
-		maY = CAMERA_HEIGHT/2 - CAMERA_HEIGHT/4;
+		obj2X = 50;
+		obj2Y = CAMERA_HEIGHT/2 - CAMERA_HEIGHT/4;
 		
-		mohisX = CAMERA_WIDTH - 150;
-		mohisY = CAMERA_HEIGHT-130;
+		obj3X = CAMERA_WIDTH - 150;
+		obj3Y = CAMERA_HEIGHT-130;
 		
-		keramBoardX = CAMERA_WIDTH - CAMERA_WIDTH/4 -95;
-		keramBoardY = CAMERA_HEIGHT-130;
+		wrongObj2X = CAMERA_WIDTH - CAMERA_WIDTH/4 -95;
+		wrongObj2Y = CAMERA_HEIGHT-130;
 		
-		meghX =  CAMERA_WIDTH/2 + 40;
-		meghY = CAMERA_HEIGHT/4;
+		obj4X =  CAMERA_WIDTH/2 + 40;
+		obj4Y = CAMERA_HEIGHT/4;
 		
-		moiX = CAMERA_WIDTH/2-90;
-		moiY = CAMERA_HEIGHT/2 - CAMERA_HEIGHT/4;
+		obj5X = CAMERA_WIDTH/2-90;
+		obj5Y = CAMERA_HEIGHT/2 - CAMERA_HEIGHT/4;
 		
 		mCamera = new Camera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
 		
@@ -129,39 +142,61 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 		// TODO Auto-generated method stub
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("BoxGameGfx/");
 
-		this.mBitmapTextureAtlas = new BuildableBitmapTextureAtlas(
+		mBitmapTextureAtlas = new BuildableBitmapTextureAtlas(
 				this.getTextureManager(), 1800, 1400);
 
-		BoxGameActivity.mbackGroundTextureRegion = BitmapTextureAtlasTextureRegionFactory
+		mbackGroundTextureRegion = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(this.mBitmapTextureAtlas, this, "JungleBG.png");
-		BoxGameActivity.mMulaTextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "mula-2.png");
-		BoxGameActivity.mKolaTextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "kola-1.png");
 		
-		BoxGameActivity.mMaTextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "ma.png");
-		BoxGameActivity.mMohisTextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "mohis-2.png");
-		BoxGameActivity.mKeramBoardTextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "keramBoard1.png");
-		BoxGameActivity.mMeghTextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "megh.png");
-		BoxGameActivity.mMoiTextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "moi-2.png");
-		BoxGameActivity.mMamaTextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "mama-2.png");
-		BoxGameActivity.mMoTextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "mo.png");
-		
-		BoxGameActivity.mBox1TextureRegion = BitmapTextureAtlasTextureRegionFactory
+		mBox1TextureRegion = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(this.mBitmapTextureAtlas, this, "box-15.png");
-		BoxGameActivity.mBox2TextureRegion = BitmapTextureAtlasTextureRegionFactory
+		mBox2TextureRegion = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(this.mBitmapTextureAtlas, this, "box-16.png");
 		
 		mAnimatedBitmapTextureAtlas = new BuildableBitmapTextureAtlas(this.getTextureManager(), 3000, 1015, TextureOptions.NEAREST);
-		BoxGameActivity.mParrotTextureRegion = BitmapTextureAtlasTextureRegionFactory.
+		mParrotTextureRegion = BitmapTextureAtlasTextureRegionFactory.
 				createTiledFromAsset(this.mAnimatedBitmapTextureAtlas, this, "parrot.png", 6, 2);
+		
+		//Letter-Mo
+		mMulaTextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterMo/mula-2.png");
+		mMaTextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterMo/ma.png");
+		mMohisTextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterMo/mohis-2.png");
+		mMeghTextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterMo/megh.png");
+		mMoiTextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterMo/moi-2.png");
+		mMamaTextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterMo/mama-2.png");
+		mMoTextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterMo/mo.png");
+		mKolaTextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterMo/kola-1.png");
+		mKeramBoardTextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterMo/keramBoard1.png");
+		
+		//Letter-A
+		mM1TextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterA/ma.png");
+		mM2TextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterA/mas.png");
+		mM3TextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterA/mohis-2.png");
+		mM4TextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterA/mula-2.png");
+		mM5TextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterA/moi-2.png");
+		mM6TextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterA/mama-2.png");
+		mMATextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterA/mo.png");
+		mW1TextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterA/pineapple.png");
+		mW2TextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterA/keramBoard1.png");
+		
 		try 
 		{
 			this.mBitmapTextureAtlas.build(new BlackPawnTextureAtlasBuilder<IBitmapTextureAtlasSource,
@@ -174,8 +209,8 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 			Debug.e(e);
 		}
 		
-		
-		try {
+		try 
+		{
 			this.mAnimatedBitmapTextureAtlas.build(new BlackPawnTextureAtlasBuilder<IBitmapTextureAtlasSource, BitmapTextureAtlas>(0, 0, 0));
 			this.mAnimatedBitmapTextureAtlas.load();
 		} 
@@ -194,120 +229,120 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 				// TODO Auto-generated method stub
 				
 				//if all the items are in the box
-				if(!(mohis.getX()>=0) && !(ma.getX()>=0) && !(mama.getX()>=0) && !(megh.getX()>=0) && !(mula.getX()>=0) && !(moi.getX()>=0))
+				if(!(obj3.getX()>=0) && !(obj2.getX()>=0) && !(obj6.getX()>=0) && !(obj4.getX()>=0) && !(obj1.getX()>=0) && !(obj5.getX()>=0))
 				{
 					startActivity();
 				}
 				
-				if(Functions.collisoinCheck(closedBox, kola)==1 ||
-						Functions.collisoinCheck(closedBox, kola)==2)
+				if(Functions.collisoinCheck(closedBox, wrongObj1)==1 ||
+						Functions.collisoinCheck(closedBox, wrongObj1)==2)
 				{
-					BoxGameActivity.openedBox.setVisible(true);
-					BoxGameActivity.closedBox.setVisible(false);
+					openedBox.setVisible(true);
+					closedBox.setVisible(false);
 				
 					if(Objects.touchFlag == false)
 					{
 						// Create jump
-						Functions.jump(kola, 0);
+						Functions.jump(wrongObj1, 0);
 					}
 				}
 				
 				//Keram board
-				else if(Functions.collisoinCheck(closedBox, keramBoard)==1 ||
-						Functions.collisoinCheck(closedBox, keramBoard)==2)
+				else if(Functions.collisoinCheck(closedBox, wrongObj2)==1 ||
+						Functions.collisoinCheck(closedBox, wrongObj2)==2)
 				{
-					BoxGameActivity.openedBox.setVisible(true);
-					BoxGameActivity.closedBox.setVisible(false);
+					openedBox.setVisible(true);
+					closedBox.setVisible(false);
 				
 					if(Objects.touchFlag == false)
 					{
 						// Create jump
-						Functions.jump(keramBoard, 1);
+						Functions.jump(wrongObj2, 1);
 					}
 				}
 				
 				//Mohis
-				else if(Functions.collisoinCheck(closedBox, mohis)==1 ||
-						Functions.collisoinCheck(closedBox, mohis)==2)
+				else if(Functions.collisoinCheck(closedBox, obj3)==1 ||
+						Functions.collisoinCheck(closedBox, obj3)==2)
 				{
-					BoxGameActivity.openedBox.setVisible(true);
-					BoxGameActivity.closedBox.setVisible(false);
+					openedBox.setVisible(true);
+					closedBox.setVisible(false);
 				
 					if(Objects.touchFlag == false)
 					{
-						Functions.fadeOut(mohis);
+						Functions.fadeOut(obj3);
 					}
 				}
 				
 				//Megh
-				else if(Functions.collisoinCheck(closedBox, megh)==1 ||
-						Functions.collisoinCheck(closedBox, megh)==2)
+				else if(Functions.collisoinCheck(closedBox, obj4)==1 ||
+						Functions.collisoinCheck(closedBox, obj4)==2)
 				{
-					BoxGameActivity.openedBox.setVisible(true);
-					BoxGameActivity.closedBox.setVisible(false);
+					openedBox.setVisible(true);
+					closedBox.setVisible(false);
 		
 					if(Objects.touchFlag == false)
 					{
-						Functions.fadeOut(megh);
+						Functions.fadeOut(obj4);
 					}
 				}
 				
 				//Mula
-				else if(Functions.collisoinCheck(closedBox, mula)==1 ||
-						Functions.collisoinCheck(closedBox, mula)==2)
+				else if(Functions.collisoinCheck(closedBox, obj1)==1 ||
+						Functions.collisoinCheck(closedBox, obj1)==2)
 				{
-					BoxGameActivity.openedBox.setVisible(true);
-					BoxGameActivity.closedBox.setVisible(false);
+					openedBox.setVisible(true);
+					closedBox.setVisible(false);
 				
 					if(Objects.touchFlag == false)
 					{
-						Functions.fadeOut(mula);
+						Functions.fadeOut(obj1);
 					}
 				}
 				
 				//Moi
-				else if(Functions.collisoinCheck(closedBox, moi)==1 ||
-						Functions.collisoinCheck(closedBox, moi)==2)
+				else if(Functions.collisoinCheck(closedBox, obj5)==1 ||
+						Functions.collisoinCheck(closedBox, obj5)==2)
 				{
-					BoxGameActivity.openedBox.setVisible(true);
-					BoxGameActivity.closedBox.setVisible(false);
+					openedBox.setVisible(true);
+					closedBox.setVisible(false);
 				
 					if(Objects.touchFlag == false)
 					{
-						Functions.fadeOut(moi);
+						Functions.fadeOut(obj5);
 					}
 				}
 				
 				//Ma
-				else if(Functions.collisoinCheck(closedBox, ma)==1 ||
-						Functions.collisoinCheck(closedBox, ma)==2)
+				else if(Functions.collisoinCheck(closedBox, obj2)==1 ||
+						Functions.collisoinCheck(closedBox, obj2)==2)
 				{
-					BoxGameActivity.openedBox.setVisible(true);
-					BoxGameActivity.closedBox.setVisible(false);
+					openedBox.setVisible(true);
+					closedBox.setVisible(false);
 				
 					if(Objects.touchFlag == false)
 					{
-						Functions.fadeOut(ma);
+						Functions.fadeOut(obj2);
 					}
 				}
 				
 				//Mama
-				else if(Functions.collisoinCheck(closedBox, mama)==1 ||
-						Functions.collisoinCheck(closedBox, mama)==2)
+				else if(Functions.collisoinCheck(closedBox, obj6)==1 ||
+						Functions.collisoinCheck(closedBox, obj6)==2)
 				{
-					BoxGameActivity.openedBox.setVisible(true);
-					BoxGameActivity.closedBox.setVisible(false);
+					openedBox.setVisible(true);
+					closedBox.setVisible(false);
 				
 					if(Objects.touchFlag == false)
 					{
-						Functions.fadeOut(mama);
+						Functions.fadeOut(obj6);
 					}
 				}
 				
 				else
 				{
-					BoxGameActivity.openedBox.setVisible(false);
-					BoxGameActivity.closedBox.setVisible(true);
+					openedBox.setVisible(false);
+					closedBox.setVisible(true);
 				}
 			}
 		});
@@ -324,12 +359,14 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 		
 		StatusBar.hideStatusBar();
 		
+		//Loading the objects according to letter
+		loadObjects(2);
+		
 		backGround = new Sprite(0, 0, mbackGroundTextureRegion, getVertexBufferObjectManager());
 		backGround.setHeight(CAMERA_HEIGHT);
 		backGround.setWidth(CAMERA_WIDTH);
 		mScene.attachChild(backGround);
 		
-		//opened box-y:160
 		openedBox = new Sprite(CAMERA_WIDTH/2-100, CAMERA_HEIGHT/2, mBox1TextureRegion, getVertexBufferObjectManager());
 		//openedBox.setWidth(ImageWidth*1.5f);
 		//openedBox.setHeight(ImageHight*1.5f);
@@ -343,75 +380,48 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 		mScene.attachChild(closedBox);
 		closedBox.setVisible(true);
 		
-		mama = new Objects(mamaX, mamaY, mMamaTextureRegion, getVertexBufferObjectManager());
-//		mama.setWidth(ImageWidth);
-//		mama.setHeight(ImageHight);
-		mScene.registerTouchArea(mama);
-		mScene.attachChild(mama);
+//		obj1.setWidth(ImageWidth);
+//		obj1.setHeight(ImageHight);
+		mScene.registerTouchArea(obj1);
+		mScene.attachChild(obj1);
 		
-		kola = new Objects(kolaX, kolaY, mKolaTextureRegion, getVertexBufferObjectManager());
-//		kola.setWidth(ImageWidth);
-//		kola.setHeight(ImageHight);
-		mScene.registerTouchArea(kola);
-		mScene.attachChild(kola);
-		
-		mula = new Objects(mulaX, mulaY, mMulaTextureRegion, getVertexBufferObjectManager());
-//		mula.setWidth(ImageWidth);
-//		mula.setHeight(ImageHight);
-		mScene.registerTouchArea(mula);
-		mScene.attachChild(mula);
-		
-		ma = new Objects(maX, maY, mMaTextureRegion, getVertexBufferObjectManager());
 //		ma.setWidth(ImageWidth);
 //		ma.setHeight(ImageHight);
-		mScene.registerTouchArea(ma);
-		mScene.attachChild(ma);
+		mScene.registerTouchArea(obj2);
+		mScene.attachChild(obj2);
 		
-		mohis = new Objects(mohisX, mohisY, mMohisTextureRegion, getVertexBufferObjectManager());
-//		mohis.setWidth(ImageWidth);
-//		mohis.setHeight(ImageHight);
-		mScene.registerTouchArea(mohis);
-		mScene.attachChild(mohis);
+//		obj3.setWidth(ImageWidth);
+//		obj3.setHeight(ImageHight);
+		mScene.registerTouchArea(obj3);
+		mScene.attachChild(obj3);
 		
-		keramBoard = new Objects(keramBoardX, keramBoardY, mKeramBoardTextureRegion, getVertexBufferObjectManager());
-//		keramBoard.setWidth(ImageWidth);
-//		keramBoard.setHeight(ImageHight);
-		mScene.registerTouchArea(keramBoard);
-		mScene.attachChild(keramBoard);
+//		obj4.setWidth(ImageWidth);
+//		obj4.setHeight(ImageHight);
+		mScene.registerTouchArea(obj4);
+		mScene.attachChild(obj4);
 		
-		megh = new Objects(meghX, meghY, mMeghTextureRegion, getVertexBufferObjectManager());
-//		megh.setWidth(ImageWidth);
-//		megh.setHeight(ImageHight);
-		mScene.registerTouchArea(megh);
-		mScene.attachChild(megh);
+		mScene.registerTouchArea(obj5);
+		mScene.attachChild(obj5);
 		
-		moi = new Objects(moiX, moiY, mMoiTextureRegion, getVertexBufferObjectManager());
-		mScene.registerTouchArea(moi);
-		mScene.attachChild(moi);
+//		obj6.setWidth(ImageWidth);
+//		obj6.setHeight(ImageHight);
+		mScene.registerTouchArea(obj6);
+		mScene.attachChild(obj6);
+	
+//		wrongObj1.setWidth(ImageWidth);
+//		wrongObj1.setHeight(ImageHight);
+		mScene.registerTouchArea(wrongObj1);
+		mScene.attachChild(wrongObj1);
 		
-		mo = new Sprite(900, CAMERA_HEIGHT-100, mMoTextureRegion, getVertexBufferObjectManager())
-		{
-			@Override
-			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent, final float pTouchAreaLocalX, final float pTouchAreaLocalY)
-			{
-				switch (pSceneTouchEvent.getAction()) 
-				{
-					case TouchEvent.ACTION_DOWN:
-					
-						Functions.audioPlay = true;
-						Functions.playAudio(R.raw.mo);
-						
-					break;
-				}
-
-				return true;
-			}
-		};
-		mo.setHeight(80);
-		mo.setWidth(80);
-		mScene.attachChild(mo);
+//		wrongObj2.setWidth(ImageWidth);
+//		wrongObj2.setHeight(ImageHight);
+		mScene.registerTouchArea(wrongObj2);
+		mScene.attachChild(wrongObj2);
 		
-		parrot = new Parrot(BoxGameActivity.CAMERA_WIDTH+500, BoxGameActivity.CAMERA_HEIGHT/2-50, mParrotTextureRegion, this.getVertexBufferObjectManager());
+		mScene.registerTouchArea(letter);
+		mScene.attachChild(letter);
+		
+		parrot = new Parrot(CAMERA_WIDTH+500, CAMERA_HEIGHT/2-50, mParrotTextureRegion, this.getVertexBufferObjectManager());
 		parrot.animate(new long[]{100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100}, 0, 11, true);
 		parrot.setFlippedHorizontal(true);
 		parrot.setWidth(ImageWidth*1.5f);
@@ -439,6 +449,58 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 		return mScene;
 	}
 	
+	private void loadObjects(int i) 
+	{
+		// TODO Auto-generated method stub
+		
+		//Letter-Mo
+		if(i == 1)
+		{
+			obj1 = new Objects(obj1X, obj1Y, mMulaTextureRegion, getVertexBufferObjectManager());
+			obj2 = new Objects(obj2X, obj2Y, mMaTextureRegion, getVertexBufferObjectManager());
+			obj3 = new Objects(obj3X, obj3Y, mMohisTextureRegion, getVertexBufferObjectManager());
+			obj4 = new Objects(obj4X, obj4Y, mMeghTextureRegion, getVertexBufferObjectManager());
+			obj5 = new Objects(obj5X, obj5Y, mMoiTextureRegion, getVertexBufferObjectManager());
+			obj6 = new Objects(obj6X, obj6Y, mMamaTextureRegion, getVertexBufferObjectManager());
+			wrongObj1 = new Objects(wrongObj1X, wrongObj1Y, mKolaTextureRegion, getVertexBufferObjectManager());
+			wrongObj2 = new Objects(wrongObj2X, wrongObj2Y, mKeramBoardTextureRegion, getVertexBufferObjectManager());
+			letter = new Letter(900, CAMERA_HEIGHT-100, 80, 80, mMoTextureRegion, getVertexBufferObjectManager());
+			
+			obj1Sound = R.raw.mula;
+			obj2Sound = R.raw.ma;
+			obj3Sound = R.raw.mohis;
+			obj4Sound = R.raw.megh;
+			obj5Sound = R.raw.moi;
+			obj6Sound = R.raw.mama;
+			wrongObj1Sound = R.raw.kola;
+			wrongObj2Sound = R.raw.keram;
+			letterSound = R.raw.mo;
+		}
+		//Letter-A
+		else if(i == 2)
+		{
+			obj1 = new Objects(obj1X, obj1Y, mM1TextureRegion, getVertexBufferObjectManager());
+			obj2 = new Objects(obj2X, obj2Y, mM2TextureRegion, getVertexBufferObjectManager());
+			obj3 = new Objects(obj3X, obj3Y, mM3TextureRegion, getVertexBufferObjectManager());
+			obj4 = new Objects(obj4X, obj4Y, mM4TextureRegion, getVertexBufferObjectManager());
+			obj5 = new Objects(obj5X, obj5Y, mM5TextureRegion, getVertexBufferObjectManager());
+			obj6 = new Objects(obj6X, obj6Y, mM6TextureRegion, getVertexBufferObjectManager());
+			wrongObj1 = new Objects(wrongObj1X, wrongObj1Y, mW1TextureRegion, getVertexBufferObjectManager());
+			wrongObj2 = new Objects(wrongObj2X, wrongObj2Y, mW2TextureRegion, getVertexBufferObjectManager());
+			letter = new Letter(900, CAMERA_HEIGHT-100, 80, 80, mMATextureRegion, getVertexBufferObjectManager());
+			
+			obj1Sound = R.raw.kola;
+			obj2Sound = R.raw.langol;
+			obj3Sound = R.raw.mula;
+			obj4Sound = R.raw.shorea;
+			obj5Sound = R.raw.ma;
+			obj6Sound = R.raw.mohis;
+			wrongObj1Sound = R.raw.aam;
+			wrongObj2Sound = R.raw.keram;
+			letterSound = R.raw.akar;
+		}
+	}
+
 	public void playIntroSound()
 	{
 		Functions.audioPlay = true;

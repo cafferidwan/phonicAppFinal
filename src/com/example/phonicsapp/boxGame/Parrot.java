@@ -85,7 +85,7 @@ public class Parrot extends AnimatedSprite
 		SequenceEntityModifier mLetter_sm = new SequenceEntityModifier(mModLetter,dMod);
 		
 		BoxGameActivity.parrot.registerEntityModifier(parrot_sm);
-		BoxGameActivity.mo.registerEntityModifier(mLetter_sm);
+		BoxGameActivity.letter.registerEntityModifier(mLetter_sm);
 		
 	}
 }

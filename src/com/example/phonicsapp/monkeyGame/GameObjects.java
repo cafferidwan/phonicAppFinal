@@ -43,7 +43,7 @@ public class GameObjects
 		}
 	}
 	
-	public static void moi(int number)
+	public static void obj1(int number)
 	{
 		if(number == 1)
 		{
@@ -62,15 +62,15 @@ public class GameObjects
 			by = MonkeyGameActivity.CAMERA_HEIGHT/2 - 170;
 		}
 		
-		MonkeyGameActivity.moi = new Sprite(0, 0, MonkeyGameActivity.mFaceTextureRegionMoi, MonkeyGameActivity.vbo); 
-		MonkeyGameActivity.mScene.attachChild(MonkeyGameActivity.moi);
-		MonkeyGameActivity.mScene.registerTouchArea(MonkeyGameActivity.moi);
-		MonkeyGameActivity.moi.setWidth(MonkeyGameActivity.ImageWidthObjects);
-		MonkeyGameActivity.moi.setHeight(MonkeyGameActivity.ImageHeightObjects);
+//		MonkeyGameActivity.obj1 = new Sprite(0, 0, MonkeyGameActivity.mFaceTextureRegionMoi, MonkeyGameActivity.vbo); 
+		MonkeyGameActivity.mScene.attachChild(MonkeyGameActivity.obj1);
+		MonkeyGameActivity.mScene.registerTouchArea(MonkeyGameActivity.obj1);
+		MonkeyGameActivity.obj1.setWidth(MonkeyGameActivity.ImageWidthObjects);
+		MonkeyGameActivity.obj1.setHeight(MonkeyGameActivity.ImageHeightObjects);
 		
-		final Path moiPath = new Path(2).to(ax, ay ).to(bx, by);
+		final Path obj1Path = new Path(2).to(ax, ay ).to(bx, by);
 		
-		MonkeyGameActivity.moi.registerEntityModifier(new PathModifier(4, moiPath, null, new IPathModifierListener()
+		MonkeyGameActivity.obj1.registerEntityModifier(new PathModifier(4, obj1Path, null, new IPathModifierListener()
 		{
 			@Override
 			public void onPathStarted(final PathModifier pPathModifier, final IEntity pEntity) 
@@ -95,12 +95,14 @@ public class GameObjects
 			public void onPathFinished(final PathModifier pPathModifier, final IEntity pEntity) 
 			{
 				//Debug.d("onPathFinished");
-				new Runnable() {
-					public void run() {
+				new Runnable() 
+				{
+					public void run() 
+					{
 						//Debug.d("onPathFinished");
-						MonkeyGameActivity.moi.setVisible(false);
+						MonkeyGameActivity.obj1.setVisible(false);
 						MonkeyGameActivity.mScene
-								.detachChild(MonkeyGameActivity.moi);
+								.detachChild(MonkeyGameActivity.obj1);
 					}
 				};
 			}
@@ -108,7 +110,7 @@ public class GameObjects
 		
 	}
 	
-	public static void megh(int number)
+	public static void obj2(int number)
 	{
 		if(number == 1)
 		{
@@ -127,15 +129,80 @@ public class GameObjects
 			by = MonkeyGameActivity.CAMERA_HEIGHT/2 - 170;
 		}
 		
-		MonkeyGameActivity.megh = new Sprite(0, 50, MonkeyGameActivity.mFaceTextureRegionMegh, MonkeyGameActivity.vbo);
-		MonkeyGameActivity.mScene.attachChild(MonkeyGameActivity.megh);
-		MonkeyGameActivity.mScene.registerTouchArea(MonkeyGameActivity.megh);
-		MonkeyGameActivity.megh.setWidth(140);
-		MonkeyGameActivity.megh.setHeight(77);
+//		MonkeyGameActivity.obj2 = new Sprite(0, 150, MonkeyGameActivity.mFaceTextureRegionMama, MonkeyGameActivity.vbo);
+		MonkeyGameActivity.mScene.attachChild(MonkeyGameActivity.obj2);
+		MonkeyGameActivity.mScene.registerTouchArea(MonkeyGameActivity.obj2);
+		MonkeyGameActivity.obj2.setWidth(MonkeyGameActivity.ImageWidthObjects);
+		MonkeyGameActivity.obj2.setHeight(MonkeyGameActivity.ImageHeightObjects);
 		
-		final Path meghPath = new Path(2).to(ax, ay ).to(bx, by);
+		final Path obj2Path = new Path(2).to(ax, ay ).to(bx, by);
 		
-		MonkeyGameActivity.megh.registerEntityModifier(new PathModifier(4, meghPath, null, new IPathModifierListener()
+		MonkeyGameActivity.obj2.registerEntityModifier(new PathModifier(4, obj2Path, null, new IPathModifierListener()
+		{
+			@Override
+			public void onPathStarted(final PathModifier pPathModifier, final IEntity pEntity)
+			{
+				//Debug.d("onPathStarted");
+			}
+
+			@Override
+			public void onPathWaypointStarted(final PathModifier pPathModifier, final IEntity pEntity, final int pWaypointIndex)
+			{
+				//Debug.d("onPathWaypointStarted:  " + pWaypointIndex);
+				
+			}
+
+			@Override
+			public void onPathWaypointFinished(final PathModifier pPathModifier, final IEntity pEntity, final int pWaypointIndex) 
+			{
+				//Debug.d("onPathWaypointFinished: " + pWaypointIndex);
+			}
+
+			@Override
+			public void onPathFinished(final PathModifier pPathModifier, final IEntity pEntity) 
+			{
+				MonkeyGameActivity.obj2.setVisible(false);
+				new Runnable()
+				{
+					public void run()
+					{
+						//Debug.d("onPathFinished");
+						MonkeyGameActivity.mScene.detachChild(MonkeyGameActivity.obj2);
+					}
+				};
+			}
+		}, EaseSineInOut.getInstance()));
+		
+	}
+	
+	public static void obj3(int number)
+	{
+		if(number == 1)
+		{
+			ax = -150;
+			ay = MonkeyGameActivity.CAMERA_HEIGHT/2 - 20;
+			
+			bx = MonkeyGameActivity.CAMERA_WIDTH+20;
+			by = MonkeyGameActivity.CAMERA_HEIGHT/2 - 20;
+		}
+		else if(number == 2)
+		{
+			ax = MonkeyGameActivity.CAMERA_WIDTH+20;
+			ay = MonkeyGameActivity.CAMERA_HEIGHT/2 - 170;
+			
+			bx = -150;
+			by = MonkeyGameActivity.CAMERA_HEIGHT/2 - 170;
+		}
+		
+//		MonkeyGameActivity.obj3 = new Sprite(0, 50, MonkeyGameActivity.mFaceTextureRegionMegh, MonkeyGameActivity.vbo);
+		MonkeyGameActivity.mScene.attachChild(MonkeyGameActivity.obj3);
+		MonkeyGameActivity.mScene.registerTouchArea(MonkeyGameActivity.obj3);
+		MonkeyGameActivity.obj3.setWidth(140);
+		MonkeyGameActivity.obj3.setHeight(77);
+		
+		final Path obj3Path = new Path(2).to(ax, ay ).to(bx, by);
+		
+		MonkeyGameActivity.obj3.registerEntityModifier(new PathModifier(4, obj3Path, null, new IPathModifierListener()
 		{
 			@Override
 			public void onPathStarted(final PathModifier pPathModifier, final IEntity pEntity)
@@ -160,18 +227,19 @@ public class GameObjects
 			public void onPathFinished(final PathModifier pPathModifier, final IEntity pEntity)
 			{
 				//Debug.d("onPathFinished");
-				MonkeyGameActivity.megh.setVisible(false);
-				new Runnable() {
-					public void run() {
-						MonkeyGameActivity.mScene.detachChild(MonkeyGameActivity.megh);
+				MonkeyGameActivity.obj3.setVisible(false);
+				new Runnable()
+				{
+					public void run() 
+					{
+						MonkeyGameActivity.mScene.detachChild(MonkeyGameActivity.obj3);
 					}
 				};
 			}
 		}, EaseSineInOut.getInstance()));
 		
 	}
-	
-	public static void mama(int number)
+	public static void obj4(int number)
 	{
 		if(number == 1)
 		{
@@ -190,79 +258,15 @@ public class GameObjects
 			by = MonkeyGameActivity.CAMERA_HEIGHT/2 - 170;
 		}
 		
-		MonkeyGameActivity.mama = new Sprite(0, 150, MonkeyGameActivity.mFaceTextureRegionMama, MonkeyGameActivity.vbo);
-		MonkeyGameActivity.mScene.attachChild(MonkeyGameActivity.mama);
-		MonkeyGameActivity.mScene.registerTouchArea(MonkeyGameActivity.mama);
-		MonkeyGameActivity.mama.setWidth(MonkeyGameActivity.ImageWidthObjects);
-		MonkeyGameActivity.mama.setHeight(MonkeyGameActivity.ImageHeightObjects);
+//		MonkeyGameActivity.obj4 = new Sprite(0, 50, MonkeyGameActivity.mFaceTextureRegionMohis, MonkeyGameActivity.vbo);
+		MonkeyGameActivity.mScene.attachChild(MonkeyGameActivity.obj4);
+		MonkeyGameActivity.mScene.registerTouchArea(MonkeyGameActivity.obj4);
+		MonkeyGameActivity.obj4.setWidth(MonkeyGameActivity.ImageWidthObjects);
+		MonkeyGameActivity.obj4.setHeight(MonkeyGameActivity.ImageHeightObjects);
 		
-		final Path mamaPath = new Path(2).to(ax, ay ).to(bx, by);
+		final Path obj4Path = new Path(2).to(ax, ay ).to(bx, by);
 		
-		MonkeyGameActivity.mama.registerEntityModifier(new PathModifier(4, mamaPath, null, new IPathModifierListener()
-		{
-			@Override
-			public void onPathStarted(final PathModifier pPathModifier, final IEntity pEntity)
-			{
-				//Debug.d("onPathStarted");
-			}
-
-			@Override
-			public void onPathWaypointStarted(final PathModifier pPathModifier, final IEntity pEntity, final int pWaypointIndex)
-			{
-				//Debug.d("onPathWaypointStarted:  " + pWaypointIndex);
-				
-			}
-
-			@Override
-			public void onPathWaypointFinished(final PathModifier pPathModifier, final IEntity pEntity, final int pWaypointIndex) 
-			{
-				//Debug.d("onPathWaypointFinished: " + pWaypointIndex);
-			}
-
-			@Override
-			public void onPathFinished(final PathModifier pPathModifier, final IEntity pEntity) 
-			{
-				MonkeyGameActivity.mama.setVisible(false);
-				new Runnable() {
-					public void run() {
-						//Debug.d("onPathFinished");
-						MonkeyGameActivity.mScene
-								.detachChild(MonkeyGameActivity.mama);
-					}
-				};
-			}
-		}, EaseSineInOut.getInstance()));
-		
-	}
-	
-	public static void mohis(int number)
-	{
-		if(number == 1)
-		{
-			ax = -150;
-			ay = MonkeyGameActivity.CAMERA_HEIGHT/2 - 20;
-			
-			bx = MonkeyGameActivity.CAMERA_WIDTH+20;
-			by = MonkeyGameActivity.CAMERA_HEIGHT/2 - 20;
-		}
-		else if(number == 2)
-		{
-			ax = MonkeyGameActivity.CAMERA_WIDTH+20;
-			ay = MonkeyGameActivity.CAMERA_HEIGHT/2 - 170;
-			
-			bx = -150;
-			by = MonkeyGameActivity.CAMERA_HEIGHT/2 - 170;
-		}
-		
-		MonkeyGameActivity.mohis = new Sprite(0, 50, MonkeyGameActivity.mFaceTextureRegionMohis, MonkeyGameActivity.vbo);
-		MonkeyGameActivity.mScene.attachChild(MonkeyGameActivity.mohis);
-		MonkeyGameActivity.mScene.registerTouchArea(MonkeyGameActivity.mohis);
-		MonkeyGameActivity.mohis.setWidth(MonkeyGameActivity.ImageWidthObjects);
-		MonkeyGameActivity.mohis.setHeight(MonkeyGameActivity.ImageHeightObjects);
-		
-		final Path mohisPath = new Path(2).to(ax, ay ).to(bx, by);
-		
-		MonkeyGameActivity.mohis.registerEntityModifier(new PathModifier(4, mohisPath, null, new IPathModifierListener() 
+		MonkeyGameActivity.obj4.registerEntityModifier(new PathModifier(4, obj4Path, null, new IPathModifierListener() 
 		{
 			@Override
 			public void onPathStarted(final PathModifier pPathModifier, final IEntity pEntity)
@@ -287,11 +291,12 @@ public class GameObjects
 			public void onPathFinished(final PathModifier pPathModifier, final IEntity pEntity)
 			{
 				//Debug.d("onPathFinished");
-				//MonkeyGameActivity.mScene.detachChild(MonkeyGameActivity.mohis);
-				MonkeyGameActivity.mohis.setVisible(false);
+				//MonkeyGameActivity.mScene.detachChild(MonkeyGameActivity.obj4);
+				MonkeyGameActivity.obj4.setVisible(false);
 				new Runnable() {
-					public void run() {
-						MonkeyGameActivity.mScene.detachChild(MonkeyGameActivity.mohis);
+					public void run() 
+					{
+						MonkeyGameActivity.mScene.detachChild(MonkeyGameActivity.obj4);
 					}
 				};
 			}
@@ -299,7 +304,7 @@ public class GameObjects
 		
 	}
 	
-	public static void tala(int number)
+	public static void wrongObj1(int number)
 	{
 		if(number == 1)
 		{
@@ -318,14 +323,14 @@ public class GameObjects
 			by = MonkeyGameActivity.CAMERA_HEIGHT/2 - 170;
 		}
 		
-		MonkeyGameActivity.tala = new Sprite(0, 50, MonkeyGameActivity.mFaceTextureRegionTala, MonkeyGameActivity.vbo);
-		MonkeyGameActivity.mScene.attachChild(MonkeyGameActivity.tala);
-		MonkeyGameActivity.mScene.registerTouchArea(MonkeyGameActivity.tala);
-		MonkeyGameActivity.tala.setWidth(MonkeyGameActivity.ImageWidthObjects);
-		MonkeyGameActivity.tala.setHeight(MonkeyGameActivity.ImageHeightObjects);
+//		MonkeyGameActivity.wrongObj1 = new Sprite(0, 50, MonkeyGameActivity.mFaceTextureRegionTala, MonkeyGameActivity.vbo);
+		MonkeyGameActivity.mScene.attachChild(MonkeyGameActivity.wrongObj1);
+		MonkeyGameActivity.mScene.registerTouchArea(MonkeyGameActivity.wrongObj1);
+		MonkeyGameActivity.wrongObj1.setWidth(MonkeyGameActivity.ImageWidthObjects);
+		MonkeyGameActivity.wrongObj1.setHeight(MonkeyGameActivity.ImageHeightObjects);
 		
-		final Path talaPath = new Path(2).to(ax, ay ).to(bx, by);
-		MonkeyGameActivity.tala.registerEntityModifier(new PathModifier(4, talaPath, null, new IPathModifierListener() 
+		final Path wrongObj1Path = new Path(2).to(ax, ay ).to(bx, by);
+		MonkeyGameActivity.wrongObj1.registerEntityModifier(new PathModifier(4, wrongObj1Path, null, new IPathModifierListener() 
 		{
 			@Override
 			public void onPathStarted(final PathModifier pPathModifier, final IEntity pEntity)
@@ -350,11 +355,13 @@ public class GameObjects
 			public void onPathFinished(final PathModifier pPathModifier, final IEntity pEntity) 
 			{
 				//Debug.d("onPathFinished");
-				//MonkeyGameActivity.mScene.detachChild(MonkeyGameActivity.tala);
-				MonkeyGameActivity.tala.setVisible(false);
-				new Runnable() {
-					public void run() {
-						MonkeyGameActivity.mScene.detachChild(MonkeyGameActivity.tala);
+				//MonkeyGameActivity.mScene.detachChild(MonkeyGameActivity.wrongObj1);
+				MonkeyGameActivity.wrongObj1.setVisible(false);
+				new Runnable() 
+				{
+					public void run()
+					{
+						MonkeyGameActivity.mScene.detachChild(MonkeyGameActivity.wrongObj1);
 					}
 				};
 			}
@@ -362,7 +369,7 @@ public class GameObjects
 		
 	}
 	
-	public static void langol(int number)
+	public static void wrongObj2(int number)
 	{
 		if(number == 1)
 		{
@@ -381,14 +388,14 @@ public class GameObjects
 			by = MonkeyGameActivity.CAMERA_HEIGHT/2 - 170;
 		}
 		
-		MonkeyGameActivity.langol = new Sprite(0, 50, MonkeyGameActivity.mFaceTextureRegionLangol, MonkeyGameActivity.vbo);
-		MonkeyGameActivity.mScene.attachChild(MonkeyGameActivity.langol);
-		MonkeyGameActivity.mScene.registerTouchArea(MonkeyGameActivity.langol);
-		MonkeyGameActivity.langol.setWidth(MonkeyGameActivity.ImageWidthObjects);
-		MonkeyGameActivity.langol.setHeight(MonkeyGameActivity.ImageHeightObjects);
+//		MonkeyGameActivity.wrongObj2 = new Sprite(0, 50, MonkeyGameActivity.mFaceTextureRegionLangol, MonkeyGameActivity.vbo);
+		MonkeyGameActivity.mScene.attachChild(MonkeyGameActivity.wrongObj2);
+		MonkeyGameActivity.mScene.registerTouchArea(MonkeyGameActivity.wrongObj2);
+		MonkeyGameActivity.wrongObj2.setWidth(MonkeyGameActivity.ImageWidthObjects);
+		MonkeyGameActivity.wrongObj2.setHeight(MonkeyGameActivity.ImageHeightObjects);
 		
-		final Path langolPath = new Path(2).to(ax, ay ).to(bx, by);
-		MonkeyGameActivity.langol.registerEntityModifier(new PathModifier(4, langolPath, null, new IPathModifierListener() 
+		final Path wrongObj2Path = new Path(2).to(ax, ay ).to(bx, by);
+		MonkeyGameActivity.wrongObj2.registerEntityModifier(new PathModifier(4, wrongObj2Path, null, new IPathModifierListener() 
 		{
 			@Override
 			public void onPathStarted(final PathModifier pPathModifier, final IEntity pEntity) 
@@ -413,12 +420,12 @@ public class GameObjects
 			public void onPathFinished(final PathModifier pPathModifier, final IEntity pEntity) 
 			{
 				//Debug.d("onPathFinished");
-				//MonkeyGameActivity.mScene.detachChild(MonkeyGameActivity.langol);
-				MonkeyGameActivity.langol.setVisible(false);
-				new Runnable() {
-					public void run() {
-						MonkeyGameActivity.mScene
-								.detachChild(MonkeyGameActivity.langol);
+				MonkeyGameActivity.wrongObj2.setVisible(false);
+				new Runnable() 
+				{
+					public void run()
+					{
+						MonkeyGameActivity.mScene.detachChild(MonkeyGameActivity.wrongObj2);
 					}
 				};
 			}
