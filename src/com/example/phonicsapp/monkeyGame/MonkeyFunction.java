@@ -12,7 +12,7 @@ import org.andengine.util.modifier.ease.EaseSineInOut;
 public class MonkeyFunction 
 {
 
-	public void addFace(final float pX, final float pY) 
+	public static void addFace(final float pX, final float pY) 
 	{
 		MonkeyGameActivity.distance = (float) (MonkeyGameActivity.CAMERA_WIDTH/5.3 );
 		MonkeyGameActivity.mFaceCount = MonkeyGameActivity.mFaceCount+MonkeyGameActivity.distance;

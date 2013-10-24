@@ -1,6 +1,7 @@
 package com.example.phonicsapp.monkeyGame;
 
 import org.andengine.engine.camera.Camera;
+import org.andengine.engine.handler.IUpdateHandler;
 import org.andengine.engine.handler.timer.ITimerCallback;
 import org.andengine.engine.handler.timer.TimerHandler;
 import org.andengine.engine.options.EngineOptions;
@@ -10,6 +11,7 @@ import org.andengine.entity.IEntity;
 import org.andengine.entity.modifier.PathModifier;
 import org.andengine.entity.modifier.PathModifier.IPathModifierListener;
 import org.andengine.entity.modifier.PathModifier.Path;
+import org.andengine.entity.primitive.Rectangle;
 import org.andengine.entity.scene.IOnAreaTouchListener;
 import org.andengine.entity.scene.ITouchArea;
 import org.andengine.entity.scene.Scene;
@@ -176,7 +178,6 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 	// Methods for/from SuperClass/Interfaces
 	// ===========================================================
 	
-
 	@Override
 	public EngineOptions onCreateEngineOptions() 
 	{
@@ -374,7 +375,7 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 		backGround.setHeight(CAMERA_HEIGHT);
 		mScene.attachChild(backGround);
 		
-		mScene.registerUpdateHandler(new TimerHandler(1, true, new ITimerCallback() 
+		mScene.registerUpdateHandler(new TimerHandler(1, true, new ITimerCallback()
 		{
 			@Override
 			public void onTimePassed(TimerHandler pTimerHandler) 
@@ -383,7 +384,7 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 				
 				if(value == 1)
 				{
-					monkey1();
+					MonkeyFunction.monkey1();
 				}
 			}
 		}));
@@ -398,7 +399,7 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 				//Adding Banana
 				if(bananaValue == 1)
 				{
-					addFace(CAMERA_WIDTH / 2, CAMERA_HEIGHT / 2);
+					MonkeyFunction.addFace(CAMERA_WIDTH / 2, CAMERA_HEIGHT / 2);
 				}
 			}
 		}));
@@ -412,7 +413,8 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 				// TODO Auto-generated method stub
 				
 				//Loading the Objects according to the game content
-				LoadObjects(5);
+				LoadObjects(2);
+				LoadLevels(2);
 				
 				randomItem = (int)(Math.random()*6);
 				randomItem1 = (int)(Math.random()*6);
@@ -491,6 +493,19 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 		
 		mScene.setOnAreaTouchListener(this);
 		return mScene;
+	}
+
+	protected void LoadLevels(int i) 
+	{
+		// TODO Auto-generated method stub
+		if(i == 1)
+		{
+			
+		}
+		else if(i == 2)
+		{
+			
+		}
 	}
 
 	public static void LoadObjects(int i) 
@@ -707,155 +722,6 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 
 	}
 
-	public void addFace(final float pX, final float pY) 
-	{
-		distance = (float) (CAMERA_WIDTH/5.3 );
-		mFaceCount = mFaceCount+distance;
-		aCount = aCount+1;
-		bananaValue = 0;
-		
-		if(aCount==5)
-		{
-
-			mScene.clearUpdateHandlers();
-			mScene.clearEntityModifiers();
-			mScene.clearTouchAreas();
-			mScene.clearChildScene();
-			//Finishing the game
-			mScene.registerUpdateHandler(new TimerHandler(2, new ITimerCallback() 
-			{
-				
-				@Override
-				public void onTimePassed(TimerHandler pTimerHandler)
-				{
-					// TODO Auto-generated method stub
-					aCount = 0;
-					mFaceCount = -100;
-					startActivity();
-				}
-			}));
-		}
-			position[aCount] = new Sprite(0, 50 , mFaceTextureRegionBanana,MonkeyGameActivity.vbo); 
-			mScene.attachChild(position[aCount]);
-			mScene.registerTouchArea(position[aCount]);
-			
-			position[aCount].setWidth(ImageWidthObjects-22);
-			position[aCount].setHeight(ImageHeightObjects-22);
-			final Path bananaPath = new Path(2).to(CAMERA_WIDTH/2, -100).to(mFaceCount, CAMERA_HEIGHT - CAMERA_HEIGHT/3 + 30 );
-			
-			position[aCount].registerEntityModifier(new PathModifier((float) 1, bananaPath, null, new IPathModifierListener() 
-			{
-				@Override
-				public void onPathStarted(final PathModifier pPathModifier, final IEntity pEntity) 
-				{
-					//Debug.d("onPathStarted");
-				}
-
-				@Override
-				public void onPathWaypointStarted(final PathModifier pPathModifier, final IEntity pEntity, final int pWaypointIndex)
-				{
-					//Debug.d("onPathWaypointStarted:  " + pWaypointIndex);
-				}
-
-				@Override
-				public void onPathWaypointFinished(final PathModifier pPathModifier, final IEntity pEntity, final int pWaypointIndex) 
-				{
-					//Debug.d("onPathWaypointFinished: " + pWaypointIndex);
-				}
-
-				@Override
-				public void onPathFinished(final PathModifier pPathModifier, final IEntity pEntity)
-				{
-					//Debug.d("onPathFinished");
-					
-				}
-			}, EaseSineInOut.getInstance()));
-		}
-
-	public static void monkey1()
-	{
-		monkey1 = new Sprite(0, 50, mFaceTextureRegionM1, MonkeyGameActivity.vbo);
-		monkey1.setWidth(ImageWidth);
-		monkey1.setHeight(ImageHeight);
-		mScene.attachChild(monkey1);
-		monkey1.setVisible(true);
-		
-		value = 0;
-		
-		final Path monkey1Path = new Path(2).to(CAMERA_WIDTH/2,-400).to(position[aCount].getX(),(float) (position[aCount].getY()-CAMERA_HEIGHT/1.4)); 
-		monkey1.registerEntityModifier(new PathModifier((float) 1.1, monkey1Path, null, new IPathModifierListener() 
-		{
-			@Override
-			public void onPathStarted(final PathModifier pPathModifier, final IEntity pEntity) 
-			{
-				//Debug.d("onPathStarted");
-			}
-
-			@Override
-			public void onPathWaypointStarted(final PathModifier pPathModifier, final IEntity pEntity, final int pWaypointIndex)
-			{
-				//Debug.d("onPathWaypointStarted:  " + pWaypointIndex);
-				
-			}
-
-			@Override
-			public void onPathWaypointFinished(final PathModifier pPathModifier, final IEntity pEntity, final int pWaypointIndex)
-			{
-				//Debug.d("onPathWaypointFinished: " + pWaypointIndex);
-			}
-
-			@Override
-			public void onPathFinished(final PathModifier pPathModifier, final IEntity pEntity)
-			{
-				//Debug.d("onPathFinished");
-				monkey1.setVisible(false);
-				mFaceCount=mFaceCount-distance;
-				
-				monkey2();
-			}
-		}, EaseSineInOut.getInstance()));
-	}
-	
-	public static void monkey2()
-	{
-		monkey2 = new Sprite(position[aCount].getX(), (float) (position[aCount].getY()-CAMERA_HEIGHT/1.4), mFaceTextureRegionM2, MonkeyGameActivity.vbo);
-		monkey2.setWidth(ImageWidth);
-		monkey2.setHeight(ImageHeight);
-		mScene.attachChild(monkey2);
-		
-		final Path monkey2Path = new Path(2).to(position[aCount].getX(),(float) (position[aCount].getY()-CAMERA_HEIGHT/1.4)).to(CAMERA_WIDTH/2,-600);
-		monkey2.registerEntityModifier(new PathModifier((float)1.1, monkey2Path, null, new IPathModifierListener()
-		{
-			@Override
-			public void onPathStarted(final PathModifier pPathModifier, final IEntity pEntity) 
-			{
-				//Debug.d("onPathStarted");
-			}
-			@Override
-			public void onPathWaypointStarted(final PathModifier pPathModifier, final IEntity pEntity, final int pWaypointIndex) 
-			{
-				//Debug.d("onPathWaypointStarted:  " + pWaypointIndex);
-				
-			}
-			@Override
-			public void onPathWaypointFinished(final PathModifier pPathModifier, final IEntity pEntity, final int pWaypointIndex) 
-			{
-				//Debug.d("onPathWaypointFinished: " + pWaypointIndex);
-			}
-
-			@Override
-			public void onPathFinished(final PathModifier pPathModifier, final IEntity pEntity) 
-			{
-				//Debug.d("onPathFinished");
-				monkey2.setVisible(false);
-			}
-		}, EaseSineInOut.getInstance()));
-		
-		mScene.detachChild(position[aCount]);
-		position[aCount]=null;
-		aCount = aCount - 1;
-	}
-	
 	public static void startActivity()
 	{
 		activity.finish();
