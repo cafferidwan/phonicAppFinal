@@ -19,12 +19,8 @@ import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.ui.activity.SimpleBaseGameActivity;
 import org.andengine.util.color.Color;
 import org.andengine.util.debug.Debug;
-
 import com.example.phonicsapp.animatedBook.AnimatedBookActivity;
-import com.example.phonicsapp.boxGame.BoxGameActivity;
-import com.example.phonicsapp.monkeyGame.MonkeyGameActivity;
 import com.example.phonicsapp.wordbuilder.MainActivity;
-
 import StatusBarController.StatusBar;
 import android.content.Context;
 import android.content.Intent;

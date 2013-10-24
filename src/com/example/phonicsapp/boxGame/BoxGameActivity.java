@@ -48,27 +48,61 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 	private BuildableBitmapTextureAtlas mAnimatedBitmapTextureAtlas;
 	public static TiledTextureRegion mParrotTextureRegion;
 	
-	//Letter-Mo
-	public static ITextureRegion mMulaTextureRegion;
-	public static ITextureRegion mMaTextureRegion;
-	public static ITextureRegion mMohisTextureRegion;
-	public static ITextureRegion mMeghTextureRegion;
-	public static ITextureRegion mMoiTextureRegion;
-	public static ITextureRegion mMamaTextureRegion;
-	public static ITextureRegion mMoTextureRegion;
-	public static ITextureRegion mKolaTextureRegion;
-	public static ITextureRegion mKeramBoardTextureRegion;
-	
 	//Letter-A
-	public static ITextureRegion mM1TextureRegion;
-	public static ITextureRegion mM2TextureRegion;
-	public static ITextureRegion mM3TextureRegion;
-	public static ITextureRegion mM4TextureRegion;
-	public static ITextureRegion mM5TextureRegion;
-	public static ITextureRegion mM6TextureRegion;
-	public static ITextureRegion mMATextureRegion;
-	public static ITextureRegion mW1TextureRegion;
-	public static ITextureRegion mW2TextureRegion;
+	public static ITextureRegion mA1TextureRegion;
+	public static ITextureRegion mA2TextureRegion;
+	public static ITextureRegion mA3TextureRegion;
+	public static ITextureRegion mA4TextureRegion;
+	public static ITextureRegion mA5TextureRegion;
+	public static ITextureRegion mA6TextureRegion;
+	public static ITextureRegion mATextureRegion;
+	public static ITextureRegion mWA1TextureRegion;
+	public static ITextureRegion mWA2TextureRegion;
+	
+	//Letter-Mo
+	public static ITextureRegion mMo1TextureRegion;
+	public static ITextureRegion mMo2TextureRegion;
+	public static ITextureRegion mMo3TextureRegion;
+	public static ITextureRegion mMo4TextureRegion;
+	public static ITextureRegion mMo5TextureRegion;
+	public static ITextureRegion mMo6TextureRegion;
+	public static ITextureRegion mMoTextureRegion;
+	public static ITextureRegion mWMo1TextureRegion;
+	public static ITextureRegion mWMo2TextureRegion;
+	
+	//Letter-Ko
+	public static ITextureRegion mKo1TextureRegion;
+	public static ITextureRegion mKo2TextureRegion;
+	public static ITextureRegion mKo3TextureRegion;
+	public static ITextureRegion mKo4TextureRegion;
+	public static ITextureRegion mKo5TextureRegion;
+	public static ITextureRegion mKo6TextureRegion;
+	public static ITextureRegion mKoTextureRegion;
+	public static ITextureRegion mWKo1TextureRegion;
+	public static ITextureRegion mWKo2TextureRegion;
+	
+	//Letter-Lo
+	public static ITextureRegion mLo1TextureRegion;
+	public static ITextureRegion mLo2TextureRegion;
+	public static ITextureRegion mLo3TextureRegion;
+	public static ITextureRegion mLo4TextureRegion;
+	public static ITextureRegion mLo5TextureRegion;
+	public static ITextureRegion mLo6TextureRegion;
+	public static ITextureRegion mLoTextureRegion;
+	public static ITextureRegion mWLo1TextureRegion;
+	public static ITextureRegion mWLo2TextureRegion;
+	
+	//Letter-To
+	public static ITextureRegion mTo1TextureRegion;
+	public static ITextureRegion mTo2TextureRegion;
+	public static ITextureRegion mTo3TextureRegion;
+	public static ITextureRegion mTo4TextureRegion;
+	public static ITextureRegion mTo5TextureRegion;
+	public static ITextureRegion mTo6TextureRegion;
+	public static ITextureRegion mToTextureRegion;
+	public static ITextureRegion mWTo1TextureRegion;
+	public static ITextureRegion mWTo2TextureRegion;
+	
 	
 	public static Sprite backGround, openedBox, closedBox;
 	static Sprite obj1, obj2, obj3, obj4, obj5, obj6,wrongObj1, wrongObj2;
@@ -143,7 +177,7 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("BoxGameGfx/");
 
 		mBitmapTextureAtlas = new BuildableBitmapTextureAtlas(
-				this.getTextureManager(), 1800, 1400);
+				this.getTextureManager(), 2200, 1800);
 
 		mbackGroundTextureRegion = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(this.mBitmapTextureAtlas, this, "JungleBG.png");
@@ -157,45 +191,107 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 		mParrotTextureRegion = BitmapTextureAtlasTextureRegionFactory.
 				createTiledFromAsset(this.mAnimatedBitmapTextureAtlas, this, "parrot.png", 6, 2);
 		
+		
+		//Letter-A
+		mA1TextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterA/ma.png");
+		mA2TextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterA/mas.png");
+		mA3TextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterA/mohis-2.png");
+		mA4TextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterA/mula-2.png");
+		mA5TextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterA/moi-2.png");
+		mA6TextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterA/mama-2.png");
+		mATextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterA/mo.png");
+		mWA1TextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterA/pineapple.png");
+		mWA2TextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterA/keramBoard1.png");
+				
+				
 		//Letter-Mo
-		mMulaTextureRegion = BitmapTextureAtlasTextureRegionFactory
+		mMo1TextureRegion = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterMo/mula-2.png");
-		mMaTextureRegion = BitmapTextureAtlasTextureRegionFactory
+		mMo2TextureRegion = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterMo/ma.png");
-		mMohisTextureRegion = BitmapTextureAtlasTextureRegionFactory
+		mMo3TextureRegion = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterMo/mohis-2.png");
-		mMeghTextureRegion = BitmapTextureAtlasTextureRegionFactory
+		mMo4TextureRegion = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterMo/megh.png");
-		mMoiTextureRegion = BitmapTextureAtlasTextureRegionFactory
+		mMo5TextureRegion = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterMo/moi-2.png");
-		mMamaTextureRegion = BitmapTextureAtlasTextureRegionFactory
+		mMo6TextureRegion = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterMo/mama-2.png");
 		mMoTextureRegion = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterMo/mo.png");
-		mKolaTextureRegion = BitmapTextureAtlasTextureRegionFactory
+		mWMo1TextureRegion = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterMo/kola-1.png");
-		mKeramBoardTextureRegion = BitmapTextureAtlasTextureRegionFactory
+		mWMo2TextureRegion = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterMo/keramBoard1.png");
 		
-		//Letter-A
-		mM1TextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterA/ma.png");
-		mM2TextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterA/mas.png");
-		mM3TextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterA/mohis-2.png");
-		mM4TextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterA/mula-2.png");
-		mM5TextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterA/moi-2.png");
-		mM6TextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterA/mama-2.png");
-		mMATextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterA/mo.png");
-		mW1TextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterA/pineapple.png");
-		mW2TextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterA/keramBoard1.png");
+		//Letter-Ko
+		mKo1TextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterKo/ma.png");
+		mKo2TextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterKo/mas.png");
+		mKo3TextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterKo/mohis-2.png");
+		mKo4TextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterKo/mula-2.png");
+		mKo5TextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterKo/moi-2.png");
+		mKo6TextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterKo/mama-2.png");
+		mKoTextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterKo/mo.png");
+		mWKo1TextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterKo/pineapple.png");
+		mWKo2TextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterKo/keramBoard1.png");
+		
+		//Letter-Lo
+		mLo1TextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterLo/ma.png");
+		mLo2TextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterLo/mas.png");
+		mLo3TextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterLo/mohis-2.png");
+		mLo4TextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterLo/mula-2.png");
+		mLo5TextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterLo/moi-2.png");
+		mLo6TextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterLo/mama-2.png");
+		mLoTextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterLo/mo.png");
+		mWLo1TextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterLo/pineapple.png");
+		mWLo2TextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterLo/keramBoard1.png");
+		
+		//Letter-To
+		mTo1TextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterTo/mula-2.png");
+		mTo2TextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterTo/ma.png");
+		mTo3TextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterTo/mohis-2.png");
+		mTo4TextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterTo/megh.png");
+		mTo5TextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterTo/moi-2.png");
+		mTo6TextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterTo/mama-2.png");
+		mToTextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterTo/mo.png");
+		mWTo1TextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterTo/kola-1.png");
+		mWTo2TextureRegion = BitmapTextureAtlasTextureRegionFactory
+				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterTo/keramBoard1.png");
 		
 		try 
 		{
@@ -360,7 +456,7 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 		StatusBar.hideStatusBar();
 		
 		//Loading the objects according to letter
-		loadObjects(2);
+		loadObjects(3);
 		
 		backGround = new Sprite(0, 0, mbackGroundTextureRegion, getVertexBufferObjectManager());
 		backGround.setHeight(CAMERA_HEIGHT);
@@ -453,17 +549,40 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 	{
 		// TODO Auto-generated method stub
 		
-		//Letter-Mo
+		//Letter-A
 		if(i == 1)
 		{
-			obj1 = new Objects(obj1X, obj1Y, mMulaTextureRegion, getVertexBufferObjectManager());
-			obj2 = new Objects(obj2X, obj2Y, mMaTextureRegion, getVertexBufferObjectManager());
-			obj3 = new Objects(obj3X, obj3Y, mMohisTextureRegion, getVertexBufferObjectManager());
-			obj4 = new Objects(obj4X, obj4Y, mMeghTextureRegion, getVertexBufferObjectManager());
-			obj5 = new Objects(obj5X, obj5Y, mMoiTextureRegion, getVertexBufferObjectManager());
-			obj6 = new Objects(obj6X, obj6Y, mMamaTextureRegion, getVertexBufferObjectManager());
-			wrongObj1 = new Objects(wrongObj1X, wrongObj1Y, mKolaTextureRegion, getVertexBufferObjectManager());
-			wrongObj2 = new Objects(wrongObj2X, wrongObj2Y, mKeramBoardTextureRegion, getVertexBufferObjectManager());
+			obj1 = new Objects(obj1X, obj1Y, mA1TextureRegion, getVertexBufferObjectManager());
+			obj2 = new Objects(obj2X, obj2Y, mA2TextureRegion, getVertexBufferObjectManager());
+			obj3 = new Objects(obj3X, obj3Y, mA3TextureRegion, getVertexBufferObjectManager());
+			obj4 = new Objects(obj4X, obj4Y, mA4TextureRegion, getVertexBufferObjectManager());
+			obj5 = new Objects(obj5X, obj5Y, mA5TextureRegion, getVertexBufferObjectManager());
+			obj6 = new Objects(obj6X, obj6Y, mA6TextureRegion, getVertexBufferObjectManager());
+			wrongObj1 = new Objects(wrongObj1X, wrongObj1Y, mWMo1TextureRegion, getVertexBufferObjectManager());
+			wrongObj2 = new Objects(wrongObj2X, wrongObj2Y, mWMo2TextureRegion, getVertexBufferObjectManager());
+			letter = new Letter(900, CAMERA_HEIGHT-100, 80, 80, mATextureRegion, getVertexBufferObjectManager());
+			
+			obj1Sound = R.raw.mula;
+			obj2Sound = R.raw.ma;
+			obj3Sound = R.raw.mohis;
+			obj4Sound = R.raw.megh;
+			obj5Sound = R.raw.moi;
+			obj6Sound = R.raw.mama;
+			wrongObj1Sound = R.raw.kola;
+			wrongObj2Sound = R.raw.keram;
+			letterSound = R.raw.mo;
+		}
+		//Letter-Mo
+		else if(i == 2)
+		{
+			obj1 = new Objects(obj1X, obj1Y, mMo1TextureRegion, getVertexBufferObjectManager());
+			obj2 = new Objects(obj2X, obj2Y, mMo2TextureRegion, getVertexBufferObjectManager());
+			obj3 = new Objects(obj3X, obj3Y, mMo3TextureRegion, getVertexBufferObjectManager());
+			obj4 = new Objects(obj4X, obj4Y, mMo4TextureRegion, getVertexBufferObjectManager());
+			obj5 = new Objects(obj5X, obj5Y, mMo5TextureRegion, getVertexBufferObjectManager());
+			obj6 = new Objects(obj6X, obj6Y, mMo6TextureRegion, getVertexBufferObjectManager());
+			wrongObj1 = new Objects(wrongObj1X, wrongObj1Y, mWMo1TextureRegion, getVertexBufferObjectManager());
+			wrongObj2 = new Objects(wrongObj2X, wrongObj2Y, mWMo2TextureRegion, getVertexBufferObjectManager());
 			letter = new Letter(900, CAMERA_HEIGHT-100, 80, 80, mMoTextureRegion, getVertexBufferObjectManager());
 			
 			obj1Sound = R.raw.mula;
@@ -476,19 +595,67 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 			wrongObj2Sound = R.raw.keram;
 			letterSound = R.raw.mo;
 		}
-		//Letter-A
-		else if(i == 2)
+		//Letter-Ko
+		else if(i == 3)
 		{
-			obj1 = new Objects(obj1X, obj1Y, mM1TextureRegion, getVertexBufferObjectManager());
-			obj2 = new Objects(obj2X, obj2Y, mM2TextureRegion, getVertexBufferObjectManager());
-			obj3 = new Objects(obj3X, obj3Y, mM3TextureRegion, getVertexBufferObjectManager());
-			obj4 = new Objects(obj4X, obj4Y, mM4TextureRegion, getVertexBufferObjectManager());
-			obj5 = new Objects(obj5X, obj5Y, mM5TextureRegion, getVertexBufferObjectManager());
-			obj6 = new Objects(obj6X, obj6Y, mM6TextureRegion, getVertexBufferObjectManager());
-			wrongObj1 = new Objects(wrongObj1X, wrongObj1Y, mW1TextureRegion, getVertexBufferObjectManager());
-			wrongObj2 = new Objects(wrongObj2X, wrongObj2Y, mW2TextureRegion, getVertexBufferObjectManager());
-			letter = new Letter(900, CAMERA_HEIGHT-100, 80, 80, mMATextureRegion, getVertexBufferObjectManager());
+			obj1 = new Objects(obj1X, obj1Y, mKo1TextureRegion, getVertexBufferObjectManager());
+			obj2 = new Objects(obj2X, obj2Y, mKo2TextureRegion, getVertexBufferObjectManager());
+			obj3 = new Objects(obj3X, obj3Y, mKo3TextureRegion, getVertexBufferObjectManager());
+			obj4 = new Objects(obj4X, obj4Y, mKo4TextureRegion, getVertexBufferObjectManager());
+			obj5 = new Objects(obj5X, obj5Y, mKo5TextureRegion, getVertexBufferObjectManager());
+			obj6 = new Objects(obj6X, obj6Y, mKo6TextureRegion, getVertexBufferObjectManager());
+			wrongObj1 = new Objects(wrongObj1X, wrongObj1Y, mWKo1TextureRegion, getVertexBufferObjectManager());
+			wrongObj2 = new Objects(wrongObj2X, wrongObj2Y, mWKo2TextureRegion, getVertexBufferObjectManager());
+			letter = new Letter(900, CAMERA_HEIGHT-100, 80, 80, mKoTextureRegion, getVertexBufferObjectManager());
 			
+			obj1Sound = R.raw.kola;
+			obj2Sound = R.raw.langol;
+			obj3Sound = R.raw.mula;
+			obj4Sound = R.raw.shorea;
+			obj5Sound = R.raw.ma;
+			obj6Sound = R.raw.mohis;
+			wrongObj1Sound = R.raw.aam;
+			wrongObj2Sound = R.raw.keram;
+			letterSound = R.raw.akar;
+		}
+
+		//Letter-Lo
+		else if(i == 4)
+		{
+			obj1 = new Objects(obj1X, obj1Y, mLo1TextureRegion, getVertexBufferObjectManager());
+			obj2 = new Objects(obj2X, obj2Y, mLo2TextureRegion, getVertexBufferObjectManager());
+			obj3 = new Objects(obj3X, obj3Y, mLo3TextureRegion, getVertexBufferObjectManager());
+			obj4 = new Objects(obj4X, obj4Y, mLo4TextureRegion, getVertexBufferObjectManager());
+			obj5 = new Objects(obj5X, obj5Y, mLo5TextureRegion, getVertexBufferObjectManager());
+			obj6 = new Objects(obj6X, obj6Y, mLo6TextureRegion, getVertexBufferObjectManager());
+			wrongObj1 = new Objects(wrongObj1X, wrongObj1Y, mWLo1TextureRegion, getVertexBufferObjectManager());
+			wrongObj2 = new Objects(wrongObj2X, wrongObj2Y, mWLo2TextureRegion, getVertexBufferObjectManager());
+			letter = new Letter(900, CAMERA_HEIGHT-100, 80, 80, mLoTextureRegion, getVertexBufferObjectManager());
+					
+			obj1Sound = R.raw.kola;
+			obj2Sound = R.raw.langol;
+			obj3Sound = R.raw.mula;
+			obj4Sound = R.raw.shorea;
+			obj5Sound = R.raw.ma;
+			obj6Sound = R.raw.mohis;
+			wrongObj1Sound = R.raw.aam;
+			wrongObj2Sound = R.raw.keram;
+			letterSound = R.raw.akar;
+		}
+		
+		//Letter-To
+		else if(i == 5)
+		{
+			obj1 = new Objects(obj1X, obj1Y, mTo1TextureRegion, getVertexBufferObjectManager());
+			obj2 = new Objects(obj2X, obj2Y, mTo2TextureRegion, getVertexBufferObjectManager());
+			obj3 = new Objects(obj3X, obj3Y, mTo3TextureRegion, getVertexBufferObjectManager());
+			obj4 = new Objects(obj4X, obj4Y, mTo4TextureRegion, getVertexBufferObjectManager());
+			obj5 = new Objects(obj5X, obj5Y, mTo5TextureRegion, getVertexBufferObjectManager());
+			obj6 = new Objects(obj6X, obj6Y, mTo6TextureRegion, getVertexBufferObjectManager());
+			wrongObj1 = new Objects(wrongObj1X, wrongObj1Y, mWTo1TextureRegion, getVertexBufferObjectManager());
+			wrongObj2 = new Objects(wrongObj2X, wrongObj2Y, mWTo2TextureRegion, getVertexBufferObjectManager());
+			letter = new Letter(900, CAMERA_HEIGHT-100, 80, 80, mToTextureRegion, getVertexBufferObjectManager());
+							
 			obj1Sound = R.raw.kola;
 			obj2Sound = R.raw.langol;
 			obj3Sound = R.raw.mula;

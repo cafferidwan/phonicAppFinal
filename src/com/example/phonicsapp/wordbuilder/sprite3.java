@@ -41,8 +41,11 @@ public class sprite3 extends Sprite implements OnCompletionListener {
 	public sprite3(float pX, float pY, float pWidth, float pHeight,ITextureRegion pTextureRegion,
 			VertexBufferObjectManager pSpriteVertexBufferObject, final int a, int audio,Context cont) {
 		super(pX, pY, pWidth, pHeight, pTextureRegion,pSpriteVertexBufferObject);
+		
 		audioIndex = MainActivity.audioIndexCounter;
+		
 		MainActivity.audioIndexCounter++;
+		
 		sprite1 = new Sprite(pX, pY, pTextureRegion, pSpriteVertexBufferObject) {
 			@Override
 			public boolean onAreaTouched(final TouchEvent pSceneTouchEvent,
