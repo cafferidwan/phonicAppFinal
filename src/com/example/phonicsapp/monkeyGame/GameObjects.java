@@ -210,23 +210,44 @@ public class GameObjects
 		
 	}
 	
-	public static void obj3(int number)
+	public static void obj3(int level, int number)
 	{
-		if(number == 1)
+		Path obj3Path = null;
+		
+		if(level == 1)
 		{
-			ax = -150;
-			ay = MonkeyGameActivity.CAMERA_HEIGHT/2 - 20;
-			
-			bx = MonkeyGameActivity.CAMERA_WIDTH+20;
-			by = MonkeyGameActivity.CAMERA_HEIGHT/2 - 20;
+			if(number == 1)
+			{
+				ax = -150;
+				ay = MonkeyGameActivity.CAMERA_HEIGHT/2 - 20;
+				
+				bx = MonkeyGameActivity.CAMERA_WIDTH+20;
+				by = MonkeyGameActivity.CAMERA_HEIGHT/2 - 20;
+			}
+			else if(number == 2)
+			{
+				ax = MonkeyGameActivity.CAMERA_WIDTH+20;
+				ay = MonkeyGameActivity.CAMERA_HEIGHT/2 - 170;
+				
+				bx = -150;
+				by = MonkeyGameActivity.CAMERA_HEIGHT/2 - 170;
+			}
+			obj3Path = new Path(2).to(ax, ay ).to(bx, by);
 		}
-		else if(number == 2)
+		else if(level == 2)
 		{
-			ax = MonkeyGameActivity.CAMERA_WIDTH+20;
-			ay = MonkeyGameActivity.CAMERA_HEIGHT/2 - 170;
-			
-			bx = -150;
-			by = MonkeyGameActivity.CAMERA_HEIGHT/2 - 170;
+			if(number == 1)
+			{
+				obj3Path = new Path(5).to(-20,0).to(MonkeyGameActivity.CAMERA_WIDTH/4, MonkeyGameActivity.CAMERA_HEIGHT/2).
+						to(MonkeyGameActivity.CAMERA_WIDTH/2, 0).to(MonkeyGameActivity.CAMERA_WIDTH*(4/3),MonkeyGameActivity.CAMERA_HEIGHT/2).
+						to(MonkeyGameActivity.CAMERA_WIDTH+20, 0);
+			}
+			else if(number == 2)
+			{
+				obj3Path = new Path(5).to(MonkeyGameActivity.CAMERA_WIDTH+20,MonkeyGameActivity.CAMERA_HEIGHT/2).to(MonkeyGameActivity.CAMERA_WIDTH*(4/3), 0).
+						to(MonkeyGameActivity.CAMERA_WIDTH/2, MonkeyGameActivity.CAMERA_HEIGHT/2).to(MonkeyGameActivity.CAMERA_WIDTH /4, 0).
+						to(-20, MonkeyGameActivity.CAMERA_HEIGHT/2);
+			}
 		}
 		
 		MonkeyGameActivity.mScene.attachChild(MonkeyGameActivity.obj3);
@@ -234,7 +255,6 @@ public class GameObjects
 		MonkeyGameActivity.obj3.setWidth(140);
 		MonkeyGameActivity.obj3.setHeight(77);
 		
-		final Path obj3Path = new Path(2).to(ax, ay ).to(bx, by);
 		
 		MonkeyGameActivity.obj3.registerEntityModifier(new PathModifier(4, obj3Path, null, new IPathModifierListener()
 		{
@@ -273,31 +293,50 @@ public class GameObjects
 		}, EaseSineInOut.getInstance()));
 		
 	}
-	public static void obj4(int number)
+	public static void obj4(int level, int number)
 	{
-		if(number == 1)
+		Path obj4Path = null;
+		
+		if(level == 1)
 		{
-			ax = -150;
-			ay = MonkeyGameActivity.CAMERA_HEIGHT/2 - 20;
-			
-			bx = MonkeyGameActivity.CAMERA_WIDTH+20;
-			by = MonkeyGameActivity.CAMERA_HEIGHT/2 - 20;
+			if(number == 1)
+			{
+				ax = -150;
+				ay = MonkeyGameActivity.CAMERA_HEIGHT/2 - 20;
+				
+				bx = MonkeyGameActivity.CAMERA_WIDTH+20;
+				by = MonkeyGameActivity.CAMERA_HEIGHT/2 - 20;
+			}
+			else if(number == 2)
+			{
+				ax = MonkeyGameActivity.CAMERA_WIDTH+20;
+				ay = MonkeyGameActivity.CAMERA_HEIGHT/2 - 170;
+				
+				bx = -150;
+				by = MonkeyGameActivity.CAMERA_HEIGHT/2 - 170;
+			}
+			obj4Path = new Path(2).to(ax, ay ).to(bx, by);
 		}
-		else if(number == 2)
+		else if(level == 2)
 		{
-			ax = MonkeyGameActivity.CAMERA_WIDTH+20;
-			ay = MonkeyGameActivity.CAMERA_HEIGHT/2 - 170;
-			
-			bx = -150;
-			by = MonkeyGameActivity.CAMERA_HEIGHT/2 - 170;
+			if(number == 1)
+			{
+				obj4Path = new Path(5).to(-20,0).to(MonkeyGameActivity.CAMERA_WIDTH/4, MonkeyGameActivity.CAMERA_HEIGHT/2).
+						to(MonkeyGameActivity.CAMERA_WIDTH/2, 0).to(MonkeyGameActivity.CAMERA_WIDTH*(4/3),MonkeyGameActivity.CAMERA_HEIGHT/2).
+						to(MonkeyGameActivity.CAMERA_WIDTH+20, 0);
+			}
+			else if(number == 2)
+			{
+				obj4Path = new Path(5).to(MonkeyGameActivity.CAMERA_WIDTH+20,MonkeyGameActivity.CAMERA_HEIGHT/2).to(MonkeyGameActivity.CAMERA_WIDTH*(4/3), 0).
+						to(MonkeyGameActivity.CAMERA_WIDTH/2, MonkeyGameActivity.CAMERA_HEIGHT/2).to(MonkeyGameActivity.CAMERA_WIDTH /4, 0).
+						to(-20, MonkeyGameActivity.CAMERA_HEIGHT/2);
+			}
 		}
 		
 		MonkeyGameActivity.mScene.attachChild(MonkeyGameActivity.obj4);
 		MonkeyGameActivity.mScene.registerTouchArea(MonkeyGameActivity.obj4);
 		MonkeyGameActivity.obj4.setWidth(MonkeyGameActivity.ImageWidthObjects);
 		MonkeyGameActivity.obj4.setHeight(MonkeyGameActivity.ImageHeightObjects);
-		
-		final Path obj4Path = new Path(2).to(ax, ay ).to(bx, by);
 		
 		MonkeyGameActivity.obj4.registerEntityModifier(new PathModifier(4, obj4Path, null, new IPathModifierListener() 
 		{
@@ -337,23 +376,44 @@ public class GameObjects
 		
 	}
 	
-	public static void wrongObj1(int number)
+	public static void wrongObj1(int level, int number)
 	{
-		if(number == 1)
+		Path wrongObj1Path = null;
+		
+		if(level == 1)
 		{
-			ax = -150;
-			ay = MonkeyGameActivity.CAMERA_HEIGHT/2 - 20;
-			
-			bx = MonkeyGameActivity.CAMERA_WIDTH+20;
-			by = MonkeyGameActivity.CAMERA_HEIGHT/2 - 20;
+			if(number == 1)
+			{
+				ax = -150;
+				ay = MonkeyGameActivity.CAMERA_HEIGHT/2 - 20;
+				
+				bx = MonkeyGameActivity.CAMERA_WIDTH+20;
+				by = MonkeyGameActivity.CAMERA_HEIGHT/2 - 20;
+			}
+			else if(number == 2)
+			{
+				ax = MonkeyGameActivity.CAMERA_WIDTH+20;
+				ay = MonkeyGameActivity.CAMERA_HEIGHT/2 - 170;
+				
+				bx = -150;
+				by = MonkeyGameActivity.CAMERA_HEIGHT/2 - 170;
+			}
+			wrongObj1Path = new Path(2).to(ax, ay ).to(bx, by);
 		}
-		else if(number == 2)
+		else if(level == 2)
 		{
-			ax = MonkeyGameActivity.CAMERA_WIDTH+20;
-			ay = MonkeyGameActivity.CAMERA_HEIGHT/2 - 170;
-			
-			bx = -150;
-			by = MonkeyGameActivity.CAMERA_HEIGHT/2 - 170;
+			if(number == 1)
+			{
+				wrongObj1Path = new Path(5).to(-20,0).to(MonkeyGameActivity.CAMERA_WIDTH/4, MonkeyGameActivity.CAMERA_HEIGHT/2).
+						to(MonkeyGameActivity.CAMERA_WIDTH/2, 0).to(MonkeyGameActivity.CAMERA_WIDTH*(4/3),MonkeyGameActivity.CAMERA_HEIGHT/2).
+						to(MonkeyGameActivity.CAMERA_WIDTH+20, 0);
+			}
+			else if(number == 2)
+			{
+				wrongObj1Path = new Path(5).to(MonkeyGameActivity.CAMERA_WIDTH+20,MonkeyGameActivity.CAMERA_HEIGHT/2).to(MonkeyGameActivity.CAMERA_WIDTH*(4/3), 0).
+						to(MonkeyGameActivity.CAMERA_WIDTH/2, MonkeyGameActivity.CAMERA_HEIGHT/2).to(MonkeyGameActivity.CAMERA_WIDTH /4, 0).
+						to(-20, MonkeyGameActivity.CAMERA_HEIGHT/2);
+			}
 		}
 		
 		MonkeyGameActivity.mScene.attachChild(MonkeyGameActivity.wrongObj1);
@@ -361,7 +421,6 @@ public class GameObjects
 		MonkeyGameActivity.wrongObj1.setWidth(MonkeyGameActivity.ImageWidthObjects);
 		MonkeyGameActivity.wrongObj1.setHeight(MonkeyGameActivity.ImageHeightObjects);
 		
-		final Path wrongObj1Path = new Path(2).to(ax, ay ).to(bx, by);
 		MonkeyGameActivity.wrongObj1.registerEntityModifier(new PathModifier(4, wrongObj1Path, null, new IPathModifierListener() 
 		{
 			@Override
@@ -401,23 +460,44 @@ public class GameObjects
 		
 	}
 	
-	public static void wrongObj2(int number)
+	public static void wrongObj2(int level, int number)
 	{
-		if(number == 1)
+	Path wrongObj2Path = null;
+		
+		if(level == 1)
 		{
-			ax = -150;
-			ay = MonkeyGameActivity.CAMERA_HEIGHT/2 - 20;
-			
-			bx = MonkeyGameActivity.CAMERA_WIDTH+20;
-			by = MonkeyGameActivity.CAMERA_HEIGHT/2 - 20;
+			if(number == 1)
+			{
+				ax = -150;
+				ay = MonkeyGameActivity.CAMERA_HEIGHT/2 - 20;
+				
+				bx = MonkeyGameActivity.CAMERA_WIDTH+20;
+				by = MonkeyGameActivity.CAMERA_HEIGHT/2 - 20;
+			}
+			else if(number == 2)
+			{
+				ax = MonkeyGameActivity.CAMERA_WIDTH+20;
+				ay = MonkeyGameActivity.CAMERA_HEIGHT/2 - 170;
+				
+				bx = -150;
+				by = MonkeyGameActivity.CAMERA_HEIGHT/2 - 170;
+			}
+			wrongObj2Path = new Path(2).to(ax, ay ).to(bx, by);
 		}
-		else if(number == 2)
+		else if(level == 2)
 		{
-			ax = MonkeyGameActivity.CAMERA_WIDTH+20;
-			ay = MonkeyGameActivity.CAMERA_HEIGHT/2 - 170;
-			
-			bx = -150;
-			by = MonkeyGameActivity.CAMERA_HEIGHT/2 - 170;
+			if(number == 1)
+			{
+				wrongObj2Path = new Path(5).to(-20,0).to(MonkeyGameActivity.CAMERA_WIDTH/4, MonkeyGameActivity.CAMERA_HEIGHT/2).
+						to(MonkeyGameActivity.CAMERA_WIDTH/2, 0).to(MonkeyGameActivity.CAMERA_WIDTH*(4/3),MonkeyGameActivity.CAMERA_HEIGHT/2).
+						to(MonkeyGameActivity.CAMERA_WIDTH+20, 0);
+			}
+			else if(number == 2)
+			{
+				wrongObj2Path = new Path(5).to(MonkeyGameActivity.CAMERA_WIDTH+20,MonkeyGameActivity.CAMERA_HEIGHT/2).to(MonkeyGameActivity.CAMERA_WIDTH*(4/3), 0).
+						to(MonkeyGameActivity.CAMERA_WIDTH/2, MonkeyGameActivity.CAMERA_HEIGHT/2).to(MonkeyGameActivity.CAMERA_WIDTH /4, 0).
+						to(-20, MonkeyGameActivity.CAMERA_HEIGHT/2);
+			}
 		}
 		
 		MonkeyGameActivity.mScene.attachChild(MonkeyGameActivity.wrongObj2);
@@ -425,7 +505,6 @@ public class GameObjects
 		MonkeyGameActivity.wrongObj2.setWidth(MonkeyGameActivity.ImageWidthObjects);
 		MonkeyGameActivity.wrongObj2.setHeight(MonkeyGameActivity.ImageHeightObjects);
 		
-		final Path wrongObj2Path = new Path(2).to(ax, ay ).to(bx, by);
 		MonkeyGameActivity.wrongObj2.registerEntityModifier(new PathModifier(4, wrongObj2Path, null, new IPathModifierListener() 
 		{
 			@Override

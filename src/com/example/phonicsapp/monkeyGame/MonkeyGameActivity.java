@@ -415,8 +415,8 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 				//Loading the Objects according to the game content
 				LoadObjects(2);
 				
-				randomItem = (int)(Math.random()*1);
-				randomItem1 = (int)(Math.random()*3);
+				randomItem = (int)(Math.random()*6);
+				randomItem1 = (int)(Math.random()*6);
 				if(randomItem == randomItem1 )
 				{
 					randomItem1 = randomItem1+2;
@@ -429,66 +429,62 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 				switch(randomItem)
 				{
 					case 0:
-							//GameObjects.wrongObj1(1);
-						GameObjects.obj2(2, 1);
+							GameObjects.wrongObj1(2,1);
 					break;
 					
 					case 1:
-						GameObjects.obj2(2, 2);
-						//	GameObjects.wrongObj2(1);
+							GameObjects.wrongObj2(2,1);
 					break;
 					
 					case 2:
-						//	GameObjects.obj1(1);
+							GameObjects.obj1(2,1);
 					break;
 					
 					case 3:
-						//GameObjects.obj2(2, 1);
+							GameObjects.obj2(2, 1);
 					break;
 					
 					case 4:
-						//	GameObjects.obj4(1);
+							GameObjects.obj3(2,1);
 					break;
 						
 					case 5:
-						//	GameObjects.obj3(1);
+							GameObjects.obj4(2,1);
 					break;
 
 					default:
-						//	GameObjects.obj3(1);
+						//	GameObjects.obj3(2,1);
 					break;
 				}
 				
 				switch(randomItem1)
 				{
 					case 0:
-						//GameObjects.wrongObj1(2);
+							GameObjects.wrongObj1(2,2);
 					break;
 			
 					case 1:
-						GameObjects.obj1(2, 1);
-					//	GameObjects.wrongObj2(2);
+							GameObjects.wrongObj2(2,2);
 					break;
-			
+				
 					case 2:
-						GameObjects.obj1(2, 2);
-					//	GameObjects.obj1(2);
+							GameObjects.obj1(2,2);
 					break;
 			
 					case 3:
-					//	GameObjects.obj2(2, 1);
+							GameObjects.obj2(2, 2);
 					break;
 			
 					case 4:
-					//	GameObjects.obj4(2);
+							GameObjects.obj3(2,2);
 					break;
 				
 					case 5:
-					//	GameObjects.obj3(2);
+							GameObjects.obj4(2,2);
 					break;
-					
+
 					default:
-					//	GameObjects.obj1(2);
+						//	GameObjects.obj3(2,2);
 					break;
 				}
 			}
