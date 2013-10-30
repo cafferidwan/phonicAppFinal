@@ -4,17 +4,14 @@ import org.andengine.entity.sprite.Sprite;
 import org.andengine.input.touch.TouchEvent;
 import org.andengine.opengl.texture.region.ITextureRegion;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
-import org.andengine.util.debug.Debug;
-
-import com.example.phonicsapp.R;
-import com.example.phonicsapp.R.raw;
 
 public class Objects extends Sprite
 {
 
-	public static boolean touchFlag;
+	public static boolean touchFlag, touchFlag1, touchFlag2, touchFlag3, touchFlag4;
 	
 	int i =0;
+	
 	public Objects(float pX, float pY, ITextureRegion pTextureRegion,
 			VertexBufferObjectManager VertexBufferObject) 
 	{
@@ -30,8 +27,8 @@ public class Objects extends Sprite
 		switch (pSceneTouchEvent.getAction())
 		{
 			case TouchEvent.ACTION_DOWN:
-			{
-				touchFlag = true;
+			{ 
+				touchFlag = true;  
 				break;
 			}
 			case TouchEvent.ACTION_MOVE: 
@@ -42,11 +39,14 @@ public class Objects extends Sprite
 				if(pSceneTouchEvent.getX()- this.getWidth()/2 == BoxGameActivity.obj1.getX() && 
 						pSceneTouchEvent.getY()- this.getHeight()/2 == BoxGameActivity.obj1.getY())
 				{
+					
 					i++;
 					if(i==1)
 					{
+						touchFlag1 = true;
 						Functions.audioPlay = true;
 						Functions.playAudio(BoxGameActivity.obj1Sound);
+						
 					}
 				}
 				else if(pSceneTouchEvent.getX()- this.getWidth()/2 == BoxGameActivity.obj2.getX() && 
@@ -55,6 +55,7 @@ public class Objects extends Sprite
 					i++;
 					if(i==1)
 					{
+						touchFlag2 = true;
 						Functions.audioPlay = true;
 						Functions.playAudio(BoxGameActivity.obj2Sound);
 					}
@@ -105,6 +106,7 @@ public class Objects extends Sprite
 					i++;
 					if(i==1)
 					{
+						touchFlag1 = true;
 						Functions.audioPlay = true;
 						Functions.playAudio(BoxGameActivity.wrongObj1Sound);
 					}
@@ -115,17 +117,19 @@ public class Objects extends Sprite
 					i++;
 					if(i==1)
 					{
+						touchFlag2 = true;
 						Functions.audioPlay = true;
 						Functions.playAudio(BoxGameActivity.wrongObj2Sound);
 					}
 				}
 				break;
-			}
+			} 
 			case TouchEvent.ACTION_UP:
 			{
 				i=0;
-				
 				touchFlag = false;
+				touchFlag1 = false;
+				touchFlag2 = false;
 				BoxGameActivity.bCounter=0;
 				
 				break;

@@ -20,13 +20,14 @@ import com.example.phonicsapp.R;
 
 import android.content.Context;
 import android.media.MediaPlayer;
+import android.util.Log;
 
 public class Functions 
 {
 	
 	static Boolean audioPlay = false;
 	static MediaPlayer mediaPlayer = new MediaPlayer();
-	static int val, count = 0;
+	static int val, count = 0 , disableCol = 0;
 	public static SequenceEntityModifier jumpModifier, jumpModifier1;
 	
 	static BoxGameActivity boxGameActivityInstance;
@@ -131,7 +132,7 @@ public class Functions
 		final Path boxPath = new Path(2).to(sprite.getX(), sprite.getY()).
 				to(BoxGameActivity.closedBox.getX(), BoxGameActivity.closedBox.getY()+30);
 		
-		sprite.registerEntityModifier(new PathModifier((float)0.4, boxPath,  new IPathModifierListener() 
+		sprite.registerEntityModifier(new PathModifier((float)0.1, boxPath,  new IPathModifierListener() 
 		{
 			@Override
 			public void onPathStarted(final PathModifier pPathModifier, final IEntity pEntity) 
@@ -143,7 +144,6 @@ public class Functions
 			public void onPathWaypointStarted(final PathModifier pPathModifier, final IEntity pEntity, final int pWaypointIndex)
 			{
 				//Debug.d("onPathWaypointStarted:  " + pWaypointIndex);
-		
 			}
 
 			@Override
@@ -183,6 +183,74 @@ public class Functions
 		sprite.registerEntityModifier(yourModifier);
 	}
 	
+	//Exchange Position Function
+	public static void ExchangePosition(final Sprite a, final Sprite b)
+	{
+		final Path boxPath ;
+		
+//		if(!(a.getX()>=0))
+//		{ 
+//			Log.d("a.x",""+a.getX());
+//			Log.d("b.x",""+b.getX());
+//		}
+//		else
+//		{
+	 		
+		
+		boxPath = new Path(2).to(a.getX(), a.getY()).
+				to(b.getX(), b.getY());
+		AlphaModifier yourModifier = new AlphaModifier(1f, 0.5f, 0f)
+		{
+		        @Override
+		        protected void onModifierStarted(IEntity pItem)
+		        {
+		                super.onModifierStarted(pItem);
+		                disableCol = 1;
+		                // Your action after starting modifier
+		        }
+			       
+		        @Override
+		        protected void onModifierFinished(IEntity pItem)
+		        {
+		                super.onModifierFinished(pItem);
+		                // Your action after finishing modifier
+		                
+		            	a.registerEntityModifier(new PathModifier((float)0.01, boxPath,  new IPathModifierListener() 
+		        		{
+		        			@Override
+		        			public void onPathStarted(final PathModifier pPathModifier, final IEntity pEntity) 
+		        			{
+		        				//Debug.d("onPathStarted");
+		        			}
+
+			        		@Override
+			        		public void onPathWaypointStarted(final PathModifier pPathModifier, final IEntity pEntity, final int pWaypointIndex)
+			        		{
+			        			//Debug.d("onPathWaypointStarted:  " + pWaypointIndex);
+			        		
+			        		}
+
+			        		@Override
+			        		public void onPathWaypointFinished(final PathModifier pPathModifier, final IEntity pEntity, final int pWaypointIndex) 
+			        		{
+			        			//Debug.d("onPathWaypointFinished: " + pWaypointIndex);
+			        				
+			        		}
+
+			        		@Override
+			        		public void onPathFinished(final PathModifier pPathModifier, final IEntity pEntity) 
+			        		{
+			        			a.setAlpha(1);
+			        			disableCol = 0;
+			        		}
+		        	}));
+		       }
+		};
+			 
+		a.registerEntityModifier(yourModifier);
+//		}
+
+	}
 	//Audio play Function
 	public static void playAudio(int val)
 	{

@@ -40,13 +40,14 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 	static Context context;
 	
 	private BuildableBitmapTextureAtlas mBitmapTextureAtlas;
+	private BuildableBitmapTextureAtlas mBitmapTextureAtlas1;
 	public static ITextureRegion mbackGroundTextureRegion;
 	
 	public static ITextureRegion mBox1TextureRegion;
 	public static ITextureRegion mBox2TextureRegion;
 	
 	private BuildableBitmapTextureAtlas mAnimatedBitmapTextureAtlas;
-	public static TiledTextureRegion mParrotTextureRegion;
+	public TiledTextureRegion mParrotTextureRegion;
 	
 	//Letter-A
 	public static ITextureRegion mA1TextureRegion;
@@ -111,7 +112,7 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 	static Letter letter ;
 	//Obj1-mula, Obj2-ma, Obj3-mohis, Obj4-megh, Obj5-moi, Obj6-mama, wrongObj1-kola, wrongObj2-keramBoard;
 	static AnimatedSprite  parrot;
-	public TimerHandler timer1, timer2;
+	public TimerHandler timer1, timer2, timer3;
 	
 	static float obj1X , obj1Y, obj2X, obj2Y, obj3X, obj3Y, obj4X, obj4Y, obj5X, obj5Y, 
 				 obj6X, obj6Y, wrongObj1X, wrongObj1Y, wrongObj2X, wrongObj2Y;
@@ -122,6 +123,8 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 	static BoxGameActivity boxGameActivityInstance;
 	static int bCounter=0;
 	static int aCounter=0;
+	public static String DEBUG_TAG = BoxGameActivity.class.getSimpleName();
+	int i=0;
 	
 	public static BoxGameActivity getSharedInstances()
 	{
@@ -167,7 +170,6 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 		mCamera = new Camera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
 		
 		return new EngineOptions(true, ScreenOrientation.LANDSCAPE_SENSOR,new RatioResolutionPolicy(CAMERA_WIDTH, CAMERA_HEIGHT), mCamera);
-	
 	}
 
 	@Override
@@ -177,7 +179,9 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("BoxGameGfx/");
 
 		mBitmapTextureAtlas = new BuildableBitmapTextureAtlas(
-				this.getTextureManager(), 2200, 1800);
+				this.getTextureManager(), 1600, 1200);
+		mBitmapTextureAtlas1 = new BuildableBitmapTextureAtlas(
+				this.getTextureManager(), 1600, 1200);
 
 		mbackGroundTextureRegion = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(this.mBitmapTextureAtlas, this, "JungleBG.png");
@@ -187,51 +191,51 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 		mBox2TextureRegion = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(this.mBitmapTextureAtlas, this, "box-16.png");
 		
-		mAnimatedBitmapTextureAtlas = new BuildableBitmapTextureAtlas(this.getTextureManager(), 3000, 1015, TextureOptions.NEAREST);
+		mAnimatedBitmapTextureAtlas = new BuildableBitmapTextureAtlas(this.getTextureManager(), 1000, 338, TextureOptions.NEAREST);
 		mParrotTextureRegion = BitmapTextureAtlasTextureRegionFactory.
-				createTiledFromAsset(this.mAnimatedBitmapTextureAtlas, this, "parrot.png", 6, 2);
+				createTiledFromAsset(this.mAnimatedBitmapTextureAtlas, this, "parrot1.png", 6, 2);
 		
 		
 		//Letter-A
 		mA1TextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterA/ma.png");
+				.createFromAsset(this.mBitmapTextureAtlas1, this, "LetterA/ma.png");
 		mA2TextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterA/mas.png");
+				.createFromAsset(this.mBitmapTextureAtlas1, this, "LetterA/mas.png");
 		mA3TextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterA/mohis-2.png");
+				.createFromAsset(this.mBitmapTextureAtlas1, this, "LetterA/mohis-2.png");
 		mA4TextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterA/mula-2.png");
+				.createFromAsset(this.mBitmapTextureAtlas1, this, "LetterA/mula-2.png");
 		mA5TextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterA/moi-2.png");
+				.createFromAsset(this.mBitmapTextureAtlas1, this, "LetterA/moi-2.png");
 		mA6TextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterA/mama-2.png");
+				.createFromAsset(this.mBitmapTextureAtlas1, this, "LetterA/mama-2.png");
 		mATextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterA/mo.png");
+				.createFromAsset(this.mBitmapTextureAtlas1, this, "LetterA/mo.png");
 		mWA1TextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterA/pineapple.png");
+				.createFromAsset(this.mBitmapTextureAtlas1, this, "LetterA/pineapple.png");
 		mWA2TextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterA/keramBoard1.png");
+				.createFromAsset(this.mBitmapTextureAtlas1, this, "LetterA/keramBoard1.png");
 				
 				
 		//Letter-Mo
 		mMo1TextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterMo/mula-2.png");
+				.createFromAsset(this.mBitmapTextureAtlas1, this, "LetterMo/mula-2.png");
 		mMo2TextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterMo/ma.png");
+				.createFromAsset(this.mBitmapTextureAtlas1, this, "LetterMo/ma.png");
 		mMo3TextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterMo/mohis-2.png");
+				.createFromAsset(this.mBitmapTextureAtlas1, this, "LetterMo/mohis-2.png");
 		mMo4TextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterMo/megh.png");
+				.createFromAsset(this.mBitmapTextureAtlas1, this, "LetterMo/megh.png");
 		mMo5TextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterMo/moi-2.png");
+				.createFromAsset(this.mBitmapTextureAtlas1, this, "LetterMo/moi-2.png");
 		mMo6TextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterMo/mama-2.png");
+				.createFromAsset(this.mBitmapTextureAtlas1, this, "LetterMo/mama-2.png");
 		mMoTextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterMo/mo.png");
+				.createFromAsset(this.mBitmapTextureAtlas1, this, "LetterMo/mo.png");
 		mWMo1TextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterMo/kola-1.png");
+				.createFromAsset(this.mBitmapTextureAtlas1, this, "LetterMo/kola-1.png");
 		mWMo2TextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterMo/keramBoard1.png");
+				.createFromAsset(this.mBitmapTextureAtlas1, this, "LetterMo/keramBoard1.png");
 		
 		//Letter-Ko
 		mKo1TextureRegion = BitmapTextureAtlasTextureRegionFactory
@@ -255,49 +259,61 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 		
 		//Letter-Lo
 		mLo1TextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterLo/ma.png");
+				.createFromAsset(this.mBitmapTextureAtlas1, this, "LetterLo/ma.png");
 		mLo2TextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterLo/mas.png");
+				.createFromAsset(this.mBitmapTextureAtlas1, this, "LetterLo/mas.png");
 		mLo3TextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterLo/mohis-2.png");
+				.createFromAsset(this.mBitmapTextureAtlas1, this, "LetterLo/mohis-2.png");
 		mLo4TextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterLo/mula-2.png");
+				.createFromAsset(this.mBitmapTextureAtlas1, this, "LetterLo/mula-2.png");
 		mLo5TextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterLo/moi-2.png");
+				.createFromAsset(this.mBitmapTextureAtlas1, this, "LetterLo/moi-2.png");
 		mLo6TextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterLo/mama-2.png");
+				.createFromAsset(this.mBitmapTextureAtlas1, this, "LetterLo/mama-2.png");
 		mLoTextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterLo/mo.png");
+				.createFromAsset(this.mBitmapTextureAtlas1, this, "LetterLo/mo.png");
 		mWLo1TextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterLo/pineapple.png");
+				.createFromAsset(this.mBitmapTextureAtlas1, this, "LetterLo/pineapple.png");
 		mWLo2TextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterLo/keramBoard1.png");
+				.createFromAsset(this.mBitmapTextureAtlas1, this, "LetterLo/keramBoard1.png");
 		
 		//Letter-To
 		mTo1TextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterTo/mula-2.png");
+				.createFromAsset(this.mBitmapTextureAtlas1, this, "LetterTo/mula-2.png");
 		mTo2TextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterTo/ma.png");
+				.createFromAsset(this.mBitmapTextureAtlas1, this, "LetterTo/ma.png");
 		mTo3TextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterTo/mohis-2.png");
+				.createFromAsset(this.mBitmapTextureAtlas1, this, "LetterTo/mohis-2.png");
 		mTo4TextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterTo/megh.png");
+				.createFromAsset(this.mBitmapTextureAtlas1, this, "LetterTo/megh.png");
 		mTo5TextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterTo/moi-2.png");
+				.createFromAsset(this.mBitmapTextureAtlas1, this, "LetterTo/moi-2.png");
 		mTo6TextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterTo/mama-2.png");
+				.createFromAsset(this.mBitmapTextureAtlas1, this, "LetterTo/mama-2.png");
 		mToTextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterTo/mo.png");
+				.createFromAsset(this.mBitmapTextureAtlas1, this, "LetterTo/mo.png");
 		mWTo1TextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterTo/kola-1.png");
+				.createFromAsset(this.mBitmapTextureAtlas1, this, "LetterTo/kola-1.png");
 		mWTo2TextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "LetterTo/keramBoard1.png");
+				.createFromAsset(this.mBitmapTextureAtlas1, this, "LetterTo/keramBoard1.png");
 		
 		try 
 		{
 			this.mBitmapTextureAtlas.build(new BlackPawnTextureAtlasBuilder<IBitmapTextureAtlasSource,
 					BitmapTextureAtlas>(0, 0, 0));
 			this.mBitmapTextureAtlas.load();
+		} 
+		
+		catch (TextureAtlasBuilderException e)
+		{
+			Debug.e(e);
+		}
+		
+		try 
+		{
+			this.mBitmapTextureAtlas1.build(new BlackPawnTextureAtlasBuilder<IBitmapTextureAtlasSource,
+					BitmapTextureAtlas>(0, 0, 0));
+			this.mBitmapTextureAtlas1.load();
 		} 
 		
 		catch (TextureAtlasBuilderException e)
@@ -323,37 +339,47 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 			public void onTimePassed(TimerHandler pTimerHandler)
 			{
 				// TODO Auto-generated method stub
-				
 				//if all the items are in the box
 				if(!(obj3.getX()>=0) && !(obj2.getX()>=0) && !(obj6.getX()>=0) && !(obj4.getX()>=0) && !(obj1.getX()>=0) && !(obj5.getX()>=0))
 				{
-					startActivity();
-				}
-				
-				if(Functions.collisoinCheck(closedBox, wrongObj1)==1 ||
-						Functions.collisoinCheck(closedBox, wrongObj1)==2)
-				{
-					openedBox.setVisible(true);
-					closedBox.setVisible(false);
-				
-					if(Objects.touchFlag == false)
+					i++;
+					if(i==1)
 					{
-						// Create jump
-						Functions.jump(wrongObj1, 0);
+						startActivity();
 					}
 				}
+
 				
-				//Keram board
-				else if(Functions.collisoinCheck(closedBox, wrongObj2)==1 ||
-						Functions.collisoinCheck(closedBox, wrongObj2)==2)
+				//Mula
+				if(Functions.collisoinCheck(closedBox, obj1)==1 ||
+						Functions.collisoinCheck(closedBox, obj1)==2)
 				{
 					openedBox.setVisible(true);
 					closedBox.setVisible(false);
 				
-					if(Objects.touchFlag == false)
+					if(Objects.touchFlag == false )
 					{
-						// Create jump
-						Functions.jump(wrongObj2, 1);
+						Functions.fadeOut(obj1);
+					}
+				}
+				//Ma
+				else if(Functions.collisoinCheck(closedBox, obj2)==1 ||
+						Functions.collisoinCheck(closedBox, obj2)==2)
+				{
+					if(Functions.disableCol == 0)
+					{
+						openedBox.setVisible(true);
+						closedBox.setVisible(false);
+				
+						if(Objects.touchFlag == false )
+						{
+							Functions.fadeOut(obj2);
+						}
+					}
+					else
+					{
+						openedBox.setVisible(false);
+						closedBox.setVisible(true);
 					}
 				}
 				
@@ -383,19 +409,6 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 					}
 				}
 				
-				//Mula
-				else if(Functions.collisoinCheck(closedBox, obj1)==1 ||
-						Functions.collisoinCheck(closedBox, obj1)==2)
-				{
-					openedBox.setVisible(true);
-					closedBox.setVisible(false);
-				
-					if(Objects.touchFlag == false)
-					{
-						Functions.fadeOut(obj1);
-					}
-				}
-				
 				//Moi
 				else if(Functions.collisoinCheck(closedBox, obj5)==1 ||
 						Functions.collisoinCheck(closedBox, obj5)==2)
@@ -409,19 +422,6 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 					}
 				}
 				
-				//Ma
-				else if(Functions.collisoinCheck(closedBox, obj2)==1 ||
-						Functions.collisoinCheck(closedBox, obj2)==2)
-				{
-					openedBox.setVisible(true);
-					closedBox.setVisible(false);
-				
-					if(Objects.touchFlag == false)
-					{
-						Functions.fadeOut(obj2);
-					}
-				}
-				
 				//Mama
 				else if(Functions.collisoinCheck(closedBox, obj6)==1 ||
 						Functions.collisoinCheck(closedBox, obj6)==2)
@@ -432,6 +432,40 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 					if(Objects.touchFlag == false)
 					{
 						Functions.fadeOut(obj6);
+					}
+				}
+				
+				else if(Functions.collisoinCheck(closedBox, wrongObj1)==1 ||
+						Functions.collisoinCheck(closedBox, wrongObj1)==2)
+				{
+					openedBox.setVisible(true);
+					closedBox.setVisible(false);
+				
+					if(Objects.touchFlag == false)
+					{
+						// Create jump
+						Functions.jump(wrongObj1, 0);
+					}
+				}
+				
+				//Keram board
+				else if(Functions.collisoinCheck(closedBox, wrongObj2)==1 ||
+						Functions.collisoinCheck(closedBox, wrongObj2)==2)
+				{
+					if(Functions.disableCol == 0)
+					{
+					openedBox.setVisible(true);
+					closedBox.setVisible(false);
+				
+					if(Objects.touchFlag == false)
+					{
+						// Create jump
+						Functions.jump(wrongObj2, 1);
+					}
+					}else 
+					{
+						openedBox.setVisible(false);
+						closedBox.setVisible(true);
 					}
 				}
 				
@@ -456,7 +490,7 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 		StatusBar.hideStatusBar();
 		
 		//Loading the objects according to letter
-		loadObjects(3);
+		loadObjects(2);
 		
 		backGround = new Sprite(0, 0, mbackGroundTextureRegion, getVertexBufferObjectManager());
 		backGround.setHeight(CAMERA_HEIGHT);
@@ -520,8 +554,8 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 		parrot = new Parrot(CAMERA_WIDTH+500, CAMERA_HEIGHT/2-50, mParrotTextureRegion, this.getVertexBufferObjectManager());
 		parrot.animate(new long[]{100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100}, 0, 11, true);
 		parrot.setFlippedHorizontal(true);
-		parrot.setWidth(ImageWidth*1.5f);
-		parrot.setHeight(ImageHight*1.5f);
+//		parrot.setWidth(ImageWidth*1.5f);
+//		parrot.setHeight(ImageHight*1.5f);
 		mScene.registerTouchArea(parrot);
 		mScene.attachChild(parrot);
 		
@@ -533,7 +567,7 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 		//getting the context
 		BoxGameActivity.context = getApplicationContext();
 		
-		mScene.registerUpdateHandler(new TimerHandler((float) 0.5, new ITimerCallback()
+		mScene.registerUpdateHandler(new TimerHandler((float) 0.5,new ITimerCallback()
 		{
 			@Override
 			public void onTimePassed(TimerHandler pTimerHandler)
@@ -541,6 +575,56 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 				playIntroSound();
 			}
 		}));
+		
+		timer2 = new TimerHandler( (float) 5, true, new ITimerCallback() 
+		{
+			@Override
+			public void onTimePassed(TimerHandler pTimerHandler)
+			{
+				// TODO Auto-generated method stub
+				
+				if(Objects.touchFlag1 == false)
+				{
+					if(!(obj1.getX()>=0) || !(wrongObj1.getX()>=0))
+					{ 
+//						Log.d("a.x",""+a.getX());
+//						Log.d("b.x",""+b.getX());
+					}
+					else
+					{
+					Functions.ExchangePosition(obj1, wrongObj1);
+					Functions.ExchangePosition(wrongObj1, obj1);
+					}
+				}
+				
+			}
+		});
+		mScene.registerUpdateHandler(timer2);
+	
+		timer3 = new TimerHandler( (float) 3.5, true, new ITimerCallback() 
+		{
+			@Override
+			public void onTimePassed(TimerHandler pTimerHandler)
+			{
+				// TODO Auto-generated method stub
+				  
+				if(Objects.touchFlag2 == false)
+				{ 
+					if(!(obj2.getX()>=0) || !(wrongObj2.getX()>=0))
+					{ 
+//						Log.d("a.x",""+a.getX());
+//						Log.d("b.x",""+b.getX());
+					}
+					else
+					{
+					Functions.ExchangePosition(obj2, wrongObj2);
+					Functions.ExchangePosition(wrongObj2, obj2);
+					}
+					
+				}
+			}
+		});
+		mScene.registerUpdateHandler(timer3);
 		
 		return mScene;
 	}
@@ -680,6 +764,7 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 		mScene.unregisterUpdateHandler(timer1);
 		finish();
 		startActivity(new Intent(this, MonkeyGameActivity.class));
+		i=0;
 	}
 	
 	public void setCurrentScene(Scene scene)
