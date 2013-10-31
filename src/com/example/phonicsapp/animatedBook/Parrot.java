@@ -74,8 +74,8 @@ public class Parrot extends AnimatedSprite
 		parrotFlying.animate(new long[] {  100, 100, 100, 100,100, 100, 100, 100, 100, 100, 100,
 				100 }, 0, 11, true);
 		parrotFlying.setFlippedHorizontal(true);
-		parrotFlying.setHeight(AnimatedBookActivity.CAMERA_HEIGHT / 2);
-		parrotFlying.setWidth(AnimatedBookActivity.CAMERA_WIDTH / 4);
+//		parrotFlying.setHeight(AnimatedBookActivity.CAMERA_HEIGHT / 2);
+//		parrotFlying.setWidth(AnimatedBookActivity.CAMERA_WIDTH / 4);
 		mLetter.setHeight(80);
 		mLetter.setWidth(80);
 		mLetter.setZIndex(3);

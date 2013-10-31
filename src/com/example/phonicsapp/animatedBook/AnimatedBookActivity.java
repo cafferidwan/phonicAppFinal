@@ -201,8 +201,8 @@ public class AnimatedBookActivity extends SimpleBaseGameActivity
 		LetterToTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(LetterAllBuildableBitmapTextureAtlas, this, "grp3/letter_to.png");
 		LetterAaaTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(LetterAllBuildableBitmapTextureAtlas, this, "grp1/letter_aa.png");
 		
-		ParrotBitmapTextureAtlus = new BitmapTextureAtlas(getTextureManager(), 3000, 1015,TextureOptions.DEFAULT);
-		ParrotTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(ParrotBitmapTextureAtlus, this, "sprite_parrot4.png",0,0,6,2);
+		ParrotBitmapTextureAtlus = new BitmapTextureAtlas(getTextureManager(), 1000, 338,TextureOptions.DEFAULT);
+		ParrotTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(ParrotBitmapTextureAtlus, this, "parrot1.png",0,0,6,2);
 		
 		
 		try

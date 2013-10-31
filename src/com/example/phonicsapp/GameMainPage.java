@@ -75,13 +75,12 @@ public class GameMainPage extends SimpleBaseGameActivity
 	protected void onCreateResources() 
 	{
 		// TODO Auto-generated method stub
-		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("gameMenuGfx/");
+		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("GameMenuGfx/");
 
 		mBitmapTextureAtlas = new BuildableBitmapTextureAtlas(
-				getTextureManager(), 2600, 2200);
-		
+				this.getTextureManager(), 1600, 1200);
 		mBitmapTextureAtlas1 = new BuildableBitmapTextureAtlas(
-				getTextureManager(), 2600, 2200);
+				this.getTextureManager(), 1600, 1200);
 
 		mbackGroundTextureRegion = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(this.mBitmapTextureAtlas, this, "bg3.png");

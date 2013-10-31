@@ -200,7 +200,7 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 	@Override
 	public void onCreateResources() 
 	{
-		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("monkeyGameGfx/");
+		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("MonkeyGameGfx/");
 		
 		mBitmapAtlas = new BitmapTextureAtlas(getTextureManager(), 1600, 868,TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		mTexture = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapAtlas, getAssets(), "bg-3.png", 0, 0);
