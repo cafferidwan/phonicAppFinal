@@ -9,18 +9,14 @@ import org.andengine.entity.modifier.SequenceEntityModifier;
 import org.andengine.entity.modifier.PathModifier.IPathModifierListener;
 import org.andengine.entity.modifier.PathModifier.Path;
 import org.andengine.entity.sprite.Sprite;
-import org.andengine.ui.activity.BaseGameActivity;
-import org.andengine.util.debug.Debug;
 import org.andengine.util.modifier.ease.EaseBounceOut;
 import org.andengine.util.modifier.ease.EaseCircularInOut;
 import org.andengine.util.modifier.ease.EaseQuadOut;
 
-import com.example.phonicsapp.GameMainPage;
 import com.example.phonicsapp.R;
 
 import android.content.Context;
 import android.media.MediaPlayer;
-import android.util.Log;
 
 public class Functions 
 {
@@ -187,15 +183,6 @@ public class Functions
 	public static void ExchangePosition(final Sprite a, final Sprite b)
 	{
 		final Path boxPath ;
-		
-//		if(!(a.getX()>=0))
-//		{ 
-//			Log.d("a.x",""+a.getX());
-//			Log.d("b.x",""+b.getX());
-//		}
-//		else
-//		{
-	 		
 		
 		boxPath = new Path(2).to(a.getX(), a.getY()).
 				to(b.getX(), b.getY());

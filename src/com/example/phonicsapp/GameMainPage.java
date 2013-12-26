@@ -8,23 +8,21 @@ import org.andengine.entity.scene.Scene;
 import org.andengine.entity.scene.background.Background;
 import org.andengine.entity.sprite.Sprite;
 import org.andengine.input.touch.TouchEvent;
+import org.andengine.opengl.texture.TextureOptions;
 import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlas;
 import org.andengine.opengl.texture.atlas.bitmap.BitmapTextureAtlasTextureRegionFactory;
-import org.andengine.opengl.texture.atlas.bitmap.BuildableBitmapTextureAtlas;
-import org.andengine.opengl.texture.atlas.bitmap.source.IBitmapTextureAtlasSource;
-import org.andengine.opengl.texture.atlas.buildable.builder.BlackPawnTextureAtlasBuilder;
-import org.andengine.opengl.texture.atlas.buildable.builder.ITextureAtlasBuilder.TextureAtlasBuilderException;
 import org.andengine.opengl.texture.region.ITextureRegion;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.ui.activity.SimpleBaseGameActivity;
 import org.andengine.util.color.Color;
-import org.andengine.util.debug.Debug;
-import com.example.phonicsapp.animatedBook.AnimatedBookActivity;
-import com.example.phonicsapp.wordbuilder.MainActivity;
+
 import StatusBarController.StatusBar;
 import android.content.Context;
 import android.content.Intent;
 import android.view.Display;
+
+import com.example.phonicsapp.animatedBook.AnimatedBookActivity;
+import com.example.phonicsapp.wordbuilder.MainActivity;
 
 
 public class GameMainPage extends SimpleBaseGameActivity
@@ -39,11 +37,14 @@ public class GameMainPage extends SimpleBaseGameActivity
 	
 	public static GameMainPage GameMainPageInstace;
 	
-	private BuildableBitmapTextureAtlas mBitmapTextureAtlas, mBitmapTextureAtlas1;
 	public static ITextureRegion mKolomTextureRegion, mBoardTextureRegion, mParrotTextureRegion;
 	public static ITextureRegion mMoTextureRegion;
 	
 	public static ITextureRegion mbackGroundTextureRegion, mbackGround2TextureRegion;
+	
+	public static BitmapTextureAtlas mBitmapTextureAtlasBackGround, mBitmapTextureAtlasBackGround2,
+									 mBitmapTextureAtlasKolom, mBitmapTextureAtlasBoard,
+									 mBitmapTextureAtlasParrot, mBitmapTextureAtlasLetterMo;
 	
 	public static Sprite backGround, backGround2;
 	public static Sprite parrot, board, monkey;
@@ -77,50 +78,34 @@ public class GameMainPage extends SimpleBaseGameActivity
 		// TODO Auto-generated method stub
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("GameMenuGfx/");
 
-		mBitmapTextureAtlas = new BuildableBitmapTextureAtlas(
-				this.getTextureManager(), 1600, 1200);
-		mBitmapTextureAtlas1 = new BuildableBitmapTextureAtlas(
-				this.getTextureManager(), 1600, 1200);
-
-		mbackGroundTextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "bg3.png");
-		mbackGround2TextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas1, this, "bg.png");
+		mBitmapTextureAtlasBackGround2 = new BitmapTextureAtlas(this.getTextureManager(), 1600, 864, TextureOptions.BILINEAR);
+		mBitmapTextureAtlasBackGround = new BitmapTextureAtlas(this.getTextureManager(), 1600, 868, TextureOptions.BILINEAR);
+		mBitmapTextureAtlasKolom = new BitmapTextureAtlas(this.getTextureManager(), 135, 283, TextureOptions.BILINEAR);
+		mBitmapTextureAtlasBoard= new BitmapTextureAtlas(this.getTextureManager(), 200, 204, TextureOptions.BILINEAR);
+		mBitmapTextureAtlasParrot = new BitmapTextureAtlas(this.getTextureManager(), 275, 174, TextureOptions.BILINEAR);
+		mBitmapTextureAtlasLetterMo = new BitmapTextureAtlas(this.getTextureManager(), 100, 100, TextureOptions.BILINEAR);
 		
-		mKolomTextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "monkey.png");
-		mBoardTextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "board.png");
-		mParrotTextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas, this, "parrot.png");
+		mbackGround2TextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mBitmapTextureAtlasBackGround2, this,
+				"JungleBG.png", 0, 0,  1, 1);
+		mbackGroundTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mBitmapTextureAtlasBackGround, this,
+				"bg3.png", 0, 0,  1, 1);
+		mKolomTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mBitmapTextureAtlasKolom, this,
+				"monkey.png", 0, 0,  1, 1);
+		mBoardTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mBitmapTextureAtlasBoard, this,
+				"board.png", 0, 0,  1, 1);
+		mParrotTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mBitmapTextureAtlasParrot, this,
+				"parrot.png", 0, 0,  1, 1);
+		mMoTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mBitmapTextureAtlasLetterMo, this,
+				"mo.png", 0, 0,  1, 1);
 		
-		mMoTextureRegion = BitmapTextureAtlasTextureRegionFactory
-				.createFromAsset(this.mBitmapTextureAtlas1, this, "mo.png");
 		
-		try 
-		{
-			mBitmapTextureAtlas.build(new BlackPawnTextureAtlasBuilder<IBitmapTextureAtlasSource,
-					BitmapTextureAtlas>(0, 0, 0));
-			mBitmapTextureAtlas.load();
-		} 
+		mBitmapTextureAtlasBackGround.load();
+		mBitmapTextureAtlasBackGround2.load();
+		mBitmapTextureAtlasKolom.load();
+		mBitmapTextureAtlasBoard.load();
+		mBitmapTextureAtlasParrot.load();
+		mBitmapTextureAtlasLetterMo.load();
 		
-		catch (TextureAtlasBuilderException e)
-		{
-			Debug.e(e);
-		}
-		try 
-		{
-			mBitmapTextureAtlas1.build(new BlackPawnTextureAtlasBuilder<IBitmapTextureAtlasSource,
-					BitmapTextureAtlas>(0, 0, 0));
-			mBitmapTextureAtlas1.load();
-		} 
-		
-		catch (TextureAtlasBuilderException e)
-		{
-			Debug.e(e);
-		}
-		
-
 	}
 
 	@Override
@@ -131,7 +116,6 @@ public class GameMainPage extends SimpleBaseGameActivity
 		mScene = new Scene();
 		mScene.setBackground(new Background(Color.WHITE));
 		mScene.setTouchAreaBindingOnActionDownEnabled(true);
-		
 		
 		GameMainPage.context = getApplicationContext();
 		
@@ -153,7 +137,6 @@ public class GameMainPage extends SimpleBaseGameActivity
 						
 						mScene = new MenuPage();
 						setCurrentScene(mScene);
-						
 						
 					break;
 					

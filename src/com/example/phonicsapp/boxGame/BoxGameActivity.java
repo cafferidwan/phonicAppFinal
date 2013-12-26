@@ -764,7 +764,7 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 		mScene.unregisterUpdateHandler(timer1);
 		finish();
 		startActivity(new Intent(this, MonkeyGameActivity.class));
-		i=0;
+//		i=0;
 	}
 	
 	public void setCurrentScene(Scene scene)
