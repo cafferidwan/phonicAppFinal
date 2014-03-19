@@ -37,7 +37,7 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 	// ===========================================================
 	// Constants
 	// ===========================================================
-	static MonkeyGameActivity activity;
+	static MonkeyGameActivity MonkeyGameActivityActivity;
 	
 	static int CAMERA_WIDTH;
 	static int CAMERA_HEIGHT;
@@ -158,7 +158,10 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 	static Boolean audioPlay = false;
 	static MediaPlayer mediaPlayer = new MediaPlayer();
 	static int obj1Sound, obj2Sound, obj3Sound, obj4Sound, wrongObj1Sound, wrongObj2Sound;
-
+	
+	public static TimerHandler timer1, timer2;
+	public static int monkeyGameLevelSelector;
+	
 	// ===========================================================
 	// Constructors
 	// ===========================================================
@@ -174,7 +177,7 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 	@Override
 	public EngineOptions onCreateEngineOptions() 
 	{
-		activity = this;
+		MonkeyGameActivityActivity = this;
 		Display display = getWindowManager().getDefaultDisplay();
 		CAMERA_HEIGHT = display.getHeight();
 		CAMERA_WIDTH = display.getWidth();
@@ -368,6 +371,8 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 		backGround.setHeight(CAMERA_HEIGHT);
 		mScene.attachChild(backGround);
 		
+//		MonkeyGameActivity.monkeyGameLevelSelector = 2;
+		
 		mScene.registerUpdateHandler(new TimerHandler(1, true, new ITimerCallback()
 		{
 			@Override
@@ -397,195 +402,13 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 			}
 		}));
 		
-		//Choosing random items 
-		mScene.registerUpdateHandler(new TimerHandler(5, true, new ITimerCallback()
-		{
-			@Override
-			public void onTimePassed(TimerHandler pTimerHandler)
-			{
-				// TODO Auto-generated method stub
-				
-				//Loading the Objects according to the game content
-				LoadObjects(2);
-				
-				randomItem = (int)(Math.random()*6);
-				randomItem1 = (int)(Math.random()*6);
-				if(randomItem == randomItem1 )
-				{
-					randomItem1 = randomItem1+2;
-				}
-				
-				if(randomItem == 0 &&  randomItem1==1 || randomItem == 1 &&  randomItem1==0)
-				{
-					randomItem1 = randomItem1+2;
-				}
-				switch(randomItem)
-				{
-					case 0:
-							GameObjects.wrongObj1(2,1);
-					break;
-					
-					case 1:
-							GameObjects.wrongObj2(2,1);
-					break;
-					
-					case 2:
-							GameObjects.obj1(2,1);
-					break;
-					
-					case 3:
-							GameObjects.obj2(2, 1);
-					break;
-					
-					case 4:
-							GameObjects.obj3(2,1);
-					break;
-						
-					case 5:
-							GameObjects.obj4(2,1);
-					break;
-
-					default:
-						//	GameObjects.obj3(2,1);
-					break;
-				}
-				
-				switch(randomItem1)
-				{
-					case 0:
-							GameObjects.wrongObj1(2,2);
-					break;
-			
-					case 1:
-							GameObjects.wrongObj2(2,2);
-					break;
-				
-					case 2:
-							GameObjects.obj1(2,2);
-					break;
-			
-					case 3:
-							GameObjects.obj2(2, 2);
-					break;
-			
-					case 4:
-							GameObjects.obj3(2,2);
-					break;
-				
-					case 5:
-							GameObjects.obj4(2,2);
-					break;
-
-					default:
-						//	GameObjects.obj3(2,2);
-					break;
-				}
-			}
-		}));
+		MonkeyGameTimerHandlers.selectRandromObjects();
 		
 		mScene.setOnAreaTouchListener(this);
 		return mScene;
 	}
 
-	public static void LoadObjects(int i) 
-	{
-		// TODO Auto-generated method stub
-		if(i == 1)
-		{
-			obj1 = new Sprite(0, 0, MonkeyGameActivity.mFaceTextureRegionA1, MonkeyGameActivity.vbo);
-			obj2 = new Sprite(0, 0, MonkeyGameActivity.mFaceTextureRegionA2, MonkeyGameActivity.vbo);
-			obj3 = new Sprite(0, 0, MonkeyGameActivity.mFaceTextureRegionA3, MonkeyGameActivity.vbo);
-			obj4 = new Sprite(0, 0, MonkeyGameActivity.mFaceTextureRegionA4, MonkeyGameActivity.vbo);
-		
-			wrongObj1 = new Sprite(0, 50, MonkeyGameActivity.mFaceTextureRegionWA1, MonkeyGameActivity.vbo);	
-			wrongObj2 = new Sprite(0, 50, MonkeyGameActivity.mFaceTextureRegionWA2, MonkeyGameActivity.vbo);
-			
-			obj1Sound = R.raw.mo;
-			obj2Sound = R.raw.mula;
-			obj3Sound = R.raw.megh;
-			obj4Sound = R.raw.mohis;
-			
-			wrongObj1Sound = R.raw.akar;
-			wrongObj2Sound = R.raw.aam;
-			
-		}
-		else if(i == 2)
-		{
-			obj1 = new Sprite(0, 0, MonkeyGameActivity.mFaceTextureRegionMo1, MonkeyGameActivity.vbo);
-			obj2 = new Sprite(0, 0, MonkeyGameActivity.mFaceTextureRegionMo2, MonkeyGameActivity.vbo);
-			obj3 = new Sprite(0, 0, MonkeyGameActivity.mFaceTextureRegionMo3, MonkeyGameActivity.vbo);
-			obj4 = new Sprite(0, 0, MonkeyGameActivity.mFaceTextureRegionMo4, MonkeyGameActivity.vbo);
-		
-			wrongObj1 = new Sprite(0, 50, MonkeyGameActivity.mFaceTextureRegionWMo1, MonkeyGameActivity.vbo);	
-			wrongObj2 = new Sprite(0, 50, MonkeyGameActivity.mFaceTextureRegionWMo2, MonkeyGameActivity.vbo);
-			
-			obj1Sound = R.raw.moi;
-			obj2Sound = R.raw.mama;
-			obj3Sound = R.raw.megh;
-			obj4Sound = R.raw.mohis;
-			
-			wrongObj1Sound = R.raw.tala;
-			wrongObj2Sound = R.raw.langol;
-		}
-		//Letter-Ko
-		else if(i == 3)
-		{
-			obj1 = new Sprite(0, 0, MonkeyGameActivity.mFaceTextureRegionKo1, MonkeyGameActivity.vbo);
-			obj2 = new Sprite(0, 0, MonkeyGameActivity.mFaceTextureRegionKo2, MonkeyGameActivity.vbo);
-			obj3 = new Sprite(0, 0, MonkeyGameActivity.mFaceTextureRegionKo3, MonkeyGameActivity.vbo);
-			obj4 = new Sprite(0, 0, MonkeyGameActivity.mFaceTextureRegionKo4, MonkeyGameActivity.vbo);
-		
-			wrongObj1 = new Sprite(0, 50, MonkeyGameActivity.mFaceTextureRegionWKo1, MonkeyGameActivity.vbo);	
-			wrongObj2 = new Sprite(0, 50, MonkeyGameActivity.mFaceTextureRegionWKo2, MonkeyGameActivity.vbo);
-			
-			obj1Sound = R.raw.moi;
-			obj2Sound = R.raw.mama;
-			obj3Sound = R.raw.megh;
-			obj4Sound = R.raw.mohis;
-			
-			wrongObj1Sound = R.raw.tala;
-			wrongObj2Sound = R.raw.langol;
-		}
-		//Letter-Lo
-		else if(i == 4)
-		{
-			obj1 = new Sprite(0, 0, MonkeyGameActivity.mFaceTextureRegionLo1, MonkeyGameActivity.vbo);
-			obj2 = new Sprite(0, 0, MonkeyGameActivity.mFaceTextureRegionLo2, MonkeyGameActivity.vbo);
-			obj3 = new Sprite(0, 0, MonkeyGameActivity.mFaceTextureRegionLo3, MonkeyGameActivity.vbo);
-			obj4 = new Sprite(0, 0, MonkeyGameActivity.mFaceTextureRegionLo4, MonkeyGameActivity.vbo);
-				
-			wrongObj1 = new Sprite(0, 50, MonkeyGameActivity.mFaceTextureRegionWLo1, MonkeyGameActivity.vbo);	
-			wrongObj2 = new Sprite(0, 50, MonkeyGameActivity.mFaceTextureRegionWLo2, MonkeyGameActivity.vbo);
-				
-			obj1Sound = R.raw.moi;
-			obj2Sound = R.raw.mama;
-			obj3Sound = R.raw.megh;
-			obj4Sound = R.raw.mohis;
-					
-			wrongObj1Sound = R.raw.tala;
-			wrongObj2Sound = R.raw.langol;
-		}
-		//Letter-To
-		else if(i == 5)
-		{
-			obj1 = new Sprite(0, 0, MonkeyGameActivity.mFaceTextureRegionTo1, MonkeyGameActivity.vbo);
-			obj2 = new Sprite(0, 0, MonkeyGameActivity.mFaceTextureRegionTo2, MonkeyGameActivity.vbo);
-			obj3 = new Sprite(0, 0, MonkeyGameActivity.mFaceTextureRegionTo3, MonkeyGameActivity.vbo);
-			obj4 = new Sprite(0, 0, MonkeyGameActivity.mFaceTextureRegionTo4, MonkeyGameActivity.vbo);
-				
-			wrongObj1 = new Sprite(0, 50, MonkeyGameActivity.mFaceTextureRegionWTo1, MonkeyGameActivity.vbo);	
-			wrongObj2 = new Sprite(0, 50, MonkeyGameActivity.mFaceTextureRegionWTo2, MonkeyGameActivity.vbo);
-					
-			obj1Sound = R.raw.moi;
-			obj2Sound = R.raw.mama;
-			obj3Sound = R.raw.megh;
-			obj4Sound = R.raw.mohis;
-					
-			wrongObj1Sound = R.raw.tala;
-			wrongObj2Sound = R.raw.langol;
-		}
-	}
-
+	
 	@Override
 	public boolean onAreaTouched(TouchEvent pSceneTouchEvent,ITouchArea pTouchArea, float pTouchAreaLocalX,float pTouchAreaLocalY) 
 	{
@@ -593,144 +416,31 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 		
 		if (pSceneTouchEvent.isActionDown()) 
 		{
-			removeFace((Sprite) pTouchArea);
+			ObjectRemoveFunctions.removeFace((Sprite) pTouchArea);
 			return true;
 		}
 		return false;
 	}
 
-	public static void removeFace(Sprite pTouchArea)
-	{
-		// TODO Auto-generated method stub
-		
-		if((Sprite)pTouchArea==wrongObj1)
-		{
-			audioPlay = true;
-			playAudio(wrongObj1Sound);
-			mScene.unregisterTouchArea(pTouchArea);
-			mScene.detachChild(pTouchArea);
-			GameObjects.fadeOut(obj3);
-			GameObjects.fadeOut(obj1);
-			GameObjects.fadeOut(obj4);
-			GameObjects.fadeOut(obj2);
-			GameObjects.fadeOut(wrongObj2);
-
-			if(position[aCount]==null)
-			{
-
-			}
-			else
-			{
-				value = 1;
-			}
-		}
-		else if((Sprite)pTouchArea==wrongObj2)
-		{
-			audioPlay = true;
-			playAudio(wrongObj2Sound);
-			mScene.unregisterTouchArea(pTouchArea);
-			mScene.detachChild(pTouchArea);
-			GameObjects.fadeOut(obj3);
-			GameObjects.fadeOut(obj1);
-			GameObjects.fadeOut(obj4);
-			GameObjects.fadeOut(wrongObj1);
-			GameObjects.fadeOut(obj2);
-			
-			if(position[aCount]==null)
-			{
-
-			}
-			else
-			{	
-				value = 1;
-			}
-		}
-		
-		else if((Sprite)pTouchArea==obj1)
-		{
-			audioPlay = true;
-			playAudio(obj1Sound);
-			bananaValue = 1;
-			mScene.unregisterTouchArea(pTouchArea);
-			mScene.detachChild(pTouchArea);
-			GameObjects.fadeOut(obj3);
-			GameObjects.fadeOut(obj2);
-			GameObjects.fadeOut(obj4);
-			GameObjects.fadeOut(wrongObj1);
-			GameObjects.fadeOut(wrongObj2);
-		} 
-		else if((Sprite)pTouchArea==obj2)
-		{
-			audioPlay = true;
-			playAudio(obj2Sound);
-			bananaValue = 1;
-			mScene.unregisterTouchArea(pTouchArea);
-			mScene.detachChild(pTouchArea);
-			GameObjects.fadeOut(obj3);
-			GameObjects.fadeOut(obj1);
-			GameObjects.fadeOut(obj4);
-			GameObjects.fadeOut(wrongObj1);
-			GameObjects.fadeOut(wrongObj2);
-		}
-		else if((Sprite)pTouchArea==obj3)
-		{
-			audioPlay = true;
-			playAudio(obj3Sound);
-			bananaValue = 1;
-			mScene.unregisterTouchArea(pTouchArea);
-			mScene.detachChild(pTouchArea);
-			GameObjects.fadeOut(obj2);
-			GameObjects.fadeOut(obj1);
-			GameObjects.fadeOut(obj4);
-			GameObjects.fadeOut(wrongObj1);
-			GameObjects.fadeOut(wrongObj2);
-		}
-		else if((Sprite)pTouchArea==obj4)
-		{
-			audioPlay = true;
-			playAudio(obj4Sound);
-			bananaValue = 1;
-			mScene.unregisterTouchArea(pTouchArea);
-			mScene.detachChild(pTouchArea);
-			GameObjects.fadeOut(obj3);
-			GameObjects.fadeOut(obj1);
-			GameObjects.fadeOut(obj2);
-			GameObjects.fadeOut(wrongObj1);
-			GameObjects.fadeOut(wrongObj2);
-		}
-
-	}
+	
 
 	public static void startActivity()
 	{
-		activity.finish();
-		activity.startActivity(new Intent(activity, GameMainPage.class));
-	}
-	
-	//Audio play Function
-	public static void playAudio(int val)
-	{
-		if(audioPlay)
+		if(monkeyGameLevelSelector == 0)
 		{
-			if(!mediaPlayer.isPlaying())
-			{
-				mediaPlayer.reset();
-				mediaPlayer = MediaPlayer.create(activity, val);
-					
-				try 
-				{
-					mediaPlayer.start();
-					mediaPlayer.setLooping(false);
-				} 
-				catch (IllegalStateException e)
-				{
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
-			}
-			audioPlay = true;
+			monkeyGameLevelSelector = 1;
+			MonkeyGameActivityActivity.finish();
+			MonkeyGameActivityActivity.startActivity(new Intent(MonkeyGameActivityActivity, MonkeyGameActivity.class));
+		}
+		else if(monkeyGameLevelSelector == 1)
+		{
+			monkeyGameLevelSelector = 0;
+			MonkeyGameActivityActivity.finish();
+			MonkeyGameActivityActivity.startActivity(new Intent(MonkeyGameActivityActivity, GameMainPage.class));
+
 		}
 	}
+	
 	// ===========================================================
 	// Methods
 	// ===========================================================

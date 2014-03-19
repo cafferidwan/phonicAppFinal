@@ -22,6 +22,8 @@ import android.content.Intent;
 import android.view.Display;
 
 import com.example.phonicsapp.animatedBook.AnimatedBookActivity;
+import com.example.phonicsapp.boxGame.BoxGameActivity;
+import com.example.phonicsapp.monkeyGame.MonkeyGameActivity;
 import com.example.phonicsapp.wordbuilder.MainActivity;
 
 
@@ -135,8 +137,9 @@ public class GameMainPage extends SimpleBaseGameActivity
 					
 						this.setScale((float) 1.2);
 						
-						mScene = new MenuPage();
-						setCurrentScene(mScene);
+//						mScene = new MenuPage();
+//						setCurrentScene(mScene);
+						startActivity();
 						
 					break;
 					
@@ -211,11 +214,12 @@ public class GameMainPage extends SimpleBaseGameActivity
 		
 		return mScene;
 	}
-
+ 
 	void startActivity()
 	{
 		finish();
-		startActivity(new Intent(this, AnimatedBookActivity.class));
+//		startActivity(new Intent(this, AnimatedBookActivity.class));
+		startActivity(new Intent(this, BoxGameActivity.class));
 	}
 	
 	public void setCurrentScene(Scene scene)

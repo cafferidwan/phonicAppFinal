@@ -45,7 +45,7 @@ public class GameObjects
 		
 		Path obj1Path = null;
 		
-		if(level == 1)
+		if(level == 0)
 		{
 			if(number == 1)
 			{
@@ -65,7 +65,7 @@ public class GameObjects
 			}
 			obj1Path = new Path(2).to(ax, ay ).to(bx, by);
 		}
-		else if(level == 2)
+		else if(level == 1)
 		{
 			if(number == 1)
 			{
@@ -131,7 +131,7 @@ public class GameObjects
 		
 		Path obj2Path = null;
 		
-		if(level == 1)
+		if(level == 0)
 		{
 			if(number == 1)
 			{
@@ -151,7 +151,7 @@ public class GameObjects
 			}
 			obj2Path = new Path(2).to(ax, ay ).to(bx, by);
 		}
-		else if(level == 2)
+		else if(level == 1)
 		{
 			if(number == 1)
 			{
@@ -214,7 +214,7 @@ public class GameObjects
 	{
 		Path obj3Path = null;
 		
-		if(level == 1)
+		if(level == 0)
 		{
 			if(number == 1)
 			{
@@ -234,7 +234,7 @@ public class GameObjects
 			}
 			obj3Path = new Path(2).to(ax, ay ).to(bx, by);
 		}
-		else if(level == 2)
+		else if(level == 1)
 		{
 			if(number == 1)
 			{
@@ -297,7 +297,7 @@ public class GameObjects
 	{
 		Path obj4Path = null;
 		
-		if(level == 1)
+		if(level == 0)
 		{
 			if(number == 1)
 			{
@@ -317,7 +317,7 @@ public class GameObjects
 			}
 			obj4Path = new Path(2).to(ax, ay ).to(bx, by);
 		}
-		else if(level == 2)
+		else if(level == 1)
 		{
 			if(number == 1)
 			{
@@ -380,7 +380,7 @@ public class GameObjects
 	{
 		Path wrongObj1Path = null;
 		
-		if(level == 1)
+		if(level == 0)
 		{
 			if(number == 1)
 			{
@@ -400,7 +400,7 @@ public class GameObjects
 			}
 			wrongObj1Path = new Path(2).to(ax, ay ).to(bx, by);
 		}
-		else if(level == 2)
+		else if(level == 1)
 		{
 			if(number == 1)
 			{
@@ -464,7 +464,7 @@ public class GameObjects
 	{
 	Path wrongObj2Path = null;
 		
-		if(level == 1)
+		if(level == 0)
 		{
 			if(number == 1)
 			{
@@ -484,7 +484,7 @@ public class GameObjects
 			}
 			wrongObj2Path = new Path(2).to(ax, ay ).to(bx, by);
 		}
-		else if(level == 2)
+		else if(level == 1)
 		{
 			if(number == 1)
 			{

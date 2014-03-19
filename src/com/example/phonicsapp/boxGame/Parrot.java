@@ -2,9 +2,11 @@ package com.example.phonicsapp.boxGame;
 
 import org.andengine.entity.IEntity;
 import org.andengine.entity.modifier.DelayModifier;
-import org.andengine.entity.modifier.LoopEntityModifier;
 import org.andengine.entity.modifier.MoveModifier;
-import org.andengine.entity.modifier.RotationModifier;
+import org.andengine.entity.modifier.ParallelEntityModifier;
+import org.andengine.entity.modifier.PathModifier;
+import org.andengine.entity.modifier.PathModifier.IPathModifierListener;
+import org.andengine.entity.modifier.PathModifier.Path;
 import org.andengine.entity.modifier.SequenceEntityModifier;
 import org.andengine.entity.modifier.IEntityModifier.IEntityModifierListener;
 import org.andengine.entity.sprite.AnimatedSprite;
@@ -12,9 +14,9 @@ import org.andengine.input.touch.TouchEvent;
 import org.andengine.opengl.texture.region.ITiledTextureRegion;
 import org.andengine.opengl.vbo.VertexBufferObjectManager;
 import org.andengine.util.modifier.IModifier;
+import org.andengine.util.modifier.ease.EaseBounceOut;
 
 import com.example.phonicsapp.R;
-import com.example.phonicsapp.R.raw;
 
 
 public class Parrot extends AnimatedSprite
@@ -55,8 +57,40 @@ public class Parrot extends AnimatedSprite
 	static void parrotPath() 
 	{
 		
-		MoveModifier mMod = new MoveModifier(4, BoxGameActivity.CAMERA_WIDTH , BoxGameActivity.CAMERA_WIDTH - 200, 
-				BoxGameActivity.CAMERA_HEIGHT / 2 -200, BoxGameActivity.CAMERA_HEIGHT / 2 - 200);
+//		final Path path = new Path(2).to(BoxGameActivity.CAMERA_WIDTH, BoxGameActivity.CAMERA_HEIGHT / 2 -340).to(BoxGameActivity.CAMERA_WIDTH - 350,
+//				BoxGameActivity.CAMERA_HEIGHT / 2 - 340);
+//		BoxGameActivity.parrot.registerEntityModifier(new ParallelEntityModifier( new PathModifier(
+//				(float) 4.3, path, null, new IPathModifierListener() 
+//				{
+//					@Override
+//					public void onPathStarted(final PathModifier pPathModifier,
+//							final IEntity pEntity)
+//					{
+//						BoxGameActivity.parrot.animate(new long[]{0, 0, 150, 150}, 0, 3, true);
+//					}
+//					@Override
+//					public void onPathWaypointStarted(final PathModifier pPathModifier,
+//							final IEntity pEntity, final int pWaypointIndex) 
+//					{
+//
+//					}
+//					@Override
+//					public void onPathWaypointFinished(final PathModifier pPathModifier,
+//							final IEntity pEntity, final int pWaypointIndex) 
+//					{
+//
+//					}
+//					@Override
+//					public void onPathFinished(final PathModifier pPathModifier,
+//							final IEntity pEntity) 
+//					{
+//						BoxGameActivity.parrot.animate(new long[]{150, 150, 0, 0}, 0, 3, true);
+//					}
+//				})));
+
+		/////////////////////
+		MoveModifier mMod = new MoveModifier(4, BoxGameActivity.CAMERA_WIDTH , BoxGameActivity.CAMERA_WIDTH - 350, 
+				BoxGameActivity.CAMERA_HEIGHT / 2 -340, BoxGameActivity.CAMERA_HEIGHT / 2 - 340);
 		
 		MoveModifier mModLetter = new MoveModifier(4, BoxGameActivity.CAMERA_WIDTH  ,BoxGameActivity.CAMERA_WIDTH - 180,
 				BoxGameActivity.CAMERA_HEIGHT / 2 -80, BoxGameActivity.CAMERA_HEIGHT / 2 - 80);
@@ -68,7 +102,7 @@ public class Parrot extends AnimatedSprite
 					public void onModifierStarted(IModifier<IEntity> arg0,
 							IEntity arg1) 
 					{
-					
+						BoxGameActivity.parrot.animate(new long[]{0, 0, 150, 150}, 0, 3, true);
 					}
 
 					@Override
@@ -77,7 +111,7 @@ public class Parrot extends AnimatedSprite
 					{
 						//playAudio(R.raw.parrot_introducing_mo);
 						//mLetter.setVisible(false);
-						
+						BoxGameActivity.parrot.animate(new long[]{150, 150, 0, 0}, 0, 3, true);
 					}
 				});
 		

@@ -19,6 +19,7 @@ public class MonkeyFunction
 		MonkeyGameActivity.aCount = MonkeyGameActivity.aCount+1;
 		MonkeyGameActivity.bananaValue = 0;
 		
+		//if 5 banana is added then game over
 		if(MonkeyGameActivity.aCount==5)
 		{
 

@@ -1,5 +1,7 @@
 package com.example.phonicsapp.boxGame;
 
+import java.util.Timer;
+
 import org.andengine.engine.camera.Camera;
 import org.andengine.engine.handler.timer.ITimerCallback;
 import org.andengine.engine.handler.timer.TimerHandler;
@@ -47,7 +49,7 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 	public static ITextureRegion mBox2TextureRegion;
 	
 	private BuildableBitmapTextureAtlas mAnimatedBitmapTextureAtlas;
-	public TiledTextureRegion mParrotTextureRegion;
+	public static TiledTextureRegion mParrotTextureRegion;
 	
 	//Letter-A
 	public static ITextureRegion mA1TextureRegion;
@@ -112,7 +114,7 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 	static Letter letter ;
 	//Obj1-mula, Obj2-ma, Obj3-mohis, Obj4-megh, Obj5-moi, Obj6-mama, wrongObj1-kola, wrongObj2-keramBoard;
 	static AnimatedSprite  parrot;
-	public TimerHandler timer1, timer2, timer3;
+	public static TimerHandler timer1, timer2, timer3;
 	
 	static float obj1X , obj1Y, obj2X, obj2Y, obj3X, obj3Y, obj4X, obj4Y, obj5X, obj5Y, 
 				 obj6X, obj6Y, wrongObj1X, wrongObj1Y, wrongObj2X, wrongObj2Y;
@@ -124,7 +126,10 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 	static int bCounter=0;
 	static int aCounter=0;
 	public static String DEBUG_TAG = BoxGameActivity.class.getSimpleName();
-	int i=0;
+	static int counter=0;
+	
+	//level selector of box game
+	public static int boxGameLevel;
 	
 	public static BoxGameActivity getSharedInstances()
 	{
@@ -167,6 +172,11 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 		obj5X = CAMERA_WIDTH/2-90;
 		obj5Y = CAMERA_HEIGHT/2 - CAMERA_HEIGHT/4;
 		
+		BoxGameActivity.counter = 0;
+		
+		//setting the level to 0
+		//boxGameLevel = 0;
+		
 		mCamera = new Camera(0, 0, CAMERA_WIDTH, CAMERA_HEIGHT);
 		
 		return new EngineOptions(true, ScreenOrientation.LANDSCAPE_SENSOR,new RatioResolutionPolicy(CAMERA_WIDTH, CAMERA_HEIGHT), mCamera);
@@ -191,10 +201,9 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 		mBox2TextureRegion = BitmapTextureAtlasTextureRegionFactory
 				.createFromAsset(this.mBitmapTextureAtlas, this, "box-16.png");
 		
-		mAnimatedBitmapTextureAtlas = new BuildableBitmapTextureAtlas(this.getTextureManager(), 1000, 338, TextureOptions.NEAREST);
+		mAnimatedBitmapTextureAtlas = new BuildableBitmapTextureAtlas(this.getTextureManager(), 806, 806, TextureOptions.NEAREST);
 		mParrotTextureRegion = BitmapTextureAtlasTextureRegionFactory.
-				createTiledFromAsset(this.mAnimatedBitmapTextureAtlas, this, "parrot1.png", 6, 2);
-		
+				createTiledFromAsset(this.mAnimatedBitmapTextureAtlas, this, "animatedParrot.png", 2, 2);
 		
 		//Letter-A
 		mA1TextureRegion = BitmapTextureAtlasTextureRegionFactory
@@ -331,152 +340,6 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 			Debug.e(e);
 		}
 		
-		
-		//timer1 for checking if the any object collides with the box
-		timer1 = new TimerHandler(1.0f/120, true, new ITimerCallback()
-		{
-			@Override
-			public void onTimePassed(TimerHandler pTimerHandler)
-			{
-				// TODO Auto-generated method stub
-				//if all the items are in the box
-				if(!(obj3.getX()>=0) && !(obj2.getX()>=0) && !(obj6.getX()>=0) && !(obj4.getX()>=0) && !(obj1.getX()>=0) && !(obj5.getX()>=0))
-				{
-					i++;
-					if(i==1)
-					{
-						startActivity();
-					}
-				}
-
-				
-				//Mula
-				if(Functions.collisoinCheck(closedBox, obj1)==1 ||
-						Functions.collisoinCheck(closedBox, obj1)==2)
-				{
-					openedBox.setVisible(true);
-					closedBox.setVisible(false);
-				
-					if(Objects.touchFlag == false )
-					{
-						Functions.fadeOut(obj1);
-					}
-				}
-				//Ma
-				else if(Functions.collisoinCheck(closedBox, obj2)==1 ||
-						Functions.collisoinCheck(closedBox, obj2)==2)
-				{
-					if(Functions.disableCol == 0)
-					{
-						openedBox.setVisible(true);
-						closedBox.setVisible(false);
-				
-						if(Objects.touchFlag == false )
-						{
-							Functions.fadeOut(obj2);
-						}
-					}
-					else
-					{
-						openedBox.setVisible(false);
-						closedBox.setVisible(true);
-					}
-				}
-				
-				//Mohis
-				else if(Functions.collisoinCheck(closedBox, obj3)==1 ||
-						Functions.collisoinCheck(closedBox, obj3)==2)
-				{
-					openedBox.setVisible(true);
-					closedBox.setVisible(false);
-				
-					if(Objects.touchFlag == false)
-					{
-						Functions.fadeOut(obj3);
-					}
-				}
-				
-				//Megh
-				else if(Functions.collisoinCheck(closedBox, obj4)==1 ||
-						Functions.collisoinCheck(closedBox, obj4)==2)
-				{
-					openedBox.setVisible(true);
-					closedBox.setVisible(false);
-		
-					if(Objects.touchFlag == false)
-					{
-						Functions.fadeOut(obj4);
-					}
-				}
-				
-				//Moi
-				else if(Functions.collisoinCheck(closedBox, obj5)==1 ||
-						Functions.collisoinCheck(closedBox, obj5)==2)
-				{
-					openedBox.setVisible(true);
-					closedBox.setVisible(false);
-				
-					if(Objects.touchFlag == false)
-					{
-						Functions.fadeOut(obj5);
-					}
-				}
-				
-				//Mama
-				else if(Functions.collisoinCheck(closedBox, obj6)==1 ||
-						Functions.collisoinCheck(closedBox, obj6)==2)
-				{
-					openedBox.setVisible(true);
-					closedBox.setVisible(false);
-				
-					if(Objects.touchFlag == false)
-					{
-						Functions.fadeOut(obj6);
-					}
-				}
-				
-				else if(Functions.collisoinCheck(closedBox, wrongObj1)==1 ||
-						Functions.collisoinCheck(closedBox, wrongObj1)==2)
-				{
-					openedBox.setVisible(true);
-					closedBox.setVisible(false);
-				
-					if(Objects.touchFlag == false)
-					{
-						// Create jump
-						Functions.jump(wrongObj1, 0);
-					}
-				}
-				
-				//Keram board
-				else if(Functions.collisoinCheck(closedBox, wrongObj2)==1 ||
-						Functions.collisoinCheck(closedBox, wrongObj2)==2)
-				{
-					if(Functions.disableCol == 0)
-					{
-					openedBox.setVisible(true);
-					closedBox.setVisible(false);
-				
-					if(Objects.touchFlag == false)
-					{
-						// Create jump
-						Functions.jump(wrongObj2, 1);
-					}
-					}else 
-					{
-						openedBox.setVisible(false);
-						closedBox.setVisible(true);
-					}
-				}
-				
-				else
-				{
-					openedBox.setVisible(false);
-					closedBox.setVisible(true);
-				}
-			}
-		});
-		
 	}
 
 	@Override
@@ -487,86 +350,27 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 		mScene.setBackground(new Background(Color.WHITE));
 		mScene.setTouchAreaBindingOnActionDownEnabled(true);
 		
-		StatusBar.hideStatusBar();
+//		StatusBar.hideStatusBar();
+		StatusBar.showStatusBar();
 		
 		//Loading the objects according to letter
-		loadObjects(2);
+		LevelResources.loadObjects(2); 
 		
-		backGround = new Sprite(0, 0, mbackGroundTextureRegion, getVertexBufferObjectManager());
-		backGround.setHeight(CAMERA_HEIGHT);
-		backGround.setWidth(CAMERA_WIDTH);
-		mScene.attachChild(backGround);
+		//check collisions
+		TimerHandlers.checkObjectCollisions();
 		
-		openedBox = new Sprite(CAMERA_WIDTH/2-100, CAMERA_HEIGHT/2, mBox1TextureRegion, getVertexBufferObjectManager());
-		//openedBox.setWidth(ImageWidth*1.5f);
-		//openedBox.setHeight(ImageHight*1.5f);
-		mScene.attachChild(openedBox);
-		openedBox.setVisible(false);
-		
-		//closed box
-		closedBox = new Sprite(CAMERA_WIDTH/2-100, CAMERA_HEIGHT/2, mBox2TextureRegion, getVertexBufferObjectManager());
-		//closedBox.setWidth(ImageWidth*1.5f);
-		//closedBox.setHeight(ImageHight*1.5f);
-		mScene.attachChild(closedBox);
-		closedBox.setVisible(true);
-		
-//		obj1.setWidth(ImageWidth);
-//		obj1.setHeight(ImageHight);
-		mScene.registerTouchArea(obj1);
-		mScene.attachChild(obj1);
-		
-//		ma.setWidth(ImageWidth);
-//		ma.setHeight(ImageHight);
-		mScene.registerTouchArea(obj2);
-		mScene.attachChild(obj2);
-		
-//		obj3.setWidth(ImageWidth);
-//		obj3.setHeight(ImageHight);
-		mScene.registerTouchArea(obj3);
-		mScene.attachChild(obj3);
-		
-//		obj4.setWidth(ImageWidth);
-//		obj4.setHeight(ImageHight);
-		mScene.registerTouchArea(obj4);
-		mScene.attachChild(obj4);
-		
-		mScene.registerTouchArea(obj5);
-		mScene.attachChild(obj5);
-		
-//		obj6.setWidth(ImageWidth);
-//		obj6.setHeight(ImageHight);
-		mScene.registerTouchArea(obj6);
-		mScene.attachChild(obj6);
-	
-//		wrongObj1.setWidth(ImageWidth);
-//		wrongObj1.setHeight(ImageHight);
-		mScene.registerTouchArea(wrongObj1);
-		mScene.attachChild(wrongObj1);
-		
-//		wrongObj2.setWidth(ImageWidth);
-//		wrongObj2.setHeight(ImageHight);
-		mScene.registerTouchArea(wrongObj2);
-		mScene.attachChild(wrongObj2);
-		
-		mScene.registerTouchArea(letter);
-		mScene.attachChild(letter);
-		
-		parrot = new Parrot(CAMERA_WIDTH+500, CAMERA_HEIGHT/2-50, mParrotTextureRegion, this.getVertexBufferObjectManager());
-		parrot.animate(new long[]{100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100}, 0, 11, true);
-		parrot.setFlippedHorizontal(true);
-//		parrot.setWidth(ImageWidth*1.5f);
-//		parrot.setHeight(ImageHight*1.5f);
-		mScene.registerTouchArea(parrot);
-		mScene.attachChild(parrot);
-		
-		Parrot.parrotPath();
-		
-		
-		mScene.registerUpdateHandler(timer1);
+		//change wrong objects with right ones when it is second level
+		if(boxGameLevel == 1)
+		{
+			TimerHandlers.ExchangeObjects();
+		}
+			
+		CreateObjects.create();
 		
 		//getting the context
 		BoxGameActivity.context = getApplicationContext();
 		
+		//playing the introduction sound of parrot
 		mScene.registerUpdateHandler(new TimerHandler((float) 0.5,new ITimerCallback()
 		{
 			@Override
@@ -576,181 +380,12 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 			}
 		}));
 		
-		timer2 = new TimerHandler( (float) 5, true, new ITimerCallback() 
-		{
-			@Override
-			public void onTimePassed(TimerHandler pTimerHandler)
-			{
-				// TODO Auto-generated method stub
-				
-				if(Objects.touchFlag1 == false)
-				{
-					if(!(obj1.getX()>=0) || !(wrongObj1.getX()>=0))
-					{ 
-//						Log.d("a.x",""+a.getX());
-//						Log.d("b.x",""+b.getX());
-					}
-					else
-					{
-					Functions.ExchangePosition(obj1, wrongObj1);
-					Functions.ExchangePosition(wrongObj1, obj1);
-					}
-				}
-				
-			}
-		});
-		mScene.registerUpdateHandler(timer2);
-	
-		timer3 = new TimerHandler( (float) 3.5, true, new ITimerCallback() 
-		{
-			@Override
-			public void onTimePassed(TimerHandler pTimerHandler)
-			{
-				// TODO Auto-generated method stub
-				  
-				if(Objects.touchFlag2 == false)
-				{ 
-					if(!(obj2.getX()>=0) || !(wrongObj2.getX()>=0))
-					{ 
-//						Log.d("a.x",""+a.getX());
-//						Log.d("b.x",""+b.getX());
-					}
-					else
-					{
-					Functions.ExchangePosition(obj2, wrongObj2);
-					Functions.ExchangePosition(wrongObj2, obj2);
-					}
-					
-				}
-			}
-		});
-		mScene.registerUpdateHandler(timer3);
+		Debug.d("level:"+boxGameLevel);
 		
 		return mScene;
 	}
 	
-	private void loadObjects(int i) 
-	{
-		// TODO Auto-generated method stub
-		
-		//Letter-A
-		if(i == 1)
-		{
-			obj1 = new Objects(obj1X, obj1Y, mA1TextureRegion, getVertexBufferObjectManager());
-			obj2 = new Objects(obj2X, obj2Y, mA2TextureRegion, getVertexBufferObjectManager());
-			obj3 = new Objects(obj3X, obj3Y, mA3TextureRegion, getVertexBufferObjectManager());
-			obj4 = new Objects(obj4X, obj4Y, mA4TextureRegion, getVertexBufferObjectManager());
-			obj5 = new Objects(obj5X, obj5Y, mA5TextureRegion, getVertexBufferObjectManager());
-			obj6 = new Objects(obj6X, obj6Y, mA6TextureRegion, getVertexBufferObjectManager());
-			wrongObj1 = new Objects(wrongObj1X, wrongObj1Y, mWMo1TextureRegion, getVertexBufferObjectManager());
-			wrongObj2 = new Objects(wrongObj2X, wrongObj2Y, mWMo2TextureRegion, getVertexBufferObjectManager());
-			letter = new Letter(900, CAMERA_HEIGHT-100, 80, 80, mATextureRegion, getVertexBufferObjectManager());
-			
-			obj1Sound = R.raw.mula;
-			obj2Sound = R.raw.ma;
-			obj3Sound = R.raw.mohis;
-			obj4Sound = R.raw.megh;
-			obj5Sound = R.raw.moi;
-			obj6Sound = R.raw.mama;
-			wrongObj1Sound = R.raw.kola;
-			wrongObj2Sound = R.raw.keram;
-			letterSound = R.raw.mo;
-		}
-		//Letter-Mo
-		else if(i == 2)
-		{
-			obj1 = new Objects(obj1X, obj1Y, mMo1TextureRegion, getVertexBufferObjectManager());
-			obj2 = new Objects(obj2X, obj2Y, mMo2TextureRegion, getVertexBufferObjectManager());
-			obj3 = new Objects(obj3X, obj3Y, mMo3TextureRegion, getVertexBufferObjectManager());
-			obj4 = new Objects(obj4X, obj4Y, mMo4TextureRegion, getVertexBufferObjectManager());
-			obj5 = new Objects(obj5X, obj5Y, mMo5TextureRegion, getVertexBufferObjectManager());
-			obj6 = new Objects(obj6X, obj6Y, mMo6TextureRegion, getVertexBufferObjectManager());
-			wrongObj1 = new Objects(wrongObj1X, wrongObj1Y, mWMo1TextureRegion, getVertexBufferObjectManager());
-			wrongObj2 = new Objects(wrongObj2X, wrongObj2Y, mWMo2TextureRegion, getVertexBufferObjectManager());
-			letter = new Letter(900, CAMERA_HEIGHT-100, 80, 80, mMoTextureRegion, getVertexBufferObjectManager());
-			
-			obj1Sound = R.raw.mula;
-			obj2Sound = R.raw.ma;
-			obj3Sound = R.raw.mohis;
-			obj4Sound = R.raw.megh;
-			obj5Sound = R.raw.moi;
-			obj6Sound = R.raw.mama;
-			wrongObj1Sound = R.raw.kola;
-			wrongObj2Sound = R.raw.keram;
-			letterSound = R.raw.mo;
-		}
-		//Letter-Ko
-		else if(i == 3)
-		{
-			obj1 = new Objects(obj1X, obj1Y, mKo1TextureRegion, getVertexBufferObjectManager());
-			obj2 = new Objects(obj2X, obj2Y, mKo2TextureRegion, getVertexBufferObjectManager());
-			obj3 = new Objects(obj3X, obj3Y, mKo3TextureRegion, getVertexBufferObjectManager());
-			obj4 = new Objects(obj4X, obj4Y, mKo4TextureRegion, getVertexBufferObjectManager());
-			obj5 = new Objects(obj5X, obj5Y, mKo5TextureRegion, getVertexBufferObjectManager());
-			obj6 = new Objects(obj6X, obj6Y, mKo6TextureRegion, getVertexBufferObjectManager());
-			wrongObj1 = new Objects(wrongObj1X, wrongObj1Y, mWKo1TextureRegion, getVertexBufferObjectManager());
-			wrongObj2 = new Objects(wrongObj2X, wrongObj2Y, mWKo2TextureRegion, getVertexBufferObjectManager());
-			letter = new Letter(900, CAMERA_HEIGHT-100, 80, 80, mKoTextureRegion, getVertexBufferObjectManager());
-			
-			obj1Sound = R.raw.kola;
-			obj2Sound = R.raw.langol;
-			obj3Sound = R.raw.mula;
-			obj4Sound = R.raw.shorea;
-			obj5Sound = R.raw.ma;
-			obj6Sound = R.raw.mohis;
-			wrongObj1Sound = R.raw.aam;
-			wrongObj2Sound = R.raw.keram;
-			letterSound = R.raw.akar;
-		}
-
-		//Letter-Lo
-		else if(i == 4)
-		{
-			obj1 = new Objects(obj1X, obj1Y, mLo1TextureRegion, getVertexBufferObjectManager());
-			obj2 = new Objects(obj2X, obj2Y, mLo2TextureRegion, getVertexBufferObjectManager());
-			obj3 = new Objects(obj3X, obj3Y, mLo3TextureRegion, getVertexBufferObjectManager());
-			obj4 = new Objects(obj4X, obj4Y, mLo4TextureRegion, getVertexBufferObjectManager());
-			obj5 = new Objects(obj5X, obj5Y, mLo5TextureRegion, getVertexBufferObjectManager());
-			obj6 = new Objects(obj6X, obj6Y, mLo6TextureRegion, getVertexBufferObjectManager());
-			wrongObj1 = new Objects(wrongObj1X, wrongObj1Y, mWLo1TextureRegion, getVertexBufferObjectManager());
-			wrongObj2 = new Objects(wrongObj2X, wrongObj2Y, mWLo2TextureRegion, getVertexBufferObjectManager());
-			letter = new Letter(900, CAMERA_HEIGHT-100, 80, 80, mLoTextureRegion, getVertexBufferObjectManager());
-					
-			obj1Sound = R.raw.kola;
-			obj2Sound = R.raw.langol;
-			obj3Sound = R.raw.mula;
-			obj4Sound = R.raw.shorea;
-			obj5Sound = R.raw.ma;
-			obj6Sound = R.raw.mohis;
-			wrongObj1Sound = R.raw.aam;
-			wrongObj2Sound = R.raw.keram;
-			letterSound = R.raw.akar;
-		}
-		
-		//Letter-To
-		else if(i == 5)
-		{
-			obj1 = new Objects(obj1X, obj1Y, mTo1TextureRegion, getVertexBufferObjectManager());
-			obj2 = new Objects(obj2X, obj2Y, mTo2TextureRegion, getVertexBufferObjectManager());
-			obj3 = new Objects(obj3X, obj3Y, mTo3TextureRegion, getVertexBufferObjectManager());
-			obj4 = new Objects(obj4X, obj4Y, mTo4TextureRegion, getVertexBufferObjectManager());
-			obj5 = new Objects(obj5X, obj5Y, mTo5TextureRegion, getVertexBufferObjectManager());
-			obj6 = new Objects(obj6X, obj6Y, mTo6TextureRegion, getVertexBufferObjectManager());
-			wrongObj1 = new Objects(wrongObj1X, wrongObj1Y, mWTo1TextureRegion, getVertexBufferObjectManager());
-			wrongObj2 = new Objects(wrongObj2X, wrongObj2Y, mWTo2TextureRegion, getVertexBufferObjectManager());
-			letter = new Letter(900, CAMERA_HEIGHT-100, 80, 80, mToTextureRegion, getVertexBufferObjectManager());
-							
-			obj1Sound = R.raw.kola;
-			obj2Sound = R.raw.langol;
-			obj3Sound = R.raw.mula;
-			obj4Sound = R.raw.shorea;
-			obj5Sound = R.raw.ma;
-			obj6Sound = R.raw.mohis;
-			wrongObj1Sound = R.raw.aam;
-			wrongObj2Sound = R.raw.keram;
-			letterSound = R.raw.akar;
-		}
-	}
+	
 
 	public void playIntroSound()
 	{
@@ -759,12 +394,26 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 		
 	}
 	
-	public void startActivity()
+	public static void startActivity()
 	{
-		mScene.unregisterUpdateHandler(timer1);
-		finish();
-		startActivity(new Intent(this, MonkeyGameActivity.class));
-//		i=0;
+		Debug.d("level:"+boxGameLevel);
+		if(boxGameLevel == 0)
+		{
+			boxGameLevel = 1;
+			
+			mScene.unregisterUpdateHandler(timer1);
+			BoxGameActivity.boxGameActivityInstance.finish();
+			BoxGameActivity.boxGameActivityInstance.startActivity(new Intent(boxGameActivityInstance, BoxGameActivity.class));
+		}
+		else if(boxGameLevel == 1)
+		{
+			mScene.unregisterUpdateHandler(timer1);
+			BoxGameActivity.boxGameActivityInstance.finish();
+			BoxGameActivity.boxGameActivityInstance.startActivity(new Intent(boxGameActivityInstance, MonkeyGameActivity.class));
+	
+			boxGameLevel = 0;
+		}
+		
 	}
 	
 	public void setCurrentScene(Scene scene)
