@@ -1,5 +1,6 @@
 package com.example.phonicsapp.boxGame;
 
+import org.andengine.entity.Entity;
 import org.andengine.entity.sprite.Sprite;
 
 public class CreateObjects 
@@ -48,17 +49,22 @@ public class CreateObjects
 		BoxGameActivity.mScene.registerTouchArea(BoxGameActivity.wrongObj2);
 		BoxGameActivity.mScene.attachChild(BoxGameActivity.wrongObj2);
 		
+		
+		//parrot-letter
+		BoxGameActivity.parrotLetter =  new Entity(50,20);
+		BoxGameActivity.mScene.attachChild(BoxGameActivity.parrotLetter);
+		
 		BoxGameActivity.mScene.registerTouchArea(BoxGameActivity.letter);
-		BoxGameActivity.mScene.attachChild(BoxGameActivity.letter);
+		BoxGameActivity.parrotLetter.attachChild(BoxGameActivity.letter);
 		
-		BoxGameActivity.parrot = new Parrot(BoxGameActivity.CAMERA_WIDTH+500, BoxGameActivity.CAMERA_HEIGHT/2-50, 
+		BoxGameActivity.parrot = new Parrot(0,0, 
 				BoxGameActivity.mParrotTextureRegion, BoxGameActivity.boxGameActivityInstance.getVertexBufferObjectManager());
-//		BoxGameActivity.parrot.animate(new long[]{0, 0, 150, 150}, 0, 3, true);
+		//BoxGameActivity.parrot.animate(new long[]{0, 0, 150, 150}, 0, 3, true);
 		BoxGameActivity.parrot.setScale((float) 0.4);
-		//BoxGameActivity.parrot.setFlippedHorizontal(true);
 		BoxGameActivity.mScene.registerTouchArea(BoxGameActivity.parrot);
-		BoxGameActivity.mScene.attachChild(BoxGameActivity.parrot);
+		BoxGameActivity.parrotLetter.attachChild(BoxGameActivity.parrot);
 		
+				
 		Parrot.parrotPath();
 	}
 }

@@ -219,7 +219,7 @@ public class GameMainPage extends SimpleBaseGameActivity
 	{
 		finish();
 //		startActivity(new Intent(this, AnimatedBookActivity.class));
-		startActivity(new Intent(this, BoxGameActivity.class));
+		startActivity(new Intent(this, Menu.class));
 	}
 	
 	public void setCurrentScene(Scene scene)
