@@ -29,6 +29,7 @@ import android.media.MediaPlayer;
 import android.view.Display;
 
 import com.example.phonicsapp.GameMainPage;
+import com.example.phonicsapp.Menu;
 import com.example.phonicsapp.R;
 
 
@@ -62,21 +63,6 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 	public static BitmapTextureAtlas mBitmapTextureAtlasBanana;
 	public static ITextureRegion mFaceTextureRegionBanana;
 	
-	//Letter-A
-	public BitmapTextureAtlas mBitmapTextureAtlasA1;
-	public BitmapTextureAtlas mBitmapTextureAtlasA2;
-	public BitmapTextureAtlas mBitmapTextureAtlasA3;
-	public BitmapTextureAtlas mBitmapTextureAtlasA4;
-	public BitmapTextureAtlas mBitmapTextureAtlasWA1;
-	public BitmapTextureAtlas mBitmapTextureAtlasWA2;
-	
-	public static ITextureRegion mFaceTextureRegionA1;
-	public static ITextureRegion mFaceTextureRegionA2;
-	public static ITextureRegion mFaceTextureRegionA3;
-	public static ITextureRegion mFaceTextureRegionA4;
-	public static ITextureRegion mFaceTextureRegionWA1;
-	public static ITextureRegion mFaceTextureRegionWA2;
-	
 	//Letter-Mo
 	public static BitmapTextureAtlas mBitmapTextureAtlasMo1;
 	public static BitmapTextureAtlas mBitmapTextureAtlasMo2;
@@ -92,35 +78,50 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 	public static ITextureRegion mFaceTextureRegionWMo1;
 	public static ITextureRegion mFaceTextureRegionWMo2;
 	
+	//Letter-Bo
+	public BitmapTextureAtlas mBitmapTextureAtlasBo1;
+	public BitmapTextureAtlas mBitmapTextureAtlasBo2;
+	public BitmapTextureAtlas mBitmapTextureAtlasBo3;
+	public BitmapTextureAtlas mBitmapTextureAtlasBo4;
+	public BitmapTextureAtlas mBitmapTextureAtlasWBo1;
+	public BitmapTextureAtlas mBitmapTextureAtlasWBo2;
+	
+	public static ITextureRegion mFaceTextureRegionBo1;
+	public static ITextureRegion mFaceTextureRegionBo2;
+	public static ITextureRegion mFaceTextureRegionBo3;
+	public static ITextureRegion mFaceTextureRegionBo4;
+	public static ITextureRegion mFaceTextureRegionWA1;
+	public static ITextureRegion mFaceTextureRegionWA2;
+	
 	//Letter-Ko
-	public static BitmapTextureAtlas mBitmapTextureAtlasKo1;
-	public static BitmapTextureAtlas mBitmapTextureAtlasKo2;
-	public static BitmapTextureAtlas mBitmapTextureAtlasKo3;
-	public static BitmapTextureAtlas mBitmapTextureAtlasKo4;
-	public static BitmapTextureAtlas mBitmapTextureAtlasWKo1;
-	public static BitmapTextureAtlas mBitmapTextureAtlasWKo2;
+	public static BitmapTextureAtlas mBitmapTextureAtlasRaw1;
+	public static BitmapTextureAtlas mBitmapTextureAtlasRaw2;
+	public static BitmapTextureAtlas mBitmapTextureAtlasRaw3;
+	public static BitmapTextureAtlas mBitmapTextureAtlasRaw4;
+	public static BitmapTextureAtlas mBitmapTextureAtlasWRaw1;
+	public static BitmapTextureAtlas mBitmapTextureAtlasWRaw2;
 		
-	public static ITextureRegion mFaceTextureRegionKo1;
-	public static ITextureRegion mFaceTextureRegionKo2;
-	public static ITextureRegion mFaceTextureRegionKo3;
-	public static ITextureRegion mFaceTextureRegionKo4;
-	public static ITextureRegion mFaceTextureRegionWKo1;
-	public static ITextureRegion mFaceTextureRegionWKo2;
+	public static ITextureRegion mFaceTextureRegionRaw1;
+	public static ITextureRegion mFaceTextureRegionRaw2;
+	public static ITextureRegion mFaceTextureRegionRaw3;
+	public static ITextureRegion mFaceTextureRegionRaw4;
+	public static ITextureRegion mFaceTextureRegionWRaw1;
+	public static ITextureRegion mFaceTextureRegionWRaw2;
 	
 	//Letter-Lo
-	public static BitmapTextureAtlas mBitmapTextureAtlasLo1;
-	public static BitmapTextureAtlas mBitmapTextureAtlasLo2;
-	public static BitmapTextureAtlas mBitmapTextureAtlasLo3;
-	public static BitmapTextureAtlas mBitmapTextureAtlasLo4;
-	public static BitmapTextureAtlas mBitmapTextureAtlasWLo1;
-	public static BitmapTextureAtlas mBitmapTextureAtlasWLo2;
+	public static BitmapTextureAtlas mBitmapTextureAtlasToh1;
+	public static BitmapTextureAtlas mBitmapTextureAtlasToh2;
+	public static BitmapTextureAtlas mBitmapTextureAtlasToh3;
+	public static BitmapTextureAtlas mBitmapTextureAtlasToh4;
+	public static BitmapTextureAtlas mBitmapTextureAtlasWToh1;
+	public static BitmapTextureAtlas mBitmapTextureAtlasWToh2;
 		
-	public static ITextureRegion mFaceTextureRegionLo1;
-	public static ITextureRegion mFaceTextureRegionLo2;
-	public static ITextureRegion mFaceTextureRegionLo3;
-	public static ITextureRegion mFaceTextureRegionLo4;
-	public static ITextureRegion mFaceTextureRegionWLo1;
-	public static ITextureRegion mFaceTextureRegionWLo2;
+	public static ITextureRegion mFaceTextureRegionToh1;
+	public static ITextureRegion mFaceTextureRegionToh2;
+	public static ITextureRegion mFaceTextureRegionToh3;
+	public static ITextureRegion mFaceTextureRegionToh4;
+	public static ITextureRegion mFaceTextureRegionWToh1;
+	public static ITextureRegion mFaceTextureRegionWToh2;
 	
 	//Letter-To
 	public static BitmapTextureAtlas mBitmapTextureAtlasTo1;
@@ -161,6 +162,7 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 	
 	public static TimerHandler timer1, timer2;
 	public static int monkeyGameLevelSelector;
+	public static int monkeyGameMenuLetterSelector;
 	
 	// ===========================================================
 	// Constructors
@@ -201,28 +203,13 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 		mBitmapAtlas = new BitmapTextureAtlas(getTextureManager(), 1600, 868,TextureOptions.BILINEAR_PREMULTIPLYALPHA);
 		mTexture = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapAtlas, getAssets(), "bg-3.png", 0, 0);
 
-		//Letter-A
-		mBitmapTextureAtlasA1 = new BitmapTextureAtlas(getTextureManager(), 120, 120, TextureOptions.BILINEAR);
-		mBitmapTextureAtlasA2 = new BitmapTextureAtlas(getTextureManager(), 120, 120);
-		mBitmapTextureAtlasA3 = new BitmapTextureAtlas(getTextureManager(), 200, 200);
-		mBitmapTextureAtlasA4 = new BitmapTextureAtlas(getTextureManager(), 120, 120);
-		mBitmapTextureAtlasWA1 = new BitmapTextureAtlas(getTextureManager(), 200, 200);
-		mBitmapTextureAtlasWA2 = new BitmapTextureAtlas(getTextureManager(), 120, 120);
-				
-		mFaceTextureRegionA1 = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasA1, this, "LetterA/keramBoard1.png", 0, 0);
-		mFaceTextureRegionA2 = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasA2, this, "LetterA/mas.png",0,0);
-		mFaceTextureRegionA3 = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasA3, this, "LetterA/mula-2.png",0,0);
-		mFaceTextureRegionA4 = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasA4, this, "LetterA/mohis-2.png",0,0);
-		mFaceTextureRegionWA1 = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasWA1, this, "LetterA/ma.png",0,0);
-		mFaceTextureRegionWA2 = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasWA2, this, "LetterA/pineapple.png",0,0);
-				
 		//Letter-Mo
-		mBitmapTextureAtlasMo1 = new BitmapTextureAtlas(getTextureManager(), 120, 120, TextureOptions.BILINEAR);
-		mBitmapTextureAtlasMo2 = new BitmapTextureAtlas(getTextureManager(), 120, 120);
+		mBitmapTextureAtlasMo1 = new BitmapTextureAtlas(getTextureManager(), 200, 200, TextureOptions.BILINEAR);
+		mBitmapTextureAtlasMo2 = new BitmapTextureAtlas(getTextureManager(), 200, 200);
 		mBitmapTextureAtlasMo3 = new BitmapTextureAtlas(getTextureManager(), 200, 200);
-		mBitmapTextureAtlasMo4 = new BitmapTextureAtlas(getTextureManager(), 120, 120);
-		mBitmapTextureAtlasWMo1 = new BitmapTextureAtlas(getTextureManager(), 120, 120);
-		mBitmapTextureAtlasWMo2 = new BitmapTextureAtlas(getTextureManager(), 120, 120);
+		mBitmapTextureAtlasMo4 = new BitmapTextureAtlas(getTextureManager(), 200, 200);
+		mBitmapTextureAtlasWMo1 = new BitmapTextureAtlas(getTextureManager(), 200, 200);
+		mBitmapTextureAtlasWMo2 = new BitmapTextureAtlas(getTextureManager(), 200, 200);
 		
 		mFaceTextureRegionMo1 = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasMo1, this, "LetterMo/moi-2.png", 0, 0);
 		mFaceTextureRegionMo2 = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasMo2, this, "LetterMo/mama-2.png",0,0);
@@ -231,37 +218,52 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 		mFaceTextureRegionWMo1 = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasWMo1, this, "LetterMo/tala.png",0,0);
 		mFaceTextureRegionWMo2 = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasWMo2, this, "LetterMo/langol.png",0,0);
 		
-		//Letter-Ko
-		mBitmapTextureAtlasKo1 = new BitmapTextureAtlas(getTextureManager(), 120, 120, TextureOptions.BILINEAR);
-		mBitmapTextureAtlasKo2 = new BitmapTextureAtlas(getTextureManager(), 120, 120);
-		mBitmapTextureAtlasKo3 = new BitmapTextureAtlas(getTextureManager(), 200, 200);
-		mBitmapTextureAtlasKo4 = new BitmapTextureAtlas(getTextureManager(), 120, 120);
-		mBitmapTextureAtlasWKo1 = new BitmapTextureAtlas(getTextureManager(), 120, 120);
-		mBitmapTextureAtlasWKo2 = new BitmapTextureAtlas(getTextureManager(), 120, 120);
-				
-		mFaceTextureRegionKo1 = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasKo1, this, "LetterKo/moi-2.png", 0, 0);
-		mFaceTextureRegionKo2 = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasKo2, this, "LetterKo/mama-2.png",0,0);
-		mFaceTextureRegionKo3 = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasKo3, this, "LetterKo/megh.png",0,0);
-		mFaceTextureRegionKo4 = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasKo4, this, "LetterKo/mohis-2.png",0,0);
-		mFaceTextureRegionWKo1 = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasWKo1, this, "LetterKo/tala.png",0,0);
-		mFaceTextureRegionWKo2 = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasWKo2, this, "LetterKo/langol.png",0,0);
-				
-		//Letter-Lo
-		mBitmapTextureAtlasLo1 = new BitmapTextureAtlas(getTextureManager(), 120, 120, TextureOptions.BILINEAR);
-		mBitmapTextureAtlasLo2 = new BitmapTextureAtlas(getTextureManager(), 120, 120);
-		mBitmapTextureAtlasLo3 = new BitmapTextureAtlas(getTextureManager(), 200, 200);
-		mBitmapTextureAtlasLo4 = new BitmapTextureAtlas(getTextureManager(), 120, 120);
-		mBitmapTextureAtlasWLo1 = new BitmapTextureAtlas(getTextureManager(), 120, 120);
-		mBitmapTextureAtlasWLo2 = new BitmapTextureAtlas(getTextureManager(), 120, 120);
+		//Letter-Bo
+		mBitmapTextureAtlasBo1 = new BitmapTextureAtlas(getTextureManager(), 200, 200, TextureOptions.BILINEAR);
+		mBitmapTextureAtlasBo2 = new BitmapTextureAtlas(getTextureManager(), 200, 200);
+		mBitmapTextureAtlasBo3 = new BitmapTextureAtlas(getTextureManager(), 200, 200);
+		mBitmapTextureAtlasBo4 = new BitmapTextureAtlas(getTextureManager(), 200, 200);
+		mBitmapTextureAtlasWBo1 = new BitmapTextureAtlas(getTextureManager(), 200, 200);
+		mBitmapTextureAtlasWBo2 = new BitmapTextureAtlas(getTextureManager(), 200, 110);
 						
-		mFaceTextureRegionLo1 = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasLo1, this, "LetterLo/moi-2.png", 0, 0);
-		mFaceTextureRegionLo2 = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasLo2, this, "LetterLo/mama-2.png",0,0);
-		mFaceTextureRegionLo3 = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasLo3, this, "LetterLo/megh.png",0,0);
-		mFaceTextureRegionLo4 = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasLo4, this, "LetterLo/mohis-2.png",0,0);
-		mFaceTextureRegionWLo1 = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasWLo1, this, "LetterLo/tala.png",0,0);
-		mFaceTextureRegionWLo2 = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasWLo2, this, "LetterLo/langol.png",0,0);
+		mFaceTextureRegionBo1 = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasBo1, this, "LetterBo/balish.png", 0, 0);
+		mFaceTextureRegionBo2 = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasBo2, this, "LetterBo/boi.png",0,0);
+		mFaceTextureRegionBo3 = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasBo3, this, "LetterBo/ballon.png",0,0);
+		mFaceTextureRegionBo4 = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasBo4, this, "LetterBo/brinjal.png",0,0);
+		mFaceTextureRegionWA1 = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasWBo1, this, "LetterBo/taka.png",0,0);
+		mFaceTextureRegionWA2 = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasWBo2, this, "LetterBo/megh.png",0,0);
+
+		//Letter-Raw
+		mBitmapTextureAtlasRaw1 = new BitmapTextureAtlas(getTextureManager(), 200, 200, TextureOptions.BILINEAR);
+		mBitmapTextureAtlasRaw2 = new BitmapTextureAtlas(getTextureManager(), 200, 200);
+		mBitmapTextureAtlasRaw3 = new BitmapTextureAtlas(getTextureManager(), 200, 200);
+		mBitmapTextureAtlasRaw4 = new BitmapTextureAtlas(getTextureManager(), 200, 200);
+		mBitmapTextureAtlasWRaw1 = new BitmapTextureAtlas(getTextureManager(), 200, 110);
+		mBitmapTextureAtlasWRaw2 = new BitmapTextureAtlas(getTextureManager(), 200, 110);
+				
+		mFaceTextureRegionRaw1 = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasRaw1, this, "LetterRaw/rui.png", 0, 0);
+		mFaceTextureRegionRaw2 = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasRaw2, this, "LetterRaw/rui.png",0,0);
+		mFaceTextureRegionRaw3 = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasRaw3, this, "LetterRaw/rui.png",0,0);
+		mFaceTextureRegionRaw4 = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasRaw4, this, "LetterRaw/rui.png",0,0);
+		mFaceTextureRegionWRaw1 = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasWRaw1, this, "LetterRaw/megh.png",0,0);
+		mFaceTextureRegionWRaw2 = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasWRaw2, this, "LetterRaw/megh.png",0,0);
+				
+		//Letter-Toh
+		mBitmapTextureAtlasToh1 = new BitmapTextureAtlas(getTextureManager(), 200, 200, TextureOptions.BILINEAR);
+		mBitmapTextureAtlasToh2 = new BitmapTextureAtlas(getTextureManager(), 200, 200);
+		mBitmapTextureAtlasToh3 = new BitmapTextureAtlas(getTextureManager(), 200, 200);
+		mBitmapTextureAtlasToh4 = new BitmapTextureAtlas(getTextureManager(), 200, 200);
+		mBitmapTextureAtlasWToh1 = new BitmapTextureAtlas(getTextureManager(), 200, 110);
+		mBitmapTextureAtlasWToh2 = new BitmapTextureAtlas(getTextureManager(), 120, 120);
 						
-		//Letter-To
+		mFaceTextureRegionToh1 = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasToh1, this, "LetterToh/table.png", 0, 0);
+		mFaceTextureRegionToh2 = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasToh2, this, "LetterToh/tomato.png",0,0);
+		mFaceTextureRegionToh3 = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasToh3, this, "LetterToh/tin.png",0,0);
+		mFaceTextureRegionToh4 = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasToh4, this, "LetterToh/taka.png",0,0);
+		mFaceTextureRegionWToh1 = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasWToh1, this, "LetterToh/megh.png",0,0);
+		mFaceTextureRegionWToh2 = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasWToh2, this, "LetterToh/langol.png",0,0);
+						
+		//Letter-To 
 		mBitmapTextureAtlasTo1 = new BitmapTextureAtlas(getTextureManager(), 120, 120, TextureOptions.BILINEAR);
 		mBitmapTextureAtlasTo2 = new BitmapTextureAtlas(getTextureManager(), 120, 120);
 		mBitmapTextureAtlasTo3 = new BitmapTextureAtlas(getTextureManager(), 200, 200);
@@ -288,14 +290,6 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 		
 		mBitmapAtlas.load();
 		
-		//Letter-A
-		mBitmapTextureAtlasA1.load();
-		mBitmapTextureAtlasA2.load();
-		mBitmapTextureAtlasA3.load();
-		mBitmapTextureAtlasA4.load();
-		mBitmapTextureAtlasWA1.load();
-		mBitmapTextureAtlasWA2.load();
-		
 		//Letter-Mo
 		mBitmapTextureAtlasMo1.load();
 		mBitmapTextureAtlasMo2.load();
@@ -304,21 +298,29 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 		mBitmapTextureAtlasWMo1.load();
 		mBitmapTextureAtlasWMo2.load();
 		
+		//Letter-Bo
+		mBitmapTextureAtlasBo1.load();
+		mBitmapTextureAtlasBo2.load();
+		mBitmapTextureAtlasBo3.load();
+		mBitmapTextureAtlasBo4.load();
+		mBitmapTextureAtlasWBo1.load();
+		mBitmapTextureAtlasWBo2.load();
+		
 		//Letter-Ko
-		mBitmapTextureAtlasKo1.load();
-		mBitmapTextureAtlasKo2.load();
-		mBitmapTextureAtlasKo3.load();
-		mBitmapTextureAtlasKo4.load();
-		mBitmapTextureAtlasWKo1.load();
-		mBitmapTextureAtlasWKo2.load();
+		mBitmapTextureAtlasRaw1.load();
+		mBitmapTextureAtlasRaw2.load();
+		mBitmapTextureAtlasRaw3.load();
+		mBitmapTextureAtlasRaw4.load();
+		mBitmapTextureAtlasWRaw1.load();
+		mBitmapTextureAtlasWRaw2.load();
 		
 		//Letter-Lo
-		mBitmapTextureAtlasLo1.load();
-		mBitmapTextureAtlasLo2.load();
-		mBitmapTextureAtlasLo3.load();
-		mBitmapTextureAtlasLo4.load();
-		mBitmapTextureAtlasWLo1.load();
-		mBitmapTextureAtlasWLo2.load();
+		mBitmapTextureAtlasToh1.load();
+		mBitmapTextureAtlasToh2.load();
+		mBitmapTextureAtlasToh3.load();
+		mBitmapTextureAtlasToh4.load();
+		mBitmapTextureAtlasWToh1.load();
+		mBitmapTextureAtlasWToh2.load();
 		
 		//Letter-To
 		mBitmapTextureAtlasTo1.load();
@@ -372,6 +374,8 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 		mScene.attachChild(backGround);
 		
 //		MonkeyGameActivity.monkeyGameLevelSelector = 2;
+		
+		monkeyGameMenuLetterSelector = Menu.letterNumber;
 		
 		mScene.registerUpdateHandler(new TimerHandler(1, true, new ITimerCallback()
 		{

@@ -10,26 +10,8 @@ public class MonkeyGameLevelResources
 	public static void LoadObjects(int i) 
 	{
 		// TODO Auto-generated method stub
+		//Mo
 		if(i == 1)
-		{
-			MonkeyGameActivity.obj1 = new Sprite(0, 0, MonkeyGameActivity.mFaceTextureRegionA1, MonkeyGameActivity.vbo);
-			MonkeyGameActivity.obj2 = new Sprite(0, 0, MonkeyGameActivity.mFaceTextureRegionA2, MonkeyGameActivity.vbo);
-			MonkeyGameActivity.obj3 = new Sprite(0, 0, MonkeyGameActivity.mFaceTextureRegionA3, MonkeyGameActivity.vbo);
-			MonkeyGameActivity.obj4 = new Sprite(0, 0, MonkeyGameActivity.mFaceTextureRegionA4, MonkeyGameActivity.vbo);
-		
-			MonkeyGameActivity.wrongObj1 = new Sprite(0, 50, MonkeyGameActivity.mFaceTextureRegionWA1, MonkeyGameActivity.vbo);	
-			MonkeyGameActivity.wrongObj2 = new Sprite(0, 50, MonkeyGameActivity.mFaceTextureRegionWA2, MonkeyGameActivity.vbo);
-			
-			MonkeyGameActivity.obj1Sound = R.raw.mo;
-			MonkeyGameActivity.obj2Sound = R.raw.mula;
-			MonkeyGameActivity.obj3Sound = R.raw.megh;
-			MonkeyGameActivity.obj4Sound = R.raw.mohis;
-			
-			MonkeyGameActivity.wrongObj1Sound = R.raw.akar;
-			MonkeyGameActivity.wrongObj2Sound = R.raw.aam;
-			
-		}
-		else if(i == 2)
 		{
 			MonkeyGameActivity.obj1 = new Sprite(0, 0, MonkeyGameActivity.mFaceTextureRegionMo1, MonkeyGameActivity.vbo);
 			MonkeyGameActivity.obj2 = new Sprite(0, 0, MonkeyGameActivity.mFaceTextureRegionMo2, MonkeyGameActivity.vbo);
@@ -47,16 +29,36 @@ public class MonkeyGameLevelResources
 			MonkeyGameActivity.wrongObj1Sound = R.raw.tala;
 			MonkeyGameActivity.wrongObj2Sound = R.raw.langol;
 		}
-		//Letter-Ko
-		else if(i == 3)
+		//Bo
+		else if(i == 6)
 		{
-			MonkeyGameActivity.obj1 = new Sprite(0, 0, MonkeyGameActivity.mFaceTextureRegionKo1, MonkeyGameActivity.vbo);
-			MonkeyGameActivity.obj2 = new Sprite(0, 0, MonkeyGameActivity.mFaceTextureRegionKo2, MonkeyGameActivity.vbo);
-			MonkeyGameActivity.obj3 = new Sprite(0, 0, MonkeyGameActivity.mFaceTextureRegionKo3, MonkeyGameActivity.vbo);
-			MonkeyGameActivity.obj4 = new Sprite(0, 0, MonkeyGameActivity.mFaceTextureRegionKo4, MonkeyGameActivity.vbo);
+			MonkeyGameActivity.obj1 = new Sprite(0, 0, MonkeyGameActivity.mFaceTextureRegionBo1, MonkeyGameActivity.vbo);
+			MonkeyGameActivity.obj2 = new Sprite(0, 0, MonkeyGameActivity.mFaceTextureRegionBo2, MonkeyGameActivity.vbo);
+			MonkeyGameActivity.obj3 = new Sprite(0, 0, MonkeyGameActivity.mFaceTextureRegionBo3, MonkeyGameActivity.vbo);
+			MonkeyGameActivity.obj4 = new Sprite(0, 0, MonkeyGameActivity.mFaceTextureRegionBo4, MonkeyGameActivity.vbo);
 		
-			MonkeyGameActivity.wrongObj1 = new Sprite(0, 50, MonkeyGameActivity.mFaceTextureRegionWKo1, MonkeyGameActivity.vbo);	
-			MonkeyGameActivity.wrongObj2 = new Sprite(0, 50, MonkeyGameActivity.mFaceTextureRegionWKo2, MonkeyGameActivity.vbo);
+			MonkeyGameActivity.wrongObj1 = new Sprite(0, 50, MonkeyGameActivity.mFaceTextureRegionWA1, MonkeyGameActivity.vbo);	
+			MonkeyGameActivity.wrongObj2 = new Sprite(0, 50, MonkeyGameActivity.mFaceTextureRegionWA2, MonkeyGameActivity.vbo);
+			
+			MonkeyGameActivity.obj1Sound = R.raw.mo;
+			MonkeyGameActivity.obj2Sound = R.raw.mula;
+			MonkeyGameActivity.obj3Sound = R.raw.megh;
+			MonkeyGameActivity.obj4Sound = R.raw.mohis;
+			
+			MonkeyGameActivity.wrongObj1Sound = R.raw.akar;
+			MonkeyGameActivity.wrongObj2Sound = R.raw.aam;
+			
+		}
+		//Letter-Raw
+		else if(i == 4)
+		{
+			MonkeyGameActivity.obj1 = new Sprite(0, 0, MonkeyGameActivity.mFaceTextureRegionRaw1, MonkeyGameActivity.vbo);
+			MonkeyGameActivity.obj2 = new Sprite(0, 0, MonkeyGameActivity.mFaceTextureRegionRaw2, MonkeyGameActivity.vbo);
+			MonkeyGameActivity.obj3 = new Sprite(0, 0, MonkeyGameActivity.mFaceTextureRegionRaw3, MonkeyGameActivity.vbo);
+			MonkeyGameActivity.obj4 = new Sprite(0, 0, MonkeyGameActivity.mFaceTextureRegionRaw4, MonkeyGameActivity.vbo);
+		
+			MonkeyGameActivity.wrongObj1 = new Sprite(0, 50, MonkeyGameActivity.mFaceTextureRegionWRaw1, MonkeyGameActivity.vbo);	
+			MonkeyGameActivity.wrongObj2 = new Sprite(0, 50, MonkeyGameActivity.mFaceTextureRegionWRaw2, MonkeyGameActivity.vbo);
 			
 			MonkeyGameActivity.obj1Sound = R.raw.moi;
 			MonkeyGameActivity.obj2Sound = R.raw.mama;
@@ -66,16 +68,16 @@ public class MonkeyGameLevelResources
 			MonkeyGameActivity.wrongObj1Sound = R.raw.tala;
 			MonkeyGameActivity.wrongObj2Sound = R.raw.langol;
 		}
-		//Letter-Lo
-		else if(i == 4)
+		//Letter-Toh
+		else if(i == 19)
 		{
-			MonkeyGameActivity.obj1 = new Sprite(0, 0, MonkeyGameActivity.mFaceTextureRegionLo1, MonkeyGameActivity.vbo);
-			MonkeyGameActivity.obj2 = new Sprite(0, 0, MonkeyGameActivity.mFaceTextureRegionLo2, MonkeyGameActivity.vbo);
-			MonkeyGameActivity.obj3 = new Sprite(0, 0, MonkeyGameActivity.mFaceTextureRegionLo3, MonkeyGameActivity.vbo);
-			MonkeyGameActivity.obj4 = new Sprite(0, 0, MonkeyGameActivity.mFaceTextureRegionLo4, MonkeyGameActivity.vbo);
+			MonkeyGameActivity.obj1 = new Sprite(0, 0, MonkeyGameActivity.mFaceTextureRegionToh1, MonkeyGameActivity.vbo);
+			MonkeyGameActivity.obj2 = new Sprite(0, 0, MonkeyGameActivity.mFaceTextureRegionToh2, MonkeyGameActivity.vbo);
+			MonkeyGameActivity.obj3 = new Sprite(0, 0, MonkeyGameActivity.mFaceTextureRegionToh3, MonkeyGameActivity.vbo);
+			MonkeyGameActivity.obj4 = new Sprite(0, 0, MonkeyGameActivity.mFaceTextureRegionToh4, MonkeyGameActivity.vbo);
 				
-			MonkeyGameActivity.wrongObj1 = new Sprite(0, 50, MonkeyGameActivity.mFaceTextureRegionWLo1, MonkeyGameActivity.vbo);	
-			MonkeyGameActivity.wrongObj2 = new Sprite(0, 50, MonkeyGameActivity.mFaceTextureRegionWLo2, MonkeyGameActivity.vbo);
+			MonkeyGameActivity.wrongObj1 = new Sprite(0, 50, MonkeyGameActivity.mFaceTextureRegionWToh1, MonkeyGameActivity.vbo);	
+			MonkeyGameActivity.wrongObj2 = new Sprite(0, 50, MonkeyGameActivity.mFaceTextureRegionWToh2, MonkeyGameActivity.vbo);
 				
 			MonkeyGameActivity.obj1Sound = R.raw.moi;
 			MonkeyGameActivity.obj2Sound = R.raw.mama;
