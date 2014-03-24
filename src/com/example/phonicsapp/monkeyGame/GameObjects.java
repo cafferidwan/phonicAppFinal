@@ -84,8 +84,9 @@ public class GameObjects
 		
 		MonkeyGameActivity.mScene.attachChild(MonkeyGameActivity.obj1);
 		MonkeyGameActivity.mScene.registerTouchArea(MonkeyGameActivity.obj1);
-		MonkeyGameActivity.obj1.setWidth(MonkeyGameActivity.ImageWidthObjects);
-		MonkeyGameActivity.obj1.setHeight(MonkeyGameActivity.ImageHeightObjects);
+		MonkeyGameActivity.obj1.setScale((float) MonkeyGameActivity.monkeyGameObjectScale);
+//		MonkeyGameActivity.obj1.setWidth(MonkeyGameActivity.ImageWidthObjects);
+//		MonkeyGameActivity.obj1.setHeight(MonkeyGameActivity.ImageHeightObjects);
 		
 		MonkeyGameActivity.obj1.registerEntityModifier(new PathModifier(4, obj1Path, null, new IPathModifierListener()
 		{
@@ -169,8 +170,9 @@ public class GameObjects
 		
 		MonkeyGameActivity.mScene.attachChild(MonkeyGameActivity.obj2);
 		MonkeyGameActivity.mScene.registerTouchArea(MonkeyGameActivity.obj2);
-		MonkeyGameActivity.obj2.setWidth(MonkeyGameActivity.ImageWidthObjects);
-		MonkeyGameActivity.obj2.setHeight(MonkeyGameActivity.ImageHeightObjects);
+		MonkeyGameActivity.obj2.setScale((float) MonkeyGameActivity.monkeyGameObjectScale);
+//		MonkeyGameActivity.obj2.setWidth(MonkeyGameActivity.ImageWidthObjects);
+//		MonkeyGameActivity.obj2.setHeight(MonkeyGameActivity.ImageHeightObjects);
 		
 		MonkeyGameActivity.obj2.registerEntityModifier(new PathModifier(4, obj2Path, null, new IPathModifierListener()
 		{
@@ -252,8 +254,9 @@ public class GameObjects
 		
 		MonkeyGameActivity.mScene.attachChild(MonkeyGameActivity.obj3);
 		MonkeyGameActivity.mScene.registerTouchArea(MonkeyGameActivity.obj3);
-		MonkeyGameActivity.obj3.setWidth(140);
-		MonkeyGameActivity.obj3.setHeight(77);
+		MonkeyGameActivity.obj3.setScale((float) MonkeyGameActivity.monkeyGameObjectScale);
+//		MonkeyGameActivity.obj3.setWidth(140);
+//		MonkeyGameActivity.obj3.setHeight(77);
 		
 		
 		MonkeyGameActivity.obj3.registerEntityModifier(new PathModifier(4, obj3Path, null, new IPathModifierListener()
@@ -335,8 +338,9 @@ public class GameObjects
 		
 		MonkeyGameActivity.mScene.attachChild(MonkeyGameActivity.obj4);
 		MonkeyGameActivity.mScene.registerTouchArea(MonkeyGameActivity.obj4);
-		MonkeyGameActivity.obj4.setWidth(MonkeyGameActivity.ImageWidthObjects);
-		MonkeyGameActivity.obj4.setHeight(MonkeyGameActivity.ImageHeightObjects);
+		MonkeyGameActivity.obj4.setScale((float) MonkeyGameActivity.monkeyGameObjectScale);
+//		MonkeyGameActivity.obj4.setWidth(MonkeyGameActivity.ImageWidthObjects);
+//		MonkeyGameActivity.obj4.setHeight(MonkeyGameActivity.ImageHeightObjects);
 		
 		MonkeyGameActivity.obj4.registerEntityModifier(new PathModifier(4, obj4Path, null, new IPathModifierListener() 
 		{
@@ -418,8 +422,9 @@ public class GameObjects
 		
 		MonkeyGameActivity.mScene.attachChild(MonkeyGameActivity.wrongObj1);
 		MonkeyGameActivity.mScene.registerTouchArea(MonkeyGameActivity.wrongObj1);
-		MonkeyGameActivity.wrongObj1.setWidth(MonkeyGameActivity.ImageWidthObjects);
-		MonkeyGameActivity.wrongObj1.setHeight(MonkeyGameActivity.ImageHeightObjects);
+		MonkeyGameActivity.wrongObj1.setScale((float) MonkeyGameActivity.monkeyGameObjectScale);
+//		MonkeyGameActivity.wrongObj1.setWidth(MonkeyGameActivity.ImageWidthObjects);
+//		MonkeyGameActivity.wrongObj1.setHeight(MonkeyGameActivity.ImageHeightObjects);
 		
 		MonkeyGameActivity.wrongObj1.registerEntityModifier(new PathModifier(4, wrongObj1Path, null, new IPathModifierListener() 
 		{
@@ -502,8 +507,9 @@ public class GameObjects
 		
 		MonkeyGameActivity.mScene.attachChild(MonkeyGameActivity.wrongObj2);
 		MonkeyGameActivity.mScene.registerTouchArea(MonkeyGameActivity.wrongObj2);
-		MonkeyGameActivity.wrongObj2.setWidth(MonkeyGameActivity.ImageWidthObjects);
-		MonkeyGameActivity.wrongObj2.setHeight(MonkeyGameActivity.ImageHeightObjects);
+		MonkeyGameActivity.wrongObj2.setScale((float) MonkeyGameActivity.monkeyGameObjectScale);
+//		MonkeyGameActivity.wrongObj2.setWidth(MonkeyGameActivity.ImageWidthObjects);
+//		MonkeyGameActivity.wrongObj2.setHeight(MonkeyGameActivity.ImageHeightObjects);
 		
 		MonkeyGameActivity.wrongObj2.registerEntityModifier(new PathModifier(4, wrongObj2Path, null, new IPathModifierListener() 
 		{

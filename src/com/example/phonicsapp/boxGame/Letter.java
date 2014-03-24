@@ -21,12 +21,12 @@ public class Letter extends Sprite
 	public boolean onAreaTouched(final TouchEvent pSceneTouchEvent,
 			final float pTouchAreaLocalX, final float pTouchAreaLocalY) 
 	{
-		switch (pSceneTouchEvent.getAction()) 
+		switch (pSceneTouchEvent.getAction())  
 		{
 		case TouchEvent.ACTION_DOWN:
 
 			Functions.audioPlay = true;
-			Functions.playAudio(R.raw.mo);
+			Functions.playAudio(BoxGameActivity.letterSound);
 
 			break;
 		}

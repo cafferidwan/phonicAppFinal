@@ -40,13 +40,13 @@ public class MonkeyGameLevelResources
 			MonkeyGameActivity.wrongObj1 = new Sprite(0, 50, MonkeyGameActivity.mFaceTextureRegionWA1, MonkeyGameActivity.vbo);	
 			MonkeyGameActivity.wrongObj2 = new Sprite(0, 50, MonkeyGameActivity.mFaceTextureRegionWA2, MonkeyGameActivity.vbo);
 			
-			MonkeyGameActivity.obj1Sound = R.raw.mo;
-			MonkeyGameActivity.obj2Sound = R.raw.mula;
-			MonkeyGameActivity.obj3Sound = R.raw.megh;
-			MonkeyGameActivity.obj4Sound = R.raw.mohis;
+			MonkeyGameActivity.obj1Sound = R.raw.balish;
+			MonkeyGameActivity.obj2Sound = R.raw.boi;
+			MonkeyGameActivity.obj3Sound = R.raw.belun;
+			MonkeyGameActivity.obj4Sound = R.raw.begun;
 			
-			MonkeyGameActivity.wrongObj1Sound = R.raw.akar;
-			MonkeyGameActivity.wrongObj2Sound = R.raw.aam;
+			MonkeyGameActivity.wrongObj1Sound = R.raw.taka;
+			MonkeyGameActivity.wrongObj2Sound = R.raw.megh;
 			
 		}
 		//Letter-Raw
@@ -60,13 +60,13 @@ public class MonkeyGameLevelResources
 			MonkeyGameActivity.wrongObj1 = new Sprite(0, 50, MonkeyGameActivity.mFaceTextureRegionWRaw1, MonkeyGameActivity.vbo);	
 			MonkeyGameActivity.wrongObj2 = new Sprite(0, 50, MonkeyGameActivity.mFaceTextureRegionWRaw2, MonkeyGameActivity.vbo);
 			
-			MonkeyGameActivity.obj1Sound = R.raw.moi;
-			MonkeyGameActivity.obj2Sound = R.raw.mama;
-			MonkeyGameActivity.obj3Sound = R.raw.megh;
-			MonkeyGameActivity.obj4Sound = R.raw.mohis;
+			MonkeyGameActivity.obj1Sound = R.raw.robi;
+			MonkeyGameActivity.obj2Sound = R.raw.rocket;
+			MonkeyGameActivity.obj3Sound = R.raw.rani;
+			MonkeyGameActivity.obj4Sound = R.raw.ruimach;
 			
-			MonkeyGameActivity.wrongObj1Sound = R.raw.tala;
-			MonkeyGameActivity.wrongObj2Sound = R.raw.langol;
+			MonkeyGameActivity.wrongObj1Sound = R.raw.mama;
+			MonkeyGameActivity.wrongObj2Sound = R.raw.tebil;
 		}
 		//Letter-Toh
 		else if(i == 19)
@@ -79,13 +79,13 @@ public class MonkeyGameLevelResources
 			MonkeyGameActivity.wrongObj1 = new Sprite(0, 50, MonkeyGameActivity.mFaceTextureRegionWToh1, MonkeyGameActivity.vbo);	
 			MonkeyGameActivity.wrongObj2 = new Sprite(0, 50, MonkeyGameActivity.mFaceTextureRegionWToh2, MonkeyGameActivity.vbo);
 				
-			MonkeyGameActivity.obj1Sound = R.raw.moi;
-			MonkeyGameActivity.obj2Sound = R.raw.mama;
-			MonkeyGameActivity.obj3Sound = R.raw.megh;
-			MonkeyGameActivity.obj4Sound = R.raw.mohis;
+			MonkeyGameActivity.obj1Sound = R.raw.tomtom;
+			MonkeyGameActivity.obj2Sound = R.raw.tomato;
+			MonkeyGameActivity.obj3Sound = R.raw.tin;
+			MonkeyGameActivity.obj4Sound = R.raw.taka;
 					
-			MonkeyGameActivity.wrongObj1Sound = R.raw.tala;
-			MonkeyGameActivity.wrongObj2Sound = R.raw.langol;
+			MonkeyGameActivity.wrongObj1Sound = R.raw.boi;
+			MonkeyGameActivity.wrongObj2Sound = R.raw.rocket;
 		}
 		//Letter-To
 		else if(i == 5)

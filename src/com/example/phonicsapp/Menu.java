@@ -17,6 +17,7 @@ import org.andengine.ui.activity.SimpleBaseGameActivity;
 import org.andengine.util.debug.Debug;
 
 import com.example.phonicsapp.boxGame.BoxGameActivity;
+import com.example.phonicsapp.monkeyGame.MonkeyGameActivity;
 
 import android.content.Intent;
 import android.view.Display;
@@ -277,15 +278,15 @@ public class Menu extends SimpleBaseGameActivity implements IOnSceneTouchListene
 	
 	public void setStartActivity(int number, int row, int column)
 	{
-		menuLetters[row][column].setScale((float) 0.55);
 		letterNumber = number;
 		
 		if(letterNumber == 1 ||letterNumber == 6|| letterNumber == 4 || letterNumber == 19 )
 		{
+			menuLetters[row][column].setScale((float) 0.55);
 			startActivity(new Intent(getBaseContext(), BoxGameActivity.class));
+//			startActivity(new Intent(getBaseContext(), MonkeyGameActivity.class));
 			finish();
 		}
-		//menuLetters[row][column].setScale((float) 0.4);
 	}
 	
 	@Override

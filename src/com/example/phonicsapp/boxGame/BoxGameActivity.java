@@ -42,8 +42,10 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 	public static Scene mScene;
 	static Context context;
 	
-	public static ITextureRegion mbackGroundTextureRegion;
-	public static BitmapTextureAtlas mBitmapTextureAtlasBackGround;
+	public static ITextureRegion mJungleBackGroundTextureRegion, mBeachBackGroundTextureRegion,
+								 mUnderWaterBackGroundTextureRegion, mPlanetBackGroundTextureRegion;
+	public static BitmapTextureAtlas mBitmapTextureAtlasJungleBackGround, mBitmapTextureAtlasUnderWaterBackGround,
+									 mBitmapTextureAtlasBeachBackGround, mBitmapTextureAtlasPlanetBackGround;
 	
 	public static ITextureRegion mBox1TextureRegion;
 	public static ITextureRegion mBox2TextureRegion;
@@ -82,7 +84,7 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 	public static ITextureRegion mBo4TextureRegion;
 	public static ITextureRegion mBo5TextureRegion;
 	public static ITextureRegion mBo6TextureRegion;
-	public static ITextureRegion mATextureRegion;
+	public static ITextureRegion mBoTextureRegion;
 	public static ITextureRegion mWBo1TextureRegion;
 	public static ITextureRegion mWBo2TextureRegion;
 	
@@ -183,6 +185,7 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 	static int aCounter=0;
 	public static String DEBUG_TAG = BoxGameActivity.class.getSimpleName();
 	static int counter=0;
+	public static double objectScale;
 	
 	//level selector of box game
 	public static int boxGameLevel;
@@ -232,6 +235,9 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 		letterX = 160;
 		letterY = 250;
 		
+		//Box game every object scale
+		objectScale = 0.7;
+		
 		BoxGameActivity.counter = 0;
 		
 		//setting the level to 0
@@ -248,9 +254,22 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 		// TODO Auto-generated method stub
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("BoxGameGfx/");
 
-		mBitmapTextureAtlasBackGround = new BitmapTextureAtlas(this.getTextureManager(), 1600, 864, TextureOptions.BILINEAR);
-		mbackGroundTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mBitmapTextureAtlasBackGround, this,
+		mBitmapTextureAtlasJungleBackGround = new BitmapTextureAtlas(this.getTextureManager(), 1600, 864, TextureOptions.BILINEAR);
+		mJungleBackGroundTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mBitmapTextureAtlasJungleBackGround, this,
 				"JungleBG.png", 0, 0,  1, 1);
+		
+		mBitmapTextureAtlasBeachBackGround = new BitmapTextureAtlas(this.getTextureManager(), 1600, 864, TextureOptions.BILINEAR);
+		mBeachBackGroundTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mBitmapTextureAtlasBeachBackGround, this,
+				"BeachBG.png", 0, 0,  1, 1);
+		
+		mBitmapTextureAtlasUnderWaterBackGround = new BitmapTextureAtlas(this.getTextureManager(), 1600, 864, TextureOptions.BILINEAR);
+		mUnderWaterBackGroundTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mBitmapTextureAtlasUnderWaterBackGround, this,
+				"UnderWaterBG.png", 0, 0,  1, 1);
+		
+		mBitmapTextureAtlasPlanetBackGround = new BitmapTextureAtlas(this.getTextureManager(), 1600, 864, TextureOptions.BILINEAR);
+		mPlanetBackGroundTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mBitmapTextureAtlasPlanetBackGround, this,
+				"PlanetBG.png", 0, 0,  1, 1);
+		
 		
 		mBitmapTextureAtlasBox1 = new BitmapTextureAtlas(this.getTextureManager(), 180, 248, TextureOptions.BILINEAR);
 		mBox1TextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mBitmapTextureAtlasBox1, this,
@@ -274,33 +293,33 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 		mMo2TextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mBitmapTextureAtlasMo2, this,
 				"LetterMo/megh.png", 0, 0,  1, 1);
 		
-		mBitmapTextureAtlasMo3 = new BitmapTextureAtlas(this.getTextureManager(), 150, 152, TextureOptions.BILINEAR);
+		mBitmapTextureAtlasMo3 = new BitmapTextureAtlas(this.getTextureManager(), 200, 200, TextureOptions.BILINEAR);
 		mMo3TextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mBitmapTextureAtlasMo3, this,
-				"LetterMo/mohis-2.png", 0, 0,  1, 1);
+				"LetterMo/mohis.png", 0, 0,  1, 1);
 		
-		mBitmapTextureAtlasMo4 = new BitmapTextureAtlas(this.getTextureManager(), 150, 153, TextureOptions.BILINEAR);
+		mBitmapTextureAtlasMo4 = new BitmapTextureAtlas(this.getTextureManager(), 200, 200, TextureOptions.BILINEAR);
 		mMo4TextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mBitmapTextureAtlasMo4, this,
-				"LetterMo/moi-2.png", 0, 0,  1, 1);
+				"LetterMo/moi.png", 0, 0,  1, 1);
 		
-		mBitmapTextureAtlasMo5 = new BitmapTextureAtlas(this.getTextureManager(), 150, 153, TextureOptions.BILINEAR);
+		mBitmapTextureAtlasMo5 = new BitmapTextureAtlas(this.getTextureManager(), 200, 200, TextureOptions.BILINEAR);
 		mMo5TextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mBitmapTextureAtlasMo5, this,
-				"LetterMo/mula-2.png", 0, 0,  1, 1);
+				"LetterMo/mula.png", 0, 0,  1, 1);
 		
-		mBitmapTextureAtlasMo6 = new BitmapTextureAtlas(this.getTextureManager(), 150, 152, TextureOptions.BILINEAR);
+		mBitmapTextureAtlasMo6 = new BitmapTextureAtlas(this.getTextureManager(), 200, 200, TextureOptions.BILINEAR);
 		mMo6TextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mBitmapTextureAtlasMo6, this,
-				"LetterMo/mama-2.png", 0, 0,  1, 1);
+				"LetterMo/mama.png", 0, 0,  1, 1);
 		
 		mBitmapTextureAtlasMo = new BitmapTextureAtlas(this.getTextureManager(), 200, 200, TextureOptions.BILINEAR);
 		mMoTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mBitmapTextureAtlasMo, this,
 				"LetterMo/mo.png", 0, 0,  1, 1);
 		
-		mBitmapTextureAtlasWMo1 = new BitmapTextureAtlas(this.getTextureManager(), 120, 120, TextureOptions.BILINEAR);
+		mBitmapTextureAtlasWMo1 = new BitmapTextureAtlas(this.getTextureManager(), 200, 200, TextureOptions.BILINEAR);
 		mWMo1TextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mBitmapTextureAtlasWMo1, this,
-				"LetterMo/kola-1.png", 0, 0,  1, 1);
+				"LetterMo/kola.png", 0, 0,  1, 1);
 		
-		mBitmapTextureAtlasWMo2 = new BitmapTextureAtlas(this.getTextureManager(), 120, 122, TextureOptions.BILINEAR);
+		mBitmapTextureAtlasWMo2 = new BitmapTextureAtlas(this.getTextureManager(), 200, 200, TextureOptions.BILINEAR);
 		mWMo2TextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mBitmapTextureAtlasWMo2, this,
-				"LetterMo/keramBoard1.png", 0, 0,  1, 1);
+				"LetterMo/keramBoard.png", 0, 0,  1, 1);
 		
 		
 		//Letter-Bo
@@ -329,8 +348,8 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 				"LetterBo/ball.png", 0, 0,  1, 1); 
 		
 		mBitmapTextureAtlasBo = new BitmapTextureAtlas(this.getTextureManager(), 200, 200, TextureOptions.BILINEAR);
-		mATextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mBitmapTextureAtlasBo, this,
-				"LetterBo/mo.png", 0, 0,  1, 1);
+		mBoTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mBitmapTextureAtlasBo, this,
+				"LetterBo/bo.png", 0, 0,  1, 1);
 		
 		mBitmapTextureAtlasWBo1 = new BitmapTextureAtlas(this.getTextureManager(), 200, 200, TextureOptions.BILINEAR);
 		mWBo1TextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mBitmapTextureAtlasWBo1, this,
@@ -360,23 +379,23 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 		
 		mBitmapTextureAtlasRaw5 = new BitmapTextureAtlas(this.getTextureManager(), 200, 200, TextureOptions.BILINEAR);
 		mRaw5TextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mBitmapTextureAtlasRaw5, this,
-				"LetterRaw/robi.png", 0, 0,  1, 1);
+				"LetterRaw/rani.png", 0, 0,  1, 1);
 		
 		mBitmapTextureAtlasRaw6 = new BitmapTextureAtlas(this.getTextureManager(), 200, 200, TextureOptions.BILINEAR);
 		mRaw6TextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mBitmapTextureAtlasRaw6, this,
-				"LetterRaw/rocket.png", 0, 0,  1, 1);
+				"LetterRaw/ranna.png", 0, 0,  1, 1);
 		
 		mBitmapTextureAtlasRaw = new BitmapTextureAtlas(this.getTextureManager(), 200, 200, TextureOptions.BILINEAR);
 		mRawTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mBitmapTextureAtlasRaw, this,
-				"LetterRaw/mo.png", 0, 0,  1, 1);
+				"LetterRaw/raw.png", 0, 0,  1, 1);
 		
-		mBitmapTextureAtlasWRaw1 = new BitmapTextureAtlas(this.getTextureManager(), 120, 120, TextureOptions.BILINEAR);
+		mBitmapTextureAtlasWRaw1 = new BitmapTextureAtlas(this.getTextureManager(), 200, 200, TextureOptions.BILINEAR);
 		mWRaw1TextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mBitmapTextureAtlasWRaw1, this,
-				"LetterRaw/kola-1.png", 0, 0,  1, 1);
+				"LetterRaw/mohis.png", 0, 0,  1, 1);
 		
-		mBitmapTextureAtlasWRaw2 = new BitmapTextureAtlas(this.getTextureManager(), 120, 122, TextureOptions.BILINEAR);
+		mBitmapTextureAtlasWRaw2 = new BitmapTextureAtlas(this.getTextureManager(), 200, 200, TextureOptions.BILINEAR);
 		mWRaw2TextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mBitmapTextureAtlasWRaw2, this,
-				"LetterRaw/keramBoard1.png", 0, 0,  1, 1);
+				"LetterRaw/boi.png", 0, 0,  1, 1);
 		
 		//Letter-Toh
 		mBitmapTextureAtlasToh1 = new BitmapTextureAtlas(this.getTextureManager(), 200, 200, TextureOptions.BILINEAR);
@@ -405,15 +424,15 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 		
 		mBitmapTextureAtlasToh = new BitmapTextureAtlas(this.getTextureManager(), 200, 200, TextureOptions.BILINEAR);
 		mTohTextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mBitmapTextureAtlasToh, this,
-				"LetterToh/mo.png", 0, 0,  1, 1);
+				"LetterToh/toh.png", 0, 0,  1, 1);
 		
-		mBitmapTextureAtlasWToh1 = new BitmapTextureAtlas(this.getTextureManager(), 120, 120, TextureOptions.BILINEAR);
+		mBitmapTextureAtlasWToh1 = new BitmapTextureAtlas(this.getTextureManager(), 200, 200, TextureOptions.BILINEAR);
 		mWToh1TextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mBitmapTextureAtlasWToh1, this,
-				"LetterToh/kola-1.png", 0, 0,  1, 1);
+				"LetterToh/brinjal.png", 0, 0,  1, 1);
 		
-		mBitmapTextureAtlasWToh2 = new BitmapTextureAtlas(this.getTextureManager(), 120, 122, TextureOptions.BILINEAR);
+		mBitmapTextureAtlasWToh2 = new BitmapTextureAtlas(this.getTextureManager(), 200, 200, TextureOptions.BILINEAR);
 		mWToh2TextureRegion = BitmapTextureAtlasTextureRegionFactory.createTiledFromAsset(mBitmapTextureAtlasWToh2, this,
-				"LetterToh/keramBoard1.png", 0, 0,  1, 1);
+				"LetterToh/rongdhonu.png", 0, 0,  1, 1);
 		
 		
 		//Letter-To
@@ -464,7 +483,10 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 			Debug.e(e);
 		}
 		
-		mBitmapTextureAtlasBackGround.load();
+		mBitmapTextureAtlasJungleBackGround.load();
+		mBitmapTextureAtlasBeachBackGround.load();
+		mBitmapTextureAtlasUnderWaterBackGround.load();
+		mBitmapTextureAtlasPlanetBackGround.load();
 		
 		mBitmapTextureAtlasBo1.load();
 		mBitmapTextureAtlasBo2.load();
@@ -545,7 +567,7 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 			TimerHandlers.ExchangeObjects();
 		}
 			
-		CreateObjects.create();
+		CreateObjects.create(boxGameMenuLetterSelector);
 		
 		//getting the context
 		BoxGameActivity.context = getApplicationContext();
