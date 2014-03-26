@@ -8,11 +8,63 @@ import org.andengine.entity.modifier.PathModifier.Path;
 import org.andengine.entity.sprite.Sprite;
 import org.andengine.util.modifier.ease.EaseSineInOut;
 
+import com.example.phonicsapp.boxGame.BoxGameActivity;
+
 public class GameObjects 
 {
 	static float ax, ay, bx, by;
 	
-
+	public static void createObjects(int a)
+	{
+		if(a==1)
+		{
+			MonkeyGameActivity.backGround = new Sprite(0, 0, MonkeyGameActivity.mJungleBackGroundTextureRegion,
+					MonkeyGameActivity.MonkeyGameActivityActivity.getVertexBufferObjectManager());
+			MonkeyGameActivity.backGround.setWidth(MonkeyGameActivity.CAMERA_WIDTH);
+			MonkeyGameActivity.backGround.setHeight(MonkeyGameActivity.CAMERA_HEIGHT);
+			MonkeyGameActivity.mScene.attachChild(MonkeyGameActivity.backGround);
+		}
+		else if(a==6)
+		{
+			MonkeyGameActivity.backGround = new Sprite(0, 0, MonkeyGameActivity.mBeachBackGroundTextureRegion,
+					MonkeyGameActivity.MonkeyGameActivityActivity.getVertexBufferObjectManager());
+			MonkeyGameActivity.backGround.setWidth(MonkeyGameActivity.CAMERA_WIDTH);
+			MonkeyGameActivity.backGround.setHeight(MonkeyGameActivity.CAMERA_HEIGHT);
+			MonkeyGameActivity.mScene.attachChild(MonkeyGameActivity.backGround);
+		}
+		else if(a==4)
+		{
+			MonkeyGameActivity.backGround = new Sprite(0, 0, MonkeyGameActivity.mUnderWaterBackGroundTextureRegion,
+					MonkeyGameActivity.MonkeyGameActivityActivity.getVertexBufferObjectManager());
+			MonkeyGameActivity.backGround.setWidth(MonkeyGameActivity.CAMERA_WIDTH);
+			MonkeyGameActivity.backGround.setHeight(MonkeyGameActivity.CAMERA_HEIGHT);
+			MonkeyGameActivity.mScene.attachChild(MonkeyGameActivity.backGround);
+			//create box side layer
+			for(int i=1;i<=5;i++)
+			{
+				MonkeyGameActivity.boxSide[i] = new Sprite(i*160-210, 240, MonkeyGameActivity.mBoxSideTextureRegion,
+						MonkeyGameActivity.MonkeyGameActivityActivity.getVertexBufferObjectManager());
+				MonkeyGameActivity.boxSide[i].setScale((float) 0.5);
+				MonkeyGameActivity.boxSide[i].setZIndex(2);
+//			MonkeyGameActivity.boxSide.setWidth(MonkeyGameActivity.CAMERA_WIDTH);
+//			MonkeyGameActivity.boxSide.setHeight(MonkeyGameActivity.CAMERA_HEIGHT);
+				MonkeyGameActivity.mScene.attachChild(MonkeyGameActivity.boxSide[i]);
+				
+			}
+			
+		}
+		else if(a==19)
+		{
+			MonkeyGameActivity.backGround = new Sprite(0, 0, MonkeyGameActivity.mPlanetBackGroundTextureRegion,
+					MonkeyGameActivity.MonkeyGameActivityActivity.getVertexBufferObjectManager());
+			MonkeyGameActivity.backGround.setWidth(MonkeyGameActivity.CAMERA_WIDTH);
+			MonkeyGameActivity.backGround.setHeight(MonkeyGameActivity.CAMERA_HEIGHT);
+			MonkeyGameActivity.mScene.attachChild(MonkeyGameActivity.backGround);
+		}
+		
+		
+	}
+	
 	public static void fadeOut(final Sprite sprite)
 	{
 		if(sprite!= null)

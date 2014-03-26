@@ -188,8 +188,9 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 	public static double objectScale;
 	
 	//level selector of box game
-	public static int boxGameLevel;
 	public static int boxGameMenuLetterSelector;
+	public static int[] letterLevelSelector = new int[25];
+	//public static int letterLevelSelector1, letterLevelSelector4, letterLevelSelector6, letterLevelSelector19;
 	
 	public static BoxGameActivity getSharedInstances()
 	{
@@ -555,6 +556,7 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 		
 		//Getting the menu letter number
 		boxGameMenuLetterSelector = Menu.letterNumber;
+		
 		//Loading the objects according to letter
 		LevelResources.loadObjects(boxGameMenuLetterSelector); 
 		
@@ -562,10 +564,35 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 		TimerHandlers.checkObjectCollisions();
 		
 		//change wrong objects with right ones when it is second level
-		if(boxGameLevel == 1)
+		if(boxGameMenuLetterSelector==1) 
 		{
-			TimerHandlers.ExchangeObjects();
+			if(letterLevelSelector[boxGameMenuLetterSelector] == 1)
+			{
+				TimerHandlers.ExchangeObjects();
+			}
 		}
+		else if(boxGameMenuLetterSelector==6)
+		{
+			if(letterLevelSelector[boxGameMenuLetterSelector] == 1)
+			{
+				TimerHandlers.ExchangeObjects();
+			} 
+		}
+		else if(boxGameMenuLetterSelector==4)
+		{
+			if(letterLevelSelector[boxGameMenuLetterSelector] == 1)
+			{
+				TimerHandlers.ExchangeObjects();
+			}
+		}
+		else if(boxGameMenuLetterSelector==19)
+		{
+			if(letterLevelSelector[boxGameMenuLetterSelector] == 1)
+			{
+				TimerHandlers.ExchangeObjects();
+			}
+		}
+
 			
 		CreateObjects.create(boxGameMenuLetterSelector);
 		
@@ -582,8 +609,6 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 			}
 		}));
 		
-		Debug.d("level:"+boxGameLevel);
-		
 		return mScene;
 	}
 	
@@ -598,25 +623,89 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 	
 	public static void startActivity()
 	{
-		Debug.d("level:"+boxGameLevel);
-		if(boxGameLevel == 0)
-		{
-			boxGameLevel = 1;
-			
-			mScene.unregisterUpdateHandler(timer1);
-			BoxGameActivity.boxGameActivityInstance.finish();
-			BoxGameActivity.boxGameActivityInstance.startActivity(new Intent(boxGameActivityInstance, BoxGameActivity.class));
-		}
-		else if(boxGameLevel == 1)
-		{
-			mScene.unregisterUpdateHandler(timer1);
-			BoxGameActivity.boxGameActivityInstance.finish();
-			BoxGameActivity.boxGameActivityInstance.startActivity(new Intent(boxGameActivityInstance, MonkeyGameActivity.class));
+		//Debug.d("level:"+boxGameLevel);
 	
-			boxGameLevel = 0;
+		if(boxGameMenuLetterSelector==1)
+		{
+			if(letterLevelSelector[boxGameMenuLetterSelector] == 0)
+			{
+				letterLevelSelector[boxGameMenuLetterSelector] = 1;
+				
+				mScene.unregisterUpdateHandler(timer1);
+				BoxGameActivity.boxGameActivityInstance.finish();
+				BoxGameActivity.boxGameActivityInstance.startActivity(new Intent(boxGameActivityInstance, BoxGameActivity.class));
+			}
+			else if(letterLevelSelector[boxGameMenuLetterSelector] == 1)
+			{
+				mScene.unregisterUpdateHandler(timer1);
+				BoxGameActivity.boxGameActivityInstance.finish();
+				BoxGameActivity.boxGameActivityInstance.startActivity(new Intent(boxGameActivityInstance, MonkeyGameActivity.class));
+		
+				letterLevelSelector[boxGameMenuLetterSelector] = 0;
+			}
+		
+		}
+		else if(boxGameMenuLetterSelector==6)
+		{
+			if(letterLevelSelector[boxGameMenuLetterSelector] == 0)
+			{
+				letterLevelSelector[boxGameMenuLetterSelector] = 1;
+				
+				mScene.unregisterUpdateHandler(timer1);
+				BoxGameActivity.boxGameActivityInstance.finish();
+				BoxGameActivity.boxGameActivityInstance.startActivity(new Intent(boxGameActivityInstance, BoxGameActivity.class));
+			}
+			else if(letterLevelSelector[boxGameMenuLetterSelector] == 1)
+			{
+				mScene.unregisterUpdateHandler(timer1);
+				BoxGameActivity.boxGameActivityInstance.finish();
+				BoxGameActivity.boxGameActivityInstance.startActivity(new Intent(boxGameActivityInstance, MonkeyGameActivity.class));
+		
+				letterLevelSelector[boxGameMenuLetterSelector] = 0;
+			}
+		}
+		else if(boxGameMenuLetterSelector==4)
+		{
+			if(letterLevelSelector[boxGameMenuLetterSelector] == 0 )
+			{
+				letterLevelSelector[boxGameMenuLetterSelector] = 1;
+				
+				mScene.unregisterUpdateHandler(timer1); 
+				BoxGameActivity.boxGameActivityInstance.finish();
+				BoxGameActivity.boxGameActivityInstance.startActivity(new Intent(boxGameActivityInstance, BoxGameActivity.class));
+			}
+			else if(letterLevelSelector[boxGameMenuLetterSelector] == 1 )
+			{
+				mScene.unregisterUpdateHandler(timer1);
+				BoxGameActivity.boxGameActivityInstance.finish();
+				BoxGameActivity.boxGameActivityInstance.startActivity(new Intent(boxGameActivityInstance, MonkeyGameActivity.class));
+		
+				letterLevelSelector[boxGameMenuLetterSelector] = 0;
+			}
+		}
+		else if(boxGameMenuLetterSelector==19)
+		{
+			if(letterLevelSelector[boxGameMenuLetterSelector] == 0 )
+			{
+				letterLevelSelector[boxGameMenuLetterSelector] = 1;
+				
+				mScene.unregisterUpdateHandler(timer1);
+				BoxGameActivity.boxGameActivityInstance.finish();
+				BoxGameActivity.boxGameActivityInstance.startActivity(new Intent(boxGameActivityInstance, BoxGameActivity.class));
+			}
+			else if(letterLevelSelector[boxGameMenuLetterSelector] == 1)
+			{
+				mScene.unregisterUpdateHandler(timer1);
+				BoxGameActivity.boxGameActivityInstance.finish();
+				BoxGameActivity.boxGameActivityInstance.startActivity(new Intent(boxGameActivityInstance, MonkeyGameActivity.class));
+		
+				letterLevelSelector[boxGameMenuLetterSelector] = 0;
+			}
 		}
 		
 	}
+	
+	
 	
 	public void setCurrentScene(Scene scene)
 	{

@@ -31,6 +31,7 @@ import android.view.Display;
 import com.example.phonicsapp.GameMainPage;
 import com.example.phonicsapp.Menu;
 import com.example.phonicsapp.R;
+import com.example.phonicsapp.boxGame.BoxGameActivity;
 
 
 public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAreaTouchListener
@@ -47,8 +48,8 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 	// Fields
 	// ===========================================================
 	
-	public static BitmapTextureAtlas mBitmapAtlas;
-	public static TextureRegion mTexture;
+	public static BitmapTextureAtlas mBitmapTextureAtlasBoxSide;
+	public static TextureRegion mBoxSideTextureRegion;
 	
 	public static ITextureRegion mJungleBackGroundTextureRegion, mBeachBackGroundTextureRegion,
 								 mUnderWaterBackGroundTextureRegion, mPlanetBackGroundTextureRegion;
@@ -56,16 +57,32 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 									 mBitmapTextureAtlasBeachBackGround, mBitmapTextureAtlasPlanetBackGround;
 	
 	public static Sprite backGround, obj1, obj2, obj3, obj4, wrongObj1, wrongObj2, banana, monkey1, monkey2;
+	public static Sprite[] boxSide = new Sprite[7];
 	
 	public static Camera mCamera;
 	public static Scene mScene;
 	
 	//Fixed Objects monkey1, monkey2, banana;
-	public static BitmapTextureAtlas mBitmapTextureAtlasM1, mBitmapTextureAtlasM2;
-	public static ITextureRegion mFaceTextureRegionM1, mFaceTextureRegionM2;
+	public static BitmapTextureAtlas mBitmapTextureAtlasMonkeyWithoutReward, mBitmapTextureAtlasMonkeyWithBanana,
+									mBitmapTextureAtlasMonkeyWithFish, mBitmapTextureAtlasMonkeyWithAlien, 
+									mBitmapTextureAtlasMonkeyWithCup, mBitmapTextureAtlasMonkeyWithoutCup,
+									mBitmapTextureAtlasMonkeyWithoutAlien;
+	public static ITextureRegion mFaceTextureRegionMonkeyWithoutReward, mFaceTextureRegionMonkeyWithBanana, 
+									mFaceTextureRegionMonkeyWithFish, mFaceTextureRegionMonkeyWithAlien,
+									mFaceTextureRegionMonkeyWithCup, mFaceTextureRegionMonkeyWithoutCup,
+									mFaceTextureRegionMonkeyWithoutAlien;
 	
 	public static BitmapTextureAtlas mBitmapTextureAtlasBanana;
 	public static ITextureRegion mFaceTextureRegionBanana;
+	
+	public static BitmapTextureAtlas mBitmapTextureAtlasFish;
+	public static ITextureRegion mFaceTextureRegionFish;
+	
+	public static BitmapTextureAtlas mBitmapTextureAtlasCup;
+	public static ITextureRegion mFaceTextureRegionCup;
+	
+	public static BitmapTextureAtlas mBitmapTextureAtlasAlien;
+	public static ITextureRegion mFaceTextureRegionAlien;
 	
 	//Letter-Mo
 	public static BitmapTextureAtlas mBitmapTextureAtlasMo1;
@@ -74,6 +91,8 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 	public static BitmapTextureAtlas mBitmapTextureAtlasMo4;
 	public static BitmapTextureAtlas mBitmapTextureAtlasWMo1;
 	public static BitmapTextureAtlas mBitmapTextureAtlasWMo2;
+	public static BitmapTextureAtlas mBitmapTextureAtlasWMo3;
+	public static BitmapTextureAtlas mBitmapTextureAtlasWMo4;
 	
 	public static ITextureRegion mFaceTextureRegionMo1;
 	public static ITextureRegion mFaceTextureRegionMo2;
@@ -81,6 +100,8 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 	public static ITextureRegion mFaceTextureRegionMo4;
 	public static ITextureRegion mFaceTextureRegionWMo1;
 	public static ITextureRegion mFaceTextureRegionWMo2;
+	public static ITextureRegion mFaceTextureRegionWMo3;
+	public static ITextureRegion mFaceTextureRegionWMo4;
 	
 	//Letter-Bo
 	public BitmapTextureAtlas mBitmapTextureAtlasBo1;
@@ -148,6 +169,7 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 	public static int aCount = 0;
 	public static int randomItem, randomItem1;
 	
+	//reward objects like banana, fish, cup, alien
 	public static Sprite[] position = new Sprite[7];
 	
 	static float ImageHeight;
@@ -168,6 +190,7 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 	public static int monkeyGameLevelSelector;
 	public static int monkeyGameMenuLetterSelector;
 	public static double monkeyGameObjectScale;
+	public static int[] monkeyGameLevelSelector1 = new int[25];
 	
 	// ===========================================================
 	// Constructors
@@ -205,9 +228,22 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 	{
 		BitmapTextureAtlasTextureRegionFactory.setAssetBasePath("MonkeyGameGfx/");
 		
-		mBitmapAtlas = new BitmapTextureAtlas(getTextureManager(), 1600, 868,TextureOptions.BILINEAR_PREMULTIPLYALPHA);
-		mTexture = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapAtlas, getAssets(), "bg-3.png", 0, 0);
+		mBitmapTextureAtlasJungleBackGround = new BitmapTextureAtlas(getTextureManager(), 1600, 868,TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+		mJungleBackGroundTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasJungleBackGround, getAssets(), "jungleBackground.png", 0, 0);
 
+		mBitmapTextureAtlasBeachBackGround = new BitmapTextureAtlas(getTextureManager(), 1600, 868,TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+		mBeachBackGroundTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasBeachBackGround, getAssets(), "beachBackground.png", 0, 0);
+
+		mBitmapTextureAtlasUnderWaterBackGround = new BitmapTextureAtlas(getTextureManager(), 1600, 868,TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+		mUnderWaterBackGroundTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasUnderWaterBackGround, getAssets(), "underWaterBackground.png", 0, 0);
+
+		mBitmapTextureAtlasPlanetBackGround = new BitmapTextureAtlas(getTextureManager(), 1600, 868,TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+		mPlanetBackGroundTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasPlanetBackGround, getAssets(), "planetBackground.png", 0, 0);
+
+		mBitmapTextureAtlasBoxSide = new BitmapTextureAtlas(getTextureManager(), 300, 300,TextureOptions.BILINEAR_PREMULTIPLYALPHA);
+		mBoxSideTextureRegion = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasBoxSide, getAssets(), "boxSide.png", 0, 0);
+
+		
 		//Letter-Mo
 		mBitmapTextureAtlasMo1 = new BitmapTextureAtlas(getTextureManager(), 200, 200, TextureOptions.BILINEAR);
 		mBitmapTextureAtlasMo2 = new BitmapTextureAtlas(getTextureManager(), 200, 200, TextureOptions.BILINEAR);
@@ -284,16 +320,37 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 		mFaceTextureRegionWTo2 = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasWTo2, this, "LetterTo/pineapple.png",0,0);			
 		
 		//Fixed Objects- monkey1, monkey2, banana
-		mBitmapTextureAtlasM1 = new BitmapTextureAtlas(getTextureManager(), 208, 682, TextureOptions.BILINEAR_PREMULTIPLYALPHA );
-		mBitmapTextureAtlasM2 = new BitmapTextureAtlas(getTextureManager(), 208, 682, TextureOptions.BILINEAR_PREMULTIPLYALPHA );
+		mBitmapTextureAtlasMonkeyWithoutReward = new BitmapTextureAtlas(getTextureManager(), 208, 682, TextureOptions.BILINEAR_PREMULTIPLYALPHA );
+		mBitmapTextureAtlasMonkeyWithBanana = new BitmapTextureAtlas(getTextureManager(), 208, 682, TextureOptions.BILINEAR_PREMULTIPLYALPHA );
+		mBitmapTextureAtlasMonkeyWithFish = new BitmapTextureAtlas(getTextureManager(), 208, 682, TextureOptions.BILINEAR_PREMULTIPLYALPHA );
+		mBitmapTextureAtlasMonkeyWithAlien = new BitmapTextureAtlas(getTextureManager(), 208, 682, TextureOptions.BILINEAR_PREMULTIPLYALPHA );
+		mBitmapTextureAtlasMonkeyWithoutAlien = new BitmapTextureAtlas(getTextureManager(), 208, 682, TextureOptions.BILINEAR_PREMULTIPLYALPHA );
+		mBitmapTextureAtlasMonkeyWithCup = new BitmapTextureAtlas(getTextureManager(), 208, 682, TextureOptions.BILINEAR_PREMULTIPLYALPHA );
+		mBitmapTextureAtlasMonkeyWithoutCup = new BitmapTextureAtlas(getTextureManager(), 208, 682, TextureOptions.BILINEAR_PREMULTIPLYALPHA );
 		mBitmapTextureAtlasBanana = new BitmapTextureAtlas(getTextureManager(), 200, 200, TextureOptions.BILINEAR);
+		mBitmapTextureAtlasFish = new BitmapTextureAtlas(getTextureManager(), 200, 200, TextureOptions.BILINEAR);
+		mBitmapTextureAtlasCup = new BitmapTextureAtlas(getTextureManager(), 200, 200, TextureOptions.BILINEAR);
+		mBitmapTextureAtlasAlien = new BitmapTextureAtlas(getTextureManager(), 200, 200, TextureOptions.BILINEAR);
 		
-		mFaceTextureRegionM1 = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasM1, this, "m4.png",0,0);
-		mFaceTextureRegionM2 = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasM2, this, "m3.png",0,0);
-		mFaceTextureRegionBanana = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasBanana, this, "banana-1.png",0,0);
+		mFaceTextureRegionMonkeyWithoutReward = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasMonkeyWithoutReward, this, "monkeyWithoutReward.png",0,0);
+		mFaceTextureRegionMonkeyWithBanana = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasMonkeyWithBanana, this, "monkeyWithBanana.png",0,0);
+		mFaceTextureRegionMonkeyWithFish = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasMonkeyWithFish, this, "monkeyWithFish.png",0,0);
+		mFaceTextureRegionMonkeyWithAlien = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasMonkeyWithAlien, this, "monkeyWithAlien1.png",0,0);
+		mFaceTextureRegionMonkeyWithoutAlien = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasMonkeyWithoutAlien, this, "monkeyWithoutAlien2.png",0,0);
+		mFaceTextureRegionMonkeyWithCup = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasMonkeyWithCup, this, "monkeyWithCup.png",0,0);
+		mFaceTextureRegionMonkeyWithoutCup = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasMonkeyWithoutCup, this, "monkeyWithoutCup.png",0,0);
+		
+		mFaceTextureRegionBanana = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasBanana, this, "banana.png",0,0);
+		mFaceTextureRegionFish = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasFish, this, "fish.png",0,0);
+		mFaceTextureRegionCup = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasCup, this, "cup.png",0,0);
+		mFaceTextureRegionAlien = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasAlien, this, "alien.png",0,0);
 		
 		
-		mBitmapAtlas.load();
+		mBitmapTextureAtlasJungleBackGround.load();
+		mBitmapTextureAtlasBeachBackGround.load();
+		mBitmapTextureAtlasUnderWaterBackGround.load();
+		mBitmapTextureAtlasPlanetBackGround.load();
+		mBitmapTextureAtlasBoxSide.load();
 		
 		//Letter-Mo
 		mBitmapTextureAtlasMo1.load();
@@ -335,10 +392,18 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 		mBitmapTextureAtlasWTo1.load();
 		mBitmapTextureAtlasWTo2.load();
 		
-		//Fixed Objects monkey1, monkey2, banana;
+		//Fixed Objects monkey1, monkey2, banana, fish, cup, alien;
 		mBitmapTextureAtlasBanana.load();
-		mBitmapTextureAtlasM1.load();
-		mBitmapTextureAtlasM2.load();
+		mBitmapTextureAtlasFish.load();
+		mBitmapTextureAtlasCup.load();
+		mBitmapTextureAtlasAlien.load();
+		mBitmapTextureAtlasMonkeyWithoutReward.load();
+		mBitmapTextureAtlasMonkeyWithBanana.load();
+		mBitmapTextureAtlasMonkeyWithFish.load();
+		mBitmapTextureAtlasMonkeyWithAlien.load();
+		mBitmapTextureAtlasMonkeyWithoutAlien.load();
+		mBitmapTextureAtlasMonkeyWithCup.load();
+		mBitmapTextureAtlasMonkeyWithoutCup.load();
 		
 	}
 	
@@ -375,15 +440,11 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 				
 		monkeyGameObjectScale = 0.6;
 		
-		
-		backGround = new Sprite(0, 0, mTexture,getVertexBufferObjectManager());
-		backGround.setWidth(CAMERA_WIDTH);
-		backGround.setHeight(CAMERA_HEIGHT);
-		mScene.attachChild(backGround);
-		
 //		MonkeyGameActivity.monkeyGameLevelSelector = 2;
 		
 		monkeyGameMenuLetterSelector = Menu.letterNumber;
+		
+		GameObjects.createObjects(monkeyGameMenuLetterSelector);
 		
 		mScene.registerUpdateHandler(new TimerHandler(1, true, new ITimerCallback()
 		{
@@ -438,18 +499,85 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 
 	public static void startActivity()
 	{
-		if(monkeyGameLevelSelector == 0)
+		if(monkeyGameMenuLetterSelector==1)
 		{
-			monkeyGameLevelSelector = 1;
-			MonkeyGameActivityActivity.finish();
-			MonkeyGameActivityActivity.startActivity(new Intent(MonkeyGameActivityActivity, MonkeyGameActivity.class));
+			if(monkeyGameLevelSelector1[monkeyGameMenuLetterSelector] == 0)
+			{
+				monkeyGameLevelSelector1[monkeyGameMenuLetterSelector] = 1;
+				monkeyGameLevelSelector = 1;
+				mScene.unregisterUpdateHandler(timer1);
+				MonkeyGameActivityActivity.finish();
+				MonkeyGameActivityActivity.startActivity(new Intent(MonkeyGameActivityActivity, MonkeyGameActivity.class));
+			}
+			else if(monkeyGameLevelSelector1[monkeyGameMenuLetterSelector] == 1)
+			{
+				monkeyGameLevelSelector = 0;
+				mScene.unregisterUpdateHandler(timer1);
+				MonkeyGameActivityActivity.finish();
+				MonkeyGameActivityActivity.startActivity(new Intent(MonkeyGameActivityActivity, MonkeyGameActivity.class));
+		
+				monkeyGameLevelSelector1[monkeyGameMenuLetterSelector] = 0;
+			}
+		
 		}
-		else if(monkeyGameLevelSelector == 1)
+		else if(monkeyGameMenuLetterSelector==6)
 		{
-			monkeyGameLevelSelector = 0;
-			MonkeyGameActivityActivity.finish();
-			MonkeyGameActivityActivity.startActivity(new Intent(MonkeyGameActivityActivity, GameMainPage.class));
-
+			if(monkeyGameLevelSelector1[monkeyGameMenuLetterSelector] == 0)
+			{
+				monkeyGameLevelSelector1[monkeyGameMenuLetterSelector] = 1;
+				monkeyGameLevelSelector = 1;
+				mScene.unregisterUpdateHandler(timer1);
+				MonkeyGameActivityActivity.finish();
+				MonkeyGameActivityActivity.startActivity(new Intent(MonkeyGameActivityActivity, MonkeyGameActivity.class));
+			}
+			else if(monkeyGameLevelSelector1[monkeyGameMenuLetterSelector] == 1)
+			{
+				monkeyGameLevelSelector = 0;
+				mScene.unregisterUpdateHandler(timer1);
+				MonkeyGameActivityActivity.finish();
+				MonkeyGameActivityActivity.startActivity(new Intent(MonkeyGameActivityActivity, MonkeyGameActivity.class));
+		
+				monkeyGameLevelSelector1[monkeyGameMenuLetterSelector] = 0;
+			}
+		}
+		else if(monkeyGameMenuLetterSelector==4)
+		{
+			if(monkeyGameLevelSelector1[monkeyGameMenuLetterSelector] == 0 )
+			{
+				monkeyGameLevelSelector1[monkeyGameMenuLetterSelector] = 1;
+				monkeyGameLevelSelector = 1;
+				mScene.unregisterUpdateHandler(timer1); 
+				MonkeyGameActivityActivity.finish();
+				MonkeyGameActivityActivity.startActivity(new Intent(MonkeyGameActivityActivity, MonkeyGameActivity.class));
+			}
+			else if(monkeyGameLevelSelector1[monkeyGameMenuLetterSelector] == 1 )
+			{
+				monkeyGameLevelSelector = 0;
+				mScene.unregisterUpdateHandler(timer1);
+				MonkeyGameActivityActivity.finish();
+				MonkeyGameActivityActivity.startActivity(new Intent(MonkeyGameActivityActivity, MonkeyGameActivity.class));
+		
+				monkeyGameLevelSelector1[monkeyGameMenuLetterSelector] = 0;
+			}
+		}
+		else if(monkeyGameMenuLetterSelector==19)
+		{
+			if(monkeyGameLevelSelector1[monkeyGameMenuLetterSelector] == 0 )
+			{
+				monkeyGameLevelSelector1[monkeyGameMenuLetterSelector] = 1;
+				
+				mScene.unregisterUpdateHandler(timer1);
+				MonkeyGameActivityActivity.finish();
+				MonkeyGameActivityActivity.startActivity(new Intent(MonkeyGameActivityActivity, MonkeyGameActivity.class));
+			}
+			else if(monkeyGameLevelSelector1[monkeyGameMenuLetterSelector] == 1 )
+			{
+				mScene.unregisterUpdateHandler(timer1);
+				MonkeyGameActivityActivity.finish();
+				MonkeyGameActivityActivity.startActivity(new Intent(MonkeyGameActivityActivity, MonkeyGameActivity.class));
+		
+				monkeyGameLevelSelector1[monkeyGameMenuLetterSelector] = 0;
+			}
 		}
 	}
 	

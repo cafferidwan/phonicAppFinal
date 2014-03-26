@@ -41,14 +41,48 @@ public class MonkeyFunction
 				}
 			}));
 		}
-			MonkeyGameActivity.position[MonkeyGameActivity.aCount] = new Sprite(0, 50 , MonkeyGameActivity.mFaceTextureRegionBanana,MonkeyGameActivity.vbo); 
+			Path bananaPath = null ;
+			//change reward object according to the letter
+			if(MonkeyGameActivity.monkeyGameMenuLetterSelector==1)
+			{
+				MonkeyGameActivity.position[MonkeyGameActivity.aCount] = new Sprite(0, 50 , MonkeyGameActivity.mFaceTextureRegionBanana,MonkeyGameActivity.vbo); 
+				MonkeyGameActivity.position[MonkeyGameActivity.aCount].setWidth(MonkeyGameActivity.ImageWidthObjects-22);
+				MonkeyGameActivity.position[MonkeyGameActivity.aCount].setHeight(MonkeyGameActivity.ImageHeightObjects-22);
+			
+				bananaPath = new Path(2).to(MonkeyGameActivity.CAMERA_WIDTH/2, -100).to(MonkeyGameActivity.mFaceCount, MonkeyGameActivity.CAMERA_HEIGHT - MonkeyGameActivity.CAMERA_HEIGHT/3 + 30 );
+			}
+			else if(MonkeyGameActivity.monkeyGameMenuLetterSelector==6)
+			{
+				MonkeyGameActivity.position[MonkeyGameActivity.aCount] = new Sprite(0, 50 , MonkeyGameActivity.mFaceTextureRegionFish,MonkeyGameActivity.vbo); 
+		
+				MonkeyGameActivity.position[MonkeyGameActivity.aCount].setWidth(MonkeyGameActivity.ImageWidthObjects-22);
+				MonkeyGameActivity.position[MonkeyGameActivity.aCount].setHeight(MonkeyGameActivity.ImageHeightObjects-22);
+			
+				bananaPath = new Path(2).to(MonkeyGameActivity.CAMERA_WIDTH/2, -100).to(MonkeyGameActivity.mFaceCount, MonkeyGameActivity.CAMERA_HEIGHT - MonkeyGameActivity.CAMERA_HEIGHT/3 -20 );
+			}
+			else if(MonkeyGameActivity.monkeyGameMenuLetterSelector==4)
+			{
+				MonkeyGameActivity.position[MonkeyGameActivity.aCount] = new Sprite(0, 50 , MonkeyGameActivity.mFaceTextureRegionCup,MonkeyGameActivity.vbo); 
+			
+				MonkeyGameActivity.position[MonkeyGameActivity.aCount].setWidth(MonkeyGameActivity.ImageWidthObjects+10);
+				MonkeyGameActivity.position[MonkeyGameActivity.aCount].setHeight(MonkeyGameActivity.ImageHeightObjects+10);
+			
+				bananaPath = new Path(2).to(MonkeyGameActivity.CAMERA_WIDTH/2, -100).to(MonkeyGameActivity.mFaceCount, MonkeyGameActivity.CAMERA_HEIGHT - MonkeyGameActivity.CAMERA_HEIGHT/3 + 30 );
+			}
+			else if(MonkeyGameActivity.monkeyGameMenuLetterSelector==19)
+			{
+				MonkeyGameActivity.position[MonkeyGameActivity.aCount] = new Sprite(0, 50 , MonkeyGameActivity.mFaceTextureRegionAlien,MonkeyGameActivity.vbo); 
+			
+				MonkeyGameActivity.position[MonkeyGameActivity.aCount].setWidth(MonkeyGameActivity.ImageWidthObjects+10);
+				MonkeyGameActivity.position[MonkeyGameActivity.aCount].setHeight(MonkeyGameActivity.ImageHeightObjects+10);
+			
+				bananaPath = new Path(2).to(MonkeyGameActivity.CAMERA_WIDTH/2, -100).to(MonkeyGameActivity.mFaceCount, MonkeyGameActivity.CAMERA_HEIGHT - MonkeyGameActivity.CAMERA_HEIGHT/3 + 30 );
+			}
 			MonkeyGameActivity.mScene.attachChild(MonkeyGameActivity.position[MonkeyGameActivity.aCount]);
+			MonkeyGameActivity.position[MonkeyGameActivity.aCount].setZIndex(1);
 			MonkeyGameActivity.mScene.registerTouchArea(MonkeyGameActivity.position[MonkeyGameActivity.aCount]);
+			MonkeyGameActivity.mScene.sortChildren();
 			
-			MonkeyGameActivity.position[MonkeyGameActivity.aCount].setWidth(MonkeyGameActivity.ImageWidthObjects-22);
-			MonkeyGameActivity.position[MonkeyGameActivity.aCount].setHeight(MonkeyGameActivity.ImageHeightObjects-22);
-			
-			final Path bananaPath = new Path(2).to(MonkeyGameActivity.CAMERA_WIDTH/2, -100).to(MonkeyGameActivity.mFaceCount, MonkeyGameActivity.CAMERA_HEIGHT - MonkeyGameActivity.CAMERA_HEIGHT/3 + 30 );
 			
 			MonkeyGameActivity.position[MonkeyGameActivity.aCount].registerEntityModifier(new PathModifier((float) 1, bananaPath, null, new IPathModifierListener() 
 			{
@@ -79,9 +113,31 @@ public class MonkeyFunction
 			}, EaseSineInOut.getInstance()));
 		}
 
+	//monkey before taking the object
 	public static void monkey1()
 	{
-		MonkeyGameActivity.monkey1 = new Sprite(0, 50, MonkeyGameActivity.mFaceTextureRegionM1, MonkeyGameActivity.vbo);
+		//load monkey according to the level
+		if(MonkeyGameActivity.monkeyGameMenuLetterSelector==1)
+		{
+			MonkeyGameActivity.monkey1 = new Sprite(0, 50, MonkeyGameActivity.mFaceTextureRegionMonkeyWithoutReward,
+					MonkeyGameActivity.vbo);
+		}
+		else if(MonkeyGameActivity.monkeyGameMenuLetterSelector==6)
+		{
+			MonkeyGameActivity.monkey1 = new Sprite(0, 50, MonkeyGameActivity.mFaceTextureRegionMonkeyWithoutReward,
+					MonkeyGameActivity.vbo);
+		}
+		else if(MonkeyGameActivity.monkeyGameMenuLetterSelector==4)
+		{
+			MonkeyGameActivity.monkey1 = new Sprite(0, 50, MonkeyGameActivity.mFaceTextureRegionMonkeyWithoutCup,
+					MonkeyGameActivity.vbo);
+		}
+		else if(MonkeyGameActivity.monkeyGameMenuLetterSelector==19)
+		{
+			MonkeyGameActivity.monkey1 = new Sprite(0, 50, MonkeyGameActivity.mFaceTextureRegionMonkeyWithoutAlien,
+					MonkeyGameActivity.vbo);
+		}
+		
 		MonkeyGameActivity.monkey1.setWidth(MonkeyGameActivity.ImageWidth);
 		MonkeyGameActivity.monkey1.setHeight(MonkeyGameActivity.ImageHeight);
 		MonkeyGameActivity.mScene.attachChild(MonkeyGameActivity.monkey1);
@@ -123,9 +179,35 @@ public class MonkeyFunction
 		}, EaseSineInOut.getInstance()));
 	}
 	
+	//monkey after taking the object
 	public static void monkey2()
 	{
-		MonkeyGameActivity.monkey2 = new Sprite(MonkeyGameActivity.position[MonkeyGameActivity.aCount].getX(), (float) (MonkeyGameActivity.position[MonkeyGameActivity.aCount].getY()-MonkeyGameActivity.CAMERA_HEIGHT/1.4), MonkeyGameActivity.mFaceTextureRegionM2, MonkeyGameActivity.vbo);
+		//load monkey and reward object according to the level
+		if(MonkeyGameActivity.monkeyGameMenuLetterSelector==1)
+		{
+			MonkeyGameActivity.monkey2 = new Sprite(MonkeyGameActivity.position[MonkeyGameActivity.aCount].getX(), 
+					(float) (MonkeyGameActivity.position[MonkeyGameActivity.aCount].getY()-MonkeyGameActivity.CAMERA_HEIGHT/1.4),
+					MonkeyGameActivity.mFaceTextureRegionMonkeyWithBanana, MonkeyGameActivity.vbo);
+		}
+		else if(MonkeyGameActivity.monkeyGameMenuLetterSelector==6)
+		{
+			MonkeyGameActivity.monkey2 = new Sprite(MonkeyGameActivity.position[MonkeyGameActivity.aCount].getX(), 
+					(float) (MonkeyGameActivity.position[MonkeyGameActivity.aCount].getY()-MonkeyGameActivity.CAMERA_HEIGHT/1.4),
+					MonkeyGameActivity.mFaceTextureRegionMonkeyWithFish, MonkeyGameActivity.vbo);
+		}
+		else if(MonkeyGameActivity.monkeyGameMenuLetterSelector==4)
+		{
+			MonkeyGameActivity.monkey2 = new Sprite(MonkeyGameActivity.position[MonkeyGameActivity.aCount].getX(), 
+					(float) (MonkeyGameActivity.position[MonkeyGameActivity.aCount].getY()-MonkeyGameActivity.CAMERA_HEIGHT/1.4),
+					MonkeyGameActivity.mFaceTextureRegionMonkeyWithCup, MonkeyGameActivity.vbo);
+		}else if(MonkeyGameActivity.monkeyGameMenuLetterSelector==19)
+		{
+			MonkeyGameActivity.monkey2 = new Sprite(MonkeyGameActivity.position[MonkeyGameActivity.aCount].getX(), 
+					(float) (MonkeyGameActivity.position[MonkeyGameActivity.aCount].getY()-MonkeyGameActivity.CAMERA_HEIGHT/1.4),
+					MonkeyGameActivity.mFaceTextureRegionMonkeyWithAlien, MonkeyGameActivity.vbo);
+		}
+		
+		
 		MonkeyGameActivity.monkey2.setWidth(MonkeyGameActivity.ImageWidth);
 		MonkeyGameActivity.monkey2.setHeight(MonkeyGameActivity.ImageHeight);
 		MonkeyGameActivity.mScene.attachChild(MonkeyGameActivity.monkey2);
