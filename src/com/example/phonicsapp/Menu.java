@@ -38,9 +38,12 @@ public class Menu extends SimpleBaseGameActivity implements IOnSceneTouchListene
 	public static BitmapTextureAtlas[][] mBitmapTextureAtlasMenuLetters = new BitmapTextureAtlas[50][50];
 	public static ITextureRegion[][] mMenuTextureRegionMenuLetters = new ITextureRegion[50][50];
 
+	public static BitmapTextureAtlas mBitmapTextureAtlasMenuLettersLock ;
+	public static ITextureRegion  mMenuTextureRegionMenuLettersLock ;
 	
 	public static Sprite menuBackground;
 	public static Sprite[][] menuLetters = new Sprite[50][50];
+	public static Sprite[][] menuLettersLock = new Sprite[50][50];
 	public int i,j;
 	public static int letterNumber;
 	public int menuLetterBlockSize;
@@ -74,6 +77,14 @@ public class Menu extends SimpleBaseGameActivity implements IOnSceneTouchListene
 				.createTiledFromAsset(mBitmapTextureAtlasMenuBackground, this,
 						"JungleBG.png", 0, 0, 1, 1);
 
+
+			mBitmapTextureAtlasMenuLettersLock = new BitmapTextureAtlas(
+						this.getTextureManager(), 400, 400,
+						TextureOptions.BILINEAR);
+				mMenuTextureRegionMenuLettersLock= BitmapTextureAtlasTextureRegionFactory
+						.createTiledFromAsset(
+								mBitmapTextureAtlasMenuLettersLock, this, "lock.png", 0, 0, 1, 1);
+		
 		BitmapTextureAtlasTextureRegionFactory
 				.setAssetBasePath("Menu/MenuLetters/");
 		for (int i = 1; i <= 5; i++)
@@ -101,6 +112,9 @@ public class Menu extends SimpleBaseGameActivity implements IOnSceneTouchListene
 				mBitmapTextureAtlasMenuLetters[i][j].load();
 			}
 		}
+
+		// Menu Lock
+		mBitmapTextureAtlasMenuLettersLock.load();
 
 	}
 
@@ -263,6 +277,19 @@ public class Menu extends SimpleBaseGameActivity implements IOnSceneTouchListene
 				menuLetters[i][j].setScale((float) 0.4);
 				menuScene.registerTouchArea(menuLetters[i][j]);
 				menuScene.attachChild(menuLetters[i][j]);
+				
+				
+				for(int k=1; k<=4; k++)
+				{
+					for(int l=1; l<=4; l++) 
+					{
+						menuLettersLock[k][l] = new Sprite(k*130+10, l*100-120, mMenuTextureRegionMenuLettersLock,
+								vertexBufferObjectManager);
+						menuLettersLock[k][l].setScale((float) 0.4);
+						menuScene.attachChild(menuLettersLock[k][l]);
+					}
+				}
+				
 			}
 		}
 		return menuScene;
@@ -270,10 +297,10 @@ public class Menu extends SimpleBaseGameActivity implements IOnSceneTouchListene
 
 	public boolean setMenuLetter(TouchEvent pSceneTouchEvent,int row, int column)
 	{
-		return pSceneTouchEvent.getX()- menuLetters[row][column].getWidth()/2> menuLetters[1][1].getX() &&
-		pSceneTouchEvent.getX()-menuLetters[row][column].getWidth()/2<menuLetters[row][column].getX()+menuLetterBlockSize &&
-		pSceneTouchEvent.getY()-menuLetters[row][column].getHeight()/2>menuLetters[row][column].getY() &&
-		pSceneTouchEvent.getY()-menuLetters[row][column].getHeight()/2<menuLetters[row][column].getY()+menuLetterBlockSize;
+		return pSceneTouchEvent.getX()- menuLetters[row][column].getWidth()/2> menuLetters[1][1].getX()-50 &&
+				pSceneTouchEvent.getX()-menuLetters[row][column].getWidth()/2<menuLetters[row][column].getX()+menuLetterBlockSize &&
+				pSceneTouchEvent.getY()-menuLetters[row][column].getHeight()/2>menuLetters[row][column].getY()-60 &&
+				pSceneTouchEvent.getY()-menuLetters[row][column].getHeight()/2<menuLetters[row][column].getY()+menuLetterBlockSize;
 	}
 	
 	public void setStartActivity(int number, int row, int column)
@@ -283,10 +310,10 @@ public class Menu extends SimpleBaseGameActivity implements IOnSceneTouchListene
 		if(letterNumber == 1 ||letterNumber == 6|| letterNumber == 4 || letterNumber == 19 )
 		{
 			menuLetters[row][column].setScale((float) 0.55);
-//			startActivity(new Intent(getBaseContext(), BoxGameActivity.class));
-			startActivity(new Intent(getBaseContext(), MonkeyGameActivity.class));
+			startActivity(new Intent(getBaseContext(), BoxGameActivity.class));
+//			startActivity(new Intent(getBaseContext(), MonkeyGameActivity.class));
 			finish();
-		}
+		} 
 	}
 	
 	@Override
