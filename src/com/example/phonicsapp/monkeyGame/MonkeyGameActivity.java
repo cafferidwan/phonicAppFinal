@@ -66,11 +66,11 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 	public static BitmapTextureAtlas mBitmapTextureAtlasMonkeyWithoutReward, mBitmapTextureAtlasMonkeyWithBanana,
 									mBitmapTextureAtlasMonkeyWithFish, mBitmapTextureAtlasMonkeyWithAlien, 
 									mBitmapTextureAtlasMonkeyWithCup, mBitmapTextureAtlasMonkeyWithoutCup,
-									mBitmapTextureAtlasMonkeyWithoutAlien;
+									mBitmapTextureAtlasMonkeyWithoutAlien, mBitmapTextureAtlasMonkeyWithoutFish;
 	public static ITextureRegion mFaceTextureRegionMonkeyWithoutReward, mFaceTextureRegionMonkeyWithBanana, 
 									mFaceTextureRegionMonkeyWithFish, mFaceTextureRegionMonkeyWithAlien,
 									mFaceTextureRegionMonkeyWithCup, mFaceTextureRegionMonkeyWithoutCup,
-									mFaceTextureRegionMonkeyWithoutAlien;
+									mFaceTextureRegionMonkeyWithoutAlien, mFaceTextureRegionMonkeyWithoutFish;
 	
 	public static BitmapTextureAtlas mBitmapTextureAtlasBanana;
 	public static ITextureRegion mFaceTextureRegionBanana;
@@ -323,6 +323,7 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 		mBitmapTextureAtlasMonkeyWithoutReward = new BitmapTextureAtlas(getTextureManager(), 208, 682, TextureOptions.BILINEAR_PREMULTIPLYALPHA );
 		mBitmapTextureAtlasMonkeyWithBanana = new BitmapTextureAtlas(getTextureManager(), 208, 682, TextureOptions.BILINEAR_PREMULTIPLYALPHA );
 		mBitmapTextureAtlasMonkeyWithFish = new BitmapTextureAtlas(getTextureManager(), 208, 682, TextureOptions.BILINEAR_PREMULTIPLYALPHA );
+		mBitmapTextureAtlasMonkeyWithoutFish = new BitmapTextureAtlas(getTextureManager(), 208, 682, TextureOptions.BILINEAR_PREMULTIPLYALPHA );
 		mBitmapTextureAtlasMonkeyWithAlien = new BitmapTextureAtlas(getTextureManager(), 208, 682, TextureOptions.BILINEAR_PREMULTIPLYALPHA );
 		mBitmapTextureAtlasMonkeyWithoutAlien = new BitmapTextureAtlas(getTextureManager(), 208, 682, TextureOptions.BILINEAR_PREMULTIPLYALPHA );
 		mBitmapTextureAtlasMonkeyWithCup = new BitmapTextureAtlas(getTextureManager(), 208, 682, TextureOptions.BILINEAR_PREMULTIPLYALPHA );
@@ -335,8 +336,9 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 		mFaceTextureRegionMonkeyWithoutReward = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasMonkeyWithoutReward, this, "monkeyWithoutReward.png",0,0);
 		mFaceTextureRegionMonkeyWithBanana = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasMonkeyWithBanana, this, "monkeyWithBanana.png",0,0);
 		mFaceTextureRegionMonkeyWithFish = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasMonkeyWithFish, this, "monkeyWithFish.png",0,0);
-		mFaceTextureRegionMonkeyWithAlien = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasMonkeyWithAlien, this, "monkeyWithAlien1.png",0,0);
-		mFaceTextureRegionMonkeyWithoutAlien = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasMonkeyWithoutAlien, this, "monkeyWithoutAlien2.png",0,0);
+		mFaceTextureRegionMonkeyWithoutFish = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasMonkeyWithoutFish, this, "monkeyWithoutFish.png",0,0);
+		mFaceTextureRegionMonkeyWithAlien = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasMonkeyWithAlien, this, "monkeyWithAlien.png",0,0);
+		mFaceTextureRegionMonkeyWithoutAlien = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasMonkeyWithoutAlien, this, "monkeyWithoutAlien.png",0,0);
 		mFaceTextureRegionMonkeyWithCup = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasMonkeyWithCup, this, "monkeyWithCup.png",0,0);
 		mFaceTextureRegionMonkeyWithoutCup = BitmapTextureAtlasTextureRegionFactory.createFromAsset(mBitmapTextureAtlasMonkeyWithoutCup, this, "monkeyWithoutCup.png",0,0);
 		
@@ -400,6 +402,7 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 		mBitmapTextureAtlasMonkeyWithoutReward.load();
 		mBitmapTextureAtlasMonkeyWithBanana.load();
 		mBitmapTextureAtlasMonkeyWithFish.load();
+		mBitmapTextureAtlasMonkeyWithoutFish.load();
 		mBitmapTextureAtlasMonkeyWithAlien.load();
 		mBitmapTextureAtlasMonkeyWithoutAlien.load();
 		mBitmapTextureAtlasMonkeyWithCup.load();
@@ -429,7 +432,6 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 	@Override
 	public Scene onCreateScene() 
 	{
-		/* Just a simple */
 		mScene = new Scene();
 		mScene.setBackground(new Background(Color.WHITE));
 		vbo = getVertexBufferObjectManager();

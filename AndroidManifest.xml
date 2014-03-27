@@ -48,6 +48,16 @@
         </activity>
         
         <activity 
+            android:name="com.example.phonicsapp.HandWriting.banglaletterwriting.GameActivity"
+            android:label="@string/app_name" >
+        </activity>
+        
+          <activity 
+            android:name="com.example.phonicsapp.HandWriting.banglaletterwriting.HandWritingMenu"
+            android:label="@string/app_name" >
+        </activity>
+        
+        <activity 
             android:name="com.example.phonicsapp.Menu"
             android:label="@string/app_name" >
         </activity>

@@ -42,7 +42,7 @@ public class GameObjects
 			//create box side layer
 			for(int i=1;i<=5;i++)
 			{
-				MonkeyGameActivity.boxSide[i] = new Sprite(i*160-210, 240, MonkeyGameActivity.mBoxSideTextureRegion,
+				MonkeyGameActivity.boxSide[i] = new Sprite(i*160-216, 237, MonkeyGameActivity.mBoxSideTextureRegion,
 						MonkeyGameActivity.MonkeyGameActivityActivity.getVertexBufferObjectManager());
 				MonkeyGameActivity.boxSide[i].setScale((float) 0.5);
 				MonkeyGameActivity.boxSide[i].setZIndex(2);

@@ -21,6 +21,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.Display;
 
+import com.example.phonicsapp.HandWriting.banglaletterwriting.HandWritingMenu;
 import com.example.phonicsapp.animatedBook.AnimatedBookActivity;
 import com.example.phonicsapp.boxGame.BoxGameActivity;
 import com.example.phonicsapp.monkeyGame.MonkeyGameActivity;
@@ -168,6 +169,7 @@ public class GameMainPage extends SimpleBaseGameActivity
 				case TouchEvent.ACTION_DOWN:
 
 					this.setScale((float) 1.1);
+					startActivityForMonkey();
 					
 				break;
 				case TouchEvent.ACTION_UP:
@@ -220,6 +222,13 @@ public class GameMainPage extends SimpleBaseGameActivity
 		finish();
 //		startActivity(new Intent(this, AnimatedBookActivity.class));
 		startActivity(new Intent(this, Menu.class));
+	}
+	
+	void startActivityForMonkey()
+	{
+		finish();
+//		startActivity(new Intent(this, AnimatedBookActivity.class));
+		startActivity(new Intent(this, HandWritingMenu.class));
 	}
 	
 	public void setCurrentScene(Scene scene)

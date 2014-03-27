@@ -12,6 +12,7 @@ import org.andengine.util.modifier.ease.EaseSineInOut;
 public class MonkeyFunction 
 {
 
+	//add banana when touched the correct letter
 	public static void addFace(final float pX, final float pY) 
 	{
 		MonkeyGameActivity.distance = (float) (MonkeyGameActivity.CAMERA_WIDTH/5.3 );
@@ -124,7 +125,7 @@ public class MonkeyFunction
 		}
 		else if(MonkeyGameActivity.monkeyGameMenuLetterSelector==6)
 		{
-			MonkeyGameActivity.monkey1 = new Sprite(0, 50, MonkeyGameActivity.mFaceTextureRegionMonkeyWithoutReward,
+			MonkeyGameActivity.monkey1 = new Sprite(0, 50, MonkeyGameActivity.mFaceTextureRegionMonkeyWithoutFish,
 					MonkeyGameActivity.vbo);
 		}
 		else if(MonkeyGameActivity.monkeyGameMenuLetterSelector==4)
@@ -146,7 +147,7 @@ public class MonkeyFunction
 		MonkeyGameActivity.value = 0;
 		
 		final Path monkey1Path = new Path(2).to(MonkeyGameActivity.CAMERA_WIDTH/2,-400).to(MonkeyGameActivity.position[MonkeyGameActivity.aCount].getX(),(float) (MonkeyGameActivity.position[MonkeyGameActivity.aCount].getY()-MonkeyGameActivity.CAMERA_HEIGHT/1.4)); 
-		MonkeyGameActivity.monkey1.registerEntityModifier(new PathModifier((float) 1.1, monkey1Path, null, new IPathModifierListener() 
+		MonkeyGameActivity.monkey1.registerEntityModifier(new PathModifier((float) 1.4, monkey1Path, null, new IPathModifierListener() 
 		{
 			@Override
 			public void onPathStarted(final PathModifier pPathModifier, final IEntity pEntity) 
@@ -213,7 +214,7 @@ public class MonkeyFunction
 		MonkeyGameActivity.mScene.attachChild(MonkeyGameActivity.monkey2);
 		
 		final Path monkey2Path = new Path(2).to(MonkeyGameActivity.position[MonkeyGameActivity.aCount].getX(),(float) (MonkeyGameActivity.position[MonkeyGameActivity.aCount].getY()-MonkeyGameActivity.CAMERA_HEIGHT/1.4)).to(MonkeyGameActivity.CAMERA_WIDTH/2,-600);
-		MonkeyGameActivity.monkey2.registerEntityModifier(new PathModifier((float)1.1, monkey2Path, null, new IPathModifierListener()
+		MonkeyGameActivity.monkey2.registerEntityModifier(new PathModifier((float)1.5, monkey2Path, null, new IPathModifierListener()
 		{
 			@Override
 			public void onPathStarted(final PathModifier pPathModifier, final IEntity pEntity) 

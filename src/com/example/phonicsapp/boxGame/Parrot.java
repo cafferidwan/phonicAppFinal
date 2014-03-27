@@ -85,7 +85,7 @@ public class Parrot extends AnimatedSprite
 					public void onPathFinished(final PathModifier pPathModifier,
 							final IEntity pEntity) 
 					{
-						BoxGameActivity.parrot.animate(new long[]{150, 150, 0, 0}, 0, 3, true);
+						BoxGameActivity.parrot.animate(new long[]{200, 200, 0, 0}, 0, 3, true);
 					}
 				});
 		
@@ -94,9 +94,29 @@ public class Parrot extends AnimatedSprite
 	
 	static void parrotPath() 
 	{
-		
-		pathModifier(new Path(2).to(BoxGameActivity.CAMERA_WIDTH, BoxGameActivity.CAMERA_HEIGHT / 2 - 340)
-				.to(BoxGameActivity.CAMERA_WIDTH - 350,BoxGameActivity.CAMERA_HEIGHT / 2 - 340), 
-				BoxGameActivity.parrotLetter, 4);
+		if(BoxGameActivity.boxGameMenuLetterSelector == 1)
+		{
+			pathModifier(new Path(2).to(BoxGameActivity.CAMERA_WIDTH, BoxGameActivity.CAMERA_HEIGHT / 2 - 340)
+					.to(BoxGameActivity.CAMERA_WIDTH - 350,BoxGameActivity.CAMERA_HEIGHT / 2 - 340), 
+					BoxGameActivity.parrotLetter, 4);
+		}
+		else if(BoxGameActivity.boxGameMenuLetterSelector == 6)
+		{
+			pathModifier(new Path(2).to(BoxGameActivity.CAMERA_WIDTH, BoxGameActivity.CAMERA_HEIGHT / 2 - 340)
+					.to(BoxGameActivity.CAMERA_WIDTH - 350,BoxGameActivity.CAMERA_HEIGHT / 2 - 340), 
+					BoxGameActivity.parrotLetter, 4);
+		}
+		else if(BoxGameActivity.boxGameMenuLetterSelector == 4)
+		{
+			pathModifier(new Path(2).to(BoxGameActivity.CAMERA_WIDTH, BoxGameActivity.CAMERA_HEIGHT / 2 - 340)
+					.to(BoxGameActivity.CAMERA_WIDTH - 350,BoxGameActivity.CAMERA_HEIGHT / 2 - 340), 
+					BoxGameActivity.parrotLetter, 4);
+		}
+		else if(BoxGameActivity.boxGameMenuLetterSelector == 19)
+		{
+			pathModifier(new Path(2).to(BoxGameActivity.CAMERA_WIDTH, BoxGameActivity.CAMERA_HEIGHT / 2 - 340)
+					.to(BoxGameActivity.CAMERA_WIDTH - 350,BoxGameActivity.CAMERA_HEIGHT / 2 - 340), 
+					BoxGameActivity.parrotLetter, 4);
+		}
 	}
 }

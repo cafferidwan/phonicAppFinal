@@ -94,8 +94,31 @@ public class CreateObjects
 		BoxGameActivity.mScene.registerTouchArea(BoxGameActivity.letter);
 		BoxGameActivity.parrotLetter.attachChild(BoxGameActivity.letter);
 		
-		BoxGameActivity.parrot = new Parrot(0,0, 
-				BoxGameActivity.mParrotTextureRegion, BoxGameActivity.boxGameActivityInstance.getVertexBufferObjectManager());
+		if(boxGameMenuLetter == 1)
+		{
+		
+			BoxGameActivity.parrot = new Parrot(0,0, 
+					BoxGameActivity.mJungleParrotTextureRegion, BoxGameActivity.boxGameActivityInstance.
+					getVertexBufferObjectManager());
+		}
+		else if(boxGameMenuLetter == 6)
+		{
+			BoxGameActivity.parrot = new Parrot(0,0, 
+					BoxGameActivity.mBeachParrotTextureRegion, BoxGameActivity.boxGameActivityInstance.
+					getVertexBufferObjectManager());
+		}
+		else if(boxGameMenuLetter == 4)
+		{
+			BoxGameActivity.parrot = new Parrot(0,0, 
+					BoxGameActivity.mUnderWaterParrotTextureRegion, BoxGameActivity.boxGameActivityInstance.
+					getVertexBufferObjectManager());
+		}
+		else if(boxGameMenuLetter == 19)
+		{
+			BoxGameActivity.parrot = new Parrot(0,0, 
+					BoxGameActivity.mPlanetParrotTextureRegion, BoxGameActivity.boxGameActivityInstance.
+					getVertexBufferObjectManager());
+		}
 		//BoxGameActivity.parrot.animate(new long[]{0, 0, 150, 150}, 0, 3, true);
 		BoxGameActivity.parrot.setScale((float) 0.4);
 		BoxGameActivity.mScene.registerTouchArea(BoxGameActivity.parrot);

@@ -52,8 +52,12 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 	public static BitmapTextureAtlas mBitmapTextureAtlasBox1;
 	public static BitmapTextureAtlas mBitmapTextureAtlasBox2;
 	
-	private BuildableBitmapTextureAtlas mAnimatedBitmapTextureAtlas;
-	public static TiledTextureRegion mParrotTextureRegion;
+	private BuildableBitmapTextureAtlas mAnimatedJungleParrotBitmapTextureAtlas, 
+										mAnimatedUnderWaterParrotBitmapTextureAtlas,
+										mAnimatedBeachParrotBitmapTextureAtlas,
+										mAnimatedPlanetParrotBitmapTextureAtlas;
+	public static TiledTextureRegion mJungleParrotTextureRegion, mUnderWaterParrotTextureRegion,
+										mBeachParrotTextureRegion, mPlanetParrotTextureRegion;
 	
 	//Letter-Mo
 	public static ITextureRegion mMo1TextureRegion;
@@ -281,9 +285,22 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 				"box-16.png", 0, 0,  1, 1);
 		
 		
-		mAnimatedBitmapTextureAtlas = new BuildableBitmapTextureAtlas(this.getTextureManager(), 806, 806, TextureOptions.REPEATING_BILINEAR_PREMULTIPLYALPHA);
-		mParrotTextureRegion = BitmapTextureAtlasTextureRegionFactory.
-				createTiledFromAsset(this.mAnimatedBitmapTextureAtlas, this, "animatedParrot.png", 2, 2);
+		mAnimatedJungleParrotBitmapTextureAtlas = new BuildableBitmapTextureAtlas(this.getTextureManager(), 806, 806, TextureOptions.REPEATING_BILINEAR_PREMULTIPLYALPHA);
+		mJungleParrotTextureRegion = BitmapTextureAtlasTextureRegionFactory.
+				createTiledFromAsset(this.mAnimatedJungleParrotBitmapTextureAtlas, this, "animatedParrot.png", 2, 2);
+		
+		mAnimatedBeachParrotBitmapTextureAtlas = new BuildableBitmapTextureAtlas(this.getTextureManager(), 806, 806, TextureOptions.REPEATING_BILINEAR_PREMULTIPLYALPHA);
+		mBeachParrotTextureRegion = BitmapTextureAtlasTextureRegionFactory.
+				createTiledFromAsset(this.mAnimatedBeachParrotBitmapTextureAtlas, this, "beachParrot.png", 2, 2);
+		
+		mAnimatedUnderWaterParrotBitmapTextureAtlas = new BuildableBitmapTextureAtlas(this.getTextureManager(), 806, 806, TextureOptions.REPEATING_BILINEAR_PREMULTIPLYALPHA);
+		mUnderWaterParrotTextureRegion = BitmapTextureAtlasTextureRegionFactory.
+				createTiledFromAsset(this.mAnimatedUnderWaterParrotBitmapTextureAtlas, this, "underWaterParrot.png", 2, 2);
+		
+		mAnimatedPlanetParrotBitmapTextureAtlas = new BuildableBitmapTextureAtlas(this.getTextureManager(), 806, 806, TextureOptions.REPEATING_BILINEAR_PREMULTIPLYALPHA);
+		mPlanetParrotTextureRegion = BitmapTextureAtlasTextureRegionFactory.
+				createTiledFromAsset(this.mAnimatedPlanetParrotBitmapTextureAtlas, this, "planetParrot.png", 2, 2);
+		
 		
 		//Letter-Mo
 		mBitmapTextureAtlasMo1 = new BitmapTextureAtlas(this.getTextureManager(), 200, 200, TextureOptions.BILINEAR);
@@ -476,8 +493,38 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 		
 		try 
 		{
-			this.mAnimatedBitmapTextureAtlas.build(new BlackPawnTextureAtlasBuilder<IBitmapTextureAtlasSource, BitmapTextureAtlas>(0, 0, 0));
-			this.mAnimatedBitmapTextureAtlas.load();
+			this.mAnimatedJungleParrotBitmapTextureAtlas.build(new BlackPawnTextureAtlasBuilder<IBitmapTextureAtlasSource, BitmapTextureAtlas>(0, 0, 0));
+			this.mAnimatedJungleParrotBitmapTextureAtlas.load();
+		} 
+		catch (TextureAtlasBuilderException e) 
+		{
+			Debug.e(e);
+		}
+		
+		try 
+		{
+			this.mAnimatedUnderWaterParrotBitmapTextureAtlas.build(new BlackPawnTextureAtlasBuilder<IBitmapTextureAtlasSource, BitmapTextureAtlas>(0, 0, 0));
+			this.mAnimatedUnderWaterParrotBitmapTextureAtlas.load();
+		} 
+		catch (TextureAtlasBuilderException e) 
+		{
+			Debug.e(e);
+		}
+		
+		try 
+		{
+			this.mAnimatedBeachParrotBitmapTextureAtlas.build(new BlackPawnTextureAtlasBuilder<IBitmapTextureAtlasSource, BitmapTextureAtlas>(0, 0, 0));
+			this.mAnimatedBeachParrotBitmapTextureAtlas.load();
+		} 
+		catch (TextureAtlasBuilderException e) 
+		{
+			Debug.e(e);
+		}
+		
+		try 
+		{
+			this.mAnimatedPlanetParrotBitmapTextureAtlas.build(new BlackPawnTextureAtlasBuilder<IBitmapTextureAtlasSource, BitmapTextureAtlas>(0, 0, 0));
+			this.mAnimatedPlanetParrotBitmapTextureAtlas.load();
 		} 
 		catch (TextureAtlasBuilderException e) 
 		{
