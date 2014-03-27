@@ -41,7 +41,22 @@ public class Parrot extends AnimatedSprite
 			case TouchEvent.ACTION_DOWN:
 			
 				Functions.audioPlay = true;
-				Functions.playAudio(R.raw.parrot_intro);
+				if(BoxGameActivity.boxGameMenuLetterSelector==1)
+				{
+					Functions.playAudio(R.raw.box_mo);
+				}
+				else if(BoxGameActivity.boxGameMenuLetterSelector==6)
+				{
+					Functions.playAudio(R.raw.box_bo);
+				}
+				else if(BoxGameActivity.boxGameMenuLetterSelector==4)
+				{
+					Functions.playAudio(R.raw.box_ro);
+				}
+				else if(BoxGameActivity.boxGameMenuLetterSelector==19)
+				{
+					Functions.playAudio(R.raw.box_toh);
+				}
 				
 			break;
 			

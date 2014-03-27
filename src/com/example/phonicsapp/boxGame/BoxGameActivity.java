@@ -664,7 +664,22 @@ public class BoxGameActivity extends SimpleBaseGameActivity
 	public void playIntroSound()
 	{
 		Functions.audioPlay = true;
-		Functions.playAudio(R.raw.parrot_intro);
+		if(boxGameMenuLetterSelector==1)
+		{
+			Functions.playAudio(R.raw.box_mo);
+		}
+		else if(boxGameMenuLetterSelector==6)
+		{
+			Functions.playAudio(R.raw.box_bo);
+		}
+		else if(boxGameMenuLetterSelector==4)
+		{
+			Functions.playAudio(R.raw.box_ro);
+		}
+		else if(boxGameMenuLetterSelector==19)
+		{
+			Functions.playAudio(R.raw.box_toh);
+		}
 		
 	}
 	

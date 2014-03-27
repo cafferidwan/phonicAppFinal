@@ -448,6 +448,7 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 		
 		GameObjects.createObjects(monkeyGameMenuLetterSelector);
 		
+		
 		mScene.registerUpdateHandler(new TimerHandler(1, true, new ITimerCallback()
 		{
 			@Override
@@ -479,6 +480,17 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 		
 		MonkeyGameTimerHandlers.selectRandromObjects();
 		
+
+		//playing the introduction sound of parrot
+		mScene.registerUpdateHandler(new TimerHandler((float) 0.5,new ITimerCallback()
+		{
+				@Override
+				public void onTimePassed(TimerHandler pTimerHandler)
+				{
+					playIntroSound();
+				}
+		}));
+		
 		mScene.setOnAreaTouchListener(this);
 		return mScene;
 	}
@@ -495,6 +507,28 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 			return true;
 		}
 		return false;
+	}
+
+	public void playIntroSound()
+	{
+		MonkeyGameActivity.audioPlay = true;
+		if(monkeyGameMenuLetterSelector==1)
+		{
+			ObjectRemoveFunctions.playAudio(R.raw.monkey_mo);
+		}
+		else if(monkeyGameMenuLetterSelector==6)
+		{
+			ObjectRemoveFunctions.playAudio(R.raw.monkey_bo);
+		}
+		else if(monkeyGameMenuLetterSelector==4)
+		{
+			ObjectRemoveFunctions.playAudio(R.raw.monkey_ro);
+		}
+		else if(monkeyGameMenuLetterSelector==19)
+		{
+			ObjectRemoveFunctions.playAudio(R.raw.monkey_toh);
+		}
+		
 	}
 
 	
@@ -516,7 +550,7 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 				monkeyGameLevelSelector = 0;
 				mScene.unregisterUpdateHandler(timer1);
 				MonkeyGameActivityActivity.finish();
-				MonkeyGameActivityActivity.startActivity(new Intent(MonkeyGameActivityActivity, MonkeyGameActivity.class));
+				MonkeyGameActivityActivity.startActivity(new Intent(MonkeyGameActivityActivity, GameMainPage.class));
 		
 				monkeyGameLevelSelector1[monkeyGameMenuLetterSelector] = 0;
 			}
@@ -537,7 +571,7 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 				monkeyGameLevelSelector = 0;
 				mScene.unregisterUpdateHandler(timer1);
 				MonkeyGameActivityActivity.finish();
-				MonkeyGameActivityActivity.startActivity(new Intent(MonkeyGameActivityActivity, MonkeyGameActivity.class));
+				MonkeyGameActivityActivity.startActivity(new Intent(MonkeyGameActivityActivity, GameMainPage.class));
 		
 				monkeyGameLevelSelector1[monkeyGameMenuLetterSelector] = 0;
 			}
@@ -557,7 +591,7 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 				monkeyGameLevelSelector = 0;
 				mScene.unregisterUpdateHandler(timer1);
 				MonkeyGameActivityActivity.finish();
-				MonkeyGameActivityActivity.startActivity(new Intent(MonkeyGameActivityActivity, MonkeyGameActivity.class));
+				MonkeyGameActivityActivity.startActivity(new Intent(MonkeyGameActivityActivity, GameMainPage.class));
 		
 				monkeyGameLevelSelector1[monkeyGameMenuLetterSelector] = 0;
 			}
@@ -576,7 +610,7 @@ public class MonkeyGameActivity  extends SimpleBaseGameActivity implements IOnAr
 			{
 				mScene.unregisterUpdateHandler(timer1);
 				MonkeyGameActivityActivity.finish();
-				MonkeyGameActivityActivity.startActivity(new Intent(MonkeyGameActivityActivity, MonkeyGameActivity.class));
+				MonkeyGameActivityActivity.startActivity(new Intent(MonkeyGameActivityActivity, GameMainPage.class));
 		
 				monkeyGameLevelSelector1[monkeyGameMenuLetterSelector] = 0;
 			}

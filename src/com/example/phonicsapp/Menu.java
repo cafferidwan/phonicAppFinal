@@ -283,8 +283,8 @@ public class Menu extends SimpleBaseGameActivity implements IOnSceneTouchListene
 		if(letterNumber == 1 ||letterNumber == 6|| letterNumber == 4 || letterNumber == 19 )
 		{
 			menuLetters[row][column].setScale((float) 0.55);
-			startActivity(new Intent(getBaseContext(), BoxGameActivity.class));
-//			startActivity(new Intent(getBaseContext(), MonkeyGameActivity.class));
+//			startActivity(new Intent(getBaseContext(), BoxGameActivity.class));
+			startActivity(new Intent(getBaseContext(), MonkeyGameActivity.class));
 			finish();
 		}
 	}
